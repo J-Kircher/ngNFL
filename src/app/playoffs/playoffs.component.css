@@ -1,0 +1,41 @@
+.playoffs {
+  font-family: Arial;
+  font-style: italic;
+  font-size: 14pt;
+  font-weight: bold;
+  vertical-align: middle;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 10px; }
+
+img {
+  border: 0px; }
+
+.play-img {
+  position: relative;
+  left: -32.5px; }
+
+.sb-img {
+  position: relative;
+  left: -9px; }
+
+.flex-container {
+  display: flex;
+  justify-content: space-around; }
+
+.flex-container-col {
+  align-self: center;
+  flex-direction: column;
+  color: white;
+  margin: 10px 0px;
+  text-align: center;
+  font-size: 30px; }
+
+.flex-container-col > div {
+  background-color: #c1f1c1;
+  width: 82px;
+  height: 55px;
+  border: 0px;
+  margin: 10px;
+  text-align: center;
+  font-size: 30px; }

@@ -1,0 +1,106 @@
+<div class="well" style="border:0; background: url('/assets/images/grass.gif');margin-bottom:0px;">
+  <div class="flex-container">
+    <button [routerLink]="['/teams']" type="button" class="btn btn-default btn-sm navbar-btn" id="show">Show Teams</button>
+    <button [routerLink]="['/schedule']" type="button" class="btn btn-default btn-sm navbar-btn" id="schedule">Schedule</button>
+    <button type="button" class="btn btn-default btn-sm navbar-btn" id="simulate" (click)="simulate()" [disabled]="postseason">Simulate</button>
+    <button [routerLink]="['/standings']" type="button" class="btn btn-default btn-sm navbar-btn" id="standings">Standings</button>
+    <button *ngIf="postseason" [routerLink]="['/playoffs']" type="button" class="btn btn-default btn-sm navbar-btn" id="playoffs">Playoffs</button>
+    <button type="button" class="btn btn-default btn-sm navbar-btn" id="topTeams" (click)="getTopTeams()" modal-trigger="showTopTeams">Top Teams</button>
+    <button type="button" class="btn btn-default btn-sm navbar-btn" id="help">Help</button>
+  </div>
+</div>
+
+<simple-modal modalTitle="Top Teams" elementId="showTopTeams" closeOnBodyClick="false">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a data-toggle="tab" href="#afc">AFC Playoffs</a>
+    </li>
+    <li style="float: right;">
+      <a data-toggle="tab" href="#nfc">NFC Playoffs</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="afc" class="tab-pane fade in active">
+      <div class="container well col-sm-12">
+        <h3 class="heading">Playoff <img src="/assets/images/AFC.png"> Picture</h3>
+        <div class='well division col-sm-4'>
+          Division Leaders
+          <div class='div-table' *ngFor="let team of AFCDivLeaders">
+            <div class="team-info">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span class="team-city">{{team.city}}</span>
+              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+              <br>
+              <span class="team-name">{{team.name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class='well division col-sm-4'>
+          Wildcards
+          <div class='div-table' *ngFor="let team of AFCWildcard">
+            <div class="team-info">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span class="team-city">{{team.city}}</span>
+              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+              <br>
+              <span class="team-name">{{team.name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class='well division col-sm-4'>
+          On the Outside
+          <div class='div-table' *ngFor="let team of AFCHunt">
+            <div class="team-info">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span class="team-city">{{team.city}}</span>
+              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+              <br>
+              <span class="team-name">{{team.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nfc" class="tab-pane fade">
+      <div class="container well col-sm-12">
+        <h3 class="heading">Playoff <img src="/assets/images/NFC.png"> Picture</h3>
+        <div class='well division col-sm-4'>
+          Division Leaders
+          <div class='div-table' *ngFor="let team of NFCDivLeaders">
+            <div class="team-info">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span class="team-city">{{team.city}}</span>
+              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+              <br>
+              <span class="team-name">{{team.name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class='well division col-sm-4'>
+          Wildcards
+          <div class='div-table' *ngFor="let team of NFCWildcard">
+            <div class="team-info">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span class="team-city">{{team.city}}</span>
+              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+              <br>
+              <span class="team-name">{{team.name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class='well division col-sm-4'>
+          On the Outside
+          <div class='div-table' *ngFor="let team of NFCHunt">
+            <div class="team-info">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span class="team-city">{{team.city}}</span>
+              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+              <br>
+              <span class="team-name">{{team.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</simple-modal>

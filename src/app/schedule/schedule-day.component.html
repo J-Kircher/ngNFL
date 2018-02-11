@@ -1,0 +1,202 @@
+<div class="container well col-sm-12">
+  <div class="row well schedule">
+    <div class="schedule col-sm-12">
+      <div class="col-sm-12" style="margin-top:5px">
+        {{gameDay}}
+      </div>
+      <div class="well col-sm-3 gameday" *ngFor="let score of gamesArr"
+        modal-trigger="showMatchup" (click)="matchupClick(score.id)">
+        <show-score [score]=score></show-score>
+      </div>
+    </div>
+  </div>
+</div>
+
+<simple-modal modalTitle="Matchup" elementId="showMatchup" closeOnBodyClick="false">
+  <div class="row well schedule">
+    <div class="schedule col-sm-12">
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <span class="team-city">{{teamsArr[modalGame?.visitTeam]?.city}}</span><br>
+        <span class="team-name">{{teamsArr[modalGame?.visitTeam]?.name}}</span>
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <span class="team-city">{{teamsArr[modalGame?.homeTeam]?.city}}</span><br>
+        <span class="team-name">{{teamsArr[modalGame?.homeTeam]?.name}}</span>
+      </div>
+    </div>
+    <div class="schedule col-sm-12" *ngIf="modalGame?.visitTeam || modalGame?.homeTeam">
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <img src="/assets/images/{{teamsArr[modalGame?.visitTeam]?.abbrev}}-L.png" [alt]="teamsArr[modalGame?.visitTeam]?.name">
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <img src="/assets/images/{{teamsArr[modalGame?.homeTeam]?.abbrev}}-R.png" [alt]="teamsArr[modalGame?.homeTeam]?.name">
+      </div>
+    </div>
+
+    <div class="schedule col-sm-12">
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.qb/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.qb}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">QB</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.qb/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.qb}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.rb/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.rb}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">RB</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.rb/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.rb}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.wr/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.wr}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">WR</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.wr/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.wr}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.ol/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.ol}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">OL</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.ol/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.ol}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.dl/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.dl}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">DL</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.dl/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.dl}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.lb/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.lb}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">LB</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.lb/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.lb}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.db/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.db}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">DB</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.db/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.db}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.st/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.st}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">ST</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.st/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.st}}
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="margin-top:5px;text-align:right">
+        <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.co/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+            'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+            'float':'right', 'padding-right':'5px'}">
+          {{teamsArr[modalGame?.visitTeam]?.co}}
+        </div>
+      </div>
+      <div class="col-sm-2" style="text-align:center">CO</div>
+      <div class="col-sm-5" style="margin-top:5px;text-align:left">
+        <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.co/9*200"
+          [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+            'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+            'float':'left', 'padding-left':'5px'}">
+          {{teamsArr[modalGame?.homeTeam]?.co}}
+        </div>
+      </div>
+    </div>
+  </div>
+</simple-modal>

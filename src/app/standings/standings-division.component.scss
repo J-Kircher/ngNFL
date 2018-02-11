@@ -1,0 +1,51 @@
+table {
+  border-collapse: collapse;
+  border-style: hidden;
+}
+table td, table th {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.division {
+  font-family: Arial;
+  font-size: 12pt;
+  text-align: center;
+  background: rgba(0, 128, 0, 0.5);
+  min-height: 160px;
+  margin-bottom: 0px;
+  border-radius: 5px;
+}
+.div-table {
+  font-family: Arial;
+  font-size: 10pt;
+  font-style: normal;
+  text-align: left;
+  background: url(/assets/images/whiteback.gif);
+  margin-bottom: 0px;
+  border-radius: 5px;
+}
+.team-info {
+  white-space: nowrap;
+  x-line-height: 18px;
+}
+.logo {
+  float:left;
+  height: 40px;
+}
+.team-city {
+  font-family: Arial;
+  font-size: 10pt;
+  font-weight: normal;
+  font-style: normal;
+  -webkit-padding-start: 5px;
+}
+.team-name {
+  font-family: Arial;
+  font-size: 12pt;
+  font-weight: bold;
+  font-style: normal;
+  -webkit-padding-start: 5px;
+}
+.team-row:hover {
+  border-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.2);
+}

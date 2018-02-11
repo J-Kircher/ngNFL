@@ -9,6 +9,11 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+  <app-nfl>
+    <div class="well loading-well" *ngIf="loading">
+      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+      <div class="syn-font loading-font" style="float:right">&nbsp; Loading NFL &hellip;</div>
+    </div>
+  </app-nfl>
 </body>
 </html>

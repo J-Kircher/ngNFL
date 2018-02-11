@@ -1,0 +1,66 @@
+<div class="container well col-sm-12">
+  <div class="row well playoffs">
+    <div class="playoffs col-sm-12">
+      <div class="col-sm-12" style="margin-top:5px">
+        Playoffs
+      </div>
+    </div>
+  </div>
+  <div class="flex-container">
+    <div class="flex-container-col">
+      <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[4]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[3]]?.abbrev}}.png"></div>
+      <div></div>
+      <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[5]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[2]]?.abbrev}}.png"></div>
+      <div></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img *ngIf="teamsArr[AFCPlayoffTeams[6]]" src="/assets/images/{{teamsArr[AFCPlayoffTeams[6]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[0]]?.abbrev}}.png"></div>
+      <div></div>
+      <div><img *ngIf="teamsArr[AFCPlayoffTeams[7]]" src="/assets/images/{{teamsArr[AFCPlayoffTeams[7]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[1]]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img *ngIf="teamsArr[AFCPlayoffTeams[8]]" src="/assets/images/{{teamsArr[AFCPlayoffTeams[8]]?.abbrev}}.png"></div>
+      <div></div>
+      <div></div>
+      <div><img *ngIf="teamsArr[AFCPlayoffTeams[9]]" src="/assets/images/{{teamsArr[AFCPlayoffTeams[9]]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img *ngIf="teamsArr[AFCPlayoffTeams[10]]" src="/assets/images/{{teamsArr[AFCPlayoffTeams[10]]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img class="play-img" src="/assets/images/NFLPlayoffs.png"></div>
+      <div></div>
+      <div><img class="sb-img" src="/assets/images/SuperBowl.png" width="100"></div>
+      <div></div>
+      <div><img *ngIf="SuperBowlChamp" src="/assets/images/{{teamsArr[SuperBowlChamp]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img *ngIf="teamsArr[NFCPlayoffTeams[10]]" src="/assets/images/{{teamsArr[NFCPlayoffTeams[10]]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img *ngIf="teamsArr[NFCPlayoffTeams[8]]" src="/assets/images/{{teamsArr[NFCPlayoffTeams[8]]?.abbrev}}.png"></div>
+      <div></div>
+      <div></div>
+      <div><img *ngIf="teamsArr[NFCPlayoffTeams[9]]" src="/assets/images/{{teamsArr[NFCPlayoffTeams[9]]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img *ngIf="teamsArr[NFCPlayoffTeams[6]]" src="/assets/images/{{teamsArr[NFCPlayoffTeams[6]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[NFCPlayoffTeams[0]]?.abbrev}}.png"></div>
+      <div></div>
+      <div><img *ngIf="teamsArr[NFCPlayoffTeams[7]]" src="/assets/images/{{teamsArr[NFCPlayoffTeams[7]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[NFCPlayoffTeams[1]]?.abbrev}}.png"></div>
+    </div>
+    <div class="flex-container-col">
+      <div><img src="/assets/images/{{teamsArr[NFCPlayoffTeams[4]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[NFCPlayoffTeams[3]]?.abbrev}}.png"></div>
+      <div></div>
+      <div><img src="/assets/images/{{teamsArr[NFCPlayoffTeams[5]]?.abbrev}}.png"></div>
+      <div><img src="/assets/images/{{teamsArr[NFCPlayoffTeams[2]]?.abbrev}}.png"></div>
+      <div></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class='well division col-sm-6'>
+  {{division}}
+  <table class='div-table' width='100%'>
+    <thead>
+      <tr>
+        <td width='40%'></td>
+        <td width='12%' align='center'>W</td>
+        <td width='12%' align='center'>L</td>
+        <td width='12%' align='center'>PCT</td>
+        <td width='12%' align='center'>PF</td>
+        <td width='12%' align='center'>PA</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="team-row" *ngFor="let team of divisionTeams" (click)="showTeam(team.abbrev)">
+        <td class="team-info">
+          <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+          <span class="team-city">{{team.city}}</span>
+          <br>
+          <span class="team-name">{{team.name}}</span>
+        </td>
+        <td align='center'>{{team.wins}}</td>
+        <td align='center'>{{team.losses}}</td>
+        <td align='center' *ngIf="currentGame > 0">{{team.pct}}</td>
+        <td align='center' *ngIf="currentGame === 0">{{team.total}}</td>
+        <td align='center'>{{team.pf}}</td>
+        <td align='center'>{{team.pa}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
