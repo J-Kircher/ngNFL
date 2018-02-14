@@ -27,7 +27,7 @@ import { PlayoffService } from './service/playoff.service';
 import { SimpleModalComponent } from './common/simple-modal.component';
 import { ModalTriggerDirectve } from './common/modal-trigger.directive';
 import { JQUERY_TOKEN } from './common/jQuery.service';
-declare let jQuery: Object;
+export let jQuery: Object;
 
 @NgModule({
   imports: [
