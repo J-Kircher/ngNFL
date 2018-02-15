@@ -25,7 +25,7 @@ import { TeamScheduleComponent } from './teams/team-schedule.component';
 import { PlayoffsComponent } from './playoffs/playoffs.component';
 import { PlayoffService } from './service/playoff.service';
 import { SimpleModalComponent } from './common/simple-modal.component';
-import { ModalTriggerDirectve } from './common/modal-trigger.directive';
+import { ModalTriggerDirective } from './common/modal-trigger.directive';
 import { JQUERY_TOKEN } from './common/jQuery.service';
 declare let jQuery: Object;
 
@@ -53,7 +53,7 @@ declare let jQuery: Object;
     TeamScheduleComponent,
     PlayoffsComponent,
     SimpleModalComponent,
-    ModalTriggerDirectve
+    ModalTriggerDirective
   ],
   providers: [
     TeamService,
