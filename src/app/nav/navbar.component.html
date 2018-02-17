@@ -5,12 +5,12 @@
     <button type="button" class="btn btn-default btn-sm navbar-btn" id="simulate" (click)="simulate()" [disabled]="postseason">Simulate</button>
     <button [routerLink]="['/standings']" type="button" class="btn btn-default btn-sm navbar-btn" id="standings">Standings</button>
     <button *ngIf="postseason" [routerLink]="['/playoffs']" type="button" class="btn btn-default btn-sm navbar-btn" id="playoffs">Playoffs</button>
-    <button type="button" class="btn btn-default btn-sm navbar-btn" id="topTeams" (click)="getTopTeams()" modal-trigger="showTopTeams">Top Teams</button>
+    <button type="button" class="btn btn-default btn-sm navbar-btn" id="topTeams" (click)="getTopTeams()">Top Teams</button>
     <button type="button" class="btn btn-default btn-sm navbar-btn" id="help">Help</button>
   </div>
 </div>
 
-<simple-modal modalTitle="Top Teams" elementId="showTopTeams" closeOnBodyClick="false">
+<simple-modal #childModal modalTitle="Top Teams" elementId="showTopTeams">
   <ul class="nav nav-tabs">
     <li class="active">
       <a data-toggle="tab" href="#afc">AFC Playoffs</a>

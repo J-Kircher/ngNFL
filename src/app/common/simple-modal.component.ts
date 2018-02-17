@@ -1,18 +1,20 @@
-import { Component, Input, ViewChild, ElementRef, Inject } from '@angular/core';
-import { JQUERY_TOKEN } from './jQuery.service';
+import { Component, Input, ViewChild  } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'simple-modal',
   template: `
-    <div id="{{elementId}}" #modalContainer class="modal fade" tabindex="-1">
+    <div id="{{elementId}}" bsModal #childModal="bs-modal" class="modal fade" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" (click)="hide()"><span>&times;</span></button>
             <h4 class="modal-title">{{modalTitle}}</h4>
           </div>
-          <div class="modal-body" (click)="closeModal()">
+          <div class="modal-body">
             <ng-content></ng-content>
+          </div>
+          <div class="modal-footer">
           </div>
         </div>
       </div>
@@ -26,15 +28,15 @@ import { JQUERY_TOKEN } from './jQuery.service';
 export class SimpleModalComponent {
   @Input() modalTitle: string;
   @Input() elementId: string;
-  @Input() closeOnBodyClick: string;
-  @ViewChild('modalContainer') containerEl: ElementRef;
+  @ViewChild('childModal') public childModal: ModalDirective;
 
-  constructor(@Inject(JQUERY_TOKEN) private $: any) { }
+  constructor() { }
 
-  closeModal() {
-    if (this.closeOnBodyClick === 'true') {
-      // console.log('[simple-modal] closeModal()');
-      this.$(this.containerEl.nativeElement).modal('hide');
-    }
+  show() {
+    this.childModal.show();
+  }
+
+  hide() {
+    this.childModal.hide();
   }
 }

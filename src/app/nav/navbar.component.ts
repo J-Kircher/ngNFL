@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ScheduleService } from '../service/schedule.service';
 import { TeamService } from '../service/team.service';
 import { ITeam } from '../model/nfl.model';
 import { sortDivision, sortConference } from '../common/sort';
+import { SimpleModalComponent } from '../common/simple-modal.component';
 
 @Component({
   selector: 'nav-bar',
@@ -22,6 +23,7 @@ export class NavBarComponent  {
   NFCOthers: ITeam [] = [];
   NFCWildcard: ITeam[] = [];
   NFCHunt: ITeam[] = [];
+  @ViewChild('childModal') childModal: SimpleModalComponent;
 
   constructor(private scheduleService: ScheduleService, private teamService: TeamService) { }
 
@@ -97,5 +99,7 @@ export class NavBarComponent  {
     this.NFCHunt.push(this.NFCOthers[3]);
     this.NFCHunt.push(this.NFCOthers[4]);
     this.NFCHunt.push(this.NFCOthers[5]);
+
+    this.childModal.show();
   }
 }

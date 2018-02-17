@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule } from '../model/nfl.model';
 import { ScheduleDayService } from '../service/schedule.day.service';
 import { ScheduleService } from '../service/schedule.service';
+import { SimpleModalComponent } from '../common/simple-modal.component';
 
 @Component({
   selector: 'schedule-day',
@@ -39,6 +40,7 @@ export class ScheduleDayComponent implements OnInit {
   gameDay: string;
   gamesArr: ISchedule[] = [];
   modalGame: ISchedule;
+  @ViewChild('childModal') childModal: SimpleModalComponent;
 
   constructor(private teamService: TeamService, private scheduleDayService: ScheduleDayService,
     private scheduleService: ScheduleService) { }
@@ -62,5 +64,6 @@ export class ScheduleDayComponent implements OnInit {
 
   matchupClick(id: number) {
     this.modalGame = this.scheduleService.getGameById(id);
+    this.childModal.show();
   }
 }

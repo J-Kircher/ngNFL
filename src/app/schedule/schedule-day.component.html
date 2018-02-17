@@ -5,14 +5,14 @@
         {{gameDay}}
       </div>
       <div class="well col-sm-3 gameday" *ngFor="let score of gamesArr"
-        modal-trigger="showMatchup" (click)="matchupClick(score.id)">
+        (click)="matchupClick(score.id)">
         <show-score [score]=score></show-score>
       </div>
     </div>
   </div>
 </div>
 
-<simple-modal modalTitle="Matchup" elementId="showMatchup" closeOnBodyClick="false">
+<simple-modal #childModal modalTitle="Matchup" elementId="showMatchup">
   <div class="row well schedule">
     <div class="schedule col-sm-12">
       <div class="col-sm-5" style="margin-top:5px;text-align:right">

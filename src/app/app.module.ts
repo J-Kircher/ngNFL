@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { NFLRoutes } from './app.routes';
@@ -25,13 +26,11 @@ import { TeamScheduleComponent } from './teams/team-schedule.component';
 import { PlayoffsComponent } from './playoffs/playoffs.component';
 import { PlayoffService } from './service/playoff.service';
 import { SimpleModalComponent } from './common/simple-modal.component';
-import { ModalTriggerDirectve } from './common/modal-trigger.directive';
-import { JQUERY_TOKEN } from './common/jQuery.service';
-export let jQuery: Object;
 
 @NgModule({
   imports: [
     BrowserModule,
+    ModalModule.forRoot(),
     RouterModule.forRoot(NFLRoutes)
   ],
   declarations: [
@@ -52,14 +51,12 @@ export let jQuery: Object;
     ShowScoreComponent,
     TeamScheduleComponent,
     PlayoffsComponent,
-    SimpleModalComponent,
-    ModalTriggerDirectve
+    SimpleModalComponent
   ],
   providers: [
     TeamService,
     ScheduleService,
-    PlayoffService,
-    { provide: JQUERY_TOKEN, useValue: jQuery }
+    PlayoffService
   ],
   bootstrap: [
     AppComponent
