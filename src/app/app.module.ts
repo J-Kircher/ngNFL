@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
@@ -26,10 +27,19 @@ import { TeamScheduleComponent } from './teams/team-schedule.component';
 import { PlayoffsComponent } from './playoffs/playoffs.component';
 import { PlayoffService } from './service/playoff.service';
 import { SimpleModalComponent } from './common/simple-modal.component';
+import { ConfigService } from './service/config.service';
+
+// Loads application runtime config
+const appInitializerFn = (appConfig: ConfigService) => {
+  return () => {
+    return appConfig.loadAppConfig();
+  };
+};
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpModule,
     ModalModule.forRoot(),
     RouterModule.forRoot(NFLRoutes)
   ],
@@ -56,7 +66,14 @@ import { SimpleModalComponent } from './common/simple-modal.component';
   providers: [
     TeamService,
     ScheduleService,
-    PlayoffService
+    PlayoffService,
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [ ConfigService ]
+    }
   ],
   bootstrap: [
     AppComponent
