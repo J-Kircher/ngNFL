@@ -1,5 +1,20 @@
-<div class="well" style="border:0; background: url('/assets/images/grass.gif');margin-bottom:0px;">
+<ul class="menu">
+  <li><div style="margin: 5px 20px;"><img src="/assets/images/NFL.gif" height="50"></div></li>
+  <li><a [routerLink]="['/teams']" id="show">Show Teams</a></li>
+  <li><a [routerLink]="['/schedule']" id="schedule">Schedule</a></li>
+  <li><a [routerLink]="['/standings']" id="standings">Standings</a></li>
+  <li><a id="topTeams" (click)="getTopTeams()">Top Teams</a></li>
+  <li><a id="help">Help</a></li>
+  <button type="button" class="btn btn-default btn-sm navbar-btn" style="float: right;" id="simulate" (click)="simulate()" [disabled]="postseason">Simulate</button>
+  <button *ngIf="postseason" [routerLink]="['/playoffs']" type="button" class="btn btn-default btn-sm navbar-btn" style="float: right;" id="playoffs">Playoffs</button>
+</ul>
+
+<div *ngIf="false" class="well" style="border:0;">
+  <li><a id="simulate" (click)="simulate()" [ngClass]="{ 'disabled' : postseason }">Simulate</a></li>
+  <li><a *ngIf="postseason" [routerLink]="['/playoffs']" id="playoffs">Playoffs</a></li>
+
   <div class="flex-container">
+    <div><img src="/assets/images/NFL.gif" height="50"></div>
     <button [routerLink]="['/teams']" type="button" class="btn btn-default btn-sm navbar-btn" id="show">Show Teams</button>
     <button [routerLink]="['/schedule']" type="button" class="btn btn-default btn-sm navbar-btn" id="schedule">Schedule</button>
     <button type="button" class="btn btn-default btn-sm navbar-btn" id="simulate" (click)="simulate()" [disabled]="postseason">Simulate</button>

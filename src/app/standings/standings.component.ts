@@ -5,7 +5,7 @@ import { ITeam } from '../model/nfl.model';
 @Component({
   selector: 'standings',
   template: `
-    <div class="container well col-sm-12">
+    <div class="container well col-sm-12" style="margin-bottom: 0px;">
       <div class="row well standings">
         <div class="standings col-sm-12">
           <div class="col-sm-12" style="margin-top:5px">

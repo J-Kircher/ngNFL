@@ -75,3 +75,49 @@
   float:right;
   margin-right: 5px;
 }
+
+ul.menu {
+  background: url('/assets/images/grass.gif');
+  background-color: #333;
+  top: 0;
+  margin: 0px;
+  padding: 0px;
+  z-index: 99;
+  font-size: 20px;
+  text-shadow: 5px 5px 5px black;
+  list-style-type: none;
+  overflow: hidden;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+}
+
+ul.menu li {
+  float: left;
+}
+
+ul.menu li a {
+  display: block;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.menu li a:hover {
+  border-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.5);
+}
+
+ul.menu .active {
+  background-color: #4CAF50;
+}
+
+ul.menu li a.disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+
+button {
+  margin: 10px;
+}
