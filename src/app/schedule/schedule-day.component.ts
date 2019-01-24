@@ -40,13 +40,22 @@ export class ScheduleDayComponent implements OnInit {
   gameDay: string;
   gamesArr: ISchedule[] = [];
   modalGame: ISchedule;
+  loading: boolean = true;
   @ViewChild('childModal') childModal: SimpleModalComponent;
 
   constructor(private teamService: TeamService, private scheduleDayService: ScheduleDayService,
     private scheduleService: ScheduleService) { }
 
   ngOnInit() {
-    this.teamsArr = this.teamService.getTeams().map(teams => teams);
+    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+      // console.log('[schedule-day] ngOnInit() getTeams() SUCCESS');
+      this.loading = false;
+    }, (err) => {
+      console.error('[schedule-day] ngOnInit() getTeams() error: ' + err);
+    });
 
     this.scheduleDayService.scheduleDay$.subscribe(
       data => {

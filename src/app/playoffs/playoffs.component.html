@@ -1,4 +1,4 @@
-<div class="container well col-sm-12">
+<div *ngIf="!loading" class="container well col-sm-12">
   <div class="row well playoffs">
     <div class="playoffs col-sm-12">
       <div class="col-sm-12" style="margin-top:5px">
@@ -63,4 +63,8 @@
       <div></div>
     </div>
   </div>
+</div>
+<div class="well loading-well" *ngIf="loading">
+  <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+  <div class="loading-font" style="float:right">&nbsp; Loading Playoffs &hellip;</div>
 </div>

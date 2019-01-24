@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ITeam } from '../model/nfl.model';
+import { HttpClient } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
-const TEAMS: ITeam[] = [
+import { ITeam } from '../model/nfl.model';
+import { ConfigService } from '../service/config.service';
+
+const _TEAMS: ITeam[] = [
   { 'city': 'Buffalo', 'name': 'Bills', 'abbrev': 'BUF', 'lightcolor': 'CF0020', 'darkcolor': '1F488F', 'division': 'AFC East', 'qb': 5, 'rb': 4, 'wr': 5, 'ol': 5, 'dl': 6, 'lb': 7, 'db': 9, 'st': 6, 'co': 6 },
   { 'city': 'Miami', 'name': 'Dolphins', 'abbrev': 'MIA', 'lightcolor': 'EF904F', 'darkcolor': '007880', 'division': 'AFC East', 'qb': 5, 'rb': 8, 'wr': 5, 'ol': 7, 'dl': 6, 'lb': 6, 'db': 6, 'st': 7, 'co': 7 },
   { 'city': 'New England', 'name': 'Patriots', 'abbrev': 'NE', 'lightcolor': 'CF0020', 'darkcolor': '203F80', 'division': 'AFC East', 'qb': 8, 'rb': 8, 'wr': 8, 'ol': 8, 'dl': 7, 'lb': 7, 'db': 6, 'st': 7, 'co': 8 },
@@ -39,8 +45,29 @@ const TEAMS: ITeam[] = [
 @Injectable()
 export class TeamService {
 
+  private authServerUrl: string = 'http://' + this.configService.getConfig().server.host + ':' + this.configService.getConfig().server.port;
+  private useServer: boolean = this.configService.getConfig().useServer;
+
+  // private TEAMS = new Subject<ITeam[]>();
+  private TEAMS: ITeam[];
+
+  constructor (public http: Http, private configService: ConfigService) { }
+
   initTeams() {
-    TEAMS.forEach(team => {
+
+    if (this.useServer) {
+      // Use service
+      const url = this.authServerUrl + '/sports/api/team';
+      console.log(url);
+      console.log('[team.service] initTeams() Using Service!');
+      // this.TEAMS = this.http.get(this.authServerUrl).map((res: Response) => res.json());
+    } else {
+      console.log('[team.service] initTeams() NOT Using Service!');
+      this.TEAMS = _TEAMS;
+      console.log('[team.service] initTeams() TEAMS: ' + this.TEAMS.length);
+    }
+
+    this.TEAMS.forEach(team => {
       team.total = (team.qb + team.rb + team.wr + team.ol + team.dl + team.lb + team.db + team.st + team.co);
       team.wins = 0;
       team.losses = 0;
@@ -58,20 +85,35 @@ export class TeamService {
       team.othwins = 0;
       team.othlosses = 0;
     });
+    console.log('[team.service] initTeams() Complete!');
   }
 
-  getTeams(): ITeam[] {
-    return TEAMS;
+  getTeams(): Observable<ITeam[]> {
+  // getTeams() {
+    const subject = new Subject<ITeam[]>();
+
+    // return this.TEAMS;
+
+    setTimeout(() => {subject.next(_TEAMS); subject.complete(); }, 50);
+    // .next adds data to the observable stream
+    // using setTimeout to simulate aschrony
+    return subject;
+
+    // return TEAMS.asObservable();
+    // return TEAMS;
+
+    // return this.http.get(url, options).map((resp: Response) => resp.json()).catch(this.handleError);
+
   }
 
   getTeam(abbrev: string): ITeam {
-    return TEAMS.find(team => team.abbrev === abbrev);
+    return this.TEAMS.find(team => team.abbrev === abbrev);
   }
 
   getTeamIndex(abbrev: string): number {
     let counter = 0;
     let index = -1;
-    TEAMS.forEach(team => {
+    this.TEAMS.forEach(team => {
       if (team.abbrev === abbrev) {
         index = counter;
       } else {
@@ -82,10 +124,10 @@ export class TeamService {
   }
 
   getTeamByIndex(index: number): ITeam {
-    return TEAMS[index];
+    return this.TEAMS[index];
   }
 
   getTeamsForDivision(division: string) {
-    return TEAMS.filter(team => team.division.toLocaleLowerCase() === division.toLocaleLowerCase());
+    return this.TEAMS.filter(team => team.division.toLocaleLowerCase() === division.toLocaleLowerCase());
   }
 }

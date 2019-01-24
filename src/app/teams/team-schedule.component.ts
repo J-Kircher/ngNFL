@@ -7,7 +7,7 @@ import { ITeam, ISchedule } from '../model/nfl.model';
 @Component ({
   selector: 'team-schedule',
   template: `
-    <div class="container well col-sm-12">
+    <div *ngIf="!loading" class="container well col-sm-12">
       <div class="row well schedule">
         <div class="schedule col-sm-12">
           <div class="col-sm-12" style="margin-top:5px">
@@ -19,6 +19,10 @@ import { ITeam, ISchedule } from '../model/nfl.model';
           </div>
         </div>
       </div>
+    </div>
+    <div class="well loading-well" *ngIf="loading">
+      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+      <div class="loading-font" style="float:right">&nbsp; Loading Team Schedule &hellip;</div>
     </div>
 `,
   styles: [`
@@ -53,6 +57,7 @@ export class TeamScheduleComponent implements OnInit {
   teamsArr: ITeam[] = [];
   teamIndex: number;
   teamSchedule: ISchedule[];
+  loading: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private scheduleService: ScheduleService, private teamService: TeamService) {  }
@@ -61,11 +66,20 @@ export class TeamScheduleComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       this.team = this.teamService.getTeam(params['abbrev']);
       // console.log('[team-schedule] ngOnInit() team: ' + this.team.city + ' ' + this.team.name);
-      this.teamsArr = this.teamService.getTeams().map(teams => teams);
-      this.teamIndex = this.teamsArr.findIndex(team => team.abbrev === this.team.abbrev);
-      this.teamSchedule = this.scheduleService.getGamesForTeam(this.teamIndex);
-      // console.table(this.teamSchedule);
-      window.scrollTo(0, 0);
+      // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+
+      this.teamService.getTeams().subscribe((data: ITeam[]) => {
+        this.teamsArr = data;
+        // console.log('[team-schedule] ngOnInit() getTeams() SUCCESS');
+
+        this.teamIndex = this.teamsArr.findIndex(team => team.abbrev === this.team.abbrev);
+        this.teamSchedule = this.scheduleService.getGamesForTeam(this.teamIndex);
+        // console.table(this.teamSchedule);
+        window.scrollTo(0, 0);
+        this.loading = false;
+      }, (err) => {
+        console.error('[team-schedule] ngOnInit() getTeams() error: ' + err);
+      });
     });
   }
 

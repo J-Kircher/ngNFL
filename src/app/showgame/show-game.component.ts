@@ -5,7 +5,7 @@ import { ITeam } from '../model/nfl.model';
 @Component({
   selector: 'show-game',
   template: `
-    <div class="container well col-sm-12">
+    <div *ngIf="!loading" class="container well col-sm-12">
       <div class="well showgame">
         <div class="show-center">
           <img src="/assets/images/NFLToday.gif" name="NFLToday">
@@ -21,6 +21,10 @@ import { ITeam } from '../model/nfl.model';
           <div><img src="/assets/images/F.gif" name="Period"></div>
         </div>
       </div>
+    </div>
+    <div class="well loading-well" *ngIf="loading">
+      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+      <div class="loading-font" style="float:right">&nbsp; Loading Game &hellip;</div>
     </div>
   `,
   styles: [`
@@ -45,10 +49,19 @@ import { ITeam } from '../model/nfl.model';
 
 export class ShowGameComponent implements OnInit {
   teamsArr: ITeam[] = [];
+  loading: boolean = true;
 
   constructor(private teamService: TeamService) { }
 
   ngOnInit() {
-    this.teamsArr = this.teamService.getTeams().map(teams => teams);
+    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+      // console.log('[show-game] ngOnInit() getTeams() SUCCESS');
+      this.loading = false;
+    }, (err) => {
+      console.error('[show-game] ngOnInit() getTeams() error: ' + err);
+    });
   }
 }

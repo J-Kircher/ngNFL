@@ -9,7 +9,6 @@ import { NFLRoutes } from './app.routes';
 import { NavBarComponent } from './nav/navbar.component';
 import { TeamListComponent } from './teams/team-list.component';
 import { TeamService } from './service/team.service';
-import { ITeam } from './model/nfl.model';
 import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { TeamDetailsComponent } from './teams/team-details.component';
 import { ScheduleComponent } from './schedule/schedule.component';
@@ -30,7 +29,7 @@ import { SimpleModalComponent } from './common/simple-modal.component';
 import { ConfigService } from './service/config.service';
 
 // Loads application runtime config
-const appInitializerFn = (appConfig: ConfigService) => {
+export const appInitializerFn = (appConfig: ConfigService) => {
   return () => {
     return appConfig.loadAppConfig();
   };

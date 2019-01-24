@@ -5,17 +5,23 @@ import { ITeam, ISchedule } from '../model/nfl.model';
 @Component({
   selector: 'show-score',
   template: `
-    <div class="team-info"><img src="/assets/images/{{teamsArr[score.visitTeam].abbrev}}.png" class="logo">
-      <span class="score"> {{score.visitScore}} </span>
-      <span class="team-city">{{teamsArr[score.visitTeam].city}}</span><br>
-      <span class="team-name">{{teamsArr[score.visitTeam].name}}</span>
+    <div *ngIf="!loading">
+      <div class="team-info"><img src="/assets/images/{{teamsArr[score.visitTeam].abbrev}}.png" class="logo">
+        <span class="score"> {{score.visitScore}} </span>
+        <span class="team-city">{{teamsArr[score.visitTeam].city}}</span><br>
+        <span class="team-name">{{teamsArr[score.visitTeam].name}}</span>
+      </div>
+      <div class="team-info"><img src="/assets/images/{{teamsArr[score.homeTeam].abbrev}}.png" class="logo">
+        <span class="score"> {{score.homeScore}} </span>
+        <span class="team-city">{{teamsArr[score.homeTeam].city}}</span><br>
+        <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
+      </div>
     </div>
-    <div class="team-info"><img src="/assets/images/{{teamsArr[score.homeTeam].abbrev}}.png" class="logo">
-      <span class="score"> {{score.homeScore}} </span>
-      <span class="team-city">{{teamsArr[score.homeTeam].city}}</span><br>
-      <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
+    <div *ngIf="loading">
+      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+      <div style="float:right">&nbsp; Playing Game &hellip;</div>
     </div>
-  `,
+`,
   styles: [`
     .team-info {
       white-space: nowrap;
@@ -56,12 +62,22 @@ import { ITeam, ISchedule } from '../model/nfl.model';
 export class ShowScoreComponent implements OnInit {
   @Input() score: ISchedule;
   teamsArr: ITeam[] = [];
+  loading: boolean = true;
 
   constructor(private teamService: TeamService) {  }
 
   ngOnInit() {
     // console.log('[show-score] ngOnInit()');
     // console.table(this.score);
-    this.teamsArr = this.teamService.getTeams().map(teams => teams);
+
+    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+      // console.log('[show-score] ngOnInit() getTeams() SUCCESS');
+      this.loading = false;
+    }, (err) => {
+      console.error('[show-score] ngOnInit() getTeams() error: ' + err);
+    });
   }
 }

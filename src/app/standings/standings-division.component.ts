@@ -16,13 +16,24 @@ export class StandingsDivisionComponent implements DoCheck {
   teamsArr: ITeam[] = [];
   divisionTeams: ITeam[] = [];
   currentGame: number = 0;
+  loading: boolean = true;
 
   constructor(private router: Router, private teamService: TeamService, private scheduleService: ScheduleService) {  }
 
   ngDoCheck() {
     // console.log('[standings-division] ngDoCheck() division: ' + this.division);
-    this.teamsArr = this.teamService.getTeams().map(teams => teams);
+    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
     // this.divisionTeams = this.getTeamsForDivision(this.division);
+
+    if (this.loading) {
+      this.teamService.getTeams().subscribe((data: ITeam[]) => {
+        this.teamsArr = data;
+        // console.log('[standings-div] ngDoCheck() getTeams() SUCCESS');
+        this.loading = false;
+      }, (err) => {
+        console.error('[standings-div] ngDoCheck() getTeams() error: ' + err);
+      });
+    }
 
     this.currentGame = this.scheduleService.currentGame;
     if (this.currentGame > 0) {

@@ -5,7 +5,7 @@ import { ITeam } from '../model/nfl.model';
 @Component({
   selector: 'standings',
   template: `
-    <div class="container well col-sm-12" style="margin-bottom: 0px;">
+    <div *ngIf="!loading" class="container well col-sm-12" style="margin-bottom: 0px;">
       <div class="row well standings">
         <div class="standings col-sm-12">
           <div class="col-sm-12" style="margin-top:5px">
@@ -34,6 +34,10 @@ import { ITeam } from '../model/nfl.model';
         </div>
       </div>
     </div>
+    <div class="well loading-well" *ngIf="loading">
+      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+      <div class="loading-font" style="float:right">&nbsp; Loading Standings &hellip;</div>
+    </div>
   `,
   styles: [`
     .standings {
@@ -52,22 +56,31 @@ import { ITeam } from '../model/nfl.model';
 export class StandingsComponent implements OnInit {
   divisions: string[] = [];
   teamsArr: ITeam[] = [];
+  loading: boolean = true;
 
   constructor(private teamService: TeamService) { }
 
   ngOnInit() {
     // console.log('[standings] ngOnInit()');
 
-    this.teamsArr = this.teamService.getTeams().map(teams => teams);
+    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
     // this.divisions = ['AFC West', 'NFC West', 'AFC South', 'NFC South', 'AFC North', 'NFC North', 'AFC East', 'NFC East'];
 
-    this.teamsArr.forEach(team => {
-      if (this.divisions.indexOf(team.division) < 0) {
-        this.divisions.push(team.division);
-      }
-    });
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+      // console.log('[standings] ngOnInit() getTeams() SUCCESS');
 
-    window.scrollTo(0, 0);
+      this.teamsArr.forEach(team => {
+        if (this.divisions.indexOf(team.division) < 0) {
+          this.divisions.push(team.division);
+        }
+      });
+
+      this.loading = false;
+      window.scrollTo(0, 0);
+    }, (err) => {
+      console.error('[standings] ngOnInit() getTeams() error: ' + err);
+    });
   }
 }

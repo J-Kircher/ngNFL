@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { ISchedule, IScheduleBase, ITeam } from '../model/nfl.model';
 import { TeamService } from '../service/team.service';
 import { ScheduleService } from '../service/schedule.service';
@@ -133,10 +135,15 @@ export class PlayoffService {
     }
   }
 
-  getAFCPlayoffTeams(): number[] {
+  getAFCPlayoffTeams(): Observable<number[]> {
+    const subject = new Subject<number[]>();
     if (this.scheduleService.checkEndOfSeason() && this.AFCPlayoffTeams.length > 0) {
       // console.log('[playoff.service] getAFCPlayoffTeams() Season is Over');
-      return this.AFCPlayoffTeams;
+      // setTimeout(() => {subject.next(this.AFCPlayoffTeams); subject.complete(); }, 50);
+      // // .next adds data to the observable stream
+      // // using setTimeout to simulate aschrony
+      // return subject;
+      return Observable.apply(this.AFCPlayoffTeams);
     }
 
     const divisions: string[] = [];
@@ -147,78 +154,105 @@ export class PlayoffService {
     this.AFCPlayoffTeams = [];
     this.NFCPlayoffTeams = [];
 
-    teamsArr = this.teamService.getTeams().map(teams => teams);
+    // teamsArr = this.teamService.getTeams().map(teams => teams);
 
-    teamsArr.forEach(team => {
-      if (divisions.indexOf(team.division) < 0) {
-        divisions.push(team.division);
-      }
-    });
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      teamsArr = data;
+      // console.log('[playoffs.service-afc] ngOnInit() getTeams() SUCCESS');
 
-    divisions
-      .filter(division => division.indexOf('AFC') > -1 )
-      .forEach(division => {
-        const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
-        thisDiv.sort(sortDivision);
-        AFCDivLeaders.push(thisDiv[0]);
-        AFCOthers.push(thisDiv[1]);
-        AFCOthers.push(thisDiv[2]);
-        AFCOthers.push(thisDiv[3]);
+      teamsArr.forEach(team => {
+        if (divisions.indexOf(team.division) < 0) {
+          divisions.push(team.division);
+        }
       });
 
-    AFCDivLeaders.sort(sortConference);
-    AFCOthers.sort(sortConference);
+      divisions
+        .filter(division => division.indexOf('AFC') > -1 )
+        .forEach(division => {
+          const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
+          thisDiv.sort(sortDivision);
+          AFCDivLeaders.push(thisDiv[0]);
+          AFCOthers.push(thisDiv[1]);
+          AFCOthers.push(thisDiv[2]);
+          AFCOthers.push(thisDiv[3]);
+        });
 
-    this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[0].abbrev));
-    this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[1].abbrev));
-    this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[2].abbrev));
-    this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[3].abbrev));
-    this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCOthers[0].abbrev));
-    this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCOthers[1].abbrev));
-    // console.table(this.AFCPlayoffTeams);
-    return this.AFCPlayoffTeams;
+      AFCDivLeaders.sort(sortConference);
+      AFCOthers.sort(sortConference);
+
+      this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[0].abbrev));
+      this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[1].abbrev));
+      this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[2].abbrev));
+      this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCDivLeaders[3].abbrev));
+      this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCOthers[0].abbrev));
+      this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCOthers[1].abbrev));
+      // console.table(this.AFCPlayoffTeams);
+
+      // setTimeout(() => {subject.next(this.AFCPlayoffTeams); subject.complete(); }, 50);
+      // // .next adds data to the observable stream
+      // // using setTimeout to simulate aschrony
+      // return subject;
+
+      return Observable.apply(this.AFCPlayoffTeams);
+    }, (err) => {
+      console.error('[playoffs.service-afc] ngOnInit() getTeams() error: ' + err);
+    });
   }
 
-  getNFCPlayoffTeams(): number[] {
+  getNFCPlayoffTeams(): Observable<number[]> {
+    const subject = new Subject<number[]>();
     if (this.scheduleService.checkEndOfSeason() && this.NFCPlayoffTeams.length > 0) {
       // console.log('[playoff.service] getNFCPlayoffTeams() Season is Over');
-      return this.NFCPlayoffTeams;
+      setTimeout(() => {subject.next(this.NFCPlayoffTeams); subject.complete(); }, 50);
+      // .next adds data to the observable stream
+      // using setTimeout to simulate aschrony
+      return subject;
     }
     const divisions: string[] = [];
     let teamsArr: ITeam[] = [];
     const NFCDivLeaders: ITeam [] = [];
     const NFCOthers: ITeam [] = [];
 
-    teamsArr = this.teamService.getTeams().map(teams => teams);
+    // teamsArr = this.teamService.getTeams().map(teams => teams);
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      teamsArr = data;
+      // console.log('[playoff.service-nfc] ngOnInit() getTeams() SUCCESS');
 
-    teamsArr.forEach(team => {
-      if (divisions.indexOf(team.division) < 0) {
-        divisions.push(team.division);
-      }
-    });
-
-    divisions
-      .filter(division => division.indexOf('NFC') > -1 )
-      .forEach(division => {
-        const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
-        thisDiv.sort(sortDivision);
-        NFCDivLeaders.push(thisDiv[0]);
-        NFCOthers.push(thisDiv[1]);
-        NFCOthers.push(thisDiv[2]);
-        NFCOthers.push(thisDiv[3]);
+      teamsArr.forEach(team => {
+        if (divisions.indexOf(team.division) < 0) {
+          divisions.push(team.division);
+        }
       });
 
-    NFCDivLeaders.sort(sortConference);
-    NFCOthers.sort(sortConference);
+      divisions
+        .filter(division => division.indexOf('NFC') > -1 )
+        .forEach(division => {
+          const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
+          thisDiv.sort(sortDivision);
+          NFCDivLeaders.push(thisDiv[0]);
+          NFCOthers.push(thisDiv[1]);
+          NFCOthers.push(thisDiv[2]);
+          NFCOthers.push(thisDiv[3]);
+        });
 
-    this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[0].abbrev));
-    this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[1].abbrev));
-    this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[2].abbrev));
-    this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[3].abbrev));
-    this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCOthers[0].abbrev));
-    this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCOthers[1].abbrev));
-    // console.table(this.NFCPlayoffTeams);
-    return this.NFCPlayoffTeams;
+      NFCDivLeaders.sort(sortConference);
+      NFCOthers.sort(sortConference);
+
+      this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[0].abbrev));
+      this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[1].abbrev));
+      this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[2].abbrev));
+      this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCDivLeaders[3].abbrev));
+      this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCOthers[0].abbrev));
+      this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCOthers[1].abbrev));
+      // console.table(this.NFCPlayoffTeams);
+
+      setTimeout(() => {subject.next(this.NFCPlayoffTeams); subject.complete(); }, 50);
+      // .next adds data to the observable stream
+      // using setTimeout to simulate aschrony
+      return subject;
+    }, (err) => {
+      console.error('[playoff.service.nfc] ngOnInit() getTeams() error: ' + err);
+    });
   }
 }
 
