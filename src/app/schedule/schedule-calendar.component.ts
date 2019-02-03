@@ -4,29 +4,38 @@ import { NFLCalendar } from '../model/nfl.model';
 @Component({
   selector: 'schedule-calendar',
   template: `
-    <div class="container well col-sm-12">
-      <div class="row well schedule">
-        <div class="schedule col-sm-12">
-          <div class="col-sm-12" style="margin-top:5px">
-            Schedule
-          </div>
-          <div *ngFor="let schedDate of NFLCalendarArr">
-            <schedule-month [month]="schedDate.month" [year]="schedDate.year"></schedule-month>
+    <mat-card>
+      <div class="schedule">
+        <div style="margin-top:5px">
+          Schedule
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let schedDate of NFLCalendarArr">
+            <div class="schedule-body">
+              <schedule-month [month]="schedDate.month" [year]="schedDate.year"></schedule-month>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </mat-card>
 `,
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
     .schedule {
       font-family: Arial;
-      font-style: italic;
       font-size: 14pt;
       font-weight: bold;
+      font-style: italic;
       vertical-align: middle;
       margin: 0px;
       padding: 0px;
       border-radius: 10px;
+    }
+    .schedule-body {
+      margin: 2px;
     }
   `]
 })

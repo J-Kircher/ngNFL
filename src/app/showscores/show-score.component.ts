@@ -5,7 +5,7 @@ import { ITeam, ISchedule } from '../model/nfl.model';
 @Component({
   selector: 'show-score',
   template: `
-    <div *ngIf="!loading">
+    <div fxLayout="column" *ngIf="!loading">
       <div class="team-info"><img src="/assets/images/{{teamsArr[score.visitTeam].abbrev}}.png" class="logo">
         <span class="score"> {{score.visitScore}} </span>
         <span class="team-city">{{teamsArr[score.visitTeam].city}}</span><br>
@@ -17,12 +17,16 @@ import { ITeam, ISchedule } from '../model/nfl.model';
         <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
       </div>
     </div>
-    <div *ngIf="loading">
+    <mat-card *ngIf="loading">
       <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
-      <div style="float:right">&nbsp; Playing Game &hellip;</div>
-    </div>
+      <div style="float:right">&nbsp; Loading Game &hellip;</div>
+    </mat-card>
 `,
   styles: [`
+    mat-card {
+      margin: 8px 8px 0px;
+      padding: 8px;
+    }
     .team-info {
       white-space: nowrap;
       text-align: left;

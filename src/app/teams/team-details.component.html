@@ -1,69 +1,65 @@
-<div class="container well col-sm-12">
-  <div class="col-sm-12">
-    <div class="row">
-      <div class="col-sm-12 well well-sm" style="margin-bottom:0px;">
-        <div class="well well-sm banner-border" [ngStyle]="{'background-color':'#'+team.lightcolor}"></div>
-        <div class="well well-sm banner-center" [ngStyle]="{'background-color':'#'+team.darkcolor}">{{team?.city}} {{team?.name}}</div>
-        <div class="well well-sm banner-border" [ngStyle]="{'background-color':'#'+team.lightcolor}"></div>
-      </div>
+<mat-card>
+  <mat-card class="team-card">
+    <div fxLayout="column" style="margin-bottom:0px;">
+      <div class="banner-border" [ngStyle]="{'background-color':'#'+team.lightcolor}">&nbsp;</div>
+      <div class="banner-center" [ngStyle]="{'background-color':'#'+team.darkcolor}">{{team?.city}} {{team?.name}}</div>
+      <div class="banner-border" [ngStyle]="{'background-color':'#'+team.lightcolor}">{{team?.division}}</div>
     </div>
-    <div class="row">
-      <div class="col-sm-12 well well-sm" style="margin-bottom:0px;">
-        <div class="col-sm-2" style="text-align: center;"><img src="/assets/images/{{team?.abbrev}}-L.png" [alt]="team?.name"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2 image-container"><img src="/assets/images/{{team?.abbrev}}.png" [alt]="team?.name" style="padding-top:20px;"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2" style="text-align: center;"><img src="/assets/images/{{team?.abbrev}}-R.png" [alt]="team?.name"></div>
-      </div>
+  </mat-card>
+  <mat-card class="team-card">
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom:0px;">
+      <div class="image-container"><img src="/assets/images/{{team?.abbrev}}-L.png" [alt]="team?.name"></div>
+      <div class="image-container"><img src="/assets/images/{{team?.abbrev}}.png" [alt]="team?.name"></div>
+      <div class="image-container"><img src="/assets/images/{{team?.abbrev}}-R.png" [alt]="team?.name"></div>
     </div>
-    <div class="row">
-      <div class="col-sm-12 well well-sm" style="margin-bottom:0px;font-size:10pt">
-        <table width="100%">
-          <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
-            <td>QB</td>
-            <td>RB</td>
-            <td>WR</td>
-            <td>OL</td>
-            <td>DL</td>
-            <td>LB</td>
-            <td>DB</td>
-            <td>ST</td>
-            <td>CO</td>
-            <td>Total</td>
-          </tr>
-          <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
-            <td>{{team.qb}}</td>
-            <td>{{team.rb}}</td>
-            <td>{{team.wr}}</td>
-            <td>{{team.ol}}</td>
-            <td>{{team.dl}}</td>
-            <td>{{team.lb}}</td>
-            <td>{{team.db}}</td>
-            <td>{{team.st}}</td>
-            <td>{{team.co}}</td>
-            <td>{{total}}</td>
-          </tr>
-        </table>
-      </div>
+  </mat-card>
+  <mat-card class="team-card">
+    <div style="margin-bottom:0px;font-size:10pt">
+      <table width="100%">
+        <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
+          <td>QB</td>
+          <td>RB</td>
+          <td>WR</td>
+          <td>OL</td>
+          <td>DL</td>
+          <td>LB</td>
+          <td>DB</td>
+          <td>ST</td>
+          <td>CO</td>
+          <td>Total</td>
+        </tr>
+        <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
+          <td>{{team.qb}}</td>
+          <td>{{team.rb}}</td>
+          <td>{{team.wr}}</td>
+          <td>{{team.ol}}</td>
+          <td>{{team.dl}}</td>
+          <td>{{team.lb}}</td>
+          <td>{{team.db}}</td>
+          <td>{{team.st}}</td>
+          <td>{{team.co}}</td>
+          <td>{{total}}</td>
+        </tr>
+      </table>
     </div>
-    <div class="row">
-      <div class="col-sm-12 well well-sm" style="margin-bottom:0px;font-size:10pt">
-        <table width="100%">
-          <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
-            <td width="25%">Wins</td>
-            <td width="25%">Losses</td>
-            <td width="25%">PF</td>
-            <td width="25%">PA</td>
-          </tr>
-          <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
-            <td>{{team.wins}}</td>
-            <td>{{team.losses}}</td>
-            <td>{{team.pf}}</td>
-            <td>{{team.pa}}</td>
-          </tr>
-        </table>
-      </div>
+  </mat-card>
+  <mat-card class="team-card">
+   <div style="margin-bottom:0px;font-size:10pt">
+      <table width="100%">
+        <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
+          <td width="25%">Wins</td>
+          <td width="25%">Losses</td>
+          <td width="25%">PF</td>
+          <td width="25%">PA</td>
+        </tr>
+        <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
+          <td>{{team.wins}}</td>
+          <td>{{team.losses}}</td>
+          <td>{{team.pf}}</td>
+          <td>{{team.pa}}</td>
+        </tr>
+      </table>
     </div>
-  </div>
-</div>
+  </mat-card>
+</mat-card>
 <team-schedule></team-schedule>

@@ -5,8 +5,8 @@ import { ITeam } from '../model/nfl.model';
 @Component({
   selector: 'show-game',
   template: `
-    <div *ngIf="!loading" class="container well col-sm-12">
-      <div class="well showgame">
+    <mat-card *ngIf="!loading">
+      <div class="showgame">
         <div class="show-center">
           <img src="/assets/images/NFLToday.gif" name="NFLToday">
         </div>
@@ -21,19 +21,23 @@ import { ITeam } from '../model/nfl.model';
           <div><img src="/assets/images/F.gif" name="Period"></div>
         </div>
       </div>
-    </div>
-    <div class="well loading-well" *ngIf="loading">
+    </mat-card>
+    <mat-card class="loading-well" *ngIf="loading">
       <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
       <div class="loading-font" style="float:right">&nbsp; Loading Game &hellip;</div>
-    </div>
+    </mat-card>
   `,
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
     .showgame {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       background: black;
-      margin: 5px;
+      margin: 0px;
       padding: 5px;
       border-radius: 10px;
     }

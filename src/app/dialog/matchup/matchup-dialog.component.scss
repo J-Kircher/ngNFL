@@ -1,0 +1,25 @@
+.dialog-title {
+  font-weight: bold;
+}
+button {
+  color: white;
+  background-color: rgba(0, 128, 0, 0.5) !important;
+}
+.gameday {
+  font-family: Arial;
+  font-size: 12pt;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+  margin: 4px;
+}
+.schedule {
+  font-family: Arial;
+  font-size: 12pt;
+  font-weight: bold;
+  font-style: italic;
+  vertical-align: middle;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 10px;
+}

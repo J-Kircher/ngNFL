@@ -21,15 +21,10 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/normalize.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/typescript/lib/typescript.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/systemjs/dist/system.src.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/hammerjs/hammer.min.js"
             ]
           },
           "configurations": {
@@ -77,15 +72,8 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [
-              "node_modules/typescript/lib/typescript.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/systemjs/dist/system.src.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
+            "scripts": [],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/normalize.css",
               "src/styles.scss"
             ],
             "assets": [

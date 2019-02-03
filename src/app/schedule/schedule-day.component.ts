@@ -1,14 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { TeamService } from '../service/team.service';
-import { ITeam, ISchedule } from '../model/nfl.model';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ISchedule } from '../model/nfl.model';
 import { ScheduleDayService } from '../service/schedule.day.service';
-import { ScheduleService } from '../service/schedule.service';
-import { SimpleModalComponent } from '../common/simple-modal.component';
+import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
+// import { SimpleModalComponent } from '../common/simple-modal.component';
 
 @Component({
   selector: 'schedule-day',
   templateUrl: './schedule-day.component.html',
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
     .schedule {
       font-family: Arial;
       font-size: 12pt;
@@ -25,8 +29,7 @@ import { SimpleModalComponent } from '../common/simple-modal.component';
       font-weight: bold;
       font-style: italic;
       cursor: pointer;
-      margin: 0px;
-      margin-bottom: 0px;
+      margin: 4px;
     }
     .gameday:hover {
       border-color: rgba(0, 128, 0, 0.5);
@@ -36,43 +39,48 @@ import { SimpleModalComponent } from '../common/simple-modal.component';
 })
 
 export class ScheduleDayComponent implements OnInit {
-  teamsArr: ITeam[] = [];
   gameDay: string;
   gamesArr: ISchedule[] = [];
-  modalGame: ISchedule;
   loading: boolean = true;
-  @ViewChild('childModal') childModal: SimpleModalComponent;
+  // @ViewChild('childModal') childModal: SimpleModalComponent;
 
-  constructor(private teamService: TeamService, private scheduleDayService: ScheduleDayService,
-    private scheduleService: ScheduleService) { }
+  dialogReturn: any;
+
+  constructor(
+    private scheduleDayService: ScheduleDayService,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit() {
-    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
-
-    this.teamService.getTeams().subscribe((data: ITeam[]) => {
-      this.teamsArr = data;
-      // console.log('[schedule-day] ngOnInit() getTeams() SUCCESS');
-      this.loading = false;
-    }, (err) => {
-      console.error('[schedule-day] ngOnInit() getTeams() error: ' + err);
-    });
-
     this.scheduleDayService.scheduleDay$.subscribe(
       data => {
-          // console.log('[schedule-day] received: ' + data);
-          this.gameDay = data;
-        });
+        // console.log('[schedule-day] scheduleDay received: ' + data);
+        this.gameDay = data;
+      });
 
     this.scheduleDayService.scheduleGames$.subscribe(
       data => {
-          // console.log('[schedule-day] received: ' + data);
-           this.gamesArr = data;
-          // console.table(data);
-        });
+        // console.log('[schedule-day] scheduleGames received: ' + data);
+        this.gamesArr = data;
+      });
+
+    this.loading = false;
   }
 
-  matchupClick(id: number) {
-    this.modalGame = this.scheduleService.getGameById(id);
-    this.childModal.show();
+  openTopTeamsDialog(id: number): void {
+    const dialogRef = this.dialog.open(MatchupDialogComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    });
+  }
+
+  getMatchup(id: number) {
+    // console.log('[schedule-day] getMatchup: ' + id);
+    // this.childModal.show();
+    this.openTopTeamsDialog(id);
   }
 }

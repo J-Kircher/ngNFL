@@ -7,30 +7,38 @@ import { ITeam, ISchedule } from '../model/nfl.model';
 @Component ({
   selector: 'team-schedule',
   template: `
-    <div *ngIf="!loading" class="container well col-sm-12">
-      <div class="row well schedule">
-        <div class="schedule col-sm-12">
-          <div class="col-sm-12" style="margin-top:5px">
-            {{team.city}} {{team.name}} Schedule
-          </div>
-          <div class="well col-sm-3 gameday" *ngFor="let score of teamSchedule" (click)="showTeam(getOpponent(score).abbrev)">
-            {{score.gameday}}
-            <show-score [score]=score></show-score>
+    <mat-card *ngIf="!loading">
+      <div class="schedule">
+        <div style="margin-top:5px">
+          {{team.city}} {{team.name}} Schedule
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column wrap">
+          <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
+            (click)="showTeam(getOpponent(score).abbrev)">
+            <mat-card class="gameday">
+              {{score.gameday}}
+              <show-score [score]=score></show-score>
+            </mat-card>
           </div>
         </div>
       </div>
-    </div>
-    <div class="well loading-well" *ngIf="loading">
+    </mat-card>
+
+    <mat-card class="loading-well" *ngIf="loading">
       <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
       <div class="loading-font" style="float:right">&nbsp; Loading Team Schedule &hellip;</div>
-    </div>
+    </mat-card>
 `,
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
     .schedule {
       font-family: Arial;
-      font-style: italic;
       font-size: 14pt;
       font-weight: bold;
+      font-style: italic;
       vertical-align: middle;
       margin: 0px;
       padding: 0px;
@@ -38,12 +46,11 @@ import { ITeam, ISchedule } from '../model/nfl.model';
     }
     .gameday {
       font-family: Arial;
-      font-style: italic;
-      font-size: 10pt;
+      font-size: 12pt;
       font-weight: bold;
+      font-style: italic;
       cursor: pointer;
-      margin: 0px;
-      margin-bottom: 0px;
+      margin: 4px;
     }
     .gameday:hover {
       border-color: rgba(0, 128, 0, 0.5);

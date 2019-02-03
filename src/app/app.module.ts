@@ -1,10 +1,11 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
+import { MaterialModule } from './shared/material.module';
 import { NFLRoutes } from './app.routes';
 import { NavBarComponent } from './nav/navbar.component';
 import { TeamListComponent } from './teams/team-list.component';
@@ -25,8 +26,10 @@ import { ShowScoreComponent } from './showscores/show-score.component';
 import { TeamScheduleComponent } from './teams/team-schedule.component';
 import { PlayoffsComponent } from './playoffs/playoffs.component';
 import { PlayoffService } from './service/playoff.service';
-import { SimpleModalComponent } from './common/simple-modal.component';
+// import { SimpleModalComponent } from './common/simple-modal.component';
 import { ConfigService } from './service/config.service';
+import { TopTeamsDialogComponent } from './dialog/top-teams/top-teams-dialog.component';
+import { MatchupDialogComponent } from './dialog/matchup/matchup-dialog.component';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -38,9 +41,14 @@ export const appInitializerFn = (appConfig: ConfigService) => {
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
-    ModalModule.forRoot(),
+    MaterialModule,
     RouterModule.forRoot(NFLRoutes)
+  ],
+  entryComponents: [
+    TopTeamsDialogComponent,
+    MatchupDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -60,7 +68,9 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     ShowScoreComponent,
     TeamScheduleComponent,
     PlayoffsComponent,
-    SimpleModalComponent
+    TopTeamsDialogComponent,
+    MatchupDialogComponent,
+    // SimpleModalComponent
   ],
   providers: [
     TeamService,

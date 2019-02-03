@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ConfigService {
@@ -9,7 +10,7 @@ export class ConfigService {
 
   loadAppConfig() {
     return this.http.get('assets/conf.json')
-      .map(resp => resp.json())
+      .pipe(map(resp => resp.json()))
       .toPromise()
       .then(data => {
         this.appConfig = data;

@@ -5,41 +5,41 @@ import { ITeam } from '../model/nfl.model';
 @Component({
   selector: 'standings',
   template: `
-    <div *ngIf="!loading" class="container well col-sm-12" style="margin-bottom: 0px;">
-      <div class="row well standings">
-        <div class="standings col-sm-12">
-          <div class="col-sm-12" style="margin-top:5px">
-            Standings
-          </div>
-          <ul class="nav nav-tabs">
-            <li style="float: right;">
-              <a data-toggle="tab" href="#expanded">Expanded</a>
-            </li>
-            <li class="active" style="float: right;">
-              <a data-toggle="tab" href="#standard">Standard</a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <div id="standard" class="tab-pane fade in active">
-              <div *ngFor="let division of divisions">
-                <standings-division [division]="division"></standings-division>
-              </div>
-            </div>
-            <div id="expanded" class="tab-pane fade">
-              <div *ngFor="let division of divisions">
-                <standings-division-expanded [division]="division"></standings-division-expanded>
-              </div>
-            </div>
-          </div>
-        </div>
+    <mat-card *ngIf="!loading">
+      <div class="standings" style="margin-top:5px">
+        Standings
       </div>
-    </div>
-    <div class="well loading-well" *ngIf="loading">
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Standard">
+          <div id="standard" fxLayout="row wrap">
+            <div class="div-body" fxFlex="48" *ngFor="let division of divisions">
+              <standings-division [division]="division"></standings-division>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Expanded">
+          <div id="expanded" fxLayout="column">
+            <div class="div-body" *ngFor="let division of divisions">
+              <standings-division-expanded [division]="division"></standings-division-expanded>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+
+    <mat-card class="well loading-well" *ngIf="loading">
       <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
       <div class="loading-font" style="float:right">&nbsp; Loading Standings &hellip;</div>
-    </div>
+    </mat-card>
   `,
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
+    .div-body {
+      margin: 2px;
+    }
     .standings {
       font-family: Arial;
       font-style: italic;

@@ -6,27 +6,33 @@ import { ITeam } from '../model/nfl.model';
 @Component({
   selector: 'team-list',
   template: `
-    <div *ngIf="!loading" class="container well col-sm-12">
-      <div class="row well team-head">
-        <div class="col-sm-12" style="margin-top:5px">
-          NFL Teams
-        </div>
-        <div class="row well col-sm-3 team-info" *ngFor="let team of teamsArr"
-          (click)="showTeam(team.abbrev)"
-          [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
-          <div style="margin-top:5px;">
-            <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-            <span>{{team.city}}<br>{{team.name}}</span>
+    <mat-card *ngIf="!loading">
+      <div class="team-head" style="margin-top:5px">
+        NFL Teams
+      </div>
+      <div  fxLayout="row wrap" fxLayout.xs="column wrap">
+        <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let team of teamsArr">
+          <div class="team-info" (click)="showTeam(team.abbrev)"
+            [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
+            <div style="margin:5px;">
+              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+              <span>{{team.city}}<br>{{team.name}}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="well loading-well" *ngIf="loading">
+    </mat-card>
+
+    <mat-card class="loading-well" *ngIf="loading">
       <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
       <div class="loading-font" style="float:right">&nbsp; Loading Team List &hellip;</div>
-    </div>
+    </mat-card>
   `,
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
     .logo {
       float: left;
       margin-right: 5px;
@@ -50,9 +56,12 @@ import { ITeam } from '../model/nfl.model';
       text-shadow: 2px 2px 0 rgba(0,0,0,1);
       vertical-align: middle;
       cursor: pointer;
-      margin: 0px;
+      margin: 4px;
       padding: 1px 1px 5px;
       border-radius: 10px;
+      min-width: 180px;
+      max-width: 240px;
+      width: 100%;
     }
   `]
 })

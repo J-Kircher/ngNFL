@@ -1,12 +1,14 @@
 <nav-bar></nav-bar>
-<div class="container-fluid content-wrapper well" style="margin-top: 20px;">
-  <div class="row">
-    <div class="col-sm-9">
-      <router-outlet></router-outlet>
-    </div>
-    <div class="col-sm-3">
-      <show-game></show-game>
-      <show-scores></show-scores>
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div fxFlex class="content-wrapper">
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div fxFlex="75%">
+        <router-outlet></router-outlet>
+      </div>
+      <div fxFlex="25%">
+        <show-game></show-game>
+        <show-scores></show-scores>
+      </div>
     </div>
   </div>
 </div>

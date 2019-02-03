@@ -5,20 +5,26 @@ import { ISchedule } from '../model/nfl.model';
 @Component({
   selector: 'show-scores',
   template: `
-    <div class="container well col-sm-12" style="margin-bottom: 0px;">
-      <div class="row well showscores">
-        <div class="col-sm-12" style="margin-top:5px">
+    <mat-card style="margin-bottom: 12px;">
+      <div class="showscores">
+        <div style="margin-top:5px">
           {{gameDay}}
         </div>
-        <div class="showscores col-sm-12 div-scroll">
-          <div class='well scoreboard col-sm-12' *ngFor="let score of gamesArr">
-            <show-score [score]=score></show-score>
+        <div class="showscores div-scroll">
+          <div *ngFor="let score of gamesArr">
+            <mat-card class="scoreboard">
+              <show-score [score]=score></show-score>
+            </mat-card>
           </div>
         </div>
       </div>
-    </div>
+    </mat-card>
   `,
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
     .showscores {
       font-family: Arial;
       font-size: 14pt;
@@ -30,7 +36,7 @@ import { ISchedule } from '../model/nfl.model';
       border-radius: 10px;
     }
     .div-scroll {
-      max-height: 512px;
+      max-height: 540px;
       overflow-y: scroll;
     }
     .scoreboard {

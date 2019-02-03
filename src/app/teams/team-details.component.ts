@@ -7,9 +7,20 @@ import { ITeam } from '../model/nfl.model';
   selector: 'team-details', // This html tag is not necessary since we will be navigating to this
   templateUrl: './team-details.component.html',
   styles: [`
+    mat-card {
+      margin: 12px;
+      padding: 8px;
+    }
+    .team-card {
+      margin: 4px;
+    }
     .banner-border {
-      margin-top: 0px;
-      margin-bottom: 0px;
+      font-style: Arial;
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin: 2px 0px 2px;
+      padding: 2px 0px 2px;
     }
     .banner-center {
       font-style: Arial;
@@ -17,10 +28,11 @@ import { ITeam } from '../model/nfl.model';
       font-weight: bold;
       text-align: center;
       color: white;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      padding-top: 0px;
-      padding-bottom: 0px;
+      margin: 0px;
+      padding: 0px;
+    }
+    .image-container {
+      margin: 8px;
     }
     td {
       font-style: Arial;

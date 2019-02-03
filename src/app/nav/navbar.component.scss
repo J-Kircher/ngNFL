@@ -1,82 +1,4 @@
-.well {
-  padding: 5px;
-}
-.flex-container {
-  display: flex;
-  justify-content: space-around;
-}
-.nav-tabs {
-  font-family: Arial;
-  font-size: 12pt;
-  font-weight: bold;
-}
-.heading {
-  font-family: Arial;
-  font-size: 14pt;
-  font-style: italic;
-  font-weight: bold;
-  text-align: center;
-  margin: 5px;
-}
-.division {
-  font-family: Arial;
-  font-size: 12pt;
-  font-style: italic;
-  font-weight: bold;
-  text-align: center;
-  background: rgba(0, 128, 0, 0.5);
-  padding: 1px 1px 1px 1px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-}
-.div-table {
-  background: url(/assets/images/whiteback.gif);
-  text-align: left;
-  margin: 1px 1px 1px 1px;
-  border-radius: 5px;
-}
-.team-info {
-  white-space: nowrap;
-  x-line-height: 18px;
-}
-.team-info:hover {
-  border-color: rgba(0, 128, 0, 0.5);
-  background-color: rgba(0, 128, 0, 0.2);
-}
-.logo {
-  float: left;
-  height: 40px;
-  padding: 2px 1px 1px 3px;
-}
-.team-record {
-  font-family: Arial;
-  font-size: 8pt;
-  float: right;
-}
-.team-city {
-  font-family: Arial;
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  -webkit-padding-start: 5px;
-}
-.team-name {
-  font-family: Arial;
-  font-size: 12pt;
-  font-weight: bold;
-  font-style: normal;
-  -webkit-padding-start: 5px;
-}
-.team-record {
-  font-family: Arial;
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  float:right;
-  margin-right: 5px;
-}
-
-ul.menu {
+.menu {
   background: url('/assets/images/grass.gif');
   background-color: #333;
   top: 0;
@@ -91,11 +13,7 @@ ul.menu {
   position: sticky;
 }
 
-ul.menu li {
-  float: left;
-}
-
-ul.menu li a {
+.menu a {
   display: block;
   color: white;
   text-align: center;
@@ -104,18 +22,9 @@ ul.menu li a {
   text-decoration: none;
 }
 
-ul.menu li a:hover {
+.menu a:hover {
   border-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.5);
-}
-
-ul.menu .active {
-  background-color: #4CAF50;
-}
-
-ul.menu li a.disabled {
-  color: gray;
-  cursor: not-allowed;
 }
 
 button {

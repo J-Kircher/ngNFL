@@ -1,121 +1,29 @@
-<ul class="menu">
-  <li><div style="margin: 5px 20px;"><img src="/assets/images/NFL.gif" height="50"></div></li>
-  <li><a [routerLink]="['/teams']" id="show">Show Teams</a></li>
-  <li><a [routerLink]="['/schedule']" id="schedule">Schedule</a></li>
-  <li><a [routerLink]="['/standings']" id="standings">Standings</a></li>
-  <li><a id="topTeams" (click)="getTopTeams()">Top Teams</a></li>
-  <li><a id="help">Help</a></li>
-  <button type="button" class="btn btn-default btn-sm navbar-btn" style="float: right;" id="simulate" (click)="simulate()" [disabled]="postseason">Simulate</button>
-  <button *ngIf="postseason" [routerLink]="['/playoffs']" type="button" class="btn btn-default btn-sm navbar-btn" style="float: right;" id="playoffs">Playoffs</button>
-</ul>
+<mat-toolbar class="menu">
 
-<div *ngIf="false" class="well" style="border:0;">
-  <li><a id="simulate" (click)="simulate()" [ngClass]="{ 'disabled' : postseason }">Simulate</a></li>
-  <li><a *ngIf="postseason" [routerLink]="['/playoffs']" id="playoffs">Playoffs</a></li>
+  <div style="margin: 5px 20px;"><img src="/assets/images/NFL.gif" height="50"></div>
 
-  <div class="flex-container">
-    <div><img src="/assets/images/NFL.gif" height="50"></div>
-    <button [routerLink]="['/teams']" type="button" class="btn btn-default btn-sm navbar-btn" id="show">Show Teams</button>
-    <button [routerLink]="['/schedule']" type="button" class="btn btn-default btn-sm navbar-btn" id="schedule">Schedule</button>
-    <button type="button" class="btn btn-default btn-sm navbar-btn" id="simulate" (click)="simulate()" [disabled]="postseason">Simulate</button>
-    <button [routerLink]="['/standings']" type="button" class="btn btn-default btn-sm navbar-btn" id="standings">Standings</button>
-    <button *ngIf="postseason" [routerLink]="['/playoffs']" type="button" class="btn btn-default btn-sm navbar-btn" id="playoffs">Playoffs</button>
-    <button type="button" class="btn btn-default btn-sm navbar-btn" id="topTeams" (click)="getTopTeams()">Top Teams</button>
-    <button type="button" class="btn btn-default btn-sm navbar-btn" id="help">Help</button>
+  <div fxLayoutAlign="center" fxShow="false" fxShow.gt-sm>
+    <span><a [routerLink]="['/teams']" id="show">Show Teams</a></span>
+    <span><a [routerLink]="['/schedule']" id="schedule">Schedule</a></span>
+    <span><a [routerLink]="['/standings']" id="standings">Standings</a></span>
+    <span><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
+    <span><a id="help">Help</a></span>
   </div>
-</div>
 
-<simple-modal #childModal modalTitle="Top Teams" elementId="showTopTeams">
-  <ul class="nav nav-tabs">
-    <li class="active">
-      <a data-toggle="tab" href="#afc">AFC Playoffs</a>
-    </li>
-    <li style="float: right;">
-      <a data-toggle="tab" href="#nfc">NFC Playoffs</a>
-    </li>
-  </ul>
-  <div class="tab-content">
-    <div id="afc" class="tab-pane fade in active">
-      <div class="container well col-sm-12">
-        <h3 class="heading">Playoff <img src="/assets/images/AFC.png"> Picture</h3>
-        <div class='well division col-sm-4'>
-          Division Leaders
-          <div class='div-table' *ngFor="let team of AFCDivLeaders">
-            <div class="team-info">
-              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-              <span class="team-city">{{team.city}}</span>
-              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
-              <br>
-              <span class="team-name">{{team.name}}</span>
-            </div>
-          </div>
-        </div>
-        <div class='well division col-sm-4'>
-          Wildcards
-          <div class='div-table' *ngFor="let team of AFCWildcard">
-            <div class="team-info">
-              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-              <span class="team-city">{{team.city}}</span>
-              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
-              <br>
-              <span class="team-name">{{team.name}}</span>
-            </div>
-          </div>
-        </div>
-        <div class='well division col-sm-4'>
-          On the Outside
-          <div class='div-table' *ngFor="let team of AFCHunt">
-            <div class="team-info">
-              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-              <span class="team-city">{{team.city}}</span>
-              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
-              <br>
-              <span class="team-name">{{team.name}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="nfc" class="tab-pane fade">
-      <div class="container well col-sm-12">
-        <h3 class="heading">Playoff <img src="/assets/images/NFC.png"> Picture</h3>
-        <div class='well division col-sm-4'>
-          Division Leaders
-          <div class='div-table' *ngFor="let team of NFCDivLeaders">
-            <div class="team-info">
-              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-              <span class="team-city">{{team.city}}</span>
-              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
-              <br>
-              <span class="team-name">{{team.name}}</span>
-            </div>
-          </div>
-        </div>
-        <div class='well division col-sm-4'>
-          Wildcards
-          <div class='div-table' *ngFor="let team of NFCWildcard">
-            <div class="team-info">
-              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-              <span class="team-city">{{team.city}}</span>
-              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
-              <br>
-              <span class="team-name">{{team.name}}</span>
-            </div>
-          </div>
-        </div>
-        <div class='well division col-sm-4'>
-          On the Outside
-          <div class='div-table' *ngFor="let team of NFCHunt">
-            <div class="team-info">
-              <img src="/assets/images/{{team.abbrev}}.png" class="logo">
-              <span class="team-city">{{team.city}}</span>
-              <span class="team-record">{{team.wins}} - {{team.losses}}</span>
-              <br>
-              <span class="team-name">{{team.name}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</simple-modal>
+  <span fxFlex="1 1 auto"></span>
+
+  <button mat-raised-button type="button" id="simulate" [disabled]="postseason" (click)="simulate()">Simulate</button>
+  <button mat-raised-button type="button" id="playoffs" *ngIf="postseason" [routerLink]="['/playoffs']">Playoffs</button>
+
+  <a mat-button [matMenuTriggerFor]="mainMenu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>more_vert</mat-icon>
+  </a>
+  <mat-menu #mainMenu>
+    <a mat-menu-item [routerLink]="['/teams']" id="show">Show Teams</a>
+    <a mat-menu-item [routerLink]="['/schedule']" id="schedule">Schedule</a>
+    <a mat-menu-item [routerLink]="['/standings']" id="standings">Standings</a>
+    <a mat-menu-item id="topTeams" (click)="getTopTeams()">Top Teams</a>
+    <a mat-menu-item id="help">Help</a>
+  </mat-menu>
+
+  </mat-toolbar>

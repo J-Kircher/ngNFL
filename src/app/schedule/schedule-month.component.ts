@@ -6,13 +6,13 @@ import { ScheduleDayService } from '../service/schedule.day.service';
 @Component({
   selector: 'schedule-month',
   template: `
-    <div class='well month col-sm-3'>
+    <div class="month">
       {{monthName}}
-      <table class='month-table' width='100%'>
+      <table class="month-table" width="100%">
         <tr *ngFor="let week of monthArr">
           <td *ngFor="let day of week">
             <a *ngIf="hasGamesForDay(month, year, day); else noLink" (click)="getGamesForDay(month, year, day)">{{day}}</a>
-            <ng-template #noLink>{{day}}</ng-template>
+            <ng-template #noLink><div class="no-link">{{day}}</div></ng-template>
           </td>
         </tr>
       </table>
@@ -20,17 +20,28 @@ import { ScheduleDayService } from '../service/schedule.day.service';
   `,
   styles: [`
     a {
+      color: green;
       cursor: pointer;
       font-weight: bold;
     }
+    a:hover {
+      border-color: rgba(0, 128, 0, 0.5);
+      background-color: rgba(0, 128, 0, 0.2);
+    }
+    .no-link {
+      color: black;
+    }
     .month {
       font-family: Arial;
+      font-style: italic;
       font-size: 12pt;
+      font-weight: bold;
       text-align: center;
       background: rgba(0, 128, 0, 0.5);
-      min-height: 160px;
+      min-height: 120px;
       margin-bottom: 0px;
       border-radius: 5px;
+      padding: 12px;
     }
     .month-table {
       font-family: Arial;

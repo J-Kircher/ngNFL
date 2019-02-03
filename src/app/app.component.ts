@@ -6,7 +6,7 @@ import { TeamService } from './service/team.service';
   selector: 'app-nfl',
   templateUrl: './app.component.html',
   styles: [`
-    .title-well {
+    .xtitle-well {
       font-family: Arial;
       font-style: italic;
       font-size: 32px;
