@@ -1,19 +1,19 @@
-<div *ngIf="!loading" class='division'>
+<div *ngIf="!loading" class="division">
   {{division}}
-  <table class='div-table' width='100%'>
+  <table class="div-table" width="100%">
     <thead>
       <tr>
-        <td width='20%'></td>
-        <td width='8%' align='center'>W</td>
-        <td width='8%' align='center'>L</td>
-        <td width='8%' align='center'>PCT</td>
-        <td width='8%' align='center'>PF</td>
-        <td width='8%' align='center'>PA</td>
-        <td width='8%' align='center'>Home</td>
-        <td width='8%' align='center'>Away</td>
-        <td width='8%' align='center'>Div</td>
-        <td width='8%' align='center'>{{division.indexOf('NFC') >= 0 ? 'NFC' : 'AFC'}}</td>
-        <td width='8%' align='center'>{{division.indexOf('AFC') >= 0 ? 'NFC' : 'AFC'}}</td>
+        <td width="20%"></td>
+        <td width="8%">W</td>
+        <td width="8%">L</td>
+        <td width="8%">PCT</td>
+        <td width="8%">PF</td>
+        <td width="8%">PA</td>
+        <td width="8%">Home</td>
+        <td width="8%">Away</td>
+        <td width="8%">Div</td>
+        <td width="8%">{{division.indexOf('NFC') >= 0 ? 'NFC' : 'AFC'}}</td>
+        <td width="8%">{{division.indexOf('AFC') >= 0 ? 'NFC' : 'AFC'}}</td>
       </tr>
     </thead>
     <tbody>
@@ -24,17 +24,17 @@
           <br>
           <span class="team-name">{{team.name}}</span>
         </td>
-        <td align='center'>{{team.wins}}</td>
-        <td align='center'>{{team.losses}}</td>
-        <td align='center' *ngIf="currentGame > 0">{{team.pct}}</td>
-        <td align='center' *ngIf="currentGame === 0">{{team.total}}</td>
-        <td align='center'>{{team.pf}}</td>
-        <td align='center'>{{team.pa}}</td>
-        <td align='center'>{{team.homewins}}-{{team.homelosses}}</td>
-        <td align='center'>{{team.visitwins}}-{{team.visitlosses}}</td>
-        <td align='center'>{{team.divwins}}-{{team.divlosses}}</td>
-        <td align='center'>{{team.confwins}}-{{team.conflosses}}</td>
-        <td align='center'>{{team.othwins}}-{{team.othlosses}}</td>
+        <td>{{team.wins}}</td>
+        <td>{{team.losses}}</td>
+        <td *ngIf="currentGame > 0">{{team.pct}}</td>
+        <td *ngIf="currentGame === 0">{{team.total}}</td>
+        <td>{{team.pf}}</td>
+        <td>{{team.pa}}</td>
+        <td>{{team.homewins}}-{{team.homelosses}}</td>
+        <td>{{team.visitwins}}-{{team.visitlosses}}</td>
+        <td>{{team.divwins}}-{{team.divlosses}}</td>
+        <td>{{team.confwins}}-{{team.conflosses}}</td>
+        <td>{{team.othwins}}-{{team.othlosses}}</td>
       </tr>
     </tbody>
   </table>

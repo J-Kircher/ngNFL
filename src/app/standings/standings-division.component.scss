@@ -9,6 +9,9 @@ table {
 table td, table th {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
+td {
+  text-align: center;
+}
 .division {
   font-family: Arial;
   font-style: italic;
@@ -35,6 +38,7 @@ table td, table th {
   background-color: rgba(0, 128, 0, 0.2);
 }
 .team-info {
+  text-align: left;
   white-space: nowrap;
 }
 .logo {

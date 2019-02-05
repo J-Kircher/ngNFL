@@ -1,14 +1,14 @@
-<div *ngIf="!loading" class='division'>
+<div *ngIf="!loading" class="division">
   {{division}}
-  <table class='div-table' width='100%'>
+  <table class="div-table" width="100%">
     <thead>
       <tr>
-        <td width='40%'></td>
-        <td width='12%' align='center'>W</td>
-        <td width='12%' align='center'>L</td>
-        <td width='12%' align='center'>PCT</td>
-        <td width='12%' align='center'>PF</td>
-        <td width='12%' align='center'>PA</td>
+        <td width="40%"></td>
+        <td width="12%">W</td>
+        <td width="12%">L</td>
+        <td width="12%">PCT</td>
+        <td width="12%">PF</td>
+        <td width="12%">PA</td>
       </tr>
     </thead>
     <tbody>
@@ -19,12 +19,12 @@
           <br>
           <span class="team-name">{{team.name}}</span>
         </td>
-        <td align='center'>{{team.wins}}</td>
-        <td align='center'>{{team.losses}}</td>
-        <td align='center' *ngIf="currentGame > 0">{{team.pct}}</td>
-        <td align='center' *ngIf="currentGame === 0">{{team.total}}</td>
-        <td align='center'>{{team.pf}}</td>
-        <td align='center'>{{team.pa}}</td>
+        <td>{{team.wins}}</td>
+        <td>{{team.losses}}</td>
+        <td *ngIf="currentGame > 0">{{team.pct}}</td>
+        <td *ngIf="currentGame === 0">{{team.total}}</td>
+        <td>{{team.pf}}</td>
+        <td>{{team.pa}}</td>
       </tr>
     </tbody>
   </table>
