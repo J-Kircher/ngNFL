@@ -94,7 +94,7 @@ export class TeamService {
 
     // return this.TEAMS;
 
-    setTimeout(() => {subject.next(_TEAMS); subject.complete(); }, 50);
+    setTimeout(() => {subject.next(_TEAMS); subject.complete(); }, 5);
     // .next adds data to the observable stream
     // using setTimeout to simulate aschrony
     return subject;
