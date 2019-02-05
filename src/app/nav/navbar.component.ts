@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material';
 
 import { ScheduleService } from '../service/schedule.service';
 import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.component';
-// import { SimpleModalComponent } from '../common/simple-modal.component';
 
 @Component({
   selector: 'nav-bar',
@@ -13,7 +12,6 @@ import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.co
 
 export class NavBarComponent {
   private postseason: boolean = false;
-  // @ViewChild('childModal') childModal: SimpleModalComponent;
 
   dialogReturn: any;
 

@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material';
 import { ISchedule } from '../model/nfl.model';
 import { ScheduleDayService } from '../service/schedule.day.service';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
-// import { SimpleModalComponent } from '../common/simple-modal.component';
 
 @Component({
   selector: 'schedule-day',
@@ -42,7 +41,6 @@ export class ScheduleDayComponent implements OnInit {
   gameDay: string;
   gamesArr: ISchedule[] = [];
   loading: boolean = true;
-  // @ViewChild('childModal') childModal: SimpleModalComponent;
 
   dialogReturn: any;
 
