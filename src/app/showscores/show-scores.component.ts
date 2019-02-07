@@ -5,7 +5,7 @@ import { ISchedule } from '../model/nfl.model';
 @Component({
   selector: 'show-scores',
   template: `
-    <mat-card style="margin-bottom: 12px;">
+    <mat-card>
       <div class="showscores">
         <div style="margin-top:5px">
           {{gameDay}}
