@@ -29,6 +29,7 @@ import { PlayoffService } from './service/playoff.service';
 import { ConfigService } from './service/config.service';
 import { TopTeamsDialogComponent } from './dialog/top-teams/top-teams-dialog.component';
 import { MatchupDialogComponent } from './dialog/matchup/matchup-dialog.component';
+import { StorageService } from './service/storage.service';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -74,6 +75,7 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     TeamService,
     ScheduleService,
     PlayoffService,
+    StorageService,
     ConfigService,
     {
       provide: APP_INITIALIZER,

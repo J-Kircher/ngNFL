@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ISchedule, IScheduleBase, ITeam } from '../model/nfl.model';
 import { TeamService } from '../service/team.service';
+import { StorageService } from '../service/storage.service';
 
 const SCHEDULE: IScheduleBase[] = [
   { 'gameday': 'Thursday, September 7', 'games': [13, 2] },
@@ -63,36 +64,60 @@ const SCHEDULE: IScheduleBase[] = [
 
 @Injectable()
 export class ScheduleService {
-  FULL_SCHEDULE: ISchedule[] = [];
+  FULL_SCHEDULE: ISchedule[];
   currentGameDay: string;
   currentGame: number = 0;
   endOfSeason: boolean = false;
 
-  constructor(private teamService: TeamService) { }
+  constructor(
+    private teamService: TeamService,
+    private storageService: StorageService
+  ) { }
 
   // {'gameday': 'Monday, September 11', 'games': [26, 23, 14, 12]},
 
-  buildFullSchedule() {
-    // console.log('[schedule-service] buildFullSchedule()')
-    let counter: number = 0;
-    SCHEDULE.forEach(day => {
-      for (let i = 0; i < day.games.length; i++) {
-        const currentGame: ISchedule = {
-          id: counter++,
-          gameday: day.gameday,
-          visitTeam: day.games[i],
-          visitScore: null,
-          homeTeam: day.games[i + 1],
-          homeScore: null,
-          gameResults: []
-        };
-        this.FULL_SCHEDULE.push(currentGame);
-        i++;
+  loadScheduleFromStorage() {
+    this.FULL_SCHEDULE = this.storageService.loadScheduleFromLocalStorage() || [];
+    this.FULL_SCHEDULE.forEach(game => {
+      if (game.visitScore !== null) {
+        this.currentGame++;
       }
     });
-    this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
-    // console.log('[schedule-service] FULL_SCHEDULE:');
-    // console.table(this.FULL_SCHEDULE);
+    this.currentGame = this.currentGame === 0 ? 0 : this.currentGame--;
+  }
+
+  buildFullSchedule() {
+    // console.log('[schedule.service] buildFullSchedule()');
+    this.loadScheduleFromStorage();
+
+    if (this.FULL_SCHEDULE.length < 1) {
+      // console.log('[schedule.service] building()');
+      this.FULL_SCHEDULE = [];
+      let counter: number = 0;
+      SCHEDULE.forEach(day => {
+        for (let i = 0; i < day.games.length; i++) {
+          const currentGame: ISchedule = {
+            id: counter++,
+            gameday: day.gameday,
+            visitTeam: day.games[i],
+            visitScore: null,
+            homeTeam: day.games[i + 1],
+            homeScore: null,
+            gameResults: []
+          };
+          this.FULL_SCHEDULE.push(currentGame);
+          i++;
+        }
+      });
+      this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
+      // console.log('[schedule.service] FULL_SCHEDULE:');
+      // console.table(this.FULL_SCHEDULE);
+      this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
+    }
+  }
+
+  getFullSchedule(): ISchedule[] {
+    return this.FULL_SCHEDULE;
   }
 
   getGamesForDay(searchTerm: string): ISchedule[] {
@@ -107,7 +132,7 @@ export class ScheduleService {
   }
 
   getGamesForTeam(team: number): ISchedule[] {
-    // console.log('[schedule-service] getGamesForTeam() team: ' + team);
+    // console.log('[schedule.service] getGamesForTeam() team: ' + team);
     return this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)));
   }
 
@@ -116,7 +141,7 @@ export class ScheduleService {
   }
 
   generateFakeScore(oppScore: number): number {
-    // console.log('[schedule-service] generateFakeScore(' + oppScore + ')');
+    // console.log('[schedule.service] generateFakeScore(' + oppScore + ')');
     const scoreArr = [3, 7, 10, 13, 14, 17, 20, 21, 23, 24, 27, 28, 30, 31, 34, 35];
     const rndIndex = Math.floor(Math.random() * scoreArr.length);
     return scoreArr[rndIndex] !== oppScore ? scoreArr[rndIndex] : this.generateFakeScore(scoreArr[rndIndex]);
@@ -149,7 +174,7 @@ export class ScheduleService {
   }
 
   playGame(game: ISchedule) {
-    // console.log('[schedule-service] playGame()')
+    // console.log('[schedule.service] playGame()')
     // console.table(game)
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
@@ -197,19 +222,22 @@ export class ScheduleService {
     homeTeam.pct = this.getPCT(homeTeam);
     homeTeam.pf += game.homeScore;
     homeTeam.pa += game.visitScore;
+
+    this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
+    this.storageService.storeTeamsToLocalStorage(this.teamService.getAllCurrentTeams());
   }
 
   playNextGame(): boolean {
-    // console.log('[schedule-service] playNextGame() curr:' + this.currentGame + ' len:' + this.FULL_SCHEDULE.length);
+    // console.log('[schedule.service] playNextGame() curr:' + this.currentGame + ' len:' + this.FULL_SCHEDULE.length);
     if (this.currentGame < this.FULL_SCHEDULE.length) {
       this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
-      // console.log('[schedule-service] playNextGame() currentGameDay: ' + this.currentGameDay);
+      // console.log('[schedule.service] playNextGame() currentGameDay: ' + this.currentGameDay);
 
       this.playGame(this.FULL_SCHEDULE[this.currentGame]);
       this.currentGame++;
       return true;
     } else {
-      console.log('[schedule-service] playNextGame() Season Over');
+      console.log('[schedule.service] playNextGame() Season Over');
       return false;
     }
   }

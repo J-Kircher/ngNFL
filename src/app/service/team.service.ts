@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ITeam } from '../model/nfl.model';
 import { ConfigService } from '../service/config.service';
+import { StorageService } from '../service/storage.service';
 
 const _TEAMS: ITeam[] = [
   { 'city': 'Buffalo', 'name': 'Bills', 'abbrev': 'BUF', 'lightcolor': 'CF0020', 'darkcolor': '1F488F', 'division': 'AFC East', 'qb': 5, 'rb': 4, 'wr': 5, 'ol': 5, 'dl': 6, 'lb': 7, 'db': 9, 'st': 6, 'co': 6 },
@@ -51,41 +52,58 @@ export class TeamService {
   // private TEAMS = new Subject<ITeam[]>();
   private TEAMS: ITeam[];
 
-  constructor (public http: Http, private configService: ConfigService) { }
+  constructor (
+    public http: Http,
+    private configService: ConfigService,
+    private storageService: StorageService
+  ) { }
+
+  loadTeamsFromStorage() {
+    this.TEAMS = this.storageService.loadTeamsFromLocalStorage() || [];
+  }
 
   initTeams() {
+    // console.log('[team.service] initTeams()');
+    this.loadTeamsFromStorage();
 
-    if (this.useServer) {
-      // Use service
-      const url = this.authServerUrl + '/sports/api/team';
-      console.log(url);
-      console.log('[team.service] initTeams() Using Service!');
-      // this.TEAMS = this.http.get(this.authServerUrl).map((res: Response) => res.json());
-    } else {
-      console.log('[team.service] initTeams() NOT Using Service!');
-      this.TEAMS = _TEAMS;
-      console.log('[team.service] initTeams() TEAMS: ' + this.TEAMS.length);
+    if (this.TEAMS.length < 1) {
+      if (this.useServer) {
+        // Use service
+        const url = this.authServerUrl + '/sports/api/team';
+        console.log(url);
+        console.log('[team.service] initTeams() Using Service!');
+        // this.TEAMS = this.http.get(this.authServerUrl).map((res: Response) => res.json());
+      } else {
+        console.log('[team.service] initTeams() NOT Using Service!');
+        this.TEAMS = _TEAMS;
+        console.log('[team.service] initTeams() TEAMS: ' + this.TEAMS.length);
+      }
+
+      this.TEAMS.forEach(team => {
+        team.total = (team.qb + team.rb + team.wr + team.ol + team.dl + team.lb + team.db + team.st + team.co);
+        team.wins = 0;
+        team.losses = 0;
+        team.pct = '.000';
+        team.pf = 0;
+        team.pa = 0;
+        team.homewins = 0;
+        team.homelosses = 0;
+        team.visitwins = 0;
+        team.visitlosses = 0;
+        team.divwins = 0;
+        team.divlosses = 0;
+        team.confwins = 0;
+        team.conflosses = 0;
+        team.othwins = 0;
+        team.othlosses = 0;
+      });
     }
-
-    this.TEAMS.forEach(team => {
-      team.total = (team.qb + team.rb + team.wr + team.ol + team.dl + team.lb + team.db + team.st + team.co);
-      team.wins = 0;
-      team.losses = 0;
-      team.pct = '.000';
-      team.pf = 0;
-      team.pa = 0;
-      team.homewins = 0;
-      team.homelosses = 0;
-      team.visitwins = 0;
-      team.visitlosses = 0;
-      team.divwins = 0;
-      team.divlosses = 0;
-      team.confwins = 0;
-      team.conflosses = 0;
-      team.othwins = 0;
-      team.othlosses = 0;
-    });
+    this.storageService.storeTeamsToLocalStorage(this.TEAMS);
     console.log('[team.service] initTeams() Complete!');
+  }
+
+  getAllCurrentTeams(): ITeam[] {
+    return this.TEAMS;
   }
 
   getTeams(): Observable<ITeam[]> {

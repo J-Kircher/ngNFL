@@ -22,7 +22,10 @@ export class AppComponent implements OnInit {
   loading: boolean = false;
   sport = 'NFL';
 
-  constructor(private scheduleService: ScheduleService, private teamService: TeamService) {  }
+  constructor(
+    private scheduleService: ScheduleService,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
     // Initialize the Full Schedule from the schedule input
