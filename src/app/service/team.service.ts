@@ -97,8 +97,9 @@ export class TeamService {
         team.othwins = 0;
         team.othlosses = 0;
       });
+
+      this.storageService.storeTeamsToLocalStorage(this.TEAMS);
     }
-    this.storageService.storeTeamsToLocalStorage(this.TEAMS);
     console.log('[team.service] initTeams() Complete!');
   }
 
