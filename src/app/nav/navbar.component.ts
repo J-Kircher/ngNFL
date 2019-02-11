@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 
+import { StorageService } from '../service/storage.service';
 import { ScheduleService } from '../service/schedule.service';
+import { TeamService } from '../service/team.service';
 import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.component';
 
 @Component({
@@ -16,7 +19,10 @@ export class NavBarComponent {
   dialogReturn: any;
 
   constructor(
+    private router: Router,
+    private storageService: StorageService,
     private scheduleService: ScheduleService,
+    private teamService: TeamService,
     public dialog: MatDialog
     ) { }
 
@@ -39,6 +45,20 @@ export class NavBarComponent {
       // console.log('The dialog was closed');
       this.dialogReturn = result;
     });
+  }
+
+  resetSeason() {
+    console.log('[navbar] resetSeason()');
+    this.storageService.clearScheduleFromStorage().subscribe(() => {
+      this.scheduleService.buildFullSchedule();
+    });
+    this.storageService.clearTeamsFromStorage().subscribe(() => {
+      this.teamService.initTeams();
+    });
+
+    if (this.router.url.includes('schedule')) {
+      this.router.navigateByUrl('/teams');
+    }
   }
 
   getTopTeams() {

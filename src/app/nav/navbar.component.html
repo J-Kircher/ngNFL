@@ -15,6 +15,15 @@
   <button mat-raised-button type="button" id="simulate" [disabled]="postseason" (click)="simulate()">Simulate</button>
   <button mat-raised-button type="button" id="playoffs" *ngIf="postseason" [routerLink]="['/playoffs']">Playoffs</button>
 
+  <div class="spin">
+    <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #settingsMenu>
+      <a mat-menu-item id="reset" (click)="resetSeason()">Reset Season</a>
+    </mat-menu>
+  </div>
+
   <a mat-button [matMenuTriggerFor]="mainMenu" fxHide="false" fxHide.gt-sm>
     <mat-icon>more_vert</mat-icon>
   </a>

@@ -66,7 +66,7 @@ const SCHEDULE: IScheduleBase[] = [
 export class ScheduleService {
   FULL_SCHEDULE: ISchedule[];
   currentGameDay: string;
-  currentGame: number = 0;
+  currentGame: number;
   endOfSeason: boolean = false;
 
   constructor(
@@ -77,13 +77,14 @@ export class ScheduleService {
   // {'gameday': 'Monday, September 11', 'games': [26, 23, 14, 12]},
 
   loadScheduleFromStorage() {
+    this.currentGame = 0;
     this.FULL_SCHEDULE = this.storageService.loadScheduleFromLocalStorage() || [];
     this.FULL_SCHEDULE.forEach(game => {
       if (game.visitScore !== null) {
         this.currentGame++;
       }
     });
-    this.currentGame = this.currentGame === 0 ? 0 : this.currentGame--;
+    this.currentGame = this.currentGame > 0 ? this.currentGame-- : 0;
   }
 
   buildFullSchedule() {
@@ -109,11 +110,12 @@ export class ScheduleService {
           i++;
         }
       });
-      this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
       // console.log('[schedule.service] FULL_SCHEDULE:');
       // console.table(this.FULL_SCHEDULE);
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
     }
+    this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
+    console.log('[schedule.service] buildFullSchedule() Complete!');
   }
 
   getFullSchedule(): ISchedule[] {

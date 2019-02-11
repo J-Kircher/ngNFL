@@ -1,0 +1,103 @@
+/*****************************/
+// * Font size definitions * //
+
+//    Standard sizes, used by icons, labels and toolbars
+$xxxsFontSize: 0.5em;
+$xxsFontSize: 0.625em;
+$xsFontSize: 0.75em; // 12px
+$smFontSize: 0.875em; // 14px
+$medFontSize: 1em; // 16px
+$lgFontSize: 1.125em; // 18px
+$xlFontSize: 1.25em; // 21px
+$xxFontSize: 1.5em; // 26px
+
+
+/**********************************/
+// Mixins for mat icon animations //
+
+@mixin transDuration($property: all, $duration: 0.70s) {
+  backface-visibility: hidden;
+  // transform: translateZ(0);
+  // transform: translate3d(0, 0, 0);
+
+  -webkit-transition: $property $duration;
+  -moz-transition: $property $duration;
+  -ms-transition: $property $duration;
+  -o-transition: $property $duration;
+  transition: $property $duration;
+}
+
+@mixin transOrigin($xOrig: center, $yOrig: center, $zOrig: 0) {
+  filter: blur(0);
+
+  -webkit-transform-origin: $xOrig $yOrig $zOrig;
+  -moz-transform-origin: $xOrig $yOrig $zOrig;
+  -ms-transform-origin: $xOrig $yOrig $zOrig;
+  -o-transform-origin: $xOrig $yOrig $zOrig;
+  transform-origin: $xOrig $yOrig $zOrig;
+}
+
+@mixin transRotate($degree: 180deg) {
+  -webkit-transform: rotate($degree);
+  -moz-transform: rotate($degree);
+  -o-transform: rotate($degree);
+  -ms-transform: rotate($degree);
+  transform: rotate($degree);
+}
+
+@mixin transScale($xScale: 1.5, $yScale: 1.5) {
+  -webkit-transform: scale($xScale, $yScale);
+  -moz-transform: scale($xScale, $yScale);
+  -o-transform: scale($xScale, $yScale);
+  -ms-transform: scale($xScale, $yScale);
+  transform: scale($xScale, $yScale);
+}
+
+@mixin transWiggle($duration: 2s, $count: 1) {
+  animation: wiggle $duration ease 0s $count;
+  @-webkit-keyframes wiggle {
+    0%,100% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+  }
+  @-moz-keyframes wiggle {
+    0%,100% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+  }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+  }
+}
+
+// Mixin for icon spin
+@mixin matIconSpin($duration, $degree, $xOrig, $yOrig) {
+  @include transDuration(transform, $duration);
+  // Firefox/Mozilla, add 1 to the yOrig
+  @supports (-moz-appearance: none) {
+    @include transOrigin($xOrig, $yOrig + 1);
+  }
+  // Edge, add 1 to the yOrig
+  @supports (-ms-ime-align: auto) {
+    @include transOrigin($xOrig, $yOrig + 1);
+  }
+  @include transOrigin($xOrig, $yOrig);
+  &:hover {
+    @include transRotate($degree);
+  }
+}
+
+// Mixin for icon zoom
+@mixin matIconZoom($duration, $xScale, $yScale) {
+  @include transDuration(transform, $duration);
+  &:hover {
+    @include transScale($xScale, $yScale);
+  }
+}
+
+// Mixin for icon wiggle
+@mixin matIconWiggle($duration, $count) {
+  // @include transDuration(transform, $duration * $count);
+  &:hover {
+    @include transWiggle($duration, $count);
+  }
+}

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ISchedule, ITeam } from '../model/nfl.model';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class StorageService {
@@ -35,6 +36,15 @@ export class StorageService {
     }
   }
 
+  public clearScheduleFromStorage(): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    localStorage.removeItem('fullSchedule');
+    setTimeout(() => {
+      subject.next(true);
+    }, 500);
+    return subject;
+  }
+
   public loadTeamsFromLocalStorage(): ITeam[] {
     // console.log('[storage.service] loadTeamsFromLocalStorage()');
     let config;
@@ -62,5 +72,14 @@ export class StorageService {
     } catch (e) {
       console.warn('[storage.service] storeTeamsToLocalStorage() Error reading from local storage');
     }
+  }
+
+  public clearTeamsFromStorage(): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    localStorage.removeItem('teams');
+    setTimeout(() => {
+      subject.next(true);
+    }, 500);
+    return subject;
   }
 }

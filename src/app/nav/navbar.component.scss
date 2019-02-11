@@ -1,3 +1,5 @@
+@import 'src/scss/mat-common';
+
 .menu {
   background: url('/assets/images/grass.gif');
   background-color: #333;
@@ -29,4 +31,20 @@
 
 button {
   margin: 10px;
+}
+
+.settings-mini-fab {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  color: white;
+
+  mat-icon {
+    line-height: .7em;
+    font-size: $xxFontSize;
+  }
+}
+
+.spin {
+  @include matIconSpin(0.7s, 180deg, 25px, 25.5px);
 }
