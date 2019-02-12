@@ -30,9 +30,13 @@ export class PlayoffsComponent implements OnInit {
 
       this.playoffService.getAFCPlayoffTeams().subscribe(aData => {
         this.AFCPlayoffTeams = aData; // .map(teams => teams);
+      }, (err) => {
+        console.error('[playoffs] ngOnInit() getAFCPlayoffTeams() error: ' + err);
       });
       this.playoffService.getNFCPlayoffTeams().subscribe(nData => {
         this.NFCPlayoffTeams = nData.map(teams => teams);
+      }, (err) => {
+        console.error('[playoffs] ngOnInit() getNFCPlayoffTeams() error: ' + err);
       });
       // this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
 

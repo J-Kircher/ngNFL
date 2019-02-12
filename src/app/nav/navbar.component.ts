@@ -44,6 +44,8 @@ export class NavBarComponent {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       this.dialogReturn = result;
+    }, (err) => {
+      console.error('[navbar] openTopTeamsDialog() afterClosed() error: ' + err);
     });
   }
 
@@ -51,9 +53,13 @@ export class NavBarComponent {
     console.log('[navbar] resetSeason()');
     this.storageService.clearScheduleFromStorage().subscribe(() => {
       this.scheduleService.buildFullSchedule();
+    }, (err) => {
+      console.error('[navbar] resetSeason() clearScheduleFromStorage() error: ' + err);
     });
     this.storageService.clearTeamsFromStorage().subscribe(() => {
       this.teamService.initTeams();
+    }, (err) => {
+      console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
     });
 
     if (this.router.url.includes('schedule')) {

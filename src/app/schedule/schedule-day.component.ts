@@ -54,12 +54,16 @@ export class ScheduleDayComponent implements OnInit {
       data => {
         // console.log('[schedule-day] scheduleDay received: ' + data);
         this.gameDay = data;
+      }, (err) => {
+        console.error('[schedule-day] ngOnInit() scheduleDay error: ' + err);
       });
 
     this.scheduleDayService.scheduleGames$.subscribe(
       data => {
         // console.log('[schedule-day] scheduleGames received: ' + data);
         this.gamesArr = data;
+      }, (err) => {
+        console.error('[schedule-day] ngOnInit() scheduleGames error: ' + err);
       });
 
     this.loading = false;
@@ -73,6 +77,8 @@ export class ScheduleDayComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       this.dialogReturn = result;
+    }, (err) => {
+      console.error('[schedule-day] openTopTeamsDialog() afterClosed() error: ' + err);
     });
   }
 
