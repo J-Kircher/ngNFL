@@ -226,7 +226,13 @@ export class ScheduleService {
     homeTeam.pa += game.visitScore;
 
     this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
-    this.storageService.storeTeamsToLocalStorage(this.teamService.getAllCurrentTeams());
+
+    // this.storageService.storeTeamsToLocalStorage(this.teamService.getAllCurrentTeams());
+    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+      this.storageService.storeTeamsToLocalStorage(data);
+    }, (err) => {
+      console.error('[schedule.service] playGame() getAllCurrentTeams() error: ' + err);
+    });
   }
 
   playNextGame(): boolean {

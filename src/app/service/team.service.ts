@@ -103,8 +103,10 @@ export class TeamService {
     console.log('[team.service] initTeams() Complete!');
   }
 
-  getAllCurrentTeams(): ITeam[] {
-    return this.TEAMS;
+  getAllCurrentTeams(): Observable<ITeam[]> {
+    const subject = new Subject<ITeam[]>();
+    setTimeout(() => {subject.next(this.TEAMS); subject.complete(); }, 5);
+    return subject;
   }
 
   getTeams(): Observable<ITeam[]> {

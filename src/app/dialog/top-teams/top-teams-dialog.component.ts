@@ -40,11 +40,11 @@ export class TopTeamsDialogComponent implements OnInit {
       this.NFCWildcard = [];
       this.NFCHunt = [];
 
-      // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+      // this.teamsArr = this.teamService.getCurrentTeams().map(teams => teams);
 
-      this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
         this.teamsArr = data;
-        // console.log('[navbar] ngOnInit() getTeams() SUCCESS');
+        // console.log('[navbar] ngOnInit() getCurrentTeams() SUCCESS');
 
         this.teamsArr.forEach(team => {
           if (this.divisions.indexOf(team.division) < 0) {
@@ -96,7 +96,7 @@ export class TopTeamsDialogComponent implements OnInit {
         this.NFCHunt.push(this.NFCOthers[4]);
         this.NFCHunt.push(this.NFCOthers[5]);
       }, (err) => {
-        console.error('[top-teams] ngOnInit() getTeams() error: ' + err);
+        console.error('[top-teams] ngOnInit() getAllCurrentTeams() error: ' + err);
       });
   }
 
