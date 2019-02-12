@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { StorageService } from '../service/storage.service';
@@ -23,7 +23,8 @@ export class NavBarComponent {
     private storageService: StorageService,
     private scheduleService: ScheduleService,
     private teamService: TeamService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
     ) { }
 
   simulate() {
@@ -62,6 +63,8 @@ export class NavBarComponent {
       console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
     });
 
+    this.openSnackBar('Season reset!', '');
+
     if (this.router.url.includes('schedule')) {
       this.router.navigateByUrl('/teams');
     }
@@ -70,5 +73,11 @@ export class NavBarComponent {
   getTopTeams() {
     // this.childModal.show();
     this.openTopTeamsDialog();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
 }
