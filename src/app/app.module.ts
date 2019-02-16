@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
@@ -30,6 +31,7 @@ import { ConfigService } from './service/config.service';
 import { TopTeamsDialogComponent } from './dialog/top-teams/top-teams-dialog.component';
 import { MatchupDialogComponent } from './dialog/matchup/matchup-dialog.component';
 import { StorageService } from './service/storage.service';
+import { SimseasonDialogComponent } from './dialog/simseason/simseason-dialog.component';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -43,12 +45,14 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    FormsModule,
     MaterialModule,
     RouterModule.forRoot(NFLRoutes)
   ],
   entryComponents: [
     TopTeamsDialogComponent,
-    MatchupDialogComponent
+    MatchupDialogComponent,
+    SimseasonDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -69,7 +73,8 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     TeamScheduleComponent,
     PlayoffsComponent,
     TopTeamsDialogComponent,
-    MatchupDialogComponent
+    MatchupDialogComponent,
+    SimseasonDialogComponent
   ],
   providers: [
     TeamService,

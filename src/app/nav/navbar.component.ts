@@ -6,6 +6,7 @@ import { StorageService } from '../service/storage.service';
 import { ScheduleService } from '../service/schedule.service';
 import { TeamService } from '../service/team.service';
 import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.component';
+import { SimseasonDialogComponent } from '../dialog/simseason/simseason-dialog.component';
 
 @Component({
   selector: 'nav-bar',
@@ -17,6 +18,9 @@ export class NavBarComponent {
   private postseason: boolean = false;
 
   dialogReturn: any;
+  askSimSeason: boolean = false;
+  simSeason: boolean = false;
+  simFast: boolean = false;
 
   constructor(
     private router: Router,
@@ -25,15 +29,63 @@ export class NavBarComponent {
     private teamService: TeamService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
-    ) { }
+  ) { }
+
+  getTopTeams() {
+    // this.childModal.show();
+    this.openTopTeamsDialog();
+  }
 
   simulate() {
     // console.log('[navbar] simulate() clicked!');
+    if (!this.askSimSeason) {
+      this.askSimSeason = true;
+      console.log('[navbar] simulate() currentGame: ' + this.scheduleService.currentGame);
+      if (this.scheduleService.currentGame === 0) {
+        this.openSimSeasonDialog();
+      }
+    } else {
+      if (this.scheduleService.playNextGame()) {
+        // Keep playing
+      } else {
+        // End of season
+        this.postseason = true;
+      }
+    }
+  }
+
+  playAllGames() {
     if (this.scheduleService.playNextGame()) {
       // Keep playing
+      const timeout = this.simFast ? 0 : 500;
+      setTimeout(() => { this.playAllGames(); }, timeout);
     } else {
+      console.log('[navbar] playAllGames() End of Season');
+      console.log('[navbar] playAllGames() currentGame: ' + this.scheduleService.currentGame);
       // End of season
       this.postseason = true;
+    }
+  }
+
+  resetSeason() {
+    console.log('[navbar] resetSeason()');
+    this.storageService.clearScheduleFromStorage().subscribe(() => {
+      this.scheduleService.buildFullSchedule();
+    }, (err) => {
+      console.error('[navbar] resetSeason() clearScheduleFromStorage() error: ' + err);
+    });
+    this.storageService.clearTeamsFromStorage().subscribe(() => {
+      this.teamService.initTeams();
+    }, (err) => {
+      console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
+    });
+
+    this.askSimSeason = false;
+    this.postseason = false;
+    this.openSnackBar('Season reset!', '');
+
+    if (this.router.url.includes('schedule')) {
+      this.router.navigateByUrl('/teams');
     }
   }
 
@@ -50,29 +102,29 @@ export class NavBarComponent {
     });
   }
 
-  resetSeason() {
-    console.log('[navbar] resetSeason()');
-    this.storageService.clearScheduleFromStorage().subscribe(() => {
-      this.scheduleService.buildFullSchedule();
-    }, (err) => {
-      console.error('[navbar] resetSeason() clearScheduleFromStorage() error: ' + err);
-    });
-    this.storageService.clearTeamsFromStorage().subscribe(() => {
-      this.teamService.initTeams();
-    }, (err) => {
-      console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
+  openSimSeasonDialog(): void {
+    const dialogRef = this.dialog.open(SimseasonDialogComponent, {
+      data: {},
+      minWidth: '30vw',
+      disableClose: true
     });
 
-    this.openSnackBar('Season reset!', '');
-
-    if (this.router.url.includes('schedule')) {
-      this.router.navigateByUrl('/teams');
-    }
-  }
-
-  getTopTeams() {
-    // this.childModal.show();
-    this.openTopTeamsDialog();
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogReturn = result;
+      if (result) {
+        this.simSeason = result.simSeason;
+        this.simFast = result.simFast;
+        if (this.simSeason) {
+          this.playAllGames();
+        } else {
+          this.scheduleService.playNextGame();
+        }
+      } else {
+        this.scheduleService.playNextGame();
+      }
+    }, (err) => {
+      console.error('[navbar] openSimSeasonDialog() afterClosed() error: ' + err);
+    });
   }
 
   openSnackBar(message: string, action: string) {
