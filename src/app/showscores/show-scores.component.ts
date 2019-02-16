@@ -40,12 +40,13 @@ import { ISchedule } from '../model/nfl.model';
       overflow-y: scroll;
     }
     .scoreboard {
+      background-color: #DDD;
+      // background: rgba(0, 128, 0, 0.5);
       font-family: Arial;
       font-size: 12pt;
       font-weight: bold;
       font-style: italic;
       text-align: center;
-      // background: rgba(0, 128, 0, 0.5);
       margin-bottom: 0px;
       border-radius: 5px;
     }

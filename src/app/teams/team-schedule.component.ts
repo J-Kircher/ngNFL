@@ -45,6 +45,7 @@ import { ITeam, ISchedule } from '../model/nfl.model';
       border-radius: 10px;
     }
     .gameday {
+      background-color: #DDD;
       font-family: Arial;
       font-size: 12pt;
       font-weight: bold;

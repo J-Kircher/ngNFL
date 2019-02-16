@@ -23,6 +23,7 @@ import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.compone
       border-radius: 10px;
     }
     .gameday {
+      background-color: #EEE;
       font-family: Arial;
       font-size: 12pt;
       font-weight: bold;
