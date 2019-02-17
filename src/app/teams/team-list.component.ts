@@ -10,7 +10,7 @@ import { ITeam } from '../model/nfl.model';
       <div class="team-head" style="margin-top:5px">
         NFL Teams
       </div>
-      <div  fxLayout="row wrap" fxLayout.xs="column wrap">
+      <div fxLayout="row wrap" fxLayout.xs="column wrap">
         <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let team of teamsArr">
           <div class="team-info" (click)="showTeam(team.abbrev)"
             [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
