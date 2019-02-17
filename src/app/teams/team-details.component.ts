@@ -47,7 +47,10 @@ export class TeamDetailsComponent implements OnInit {
   team: ITeam;
   total: number;
 
-  constructor(private teamService: TeamService, private route: ActivatedRoute) {  }
+  constructor(
+    private teamService: TeamService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {

@@ -71,7 +71,10 @@ export class TeamListComponent implements OnInit {
   teamsArr: ITeam[] = [];
   loading: boolean = true;
 
-  constructor(private router: Router, private teamService: TeamService) { }
+  constructor(
+    private router: Router,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);

@@ -69,7 +69,10 @@ export class ScheduleMonthComponent implements OnInit {
   dayNames = ['Sunday', 'Monday', 'Tuesday',
     'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  constructor(private scheduleService: ScheduleService, private scheduleDayService: ScheduleDayService) {  }
+  constructor(
+    private scheduleService: ScheduleService,
+    private scheduleDayService: ScheduleDayService
+  ) { }
 
   ngOnInit() {
     this.monthName = this.monthNames[this.month - 1];
