@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, DoCheck, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { TeamService } from '../../service/team.service';
@@ -10,7 +10,7 @@ import { sortDivision, sortConference } from '../../common/sort';
   templateUrl: './top-teams-dialog.component.html',
   styleUrls: ['./top-teams-dialog.component.scss']
 })
-export class TopTeamsDialogComponent implements OnInit {
+export class TopTeamsDialogComponent implements OnInit, DoCheck {
 
   constructor(
     private teamService: TeamService,
@@ -30,6 +30,18 @@ export class TopTeamsDialogComponent implements OnInit {
     NFCHunt: ITeam[] = [];
 
     ngOnInit() {
+      // this.teamsArr = this.teamService.getCurrentTeams().map(teams => teams);
+
+      this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+        this.teamsArr = data;
+        // console.log('[navbar] ngOnInit() getCurrentTeams() SUCCESS');
+      }, (err) => {
+        console.error('[top-teams] ngOnInit() getAllCurrentTeams() error: ' + err);
+      });
+  }
+
+  ngDoCheck() {
+    if (this.teamsArr.length > 0) {
       this.AFCDivLeaders = [];
       this.AFCOthers = [];
       this.AFCWildcard = [];
@@ -40,64 +52,56 @@ export class TopTeamsDialogComponent implements OnInit {
       this.NFCWildcard = [];
       this.NFCHunt = [];
 
-      // this.teamsArr = this.teamService.getCurrentTeams().map(teams => teams);
+      this.teamsArr.forEach(team => {
+        if (this.divisions.indexOf(team.division) < 0) {
+          this.divisions.push(team.division);
+        }
+      });
 
-      this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
-        this.teamsArr = data;
-        // console.log('[navbar] ngOnInit() getCurrentTeams() SUCCESS');
-
-        this.teamsArr.forEach(team => {
-          if (this.divisions.indexOf(team.division) < 0) {
-            this.divisions.push(team.division);
-          }
+      this.divisions
+        .filter(division => division.indexOf('AFC') > -1)
+        .forEach(division => {
+          const thisDiv: ITeam[] = this.teamsArr.filter(team => (team.division === division));
+          thisDiv.sort(sortDivision);
+          this.AFCDivLeaders.push(thisDiv[0]);
+          this.AFCOthers.push(thisDiv[1]);
+          this.AFCOthers.push(thisDiv[2]);
+          this.AFCOthers.push(thisDiv[3]);
         });
 
-        this.divisions
-          .filter(division => division.indexOf('AFC') > -1)
-          .forEach(division => {
-            const thisDiv: ITeam[] = this.teamsArr.filter(team => (team.division === division));
-            thisDiv.sort(sortDivision);
-            this.AFCDivLeaders.push(thisDiv[0]);
-            this.AFCOthers.push(thisDiv[1]);
-            this.AFCOthers.push(thisDiv[2]);
-            this.AFCOthers.push(thisDiv[3]);
-          });
+      this.AFCDivLeaders.sort(sortConference);
+      this.AFCOthers.sort(sortConference);
 
-        this.AFCDivLeaders.sort(sortConference);
-        this.AFCOthers.sort(sortConference);
+      this.AFCWildcard.push(this.AFCOthers[0]);
+      this.AFCWildcard.push(this.AFCOthers[1]);
 
-        this.AFCWildcard.push(this.AFCOthers[0]);
-        this.AFCWildcard.push(this.AFCOthers[1]);
+      this.AFCHunt.push(this.AFCOthers[2]);
+      this.AFCHunt.push(this.AFCOthers[3]);
+      this.AFCHunt.push(this.AFCOthers[4]);
+      this.AFCHunt.push(this.AFCOthers[5]);
 
-        this.AFCHunt.push(this.AFCOthers[2]);
-        this.AFCHunt.push(this.AFCOthers[3]);
-        this.AFCHunt.push(this.AFCOthers[4]);
-        this.AFCHunt.push(this.AFCOthers[5]);
+      this.divisions
+        .filter(division => division.indexOf('NFC') > -1)
+        .forEach(division => {
+          const thisDiv: ITeam[] = this.teamsArr.filter(team => (team.division === division));
+          thisDiv.sort(sortDivision);
+          this.NFCDivLeaders.push(thisDiv[0]);
+          this.NFCOthers.push(thisDiv[1]);
+          this.NFCOthers.push(thisDiv[2]);
+          this.NFCOthers.push(thisDiv[3]);
+        });
 
-        this.divisions
-          .filter(division => division.indexOf('NFC') > -1)
-          .forEach(division => {
-            const thisDiv: ITeam[] = this.teamsArr.filter(team => (team.division === division));
-            thisDiv.sort(sortDivision);
-            this.NFCDivLeaders.push(thisDiv[0]);
-            this.NFCOthers.push(thisDiv[1]);
-            this.NFCOthers.push(thisDiv[2]);
-            this.NFCOthers.push(thisDiv[3]);
-          });
+      this.NFCDivLeaders.sort(sortConference);
+      this.NFCOthers.sort(sortConference);
 
-        this.NFCDivLeaders.sort(sortConference);
-        this.NFCOthers.sort(sortConference);
+      this.NFCWildcard.push(this.NFCOthers[0]);
+      this.NFCWildcard.push(this.NFCOthers[1]);
 
-        this.NFCWildcard.push(this.NFCOthers[0]);
-        this.NFCWildcard.push(this.NFCOthers[1]);
-
-        this.NFCHunt.push(this.NFCOthers[2]);
-        this.NFCHunt.push(this.NFCOthers[3]);
-        this.NFCHunt.push(this.NFCOthers[4]);
-        this.NFCHunt.push(this.NFCOthers[5]);
-      }, (err) => {
-        console.error('[top-teams] ngOnInit() getAllCurrentTeams() error: ' + err);
-      });
+      this.NFCHunt.push(this.NFCOthers[2]);
+      this.NFCHunt.push(this.NFCOthers[3]);
+      this.NFCHunt.push(this.NFCOthers[4]);
+      this.NFCHunt.push(this.NFCOthers[5]);
+    }
   }
 
   onClose(): void {
