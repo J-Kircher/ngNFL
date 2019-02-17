@@ -67,8 +67,12 @@ export class TeamScheduleComponent implements OnInit {
   teamSchedule: ISchedule[];
   loading: boolean = true;
 
-  constructor(private router: Router, private route: ActivatedRoute,
-    private scheduleService: ScheduleService, private teamService: TeamService) {  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private scheduleService: ScheduleService,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
@@ -76,15 +80,19 @@ export class TeamScheduleComponent implements OnInit {
       // console.log('[team-schedule] ngOnInit() team: ' + this.team.city + ' ' + this.team.name);
       // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
-      this.teamService.getTeams().subscribe((data: ITeam[]) => {
-        this.teamsArr = data;
+      this.teamService.getTeams().subscribe((teamData: ITeam[]) => {
+        this.teamsArr = teamData;
         // console.log('[team-schedule] ngOnInit() getTeams() SUCCESS');
 
         this.teamIndex = this.teamsArr.findIndex(team => team.abbrev === this.team.abbrev);
-        this.teamSchedule = this.scheduleService.getGamesForTeam(this.teamIndex);
-        // console.table(this.teamSchedule);
-        window.scrollTo(0, 0);
-        this.loading = false;
+        this.scheduleService.getGamesForTeam(this.teamIndex).subscribe((schedData: ISchedule[]) => {
+          this.teamSchedule = schedData;
+          // console.table(this.teamSchedule);
+          window.scrollTo(0, 0);
+          this.loading = false;
+        }, (err) => {
+          console.error('[team-schedule] ngOnInit() getGamesForTeam() error: ' + err);
+        });
       }, (err) => {
         console.error('[team-schedule] ngOnInit() getTeams() error: ' + err);
       });
