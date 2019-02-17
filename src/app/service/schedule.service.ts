@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+
 import { ISchedule, IScheduleBase, ITeam } from '../model/nfl.model';
 import { TeamService } from '../service/team.service';
 import { StorageService } from '../service/storage.service';
@@ -65,9 +69,18 @@ const SCHEDULE: IScheduleBase[] = [
 @Injectable()
 export class ScheduleService {
   FULL_SCHEDULE: ISchedule[];
-  currentGameDay: string;
   currentGame: number;
+  currentGameDay: string;
   endOfSeason: boolean = false;
+  finalGame: number;
+
+  // Observable sources
+  private currentGameSource = new BehaviorSubject<number>(0);
+  private currentGameDaySource = new BehaviorSubject<string>('');
+
+  // Observable streams
+  currentGame$ = this.currentGameSource.asObservable();
+  currentGameDay$ = this.currentGameDaySource.asObservable();
 
   constructor(
     private teamService: TeamService,
@@ -75,6 +88,16 @@ export class ScheduleService {
   ) { }
 
   // {'gameday': 'Monday, September 11', 'games': [26, 23, 14, 12]},
+
+  // Service message commands
+  setCurrentGame(data: number) {
+    // console.log('[schedule.service] setCurrentGame() data: ' + data);
+    this.currentGameSource.next(data);
+  }
+  setCurrentGameDay(data: string) {
+    // console.log('[schedule.service] setCurrentGameDay() data: ' + data);
+    this.currentGameDaySource.next(data);
+  }
 
   loadScheduleFromStorage() {
     this.currentGame = 0;
@@ -84,7 +107,8 @@ export class ScheduleService {
         this.currentGame++;
       }
     });
-    this.currentGame = this.currentGame > 0 ? this.currentGame-- : 0;
+    // this.currentGame = this.currentGame > 0 ? this.currentGame-- : 0;
+    this.setCurrentGame(this.currentGame);
   }
 
   buildFullSchedule() {
@@ -110,11 +134,16 @@ export class ScheduleService {
           i++;
         }
       });
+      this.finalGame = counter;
+      console.log('[schedule.service] finalGame: ' + this.finalGame);
+
       // console.log('[schedule.service] FULL_SCHEDULE:');
       // console.table(this.FULL_SCHEDULE);
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
     }
-    this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
+    this.currentGameDay = this.currentGame <= this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
+    this.setCurrentGameDay(this.currentGameDay);
+
     console.log('[schedule.service] buildFullSchedule() Complete!');
   }
 
@@ -133,9 +162,21 @@ export class ScheduleService {
     return games.length > 0 ? true : false;
   }
 
-  getGamesForTeam(team: number): ISchedule[] {
+  // getGamesForTeam(team: number): ISchedule[] {
+  //   // console.log('[schedule.service] getGamesForTeam() team: ' + team);
+  //   return this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)));
+  // }
+
+  getGamesForTeam(team: number): Observable<ISchedule[]> {
     // console.log('[schedule.service] getGamesForTeam() team: ' + team);
-    return this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)));
+
+    const subject = new Subject<ISchedule[]>();
+
+    setTimeout(() => {
+      subject.next(this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)))); subject.complete();
+    }, 5);
+
+    return subject;
   }
 
   getGameById(id: number): ISchedule {
@@ -238,8 +279,11 @@ export class ScheduleService {
   playNextGame(): boolean {
     // console.log('[schedule.service] playNextGame() curr:' + this.currentGame + ' len:' + this.FULL_SCHEDULE.length);
     if (this.currentGame < this.FULL_SCHEDULE.length) {
+      this.setCurrentGame(this.currentGame);
+
       this.currentGameDay = this.FULL_SCHEDULE[this.currentGame].gameday;
       // console.log('[schedule.service] playNextGame() currentGameDay: ' + this.currentGameDay);
+      this.setCurrentGameDay(this.currentGameDay);
 
       this.playGame(this.FULL_SCHEDULE[this.currentGame]);
       this.currentGame++;
@@ -254,4 +298,3 @@ export class ScheduleService {
     return this.endOfSeason = (this.currentGame >= this.FULL_SCHEDULE.length) ? true : false;
   }
 }
-

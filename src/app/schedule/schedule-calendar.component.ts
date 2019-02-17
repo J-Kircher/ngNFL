@@ -44,6 +44,7 @@ import { ScheduleDayService } from '../service/schedule.day.service';
 
 export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   NFLCalendarArr: NFLCalendar[] = [];
+  gameDay: string;
   gamesArr: ISchedule[] = [];
 
   constructor(
@@ -54,11 +55,12 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     // console.log('[schedule-calendar] ngOnInit()');
     this.NFLCalendarArr = [{ month: 9, year: 2017}, { month: 10, year: 2017}, { month: 11, year: 2017}, { month: 12, year: 2017}];
+    this.scheduleService.currentGameDay$.subscribe(data => this.gameDay = data);
   }
 
   ngAfterContentInit() {
     // console.log('[schedule-calendar] ngAfterContentInit()');
-    this.getGamesForDay(this.scheduleService.currentGameDay);
+    this.getGamesForDay(this.gameDay);
   }
 
   getGamesForDay(gameDay: string) {

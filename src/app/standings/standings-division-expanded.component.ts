@@ -1,4 +1,4 @@
-import { Component, Input, DoCheck } from '@angular/core';
+import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamService } from '../service/team.service';
 import { ScheduleService } from '../service/schedule.service';
@@ -11,17 +11,25 @@ import { sortDivision, sortDivisionByTotal } from '../common/sort';
   styleUrls: ['./standings-division.component.scss']
 })
 
-export class StandingsDivisionExpandedComponent implements DoCheck {
+export class StandingsDivisionExpandedComponent implements OnInit, DoCheck {
   @Input() division: string;
   teamsArr: ITeam[] = [];
   divisionTeams: ITeam[] = [];
   currentGame: number = 0;
   loading: boolean = true;
 
-  constructor(private router: Router, private teamService: TeamService, private scheduleService: ScheduleService) {  }
+  constructor(
+    private router: Router,
+    private teamService: TeamService,
+    private scheduleService: ScheduleService
+  ) { }
+
+  ngOnInit() {
+    this.scheduleService.currentGame$.subscribe(data => this.currentGame = data);
+  }
 
   ngDoCheck() {
-    // console.log('[standings-division] ngDoCheck() division: ' + this.division);
+    // console.log('[standings-div-exp] ngDoCheck() division: ' + this.division);
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
     // this.divisionTeams = this.getTeamsForDivision(this.division);
 
@@ -35,7 +43,6 @@ export class StandingsDivisionExpandedComponent implements DoCheck {
       });
     }
 
-    this.currentGame = this.scheduleService.currentGame;
     if (this.currentGame > 0) {
       this.divisionTeams = this.teamService.getTeamsForDivision(this.division).sort(sortDivision);
     } else {
