@@ -17,7 +17,10 @@ export class PlayoffsComponent implements OnInit {
   SuperBowlChamp: number;
   loading: boolean = true;
 
-  constructor(private teamService: TeamService, private playoffService: PlayoffService) { }
+  constructor(
+    private teamService: TeamService,
+    private playoffService: PlayoffService
+  ) { }
 
   ngOnInit() {
     // console.log('[playoffs] ngOnInit()');
@@ -28,17 +31,19 @@ export class PlayoffsComponent implements OnInit {
       this.teamsArr = data;
       // console.log('[playoffs] ngOnInit() getTeams() SUCCESS');
 
-      this.playoffService.getAFCPlayoffTeams().subscribe(aData => {
+      this.playoffService.getAFCPlayoffTeams().subscribe((aData: number[]) => {
         this.AFCPlayoffTeams = aData; // .map(teams => teams);
       }, (err) => {
         console.error('[playoffs] ngOnInit() getAFCPlayoffTeams() error: ' + err);
       });
+
       this.playoffService.getNFCPlayoffTeams().subscribe(nData => {
         this.NFCPlayoffTeams = nData.map(teams => teams);
       }, (err) => {
         console.error('[playoffs] ngOnInit() getNFCPlayoffTeams() error: ' + err);
       });
-      // this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
+
+      this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
 
       this.loading = false;
       window.scrollTo(0, 0);
