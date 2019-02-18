@@ -15,7 +15,7 @@ import { ITeam, ISchedule } from '../model/nfl.model';
         <div fxLayout="row wrap" fxLayout.xs="column wrap">
           <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
             (click)="showTeam(getOpponent(score).abbrev)">
-            <mat-card class="gameday">
+            <mat-card class="gameday" appMaterialElevation>
               {{score.gameday}}
               <show-score [score]=score></show-score>
             </mat-card>
@@ -54,8 +54,8 @@ import { ITeam, ISchedule } from '../model/nfl.model';
       margin: 4px;
     }
     .gameday:hover {
-      border-color: rgba(0, 128, 0, 0.5);
-      background-color: rgba(0, 128, 0, 0.2);
+      border-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.2);
     }
   `]
 })

@@ -32,8 +32,8 @@ import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.compone
       margin: 4px;
     }
     .gameday:hover {
-      border-color: rgba(0, 128, 0, 0.5);
-      background-color: rgba(0, 128, 0, 0.2);
+      border-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.2);
     }
   `]
 })

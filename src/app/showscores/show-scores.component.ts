@@ -12,7 +12,7 @@ import { ISchedule } from '../model/nfl.model';
         </div>
         <div class="showscores div-scroll">
           <div *ngFor="let score of gamesArr">
-            <mat-card class="scoreboard">
+            <mat-card class="scoreboard" appMaterialElevation>
               <show-score [score]=score></show-score>
             </mat-card>
           </div>
@@ -51,8 +51,8 @@ import { ISchedule } from '../model/nfl.model';
       border-radius: 5px;
     }
     .scoreboard:hover {
-      border-color: rgba(0, 128, 0, 0.5);
-      background-color: rgba(0, 128, 0, 0.2);
+      border-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.2);
     }
   `]
 })

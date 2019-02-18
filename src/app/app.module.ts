@@ -32,6 +32,7 @@ import { TopTeamsDialogComponent } from './dialog/top-teams/top-teams-dialog.com
 import { MatchupDialogComponent } from './dialog/matchup/matchup-dialog.component';
 import { StorageService } from './service/storage.service';
 import { SimseasonDialogComponent } from './dialog/simseason/simseason-dialog.component';
+import { MaterialElevationDirective } from './shared/material-elevation.directive';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -74,7 +75,8 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     PlayoffsComponent,
     TopTeamsDialogComponent,
     MatchupDialogComponent,
-    SimseasonDialogComponent
+    SimseasonDialogComponent,
+    MaterialElevationDirective
   ],
   providers: [
     TeamService,
