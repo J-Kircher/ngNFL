@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { SimseasonDialogComponent } from '../dialog/simseason/simseason-dialog.c
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, AfterContentChecked {
   private postseason: boolean = false;
 
   dialogReturn: any;
@@ -22,6 +22,7 @@ export class NavBarComponent implements OnInit {
   simSeason: boolean = false;
   simFast: boolean = false;
   currentGame: number = 0;
+  currentGameDay: string;
 
   constructor(
     private router: Router,
@@ -34,6 +35,11 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.scheduleService.currentGame$.subscribe(data => this.currentGame = data);
+    this.scheduleService.currentGameDay$.subscribe(data => this.currentGameDay = data);
+  }
+
+  ngAfterContentChecked() {
+    this.postseason = this.currentGameDay === 'Playoffs';
   }
 
   getTopTeams() {
@@ -51,9 +57,6 @@ export class NavBarComponent implements OnInit {
     } else {
       if (this.scheduleService.playNextGame()) {
         // Keep playing
-      } else {
-        // End of season
-        this.postseason = true;
       }
     }
   }
@@ -65,8 +68,6 @@ export class NavBarComponent implements OnInit {
       setTimeout(() => { this.playAllGames(); }, timeout);
     } else {
       console.log('[navbar] playAllGames() End of Season');
-      // End of season
-      this.postseason = true;
     }
   }
 
@@ -86,7 +87,7 @@ export class NavBarComponent implements OnInit {
     this.askSimSeason = false;
     this.simSeason = false;
     this.simFast = false;
-      this.postseason = false;
+    this.postseason = false;
     this.openSnackBar('Season reset!', '');
 
     if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {

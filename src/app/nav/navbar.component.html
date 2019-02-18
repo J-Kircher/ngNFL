@@ -12,7 +12,7 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <button mat-raised-button type="button" id="simulate" [disabled]="postseason" (click)="simulate()">Simulate</button>
+  <button mat-raised-button type="button" id="simulate" [disabled]="simSeason || postseason" (click)="simulate()">Simulate</button>
   <button mat-raised-button type="button" id="playoffs" *ngIf="postseason" [routerLink]="['/playoffs']">Playoffs</button>
 
   <div class="spin">

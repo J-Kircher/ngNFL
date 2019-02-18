@@ -290,7 +290,9 @@ export class ScheduleService {
       return true;
     } else {
       console.log('[schedule.service] playNextGame() Season Over');
-      return false;
+      this.currentGameDay = 'Playoffs';
+      this.setCurrentGameDay(this.currentGameDay);
+        return false;
     }
   }
 
