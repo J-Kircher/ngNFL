@@ -49,10 +49,11 @@ import { ISchedule } from '../model/nfl.model';
       text-align: center;
       margin-bottom: 0px;
       border-radius: 5px;
+      transition: background-color 280ms cubic-bezier(.4,0,.2,1);
     }
     .scoreboard:hover {
       border-color: rgba(0, 0, 0, 0.8);
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgb(238, 238, 238);
     }
   `]
 })

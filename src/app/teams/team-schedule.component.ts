@@ -52,10 +52,11 @@ import { ITeam, ISchedule } from '../model/nfl.model';
       font-style: italic;
       cursor: pointer;
       margin: 4px;
+      transition: background-color 280ms cubic-bezier(.4,0,.2,1);
     }
     .gameday:hover {
       border-color: rgba(0, 0, 0, 0.8);
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgb(238, 238, 238);
     }
   `]
 })
