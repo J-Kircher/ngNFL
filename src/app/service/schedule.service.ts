@@ -172,10 +172,9 @@ export class ScheduleService {
 
     const subject = new Subject<ISchedule[]>();
 
-    setTimeout(() => {
-      subject.next(this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)))); subject.complete();
-    }, 5);
-
+    setTimeout(() => {subject.next(this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)))); subject.complete(); }, 0);
+    // .next adds data to the observable stream
+    // using setTimeout to simulate aschrony
     return subject;
   }
 

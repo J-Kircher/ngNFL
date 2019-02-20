@@ -142,7 +142,7 @@ export class PlayoffService {
     const subject = new Subject<number[]>();
     // if (this.scheduleService.checkEndOfSeason() && this.AFCPlayoffTeams.length > 0) {
     //   console.log('[playoff.service] getAFCPlayoffTeams() Season is Over');
-    //   setTimeout(() => {subject.next(this.AFCPlayoffTeams); subject.complete(); }, 5);
+    //   setTimeout(() => {subject.next(this.AFCPlayoffTeams); subject.complete(); }, 0);
     //   // .next adds data to the observable stream
     //   // using setTimeout to simulate aschrony
     // } else {
@@ -186,7 +186,7 @@ export class PlayoffService {
         this.AFCPlayoffTeams.push(this.teamService.getTeamIndex(AFCOthers[1].abbrev));
         // console.table(this.AFCPlayoffTeams);
 
-        setTimeout(() => {subject.next(this.AFCPlayoffTeams); subject.complete(); }, 5);
+        setTimeout(() => {subject.next(this.AFCPlayoffTeams); subject.complete(); }, 0);
         // .next adds data to the observable stream
         // using setTimeout to simulate aschrony
         return subject;
@@ -201,7 +201,7 @@ export class PlayoffService {
     const subject = new Subject<number[]>();
     // if (this.scheduleService.checkEndOfSeason() && this.NFCPlayoffTeams.length > 0) {
     //   console.log('[playoff.service] getNFCPlayoffTeams() Season is Over');
-    //   setTimeout(() => {subject.next(this.NFCPlayoffTeams); subject.complete(); }, 5);
+    //   setTimeout(() => {subject.next(this.NFCPlayoffTeams); subject.complete(); }, 0);
     //   // .next adds data to the observable stream
     //   // using setTimeout to simulate aschrony
     // } else {
@@ -245,7 +245,7 @@ export class PlayoffService {
         this.NFCPlayoffTeams.push(this.teamService.getTeamIndex(NFCOthers[1].abbrev));
         // console.table(this.NFCPlayoffTeams);
 
-        setTimeout(() => {subject.next(this.NFCPlayoffTeams); subject.complete(); }, 5);
+        setTimeout(() => {subject.next(this.NFCPlayoffTeams); subject.complete(); }, 0);
         // .next adds data to the observable stream
         // using setTimeout to simulate aschrony
         return subject;

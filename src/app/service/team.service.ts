@@ -105,7 +105,9 @@ export class TeamService {
 
   getAllCurrentTeams(): Observable<ITeam[]> {
     const subject = new Subject<ITeam[]>();
-    setTimeout(() => {subject.next(this.TEAMS); subject.complete(); }, 5);
+    setTimeout(() => {subject.next(this.TEAMS); subject.complete(); }, 0);
+    // .next adds data to the observable stream
+    // using setTimeout to simulate aschrony
     return subject;
   }
 
@@ -115,7 +117,7 @@ export class TeamService {
 
     // return this.TEAMS;
 
-    setTimeout(() => {subject.next(_TEAMS); subject.complete(); }, 5);
+    setTimeout(() => {subject.next(_TEAMS); subject.complete(); }, 0);
     // .next adds data to the observable stream
     // using setTimeout to simulate aschrony
     return subject;
