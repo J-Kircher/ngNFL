@@ -12,7 +12,7 @@ import { ISchedule } from '../model/nfl.model';
         </div>
         <div class="showscores div-scroll">
           <div *ngFor="let score of gamesArr">
-            <mat-card class="scoreboard" appMaterialElevation>
+            <mat-card class="scoreboard" matRipple appMaterialElevation>
               <show-score [score]=score></show-score>
             </mat-card>
           </div>

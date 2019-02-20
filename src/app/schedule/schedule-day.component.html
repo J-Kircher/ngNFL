@@ -6,7 +6,7 @@
     <div fxLayout="row wrap" fxLayout.xs="column wrap">
       <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of gamesArr"
         (click)="getMatchup(score.id)">
-        <mat-card class="gameday" appMaterialElevation>
+        <mat-card class="gameday" matRipple appMaterialElevation>
           <show-score [score]=score></show-score>
         </mat-card>
       </div>

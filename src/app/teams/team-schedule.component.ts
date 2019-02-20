@@ -15,7 +15,7 @@ import { ITeam, ISchedule } from '../model/nfl.model';
         <div fxLayout="row wrap" fxLayout.xs="column wrap">
           <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
             (click)="showTeam(getOpponent(score).abbrev)">
-            <mat-card class="gameday" appMaterialElevation>
+            <mat-card class="gameday" matRipple appMaterialElevation>
               {{score.gameday}}
               <show-score [score]=score></show-score>
             </mat-card>
