@@ -6,10 +6,10 @@ import { StandingsComponent } from './standings/standings.component';
 import { PlayoffsComponent } from './playoffs/playoffs.component';
 
 export const NFLRoutes: Routes = [
-  { path: 'teams', component: TeamListComponent },
-  { path: 'teams/:abbrev', component: TeamDetailsComponent },
-  { path: 'schedule', component: ScheduleComponent },
-  { path: 'standings', component: StandingsComponent },
-  { path: 'playoffs', component: PlayoffsComponent },
+  { path: 'teams', component: TeamListComponent, data: {animation: 'TeamsPage'} },
+  { path: 'teams/:abbrev', component: TeamDetailsComponent, data: {animation: 'TeamPage'} },
+  { path: 'schedule', component: ScheduleComponent, data: {animation: 'SchedulePage'} },
+  { path: 'standings', component: StandingsComponent, data: {animation: 'StandingsPage'} },
+  { path: 'playoffs', component: PlayoffsComponent, data: {animation: 'PlayoffsPage'} },
   { path: '', redirectTo: '/teams', pathMatch: 'full' }
 ];
