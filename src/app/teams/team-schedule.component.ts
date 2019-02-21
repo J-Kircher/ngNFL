@@ -16,7 +16,9 @@ import { ITeam, ISchedule } from '../model/nfl.model';
           <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
             (click)="showTeam(getOpponent(score).abbrev)">
             <mat-card class="gameday" matRipple appMaterialElevation>
-              {{score.gameday}}
+              <div class="gameday-text">
+                {{score.gameday}}
+              </div>
               <show-score [score]=score></show-score>
             </mat-card>
           </div>
@@ -43,6 +45,9 @@ import { ITeam, ISchedule } from '../model/nfl.model';
       margin: 0px;
       padding: 0px;
       border-radius: 10px;
+    }
+    .gameday-text {
+      margin-bottom: 5px;
     }
     .gameday {
       background-color: #DDD;

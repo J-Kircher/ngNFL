@@ -7,7 +7,7 @@ import { ISchedule } from '../model/nfl.model';
   template: `
     <mat-card>
       <div class="showscores">
-        <div style="margin-top:5px">
+        <div class="gameday-text">
           {{gameDay}}
         </div>
         <div class="showscores div-scroll">
@@ -24,6 +24,9 @@ import { ISchedule } from '../model/nfl.model';
     mat-card {
       margin: 12px;
       padding: 8px;
+    }
+    .gameday-text {
+      margin: 5px 0px;
     }
     .showscores {
       font-family: Arial;
