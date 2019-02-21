@@ -22,7 +22,7 @@ export class MatchupDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('[matchup] data: ' + this.data);
+    // console.log('[matchup] data: ' + this.data);
     this.modalGame = this.scheduleService.getGameById(this.data.id);
 
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
