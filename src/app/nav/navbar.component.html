@@ -6,14 +6,14 @@
     <span><a [routerLink]="['/teams']" id="show">Show Teams</a></span>
     <span><a [routerLink]="['/schedule']" id="schedule">Schedule</a></span>
     <span><a [routerLink]="['/standings']" id="standings">Standings</a></span>
+    <span><a [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a></span>
     <span><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
     <span><a id="help">Help</a></span>
   </div>
 
   <span fxFlex="1 1 auto"></span>
 
-  <button mat-raised-button type="button" id="simulate" [disabled]="simSeason || postseason" (click)="simulate()">Simulate</button>
-  <button mat-raised-button type="button" id="playoffs" *ngIf="postseason" [routerLink]="['/playoffs']">Playoffs</button>
+  <button mat-raised-button type="button" id="simulate" [disabled]="simSeason" (click)="simulate()">{{ postseason ? 'Sim Playoffs' : 'Simulate' }}</button>
 
   <div class="spin">
     <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">

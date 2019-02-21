@@ -67,6 +67,7 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
       const timeout = this.simFast ? 0 : 500;
       setTimeout(() => { this.playAllGames(); }, timeout);
     } else {
+      this.simSeason = false;
       console.log('[navbar] playAllGames() End of Season');
     }
   }
