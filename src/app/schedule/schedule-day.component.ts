@@ -3,10 +3,12 @@ import { MatDialog } from '@angular/material';
 import { ISchedule } from '../model/nfl.model';
 import { ScheduleDayService } from '../service/schedule.day.service';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
+import { listAnimation } from '../shared/animations';
 
 @Component({
   selector: 'schedule-day',
   templateUrl: './schedule-day.component.html',
+  animations: [listAnimation],
   styles: [`
     mat-card {
       margin: 12px;
@@ -89,7 +91,6 @@ export class ScheduleDayComponent implements OnInit {
 
   getMatchup(id: number) {
     // console.log('[schedule-day] getMatchup: ' + id);
-    // this.childModal.show();
     this.openTopTeamsDialog(id);
   }
 }

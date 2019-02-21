@@ -3,15 +3,13 @@ import { RouterOutlet } from '@angular/router';
 
 import { ScheduleService } from './service/schedule.service';
 import { TeamService } from './service/team.service';
-import { fadeAnimation } from './app.animations';
+import { fadeAnimation } from './shared/animations';
 
 @Component({
   selector: 'app-nfl',
   templateUrl: './app.component.html',
   styles: [],
-  animations: [
-    fadeAnimation
-  ]
+  animations: [fadeAnimation]
 })
 
 export class AppComponent implements OnInit {

@@ -3,34 +3,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ScheduleService } from '../service/schedule.service';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule } from '../model/nfl.model';
+import { listAnimation } from '../shared/animations';
 
 @Component ({
   selector: 'team-schedule',
-  template: `
-    <mat-card *ngIf="!loading">
-      <div class="schedule">
-        <div style="margin-top:5px">
-          {{team.city}} {{team.name}} Schedule
-        </div>
-        <div fxLayout="row wrap" fxLayout.xs="column wrap">
-          <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
-            (click)="showTeam(getOpponent(score).abbrev)">
-            <mat-card class="gameday" matRipple appMaterialElevation>
-              <div class="gameday-text">
-                {{score.gameday}}
-              </div>
-              <show-score [score]=score></show-score>
-            </mat-card>
-          </div>
-        </div>
-      </div>
-    </mat-card>
-
-    <mat-card class="loading-well" *ngIf="loading">
-      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
-      <div class="loading-font" style="float:right">&nbsp; Loading Team Schedule &hellip;</div>
-    </mat-card>
-`,
+  templateUrl: './team-schedule.component.html',
+  animations: [listAnimation],
   styles: [`
     mat-card {
       margin: 12px;

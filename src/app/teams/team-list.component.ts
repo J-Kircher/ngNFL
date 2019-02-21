@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamService } from '../service/team.service';
 import { ITeam } from '../model/nfl.model';
+import { listAnimation } from '../shared/animations';
 
 @Component({
   selector: 'team-list',
+  animations: [listAnimation],
   template: `
     <mat-card *ngIf="!loading">
       <div class="team-head" style="margin-top:5px">
         NFL Teams
       </div>
-      <div fxLayout="row wrap" fxLayout.xs="column wrap">
+      <div fxLayout="row wrap" fxLayout.xs="column wrap"
+        [@listAnimations]="{ value: teamsArr.length, params: { stagger: '50ms' } }">
         <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let team of teamsArr">
           <div class="team-info" (click)="showTeam(team.abbrev)"
             [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
