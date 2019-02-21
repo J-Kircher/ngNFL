@@ -43,7 +43,6 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
   }
 
   getTopTeams() {
-    // this.childModal.show();
     this.openTopTeamsDialog();
   }
 
