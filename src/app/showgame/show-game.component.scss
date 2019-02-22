@@ -1,0 +1,20 @@
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+.showgame {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: black;
+  margin: 0px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.show-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  background: #333;
+}

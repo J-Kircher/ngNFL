@@ -1,0 +1,11 @@
+<div class="month">
+  {{monthName}}
+  <table class="month-table" width="100%">
+    <tr *ngFor="let week of monthArr">
+      <td *ngFor="let day of week">
+        <a *ngIf="hasGamesForDay(month, year, day); else noLink" (click)="getGamesForDay(month, year, day)">{{day}}</a>
+        <ng-template #noLink><div class="no-link">{{day}}</div></ng-template>
+      </td>
+    </tr>
+  </table>
+</div>

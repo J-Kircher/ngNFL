@@ -8,38 +8,8 @@ import { listAnimation } from '../shared/animations';
 @Component({
   selector: 'schedule-day',
   templateUrl: './schedule-day.component.html',
-  animations: [listAnimation],
-  styles: [`
-    mat-card {
-      margin: 12px;
-      padding: 8px;
-    }
-    .schedule {
-      font-size: 12pt;
-      font-weight: bold;
-      font-style: italic;
-      vertical-align: middle;
-      margin: 0px;
-      padding: 0px;
-      border-radius: 10px;
-    }
-    .gameday-text {
-      margin-bottom: 5px;
-    }
-    .gameday {
-      background-color: #DDD;
-      font-size: 12pt;
-      font-weight: bold;
-      font-style: italic;
-      cursor: pointer;
-      margin: 4px;
-      transition: background-color 280ms cubic-bezier(.4,0,.2,1);
-    }
-    .gameday:hover {
-      border-color: rgba(0, 0, 0, 0.8);
-      background-color: rgb(238, 238, 238);
-    }
-  `]
+  styleUrls: ['./schedule-day.component.scss'],
+  animations: [listAnimation]
 })
 
 export class ScheduleDayComponent implements OnInit {

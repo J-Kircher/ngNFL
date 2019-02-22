@@ -4,59 +4,8 @@ import { ISchedule } from '../model/nfl.model';
 
 @Component({
   selector: 'show-scores',
-  template: `
-    <mat-card>
-      <div class="showscores">
-        <div class="gameday-text">
-          {{gameDay}}
-        </div>
-        <div class="showscores div-scroll">
-          <div *ngFor="let score of gamesArr">
-            <mat-card class="scoreboard" matRipple appMaterialElevation>
-              <show-score [score]=score></show-score>
-            </mat-card>
-          </div>
-        </div>
-      </div>
-    </mat-card>
-  `,
-  styles: [`
-    mat-card {
-      margin: 12px;
-      padding: 8px;
-    }
-    .gameday-text {
-      margin: 5px 0px;
-    }
-    .showscores {
-      font-size: 14pt;
-      font-weight: bold;
-      font-style: italic;
-      vertical-align: middle;
-      margin: 0px;
-      padding: 0px;
-      border-radius: 10px;
-    }
-    .div-scroll {
-      max-height: 540px;
-      overflow-y: scroll;
-    }
-    .scoreboard {
-      background-color: #DDD;
-      // background: rgba(0, 128, 0, 0.5);
-      font-size: 12pt;
-      font-weight: bold;
-      font-style: italic;
-      text-align: center;
-      margin-bottom: 0px;
-      border-radius: 5px;
-      transition: background-color 280ms cubic-bezier(.4,0,.2,1);
-    }
-    .scoreboard:hover {
-      border-color: rgba(0, 0, 0, 0.8);
-      background-color: rgb(238, 238, 238);
-    }
-  `]
+  templateUrl: './show-scores.component.html',
+  styleUrls: ['./show-scores.component.scss']
 })
 
 export class ShowScoresComponent implements OnInit, DoCheck {

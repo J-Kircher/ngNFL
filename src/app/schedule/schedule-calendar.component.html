@@ -1,0 +1,14 @@
+<mat-card>
+  <div class="schedule">
+    <div style="margin-top:5px">
+      Schedule
+    </div>
+    <div fxLayout="row wrap" fxLayout.xs="column wrap">
+      <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let schedDate of NFLCalendarArr">
+        <div class="schedule-body">
+          <schedule-month [month]="schedDate.month" [year]="schedDate.year"></schedule-month>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

@@ -4,51 +4,8 @@ import { ITeam } from '../model/nfl.model';
 
 @Component({
   selector: 'show-game',
-  template: `
-    <mat-card *ngIf="!loading">
-      <div class="showgame">
-        <div class="show-center">
-          <img src="/assets/images/NFLToday.gif" name="NFLToday">
-        </div>
-        <div class="show-center">
-          <div><img src="/assets/images/V40.gif" name="Vteam" width="40" height="40"></div>
-          <div><img name="s11" src="/assets/images/0.gif"><img name="s12" src="/assets/images/0.gif"></div>
-          <div><img src="/assets/images/Quarter.gif"></div>
-        </div>
-        <div class="show-center" style="margin-bottom: 0px;">
-          <div><img src="/assets/images/H40.gif" name="Hteam" width="40" height="40"></div>
-          <div><img name="s21" src="/assets/images/0.gif"><img name="s22" src="/assets/images/0.gif"></div>
-          <div><img src="/assets/images/F.gif" name="Period"></div>
-        </div>
-      </div>
-    </mat-card>
-    <mat-card class="loading-well" *ngIf="loading">
-      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
-      <div class="loading-font" style="float:right">&nbsp; Loading Game &hellip;</div>
-    </mat-card>
-  `,
-  styles: [`
-    mat-card {
-      margin: 12px;
-      padding: 8px;
-    }
-    .showgame {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      background: black;
-      margin: 0px;
-      padding: 5px;
-      border-radius: 10px;
-    }
-    .show-center {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      margin-bottom: 5px;
-      background: #333;
-    }
-`]
+  templateUrl: './show-game.component.html',
+  styleUrls: ['./show-game.component.scss']
 })
 
 export class ShowGameComponent implements OnInit {

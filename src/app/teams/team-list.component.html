@@ -1,37 +1,22 @@
-<div class="container well col-sm-12">
-    <!-- <ul class="list-group">
-        <li class="list-group-item team-info" *ngFor="let team of teamsArr"
-                [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
-            <img src="/assets/images/{{team.abbrev}}.png">
-            {{team.city}} {{team.name}}
-        </li>
-    </ul> -->
-    <div id="content-scroll-wrap">
-      <div id="content-scroll">
-        <div class="row well team-info" *ngFor="let team of teamsArr" [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
-          <div class="col-sm-10" style="margin-top:5px">
-            <collapsible-well>
-              <div well-title>
-                <img src="/assets/images/{{team.abbrev}}.png">
-                {{team.city}} {{team.name}}
-              </div>
-              <div well-body style="font-size:10pt">
-                <span>QB: {{team.qb}} | </span>
-                <span>RB: {{team.rb}} | </span>
-                <span>WR: {{team.wr}} | </span>
-                <span>OL: {{team.ol}} | </span>
-                <span>DL: {{team.dl}} | </span>
-                <span>LB: {{team.lb}} | </span>
-                <span>DB: {{team.db}} | </span>
-                <span>ST: {{team.st}} | </span>
-                <span>CO: {{team.co}}</span>
-              </div>
-            </collapsible-well>
-          </div>
-          <div class="col-sm-2">
-            <button [routerLink]="['/teams', team.abbrev]" class="btn btn-primary btn-sm navbar-btn">View</button>
-          </div>
+<mat-card *ngIf="!loading">
+  <div class="team-head" style="margin-top:5px">
+    NFL Teams
+  </div>
+  <div fxLayout="row wrap" fxLayout.xs="column wrap"
+    [@listAnimations]="{ value: teamsArr.length, params: { stagger: '50ms' } }">
+    <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let team of teamsArr">
+      <div class="team-info" (click)="showTeam(team.abbrev)"
+        [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
+        <div style="margin:5px;">
+          <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+          <span>{{team.city}}<br>{{team.name}}</span>
         </div>
       </div>
     </div>
   </div>
+</mat-card>
+
+<mat-card class="loading-well" *ngIf="loading">
+  <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
+  <div class="loading-font" style="float:right">&nbsp; Loading Team List &hellip;</div>
+</mat-card>

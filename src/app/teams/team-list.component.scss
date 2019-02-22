@@ -1,0 +1,32 @@
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+.logo {
+  float: left;
+  margin-right: 5px;
+  height: 40px;
+}
+.team-head {
+  font-style: italic;
+  font-size: 14pt;
+  font-weight: bold;
+  vertical-align: middle;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 10px;
+}
+.team-info {
+  font-style: italic;
+  font-size: 12pt;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 rgba(0,0,0,1);
+  vertical-align: middle;
+  cursor: pointer;
+  margin: 4px;
+  padding: 1px 1px 5px;
+  border-radius: 10px;
+  min-width: 180px;
+  max-width: 240px;
+  width: 100%;
+}
