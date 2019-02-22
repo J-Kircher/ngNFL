@@ -15,7 +15,6 @@ import { listAnimation } from '../shared/animations';
       padding: 8px;
     }
     .schedule {
-      font-family: Arial;
       font-size: 14pt;
       font-weight: bold;
       font-style: italic;
@@ -29,7 +28,6 @@ import { listAnimation } from '../shared/animations';
     }
     .gameday {
       background-color: #DDD;
-      font-family: Arial;
       font-size: 12pt;
       font-weight: bold;
       font-style: italic;

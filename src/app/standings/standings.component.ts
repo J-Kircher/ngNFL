@@ -4,34 +4,7 @@ import { ITeam } from '../model/nfl.model';
 
 @Component({
   selector: 'standings',
-  template: `
-    <mat-card *ngIf="!loading">
-      <div class="standings" style="margin-top:5px">
-        Standings
-      </div>
-      <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="Standard">
-          <div id="standard" fxLayout="row wrap">
-            <div class="div-body" fxFlex="48" *ngFor="let division of divisions">
-              <standings-division [division]="division"></standings-division>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="Expanded">
-          <div id="expanded" fxLayout="column">
-            <div class="div-body" *ngFor="let division of divisions">
-              <standings-division-expanded [division]="division"></standings-division-expanded>
-            </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-
-    <mat-card class="well loading-well" *ngIf="loading">
-      <div style="float:left;"><img src="/assets/images/loading.gif" height="40"></div>
-      <div class="loading-font" style="float:right">&nbsp; Loading Standings &hellip;</div>
-    </mat-card>
-  `,
+  templateUrl: './standings.component.html',
   styles: [`
     mat-card {
       margin: 12px;
@@ -41,7 +14,6 @@ import { ITeam } from '../model/nfl.model';
       margin: 2px;
     }
     .standings {
-      font-family: Arial;
       font-style: italic;
       font-size: 14pt;
       font-weight: bold;

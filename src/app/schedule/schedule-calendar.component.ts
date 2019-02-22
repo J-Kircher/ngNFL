@@ -27,7 +27,6 @@ import { ScheduleDayService } from '../service/schedule.day.service';
       padding: 8px;
     }
     .schedule {
-      font-family: Arial;
       font-size: 14pt;
       font-weight: bold;
       font-style: italic;

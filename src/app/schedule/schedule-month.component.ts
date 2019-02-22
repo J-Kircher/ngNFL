@@ -32,7 +32,6 @@ import { ScheduleDayService } from '../service/schedule.day.service';
       color: black;
     }
     .month {
-      font-family: Arial;
       font-style: italic;
       font-size: 12pt;
       font-weight: bold;
@@ -44,7 +43,6 @@ import { ScheduleDayService } from '../service/schedule.day.service';
       padding: 12px;
     }
     .month-table {
-      font-family: Arial;
       font-size: 8pt;
       color: #666;
       background: url(/assets/images/whiteback.gif);

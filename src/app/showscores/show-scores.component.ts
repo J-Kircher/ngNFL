@@ -29,7 +29,6 @@ import { ISchedule } from '../model/nfl.model';
       margin: 5px 0px;
     }
     .showscores {
-      font-family: Arial;
       font-size: 14pt;
       font-weight: bold;
       font-style: italic;
@@ -45,7 +44,6 @@ import { ISchedule } from '../model/nfl.model';
     .scoreboard {
       background-color: #DDD;
       // background: rgba(0, 128, 0, 0.5);
-      font-family: Arial;
       font-size: 12pt;
       font-weight: bold;
       font-style: italic;

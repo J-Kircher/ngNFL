@@ -37,7 +37,6 @@ import { ITeam, ISchedule } from '../model/nfl.model';
       height: 40px;
     }
     .score {
-      font-family: Arial;
       font-size: 14pt;
       text-align: center;
       // background: rgba(255, 255, 255, 0.5);
@@ -47,14 +46,12 @@ import { ITeam, ISchedule } from '../model/nfl.model';
       float: right;
     }
     .team-city {
-      font-family: Arial;
       font-size: 10pt;
       font-weight: normal;
       font-style: normal;
       -webkit-padding-start: 5px;
     }
     .team-name {
-      font-family: Arial;
       font-size: 12pt;
       font-weight: bold;
       font-style: normal;

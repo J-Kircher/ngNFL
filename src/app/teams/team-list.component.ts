@@ -42,7 +42,6 @@ import { listAnimation } from '../shared/animations';
       height: 40px;
     }
     .team-head {
-      font-family: Arial;
       font-style: italic;
       font-size: 14pt;
       font-weight: bold;
@@ -52,7 +51,6 @@ import { listAnimation } from '../shared/animations';
       border-radius: 10px;
     }
     .team-info {
-      font-family: Arial;
       font-style: italic;
       font-size: 12pt;
       font-weight: bold;
