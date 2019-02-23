@@ -135,12 +135,14 @@ export class ScheduleService {
         }
       });
       this.finalGame = counter;
-      console.log('[schedule.service] finalGame: ' + this.finalGame);
 
       // console.log('[schedule.service] FULL_SCHEDULE:');
       // console.table(this.FULL_SCHEDULE);
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
+    } else {
+      this.finalGame = this.FULL_SCHEDULE.length;
     }
+
     this.currentGameDay = this.currentGame <= this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
     this.setCurrentGameDay(this.currentGameDay);
 
