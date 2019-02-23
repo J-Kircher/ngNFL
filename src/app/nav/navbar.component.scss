@@ -1,4 +1,4 @@
-@import 'src/scss/mat-common';
+@import 'src/scss/common';
 
 .menu {
   background: url('/assets/images/grass.gif');
@@ -7,44 +7,39 @@
   margin: 0px;
   padding: 0px;
   z-index: 99;
-  font-size: 20px;
   text-shadow: 5px 5px 5px black;
-  list-style-type: none;
-  overflow: hidden;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-}
 
-.menu a {
-  display: block;
-  color: white;
-  text-align: center;
-  cursor: pointer;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+  a {
+    color: white;
+    cursor: pointer;
+    padding: 14px 16px;
+    text-decoration: none;
 
-.menu a:hover {
-  border-color: rgba(0, 128, 0, 0.5);
-  background-color: rgba(0, 128, 0, 0.5);
-}
-
-button {
-  margin: 10px;
-}
-
-.settings-mini-fab {
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  color: white;
-
-  mat-icon {
-    line-height: .7em;
-    font-size: $xxFontSize;
+    &:hover {
+      border-color: rgba(0, 128, 0, 0.5);
+      background-color: rgba(0, 128, 0, 0.5);
+    }
   }
-}
 
-.spin {
-  @include matIconSpin(0.7s, 180deg, 25px, 25.5px);
+  button {
+    margin: 10px;
+
+    &.settings-mini-fab {
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      color: white;
+
+      mat-icon {
+        line-height: .7em;
+        font-size: $xxFontSize;
+      }
+    }
+  }
+
+  .spin {
+    @include matIconSpin(0.7s, 180deg, 25px, 25.5px);
+  }
 }

@@ -12,6 +12,42 @@ $xlFontSize: 1.25em; // 21px
 $xxFontSize: 1.5em; // 26px
 
 
+/*****************************/
+// * Font family definitions * //
+
+//    Standard styles
+$sansSerifFont1: Roboto, Arial, "Avenir Next", Calibri, "Helvetica Neue", Helvetica, sans-serif;
+$sansSerifFont2: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, sans-serif;
+$sansSerifFont3: Lato, "Segoe UI", "Microsoft YaHei", Arial, Helvetica, sans-serif;
+$serifFont1: Baskerville, Georgia, "Palatino Linotype", Palatino, serif;
+$serifFont2: Didot, "Book Antiqua", "Times New Roman", serif;
+
+
+/**********************************/
+// Mixins for text styles       * //
+
+@mixin normalText($fontSize: $medFontSize) {
+  font-family: $sansSerifFont1;
+  font-size: $fontSize;
+  font-style: normal;
+  font-weight: normal;
+}
+
+@mixin boldText($fontSize: $medFontSize) {
+  font-family: $sansSerifFont1;
+  font-size: $fontSize;
+  font-style: normal;
+  font-weight: bold;
+}
+
+@mixin boldItalText($fontSize: $medFontSize) {
+  font-family: $sansSerifFont1;
+  font-size: $fontSize;
+  font-style: italic;
+  font-weight: bold;
+}
+
+
 /**********************************/
 // Mixins for mat icon animations //
 

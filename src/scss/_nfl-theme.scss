@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+$nfl-theme-primary: mat-palette($mat-green);
+$nfl-theme-accent : mat-palette($mat-amber);
+$nfl-theme-warn   : mat-palette($mat-red);
+$nfl-theme: mat-light-theme(
+    $nfl-theme-primary,
+    $nfl-theme-accent,
+    $nfl-theme-warn
+);

@@ -1,37 +1,37 @@
-<h2 mat-dialog-title fxLayoutAlign="space-between">
+<div class="dialog-title" fxLayoutAlign="space-between">
   <div>
-    <div class="dialog-title">Matchup</div>
+    <div class="dialog-title-text">Matchup</div>
     <div class="gameday-text">{{modalGame.gameday}}</div>
   </div>
   <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
-</h2>
-<mat-dialog-content *ngIf="!loading" style="min-width:600px;">
+</div>
+<mat-dialog-content *ngIf="!loading">
   <mat-card>
     <mat-card-content>
-      <div class="schedule">
+      <div class="matchup">
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
-            <span class="team-city">{{teamsArr[modalGame?.visitTeam]?.city}}</span><br>
-            <span class="team-name">{{teamsArr[modalGame?.visitTeam]?.name}}</span>
+          <div fxFlex="40" class="visit-level">
+            <span>{{teamsArr[modalGame?.visitTeam]?.city}}</span><br>
+            <span>{{teamsArr[modalGame?.visitTeam]?.name}}</span>
           </div>
           <div fxFlex="20"></div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
-            <span class="team-city">{{teamsArr[modalGame?.homeTeam]?.city}}</span><br>
-            <span class="team-name">{{teamsArr[modalGame?.homeTeam]?.name}}</span>
+          <div fxFlex="40" class="home-level">
+            <span>{{teamsArr[modalGame?.homeTeam]?.city}}</span><br>
+            <span>{{teamsArr[modalGame?.homeTeam]?.name}}</span>
           </div>
         </div>
         <div *ngIf="modalGame?.visitTeam || modalGame?.homeTeam">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <img src="/assets/images/{{teamsArr[modalGame?.visitTeam]?.abbrev}}-L.png" [alt]="teamsArr[modalGame?.visitTeam]?.name">
           </div>
           <div fxFlex="20"></div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="40" class="home-level">
             <img src="/assets/images/{{teamsArr[modalGame?.homeTeam]?.abbrev}}-R.png" [alt]="teamsArr[modalGame?.homeTeam]?.name">
           </div>
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.qb/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -39,8 +39,8 @@
               {{teamsArr[modalGame?.visitTeam]?.qb}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">QB</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">QB</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.qb/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -51,7 +51,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.rb/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -59,8 +59,8 @@
               {{teamsArr[modalGame?.visitTeam]?.rb}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">RB</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">RB</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.rb/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -71,7 +71,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.wr/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -79,8 +79,8 @@
               {{teamsArr[modalGame?.visitTeam]?.wr}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">WR</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">WR</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.wr/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -91,7 +91,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.ol/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -99,8 +99,8 @@
               {{teamsArr[modalGame?.visitTeam]?.ol}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">OL</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">OL</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.ol/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -111,7 +111,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.dl/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -119,8 +119,8 @@
               {{teamsArr[modalGame?.visitTeam]?.dl}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">DL</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">DL</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.dl/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -131,7 +131,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.lb/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -139,8 +139,8 @@
               {{teamsArr[modalGame?.visitTeam]?.lb}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">LB</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">LB</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.lb/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -151,7 +151,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.db/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -159,8 +159,8 @@
               {{teamsArr[modalGame?.visitTeam]?.db}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">DB</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">DB</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.db/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -171,7 +171,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.st/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -179,8 +179,8 @@
               {{teamsArr[modalGame?.visitTeam]?.st}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">ST</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">ST</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.st/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
@@ -191,7 +191,7 @@
         </div>
 
         <div fxLayout="row">
-          <div fxFlex="40" style="margin-top:5px;text-align:right">
+          <div fxFlex="40" class="visit-level">
             <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.co/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
                 'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
@@ -199,8 +199,8 @@
               {{teamsArr[modalGame?.visitTeam]?.co}}
             </div>
           </div>
-          <div fxFlex="20" fxLayoutAlign="center end" style="text-align:center">CO</div>
-          <div fxFlex="40" style="margin-top:5px;text-align:left">
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">CO</div>
+          <div fxFlex="40" class="home-level">
             <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.co/9*200"
               [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
                 'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,

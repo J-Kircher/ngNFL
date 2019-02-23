@@ -1,35 +1,30 @@
+@import 'src/scss/common';
+
 mat-card {
   margin: 12px;
   padding: 8px;
 }
 .gameday-text {
-  margin: 5px 0px;
-}
-.showscores {
-  font-size: 14pt;
-  font-weight: bold;
-  font-style: italic;
-  vertical-align: middle;
-  margin: 0px;
-  padding: 0px;
-  border-radius: 10px;
+  @include boldItalText($lgFontSize);
 }
 .div-scroll {
-  max-height: 540px;
+  max-height: 550px;
   overflow-y: scroll;
-}
-.scoreboard {
-  background-color: #DDD;
-  // background: rgba(0, 128, 0, 0.5);
-  font-size: 12pt;
-  font-weight: bold;
-  font-style: italic;
-  text-align: center;
-  margin-bottom: 0px;
-  border-radius: 5px;
-  transition: background-color 280ms cubic-bezier(.4,0,.2,1);
-}
-.scoreboard:hover {
-  border-color: rgba(0, 0, 0, 0.8);
-  background-color: rgb(238, 238, 238);
+
+  mat-card:last-child {
+    margin-bottom: 14px;
+  }
+  .scoreboard {
+    @include boldItalText($medFontSize);
+    background-color: #DDD;
+    // background: rgba(0, 128, 0, 0.5);
+    margin-bottom: 0px;
+    border-radius: 5px;
+    transition: background-color 280ms cubic-bezier(.4,0,.2,1);
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.8);
+      background-color: rgb(238, 238, 238);
+    }
+  }
 }

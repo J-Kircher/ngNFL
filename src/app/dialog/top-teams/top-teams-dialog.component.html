@@ -1,7 +1,7 @@
-<h2 mat-dialog-title fxLayoutAlign="space-between">
-  <div class="dialog-title">Top Teams</div>
+<div class="dialog-title" fxLayoutAlign="space-between">
+  <div class="dialog-title-text">Top Teams</div>
   <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
-</h2>
+</div>
 <mat-dialog-content>
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="AFC Playoffs">
@@ -10,7 +10,7 @@
         <div fxLayout="row">
           <div fxLayout="column" class="division">
             Division Leaders
-            <div class="div-table" *ngFor="let team of AFCDivLeaders">
+            <div class="div-team" *ngFor="let team of AFCDivLeaders">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
@@ -22,7 +22,7 @@
           </div>
           <div fxLayout="column" class="division">
             Wildcards
-            <div class="div-table" *ngFor="let team of AFCWildcard">
+            <div class="div-team" *ngFor="let team of AFCWildcard">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
@@ -34,7 +34,7 @@
           </div>
           <div fxLayout="column" class="division">
             On the Outside
-            <div class="div-table" *ngFor="let team of AFCHunt">
+            <div class="div-team" *ngFor="let team of AFCHunt">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
@@ -53,7 +53,7 @@
         <div fxLayout="row">
           <div fxLayout="column" class="division">
             Division Leaders
-            <div class="div-table" *ngFor="let team of NFCDivLeaders">
+            <div class="div-team" *ngFor="let team of NFCDivLeaders">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
@@ -65,7 +65,7 @@
           </div>
           <div fxLayout="column" class="division">
             Wildcards
-            <div class="div-table" *ngFor="let team of NFCWildcard">
+            <div class="div-team" *ngFor="let team of NFCWildcard">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
@@ -77,7 +77,7 @@
           </div>
           <div fxLayout="column" class="division">
             On the Outside
-            <div class="div-table" *ngFor="let team of NFCHunt">
+            <div class="div-team" *ngFor="let team of NFCHunt">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>

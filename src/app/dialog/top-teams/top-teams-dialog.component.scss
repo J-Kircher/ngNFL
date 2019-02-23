@@ -1,62 +1,71 @@
+@import 'src/scss/common';
+
 .dialog-title {
-  font-weight: bold;
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+    margin-bottom: 28px;
+  }
+  button {
+    color: white;
+    background-color: rgba(0, 128, 0, 0.5) !important;
+  }
 }
-button {
-  color: white;
-  background-color: rgba(0, 128, 0, 0.5) !important;
+
+mat-dialog-content {
+  mat-tab-group {
+    background-color: #EEE;
+    border-radius: 5px;
+
+    .heading {
+      @include boldItalText($lgFontSize);
+      text-align: center;
+      margin: 5px;
+    }
+    .division {
+      @include boldItalText($medFontSize);
+      text-align: center;
+      background: rgba(0, 128, 0, 0.5);
+      padding: 1px 1px 1px 1px;
+      margin: 0px 0px 5px 5px;
+      border-radius: 5px;
+
+      .div-team {
+        background: url(/assets/images/whiteback.gif);
+        text-align: left;
+        margin: 1px;
+        border-radius: 5px;
+
+        .team-info {
+          white-space: nowrap;
+          min-width: 200px;
+
+          &:hover {
+            border-color: rgba(0, 128, 0, 0.5);
+            background-color: rgba(0, 128, 0, 0.2);
+          }
+          .logo {
+            float: left;
+            height: 40px;
+            padding: 2px 1px 1px 3px;
+          }
+          .team-city {
+            @include normalText($smFontSize);
+            -webkit-padding-start: 5px;
+          }
+          .team-name {
+            @include boldText($medFontSize);
+            -webkit-padding-start: 5px;
+          }
+          .team-record {
+            @include normalText($smFontSize);
+            float: right;
+            margin: 2px 5px 0px 0px;
+          }
+        }
+      }
+    }
+  }
 }
-.heading {
-  font-size: 14pt;
-  font-style: italic;
-  font-weight: bold;
-  text-align: center;
-  margin: 5px;
-}
-.division {
-  font-size: 12pt;
-  font-style: italic;
-  font-weight: bold;
-  text-align: center;
-  background: rgba(0, 128, 0, 0.5);
-  padding: 1px 1px 1px 1px;
-  margin: 0px 0px 5px 5px;
-  border-radius: 5px;
-}
-.div-table {
-  background: url(/assets/images/whiteback.gif);
-  text-align: left;
-  margin: 1px;
-  border-radius: 5px;
-}
-.team-info {
-  white-space: nowrap;
-  min-width: 200px;
-}
-.team-info:hover {
-  border-color: rgba(0, 128, 0, 0.5);
-  background-color: rgba(0, 128, 0, 0.2);
-}
-.logo {
-  float: left;
-  height: 40px;
-  padding: 2px 1px 1px 3px;
-}
-.team-city {
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  -webkit-padding-start: 5px;
-}
-.team-name {
-  font-size: 12pt;
-  font-weight: bold;
-  font-style: normal;
-  -webkit-padding-start: 5px;
-}
-.team-record {
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  float: right;
-  margin: 2px 5px 0px 0px;
-}
+
