@@ -1,11 +1,11 @@
 <mat-card *ngIf="!loading">
-  <div class="standings" style="margin-top:5px">
+  <div class="standings-text">
     Standings
   </div>
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Standard">
       <div id="standard" fxLayout="row wrap">
-        <div class="div-body" fxFlex="48" *ngFor="let division of divisions">
+        <div class="div-body" fxFlex="49" *ngFor="let division of divisions">
           <standings-division [division]="division"></standings-division>
         </div>
       </div>

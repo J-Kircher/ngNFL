@@ -1,57 +1,59 @@
+@import 'src/scss/common';
+
 mat-card {
   margin: 12px;
   padding: 8px;
 }
-table {
-  border-collapse: collapse;
-  border-style: hidden;
-}
-table td, table th {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-td {
-  text-align: center;
-}
 .division {
-  font-style: italic;
-  font-size: 12pt;
-  font-weight: bold;
+  @include boldItalText($medFontSize);
   text-align: center;
   background: rgba(0, 128, 0, 0.5);
-  min-height: 160px;
-  margin-bottom: 0px;
-  border-radius: 5px;
   padding: 12px;
-}
-.div-table {
-  font-size: 10pt;
-  font-style: normal;
-  background: url(/assets/images/whiteback.gif);
-  text-align: left;
-  margin-bottom: 0px;
+  margin: 0px;
   border-radius: 5px;
-}
-.team-row:hover {
-  border-color: rgba(0, 128, 0, 0.5);
-  background-color: rgba(0, 128, 0, 0.2);
-}
-.team-info {
-  text-align: left;
-  white-space: nowrap;
-}
-.logo {
-  float:left;
-  height: 40px;
-}
-.team-city {
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  -webkit-padding-start: 5px;
-}
-.team-name {
-  font-size: 12pt;
-  font-weight: bold;
-  font-style: normal;
-  -webkit-padding-start: 5px;
+
+  table {
+    border-collapse: collapse;
+    border-style: hidden;
+
+    thead {
+      @include boldText($smFontSize);
+    }
+
+    td {
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    &.div-table {
+      @include normalText($smFontSize);
+      background: url(/assets/images/whiteback.gif);
+      border-radius: 5px;
+
+      .team-row {
+        &:hover {
+          border-color: rgba(0, 128, 0, 0.5);
+          background-color: rgba(0, 128, 0, 0.2);
+        }
+
+        .team-info {
+          text-align: left;
+          white-space: nowrap;
+
+          .logo {
+            float:left;
+            height: 40px;
+          }
+          .team-city {
+            @include normalText($medFontSize);
+            -webkit-padding-start: 5px;
+          }
+          .team-name {
+            @include boldText($lgFontSize);
+            -webkit-padding-start: 5px;
+          }
+        }
+      }
+    }
+  }
 }

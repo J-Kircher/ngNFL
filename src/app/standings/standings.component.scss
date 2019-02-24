@@ -1,16 +1,15 @@
+@import 'src/scss/common';
+
 mat-card {
   margin: 12px;
   padding: 8px;
-}
-.div-body {
-  margin: 2px;
-}
-.standings {
-  font-style: italic;
-  font-size: 14pt;
-  font-weight: bold;
-  vertical-align: middle;
-  margin: 0px;
-  padding: 0px;
-  border-radius: 10px;
+
+  .standings-text {
+    @include boldItalText($lgFontSize);
+    margin-top: 5px;
+  }
+
+  .div-body {
+    margin: 2px;
+  }
 }
