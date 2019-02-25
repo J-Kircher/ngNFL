@@ -9,7 +9,13 @@ mat-card {
     margin-top: 5px;
   }
 
-  .div-body {
-    margin: 2px;
+  mat-tab-group {
+    background-color: #EEE;
+    border-radius: 5px;
+    padding: 5px;
+
+    .div-body {
+      margin: 2px;
+    }
   }
 }
