@@ -40,6 +40,9 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked() {
     this.postseason = this.currentGameDay === 'Playoffs';
+    if (this.currentGame > 0) {
+      this.askSimSeason = true;
+    }
   }
 
   getTopTeams() {

@@ -218,8 +218,7 @@ export class ScheduleService {
   }
 
   playGame(game: ISchedule) {
-    // console.log('[schedule.service] playGame()')
-    // console.table(game)
+    // console.log('[schedule.service] playGame() currentGame: ' + this.currentGame);
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
 
