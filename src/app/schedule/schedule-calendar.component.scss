@@ -4,11 +4,13 @@ mat-card {
   margin: 12px;
   padding: 8px;
 }
+
 .schedule {
   .schedule-text {
     @include boldItalText($lgFontSize);
     margin-top: 5px;
   }
+
   .schedule-body {
     margin: 2px;
   }

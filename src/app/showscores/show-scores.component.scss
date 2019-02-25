@@ -4,9 +4,11 @@ mat-card {
   margin: 12px;
   padding: 8px;
 }
+
 .gameday-text {
   @include boldItalText($lgFontSize);
 }
+
 .div-scroll {
   max-height: 550px;
   overflow-y: scroll;
@@ -14,6 +16,7 @@ mat-card {
   mat-card:last-child {
     margin-bottom: 14px;
   }
+
   .scoreboard {
     @include boldItalText($medFontSize);
     background-color: #DDD;

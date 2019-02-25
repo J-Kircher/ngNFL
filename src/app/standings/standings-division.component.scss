@@ -4,6 +4,7 @@ mat-card {
   margin: 12px;
   padding: 8px;
 }
+
 .division {
   @include boldItalText($medFontSize);
   text-align: center;
@@ -41,7 +42,7 @@ mat-card {
           white-space: nowrap;
 
           .logo {
-            float:left;
+            float: left;
             height: 40px;
           }
           .team-city {

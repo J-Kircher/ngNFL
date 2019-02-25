@@ -11,6 +11,10 @@
   position: -webkit-sticky; /* Safari */
   position: sticky;
 
+  .menu-logo {
+    margin: 5px 20px;
+  }
+
   a {
     color: white;
     cursor: pointer;

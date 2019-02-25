@@ -4,11 +4,13 @@ mat-card {
   margin: 12px;
   padding: 8px;
 }
+
 .team-head-text {
   @include boldItalText($lgFontSize);
   margin-top: 5px;
 }
-.team-info {
+
+.team-container {
   @include boldItalText($medFontSize);
   text-shadow: 2px 2px 0 rgba(0,0,0,1);
   cursor: pointer;
@@ -19,9 +21,13 @@ mat-card {
   max-width: 240px;
   width: 100%;
 
-  .logo {
-    float: left;
-    margin-right: 5px;
-    height: 40px;
+  .team-info {
+    margin: 2px;
+
+    .logo {
+      float: left;
+      margin-right: 5px;
+      height: 40px;
+    }
   }
 }

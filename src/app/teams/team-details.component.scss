@@ -13,16 +13,19 @@ mat-card {
       margin: 2px 0px;
       padding: 2px 0px;
     }
+
     .banner-center {
       @include boldText($xxFontSize);
       text-align: center;
       color: white;
     }
+
     .image-container {
       margin: 8px;
     }
+
     td {
-      @include boldText($lgFontSize);
+      @include boldText($smFontSize);
       text-align: center;
     }
   }

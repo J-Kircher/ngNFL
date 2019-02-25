@@ -68,6 +68,7 @@ img {
 }
 
 .loading-well {
+  border-radius: 5px;
   background-color: #272727;
   position: absolute;
   margin: 8px;
@@ -80,8 +81,13 @@ img {
   transform: translateX(-50%);
 }
 
+.loading-image {
+  float: left;
+}
+
 .loading-font {
-  font-size: 14pt;
+  float: right;
+  font-size: 1.125em;
   color: #afafaf;
   padding: 5px 0;
 }
