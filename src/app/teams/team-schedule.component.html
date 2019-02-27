@@ -6,7 +6,7 @@
     <div fxLayout="row wrap" fxLayout.xs="column wrap"
       [@listAnimations]="{ value: teamSchedule.length, params: { stagger: '100ms' } }">
       <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
-        (click)="showTeam(getOpponent(score).abbrev)">
+        (click)="getMatchup(score.id)">
         <mat-card class="gameday" matRipple appMaterialElevation>
           <div class="gameday-text">
             {{score.gameday}}

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { ScheduleService } from '../service/schedule.service';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule } from '../model/nfl.model';
+import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
 import { listAnimation } from '../shared/animations';
 
 @Component ({
@@ -19,11 +21,14 @@ export class TeamScheduleComponent implements OnInit {
   teamSchedule: ISchedule[];
   loading: boolean = true;
 
+  dialogReturn: any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private scheduleService: ScheduleService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -63,7 +68,29 @@ export class TeamScheduleComponent implements OnInit {
   }
 
   showTeam(abbrev: string) {
+    // showTeam(getOpponent(score).abbrev)
     // routing to the same component - TeamDetails needs to subscribe to the route paramaters;
     this.router.navigate(['/teams/' + abbrev]);
+  }
+
+  openMatchupDialog(id: number): void {
+    const dialogRef = this.dialog.open(MatchupDialogComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    }, (err) => {
+      console.error('[schedule-day] openMatchupDialog() afterClosed() error: ' + err);
+    });
+  }
+
+  getMatchup(id: number) {
+    // Eventually make conditional
+    // Open results if game has been played - results dialog not created yet
+    // Open matchup if game has not been played
+    // console.log('[schedule-day] getMatchup: ' + id);
+    this.openMatchupDialog(id);
   }
 }
