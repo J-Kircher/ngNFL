@@ -44,7 +44,7 @@ export class ScheduleDayComponent implements OnInit {
     this.loading = false;
   }
 
-  openTopTeamsDialog(id: number): void {
+  openMatchupDialog(id: number): void {
     const dialogRef = this.dialog.open(MatchupDialogComponent, {
       data: { id: id }
     });
@@ -53,12 +53,12 @@ export class ScheduleDayComponent implements OnInit {
       // console.log('The dialog was closed');
       this.dialogReturn = result;
     }, (err) => {
-      console.error('[schedule-day] openTopTeamsDialog() afterClosed() error: ' + err);
+      console.error('[schedule-day] openMatchupDialog() afterClosed() error: ' + err);
     });
   }
 
   getMatchup(id: number) {
     // console.log('[schedule-day] getMatchup: ' + id);
-    this.openTopTeamsDialog(id);
+    this.openMatchupDialog(id);
   }
 }
