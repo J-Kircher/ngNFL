@@ -41,6 +41,7 @@ export class StorageService {
     localStorage.removeItem('fullSchedule');
     setTimeout(() => {
       subject.next(true);
+      subject.complete();
     }, 500);
     return subject;
   }
@@ -79,6 +80,7 @@ export class StorageService {
     localStorage.removeItem('teams');
     setTimeout(() => {
       subject.next(true);
+      subject.complete();
     }, 500);
     return subject;
   }
