@@ -217,9 +217,13 @@ export class ScheduleService {
     return this.zeroPad((team.wins / (team.wins + team.losses)), 3);
   }
 
-  playGame(game: ISchedule) {
-    // this.playFastGame(game);
-    this.playSlowGame(game);
+  playGame(game: ISchedule, simSeason: boolean, simFast: boolean) {
+    console.log('[schedule.service] playGame() simSeason: ' + simSeason + ', simFast: ' + simFast);
+    if (simSeason) {
+      this.playFastGame(game);
+    } else {
+      this.playSlowGame(game, simFast);
+    }
   }
 
   generateFakeFinalScore(oppScore: number): number {
@@ -230,7 +234,7 @@ export class ScheduleService {
   }
 
   playFastGame(game: ISchedule) {
-    console.log('[schedule.service] playGame() currentGame: ' + this.currentGame);
+    console.log('[schedule.service] playFastGame() currentGame: ' + this.currentGame);
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
 
@@ -284,34 +288,31 @@ export class ScheduleService {
     this.teamService.getAllCurrentTeams().subscribe((teamData: ITeam[]) => {
       this.storageService.storeTeamsToLocalStorage(teamData);
     }, (err) => {
-      console.error('[schedule.service] playGame() getAllCurrentTeams() error: ' + err);
+      console.error('[schedule.service] playFastGame() getAllCurrentTeams() error: ' + err);
     });
   }
 
   generateFakeScore(): number {
-    // console.log('[schedule.service] generateFakeScore(' + oppScore + ')');
-    const scoreArr = [0, 3, 7];
+    // console.log('[schedule.service] generateFakeScore()');
+    const scoreArr = [7, 0, 7, 0, 7, 0, 7, 0, 3, 3, 0, 0, 3, 3, 0, 7, 0, 7, 0, 7, 0, 7];
     const rndIndex = Math.floor(Math.random() * scoreArr.length);
     return scoreArr[rndIndex];
   }
 
-  playFakeGame(game: ISchedule): Observable<ISchedule> {
+  playFakeGame(game: ISchedule, simFast: boolean): Observable<ISchedule> {
     console.log('[schedule.service] playFakeGame() started');
 
-    const scoreArr = [7, 0, 7, 0, 7, 0, 7, 0, 3, 3, 0, 0, 3, 3, 0, 7, 0, 7, 0, 7, 0, 7];
-
-    const timeout = 500;
+    const timeout = simFast ? 50 : 500;
     const subject = new Subject<ISchedule>();
     const gameCounter = 16;
+    const self = this;
 
     game.visitScore = 0;
     game.homeScore = 0;
 
     (function theLoop (i) {
-      setTimeout(function () {
-        const rndIndex = Math.floor(Math.random() * scoreArr.length);
-        const score = scoreArr[rndIndex];
-        // const score: number = this.generateFakeScore();
+      setTimeout(() => {
+        const score: number = self.generateFakeScore();
 
         let quarter = 'X';
         switch (i) {
@@ -341,7 +342,7 @@ export class ScheduleService {
             game.homeScore += 3;
             game.gameResults.push({ teamScored: game.homeTeam, quarter: 'OT', points: 3 });
           }
-          console.log('[schedule.service] playFakeGame() over');
+          console.log('[schedule.service] playFakeGame() game over');
           subject.complete();
         }
       }, timeout);
@@ -351,24 +352,24 @@ export class ScheduleService {
     return subject;
   }
 
-  playSlowGame(game: ISchedule) {
-    console.log('[schedule.service] playGame() currentGame: ' + this.currentGame);
+  playSlowGame(game: ISchedule, simFast: boolean) {
+    console.log('[schedule.service] playSlowGame() currentGame: ' + this.currentGame);
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
 
     // game.visitScore = this.generateFakeFinalScore(0);
     // game.homeScore = this.generateFakeFinalScore(game.visitScore);
 
-    this.playFakeGame(game).subscribe((gameData: ISchedule) => {
-      console.log('[schedule.service] playGame() playing Game');
+    this.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
+      console.log('[schedule.service] playSlowGame() playing Game');
       game = gameData;
     }, (err) => {
-      console.error('[schedule.service] playGame() playFakeGame() error: ' + err);
+      console.error('[schedule.service] playSlowGame() playFakeGame error: ' + err);
     }, () => {
-      console.log('[schedule.service] playGame() playFakeGame over');
+      console.log('[schedule.service] playSlowGame() playFakeGame over');
       console.log(game);
       if (game.visitScore > game.homeScore) {
-        console.log('[schedule.service] playGame() Visitors Win');
+        console.log('[schedule.service] playSlowGame() Visitors Win');
         visitTeam.wins++;
         visitTeam.visitwins++;
         homeTeam.losses++;
@@ -385,7 +386,7 @@ export class ScheduleService {
           homeTeam.othlosses++;
         }
       } else {
-        console.log('[schedule.service] playGame() Home Wins');
+        console.log('[schedule.service] playSlowGame() Home Wins');
         visitTeam.losses++;
         visitTeam.visitlosses++;
         homeTeam.wins++;
@@ -416,12 +417,12 @@ export class ScheduleService {
       this.teamService.getAllCurrentTeams().subscribe((teamData: ITeam[]) => {
         this.storageService.storeTeamsToLocalStorage(teamData);
       }, (err) => {
-        console.error('[schedule.service] playGame() getAllCurrentTeams() error: ' + err);
+        console.error('[schedule.service] playSlowGame() getAllCurrentTeams() error: ' + err);
       });
     });
   }
 
-  playNextGame(): boolean {
+  playNextGame(simSeason: boolean, simFast: boolean): boolean {
     // console.log('[schedule.service] playNextGame() curr:' + this.currentGame + ' len:' + this.FULL_SCHEDULE.length);
     if (this.currentGame < this.FULL_SCHEDULE.length) {
       this.setCurrentGame(this.currentGame);
@@ -430,7 +431,7 @@ export class ScheduleService {
       // console.log('[schedule.service] playNextGame() currentGameDay: ' + this.currentGameDay);
       this.setCurrentGameDay(this.currentGameDay);
 
-      this.playGame(this.FULL_SCHEDULE[this.currentGame]);
+      this.playGame(this.FULL_SCHEDULE[this.currentGame], simSeason, simFast);
       this.currentGame++;
       return true;
     } else {

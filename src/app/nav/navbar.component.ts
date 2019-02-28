@@ -34,15 +34,17 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
   ) { }
 
   ngOnInit() {
-    this.scheduleService.currentGame$.subscribe(data => this.currentGame = data);
+    this.scheduleService.currentGame$.subscribe(data => {
+      this.currentGame = data;
+      if (this.currentGame > 0) {
+        this.askSimSeason = true;
+      }
+    });
     this.scheduleService.currentGameDay$.subscribe(data => this.currentGameDay = data);
   }
 
   ngAfterContentChecked() {
     this.postseason = this.currentGameDay === 'Playoffs';
-    if (this.currentGame > 0) {
-      this.askSimSeason = true;
-    }
   }
 
   getTopTeams() {
@@ -57,14 +59,14 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
         this.openSimSeasonDialog();
       }
     } else {
-      if (this.scheduleService.playNextGame()) {
+      if (this.scheduleService.playNextGame(this.simSeason, this.simFast)) {
         // Keep playing
       }
     }
   }
 
   playAllGames() {
-    if (this.scheduleService.playNextGame()) {
+    if (this.scheduleService.playNextGame(this.simSeason, this.simFast)) {
       // Keep playing
       const timeout = this.simFast ? 0 : 500;
       setTimeout(() => { this.playAllGames(); }, timeout);
@@ -77,25 +79,30 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
   resetSeason() {
     console.log('[navbar] resetSeason()');
     this.storageService.clearScheduleFromStorage().subscribe(() => {
-      this.scheduleService.buildFullSchedule();
+      // Do nothing here; wait for complete
     }, (err) => {
       console.error('[navbar] resetSeason() clearScheduleFromStorage() error: ' + err);
-    });
-    this.storageService.clearTeamsFromStorage().subscribe(() => {
-      this.teamService.initTeams();
-    }, (err) => {
-      console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
-    });
+    }, () => {
+      console.log('[navbar] resetSeason() clearScheduleFromStorage() complete');
+      this.scheduleService.buildFullSchedule();
+      this.storageService.clearTeamsFromStorage().subscribe(() => {
+        // Do nothing here; wait for complete
+      }, (err) => {
+        console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
+      }, () => {
+        console.log('[navbar] resetSeason() clearTeamsFromStorage() complete');
+        this.teamService.initTeams();
+        this.askSimSeason = false;
+        this.simSeason = false;
+        this.simFast = false;
+        this.postseason = false;
+        this.openSnackBar('Season reset!', '');
 
-    this.askSimSeason = false;
-    this.simSeason = false;
-    this.simFast = false;
-    this.postseason = false;
-    this.openSnackBar('Season reset!', '');
-
-    if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {
-      this.router.navigateByUrl('/teams');
-    }
+        if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {
+          this.router.navigateByUrl('/teams');
+        }
+      });
+    });
   }
 
   openTopTeamsDialog(): void {
@@ -119,6 +126,7 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.askSimSeason = true;
       this.dialogReturn = result;
       if (result) {
         this.simSeason = result.simSeason;
@@ -126,10 +134,10 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
         if (this.simSeason) {
           this.playAllGames();
         } else {
-          this.scheduleService.playNextGame();
+          this.scheduleService.playNextGame(this.simSeason, this.simFast);
         }
       } else {
-        this.scheduleService.playNextGame();
+        this.scheduleService.playNextGame(this.simSeason, this.simFast);
       }
     }, (err) => {
       console.error('[navbar] openSimSeasonDialog() afterClosed() error: ' + err);
