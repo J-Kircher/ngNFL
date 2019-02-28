@@ -1,0 +1,48 @@
+@import 'src/scss/common';
+
+.dialog-title {
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+  }
+  .gameday-text {
+    @include boldItalText($medFontSize);
+    margin: 6px;
+  }
+  button {
+    color: white;
+    background-color: rgba(0, 128, 0, 0.5) !important;
+  }
+}
+
+mat-dialog-content {
+  min-width: 600px;
+
+  mat-card {
+    background-color: #EEE;
+
+    .results {
+      @include boldItalText($medFontSize);
+      .logo {
+        float: left;
+        height: 40px;
+      }
+      .center {
+        text-align: center;
+      }
+
+      .visit-level {
+        margin-top: 5px;
+        text-align: right;
+      }
+      .position-label {
+        text-align: center;
+      }
+      .home-level {
+        margin-top: 5px;
+        text-align: left;
+      }
+    }
+  }
+}

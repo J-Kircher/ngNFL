@@ -1,0 +1,68 @@
+<div class="dialog-title" fxLayoutAlign="space-between">
+    <div>
+      <div class="dialog-title-text">Results</div>
+      <div class="gameday-text">{{modalGame.gameday}}</div>
+    </div>
+    <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
+  </div>
+  <mat-dialog-content *ngIf="!loading">
+    <mat-card>
+      <mat-card-content>
+        <div class="results">
+
+          <div fxLayout="row" *ngFor="let result of results; let vs; let hs;">
+            <div fxFlex="nogrow"><img src="/assets/images/{{teamsArr[result.teamScored]?.abbrev}}.png" class="logo"></div>
+            <div fxFlex fxLayoutAlign="space-around center">
+              <div fxFlex class="center">{{ getQuarter(result.quarter) }}</div>
+              <div fxFlex class="center">{{ getScore(result.points) }}</div>
+              <div fxFlex class="center">{{ result.points }}</div>
+            </div>
+          </div>
+
+          <!--
+          <div fxLayout="row">
+            <div fxFlex="40" class="visit-level">
+              <span>{{teamsArr[modalGame?.visitTeam]?.city}}</span><br>
+              <span>{{teamsArr[modalGame?.visitTeam]?.name}}</span>
+            </div>
+            <div fxFlex="20"></div>
+            <div fxFlex="40" class="home-level">
+              <span>{{teamsArr[modalGame?.homeTeam]?.city}}</span><br>
+              <span>{{teamsArr[modalGame?.homeTeam]?.name}}</span>
+            </div>
+          </div>
+          <div *ngIf="modalGame?.visitTeam || modalGame?.homeTeam">
+            <div fxFlex="40" class="visit-level">
+              <img src="/assets/images/{{teamsArr[modalGame?.visitTeam]?.abbrev}}-L.png" [alt]="teamsArr[modalGame?.visitTeam]?.name">
+            </div>
+            <div fxFlex="20"></div>
+            <div fxFlex="40" class="home-level">
+              <img src="/assets/images/{{teamsArr[modalGame?.homeTeam]?.abbrev}}-R.png" [alt]="teamsArr[modalGame?.homeTeam]?.name">
+            </div>
+          </div>
+
+          <div fxLayout="row">
+            <div fxFlex="40" class="visit-level">
+              <div [style.width.px]="teamsArr[modalGame?.visitTeam]?.qb/9*200"
+                [ngStyle]="{'color':'#'+teamsArr[modalGame?.visitTeam]?.darkcolor,
+                  'background-color':'#'+teamsArr[modalGame?.visitTeam]?.lightcolor,
+                  'float':'right', 'padding-right':'5px'}">
+                {{teamsArr[modalGame?.visitTeam]?.qb}}
+              </div>
+            </div>
+            <div fxFlex="20" fxLayoutAlign="center end" class="position-label">QB</div>
+            <div fxFlex="40" class="home-level">
+              <div [style.width.px]="teamsArr[modalGame?.homeTeam]?.qb/9*200"
+                [ngStyle]="{'color':'#'+teamsArr[modalGame?.homeTeam]?.lightcolor,
+                  'background-color':'#'+teamsArr[modalGame?.homeTeam]?.darkcolor,
+                  'float':'left', 'padding-left':'5px'}">
+                {{teamsArr[modalGame?.homeTeam]?.qb}}
+              </div>
+            </div>
+          </div>
+          -->
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-dialog-content>
