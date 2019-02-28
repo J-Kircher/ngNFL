@@ -304,6 +304,9 @@ export class ScheduleService {
     const subject = new Subject<ISchedule>();
     const gameCounter = 16;
 
+    game.visitScore = 0;
+    game.homeScore = 0;
+
     (function theLoop (i) {
       setTimeout(function () {
         const rndIndex = Math.floor(Math.random() * scoreArr.length);
