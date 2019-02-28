@@ -21,6 +21,7 @@ mat-card {
     @include boldItalText($medFontSize);
     background-color: #DDD;
     // background: rgba(0, 128, 0, 0.5);
+    cursor: pointer;
     margin-bottom: 0px;
     border-radius: 5px;
     transition: background-color 280ms cubic-bezier(.4,0,.2,1);
