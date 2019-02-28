@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ISchedule } from '../model/nfl.model';
+import { ISchedule, IGameResults } from '../model/nfl.model';
+import { ScheduleService } from '../service/schedule.service';
 import { ScheduleDayService } from '../service/schedule.day.service';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
+import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
 import { listAnimation } from '../shared/animations';
 
 @Component({
@@ -20,6 +22,7 @@ export class ScheduleDayComponent implements OnInit {
   dialogReturn: any;
 
   constructor(
+    private scheduleService: ScheduleService,
     private scheduleDayService: ScheduleDayService,
     public dialog: MatDialog
     ) { }
@@ -44,6 +47,19 @@ export class ScheduleDayComponent implements OnInit {
     this.loading = false;
   }
 
+  openResultsDialog(id: number): void {
+    const dialogRef = this.dialog.open(ResultsDialogComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    }, (err) => {
+      console.error('[schedule-day] openResultsDialog() afterClosed() error: ' + err);
+    });
+  }
+
   openMatchupDialog(id: number): void {
     const dialogRef = this.dialog.open(MatchupDialogComponent, {
       data: { id: id }
@@ -58,7 +74,18 @@ export class ScheduleDayComponent implements OnInit {
   }
 
   getMatchup(id: number) {
-    // console.log('[schedule-day] getMatchup: ' + id);
-    this.openMatchupDialog(id);
+    // Open results if game has been played - results dialog not created yet
+    // Open matchup if game has not been played
+
+    console.log('[schedule-day] getMatchup: ' + id);
+
+    this.scheduleService.getGameResults(id).subscribe((results: IGameResults[]) => {
+      if (results.length) {
+        this.openResultsDialog(id);
+      } else {
+        this.openMatchupDialog(id);
+      }
+    });
+
   }
 }

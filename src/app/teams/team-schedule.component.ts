@@ -3,8 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ScheduleService } from '../service/schedule.service';
 import { TeamService } from '../service/team.service';
-import { ITeam, ISchedule } from '../model/nfl.model';
+import { ITeam, ISchedule, IGameResults } from '../model/nfl.model';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
+import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
 import { listAnimation } from '../shared/animations';
 
 @Component ({
@@ -73,6 +74,19 @@ export class TeamScheduleComponent implements OnInit {
     this.router.navigate(['/teams/' + abbrev]);
   }
 
+  openResultsDialog(id: number): void {
+    const dialogRef = this.dialog.open(ResultsDialogComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    }, (err) => {
+      console.error('[team-schedule] openResultsDialog() afterClosed() error: ' + err);
+    });
+  }
+
   openMatchupDialog(id: number): void {
     const dialogRef = this.dialog.open(MatchupDialogComponent, {
       data: { id: id }
@@ -82,15 +96,22 @@ export class TeamScheduleComponent implements OnInit {
       // console.log('The dialog was closed');
       this.dialogReturn = result;
     }, (err) => {
-      console.error('[schedule-day] openMatchupDialog() afterClosed() error: ' + err);
+      console.error('[team-schedule] openMatchupDialog() afterClosed() error: ' + err);
     });
   }
 
   getMatchup(id: number) {
-    // Eventually make conditional
     // Open results if game has been played - results dialog not created yet
     // Open matchup if game has not been played
-    // console.log('[schedule-day] getMatchup: ' + id);
-    this.openMatchupDialog(id);
+
+    console.log('[team-schedule] getMatchup: ' + id);
+
+    this.scheduleService.getGameResults(id).subscribe((results: IGameResults[]) => {
+      if (results.length) {
+        this.openResultsDialog(id);
+      } else {
+        this.openMatchupDialog(id);
+      }
+    });
   }
 }
