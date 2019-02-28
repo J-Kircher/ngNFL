@@ -86,6 +86,5 @@ export class ScheduleDayComponent implements OnInit {
         this.openMatchupDialog(id);
       }
     });
-
   }
 }
