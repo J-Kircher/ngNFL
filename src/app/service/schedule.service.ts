@@ -298,11 +298,11 @@ export class ScheduleService {
   playFakeGame(game: ISchedule): Observable<ISchedule> {
     console.log('[schedule.service] playFakeGame() started');
 
-    const scoreArr = [7, 7, 7, 7, 3, 3, 0, 0, 3, 3, 7, 7, 7, 7];
+    const scoreArr = [7, 0, 7, 0, 7, 0, 7, 0, 3, 3, 0, 0, 3, 3, 0, 7, 0, 7, 0, 7, 0, 7];
 
     const timeout = 500;
     const subject = new Subject<ISchedule>();
-    const gameCounter = 8;
+    const gameCounter = 16;
 
     (function theLoop (i) {
       setTimeout(function () {
@@ -312,10 +312,10 @@ export class ScheduleService {
 
         let quarter = 'X';
         switch (i) {
-          case 0: case 1: quarter = '1'; break;
-          case 2: case 3: quarter = '2'; break;
-          case 4: case 5: quarter = '3'; break;
-          case 6: case 7: quarter = '4'; break;
+          case 0: case 1: case 2: case 3: quarter = '1'; break;
+          case 4: case 5: case 6: case 7: quarter = '2'; break;
+          case 8: case 9: case 10: case 11: quarter = '3'; break;
+          case 12: case 13: case 14: case 15: quarter = '4'; break;
           default: return 'U';
         }
 
