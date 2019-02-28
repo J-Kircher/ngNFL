@@ -11,7 +11,6 @@ import { NFLRoutes } from './app.routes';
 import { NavBarComponent } from './nav/navbar.component';
 import { TeamListComponent } from './teams/team-list.component';
 import { TeamService } from './service/team.service';
-import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { TeamDetailsComponent } from './teams/team-details.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ScheduleService } from './service/schedule.service';
@@ -61,7 +60,6 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     AppComponent,
     NavBarComponent,
     TeamListComponent,
-    CollapsibleWellComponent,
     TeamDetailsComponent,
     ScheduleComponent,
     ScheduleCalenderComponent,
