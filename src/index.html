@@ -11,9 +11,21 @@
 </head>
 <body>
   <app-nfl>
+    <style>
+      .loading-well { border-radius: 5px; background-color: #272727; position: absolute; margin: 8px; padding: 8px;
+        width: auto; height: auto; z-index: 15; top: 40%; left: 50%; transform: translateX(-50%); }
+      .loading-image { float: left; }
+      .loading-font { float: right; font-size: 1.125em; color: #afafaf; padding: 5px 0; }
+      .one { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.0s; }
+      .two { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.2s; }
+      .three { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.4s; }
+      @-webkit-keyframes dot { 0% { opacity: 0; } 50% { opacity: 0; } 100% { opacity: 1; } }
+      @keyframes dot { 0% { opacity: 0; } 50% { opacity: 0; } 100% { opacity: 1; }
+      }
+    </style>
     <div class="loading-well">
-        <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
-        <div class="loading-font">&nbsp; Loading NFL &hellip;</div>
+      <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+      <div class="loading-font">&nbsp; Loading NFL <span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
     </div>
   </app-nfl>
 </body>
