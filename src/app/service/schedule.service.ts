@@ -137,14 +137,14 @@ export class ScheduleService {
       });
       this.finalGame = counter;
 
-      // console.log('[schedule.service] FULL_SCHEDULE:');
+      // console.log('[schedule.service] FULL_SCHEDULE built!');
       // console.table(this.FULL_SCHEDULE);
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
     } else {
       this.finalGame = this.FULL_SCHEDULE.length;
     }
 
-    this.currentGameDay = this.currentGame <= this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
+    this.currentGameDay = this.currentGame < this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
     this.setCurrentGameDay(this.currentGameDay);
 
     console.log('[schedule.service] buildFullSchedule() Complete!');
@@ -219,8 +219,8 @@ export class ScheduleService {
   }
 
   playGame(game: ISchedule, simSeason: boolean, simFast: boolean) {
-    console.log('[schedule.service] playGame() simSeason: ' + simSeason + ', simFast: ' + simFast);
-    if (simSeason) {
+    // console.log('[schedule.service] playGame() simSeason: ' + simSeason + ', simFast: ' + simFast);
+    if (simSeason && simFast) {
       this.playFastGame(game);
     } else {
       this.playSlowGame(game, simFast);
