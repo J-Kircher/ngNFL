@@ -11,13 +11,13 @@
       <div class="matchup">
         <div fxLayout="row">
           <div fxFlex="40" class="visit-level">
-            <span>{{teamsArr[modalGame?.visitTeam]?.city}}</span><br>
-            <span>{{teamsArr[modalGame?.visitTeam]?.name}}</span>
+            <span class="team-city">{{teamsArr[modalGame?.visitTeam]?.city}}</span><br>
+            <span class="team-name">{{teamsArr[modalGame?.visitTeam]?.name}}</span>
           </div>
-          <div fxFlex="20"></div>
+          <div fxFlex="20" class="center"><span class="normal"> at </span></div>
           <div fxFlex="40" class="home-level">
-            <span>{{teamsArr[modalGame?.homeTeam]?.city}}</span><br>
-            <span>{{teamsArr[modalGame?.homeTeam]?.name}}</span>
+            <span class="team-city">{{teamsArr[modalGame?.homeTeam]?.city}}</span><br>
+            <span class="team-name">{{teamsArr[modalGame?.homeTeam]?.name}}</span>
           </div>
         </div>
         <div *ngIf="modalGame?.visitTeam || modalGame?.homeTeam">
