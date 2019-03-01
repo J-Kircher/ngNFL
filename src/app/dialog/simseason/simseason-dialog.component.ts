@@ -21,8 +21,8 @@ export class SimseasonDialogComponent {
   ) { }
 
   submitForm() {
-    console.log('[simseason] submitForm() simSeason: ' + this.result.simSeason);
-    console.log('[simseason] submitForm() simFast: ' + this.result.simFast);
+    // console.log('[simseason] submitForm() simSeason: ' + this.result.simSeason);
+    // console.log('[simseason] submitForm() simFast: ' + this.result.simFast);
     this.dialogRef.close(this.result);
   }
 
