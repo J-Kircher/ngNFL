@@ -128,6 +128,7 @@ export class ScheduleService {
             visitScore: null,
             homeTeam: day.games[i + 1],
             homeScore: null,
+            quarter: null,
             gameResults: []
           };
           this.FULL_SCHEDULE.push(currentGame);
@@ -240,6 +241,7 @@ export class ScheduleService {
 
     game.visitScore = this.generateFakeFinalScore(0);
     game.homeScore = this.generateFakeFinalScore(game.visitScore);
+    game.quarter = 'F';
 
     if (game.visitScore > game.homeScore) {
       visitTeam.wins++;
@@ -323,6 +325,8 @@ export class ScheduleService {
           default: return 'U';
         }
 
+        game.quarter = quarter;
+
         if (score > 0) {
           if ((i % 2) > 0) {
             // visit
@@ -357,9 +361,6 @@ export class ScheduleService {
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
 
-    // game.visitScore = this.generateFakeFinalScore(0);
-    // game.homeScore = this.generateFakeFinalScore(game.visitScore);
-
     this.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
       console.log('[schedule.service] playSlowGame() playing Game');
       game = gameData;
@@ -367,6 +368,7 @@ export class ScheduleService {
       console.error('[schedule.service] playSlowGame() playFakeGame error: ' + err);
     }, () => {
       console.log('[schedule.service] playSlowGame() playFakeGame over');
+      game.quarter = 'F';
       console.log(game);
       if (game.visitScore > game.homeScore) {
         console.log('[schedule.service] playSlowGame() Visitors Win');
