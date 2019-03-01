@@ -41,6 +41,7 @@ export class PlayoffService {
           visitScore: null,
           homeTeam: day.games[i + 1],
           homeScore: null,
+          quarter: null,
           gameResults: []
         };
         this.PLAYOFF_SCHEDULE.push(currentGame);
