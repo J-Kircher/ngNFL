@@ -55,6 +55,7 @@ mat-dialog-content {
       }
       .normal {
         @include normalText($medFontSize);
+        line-height: 30px;
       }
       .bold {
         @include boldText($medFontSize);
