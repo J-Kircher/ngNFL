@@ -17,31 +17,47 @@
 }
 
 mat-dialog-content {
-  min-width: 600px;
+  min-width: 400px;
 
   mat-card {
     background-color: #EEE;
 
     .results {
       @include boldItalText($medFontSize);
-      .logo {
-        float: left;
-        height: 40px;
+      .visit {
+        text-align: left;
+      }
+      .home {
+        text-align: right;
       }
       .center {
         text-align: center;
       }
-
-      .visit-level {
-        margin-top: 5px;
-        text-align: right;
+      .team-city {
+        @include normalText($medFontSize);
+        -webkit-padding-start: 5px;
       }
-      .position-label {
-        text-align: center;
+      .team-name {
+        @include boldText($lgFontSize);
+        -webkit-padding-start: 5px;
       }
-      .home-level {
-        margin-top: 5px;
+      .logo {
         text-align: left;
+        height: 40px;
+      }
+      .quarter {
+        height: 25px;
+        width: 100%;
+        background: rgba(0, 128, 0, 0.5);
+        border-radius: 5px;
+        text-align: center;
+        line-height: 25px;
+      }
+      .normal {
+        @include normalText($medFontSize);
+      }
+      .bold {
+        @include boldText($medFontSize);
       }
     }
   }

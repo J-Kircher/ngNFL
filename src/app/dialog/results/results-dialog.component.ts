@@ -26,8 +26,6 @@ export class ResultsDialogComponent implements OnInit {
     // console.log('[results] data: ' + this.data);
     this.modalGame = this.scheduleService.getGameById(this.data.id);
 
-    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
-
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
       this.results = this.modalGame.gameResults;
@@ -37,7 +35,7 @@ export class ResultsDialogComponent implements OnInit {
     });
   }
 
-  getQuarter(quarter) {
+  getQuarter(quarter: string) {
     switch (quarter) {
       case '1': return 'First Quarter';
       case '2': return 'Second Quarter';
@@ -48,11 +46,57 @@ export class ResultsDialogComponent implements OnInit {
     }
   }
 
-  getScore(score) {
+  getScoreType(score: number) {
     switch (score) {
       case 3: return 'Field Goal';
       case 7: return 'Touchdown';
       default: return '?';
+    }
+  }
+
+  whoScored(idx: number, team: string) {
+    let visitScored = false;
+    let homeScored = false;
+    let returnClass = 'normal';
+
+    if (this.results[idx].teamScored === this.modalGame.homeTeam) {
+      homeScored = true;
+    }
+
+    if (this.results[idx].teamScored === this.modalGame.visitTeam) {
+      visitScored = true;
+    }
+
+    if ((team === 'v' && visitScored) || (team === 'h' && homeScored)) {
+      returnClass = 'bold';
+    }
+
+    return returnClass;
+  }
+
+  getGameScore(idx: number, team: string) {
+    let visitScore = 0;
+    let homeScore = 0;
+
+    this.results.forEach((result, i) => {
+      if (i <= idx) {
+        if (result.teamScored === this.modalGame.homeTeam) {
+          homeScore += result.points;
+        }
+        if (result.teamScored === this.modalGame.visitTeam) {
+          visitScore += result.points;
+        }
+      }
+    });
+
+    return team === 'v' ? visitScore : homeScore;
+  }
+
+  getWinner() {
+    if (this.modalGame.homeScore > this.modalGame.visitScore) {
+      return this.teamsArr[this.modalGame.homeTeam].name;
+    } else {
+      return this.teamsArr[this.modalGame.visitTeam].name;
     }
   }
 
