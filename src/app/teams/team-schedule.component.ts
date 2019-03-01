@@ -103,8 +103,7 @@ export class TeamScheduleComponent implements OnInit {
   getMatchup(id: number) {
     // Open results if game has been played - results dialog not created yet
     // Open matchup if game has not been played
-
-    console.log('[team-schedule] getMatchup: ' + id);
+    // console.log('[team-schedule] getMatchup: ' + id);
 
     this.scheduleService.getGameResults(id).subscribe((results: IGameResults[]) => {
       if (results.length) {

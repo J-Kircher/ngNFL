@@ -44,7 +44,7 @@ export class ShowScoresComponent implements OnInit, DoCheck {
   }
 
   getResults(id: number) {
-    console.log('[show-scores] getResults: ' + id);
+    // console.log('[show-scores] getResults: ' + id);
     this.openResultsDialog(id);
   }
 }
