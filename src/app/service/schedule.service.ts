@@ -369,7 +369,6 @@ export class ScheduleService {
     }, () => {
       console.log('[schedule.service] playSlowGame() playFakeGame over');
       game.quarter = 'F';
-      console.log(game);
       if (game.visitScore > game.homeScore) {
         console.log('[schedule.service] playSlowGame() Visitors Win');
         visitTeam.wins++;
