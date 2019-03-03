@@ -13,13 +13,13 @@ export class ShowScoreComponent implements OnInit {
   teamsArr: ITeam[] = [];
   loading: boolean = true;
 
-  constructor(private teamService: TeamService) {  }
+  constructor(
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
     // console.log('[show-score] ngOnInit()');
     // console.table(this.score);
-
-    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
@@ -28,5 +28,9 @@ export class ShowScoreComponent implements OnInit {
     }, (err) => {
       console.error('[show-score] ngOnInit() getTeams() error: ' + err);
     });
+  }
+
+  showQuarter() {
+    return !['F', 'OT'].includes(this.score.quarter);
   }
 }

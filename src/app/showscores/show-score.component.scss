@@ -9,6 +9,7 @@ mat-card {
   .team-info {
     white-space: nowrap;
     text-align: left;
+    width: 100%;
 
     .logo {
       float: left;
@@ -29,5 +30,8 @@ mat-card {
       @include boldText($medFontSize);
       -webkit-padding-start: 5px;
     }
+  }
+  .quarter {
+    @include boldItalText($medFontSize);
   }
 }

@@ -1,15 +1,24 @@
-<div class="show-score" fxLayout="column" *ngIf="!loading">
-  <div class="team-info">
-    <img src="/assets/images/{{teamsArr[score.visitTeam].abbrev}}.png" class="logo">
-    <span class="score"> {{score.visitScore}} </span>
-    <span class="team-city">{{teamsArr[score.visitTeam].city}}</span><br>
-    <span class="team-name">{{teamsArr[score.visitTeam].name}}</span>
+<div class="show-score" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!loading">
+  <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
+    <div class="team-info">
+      <img src="/assets/images/{{teamsArr[score.visitTeam].abbrev}}.png" class="logo">
+      <span class="score">{{score.visitScore}}</span>
+      <span>
+        <span class="team-city">{{teamsArr[score.visitTeam].city}}</span><br>
+        <span class="team-name">{{teamsArr[score.visitTeam].name}}</span>
+      </span>
+    </div>
+    <div class="team-info">
+      <img src="/assets/images/{{teamsArr[score.homeTeam].abbrev}}.png" class="logo">
+      <span class="score">{{score.homeScore}}</span>
+      <span>
+        <span class="team-city">{{teamsArr[score.homeTeam].city}}</span><br>
+        <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
+      </span>
+    </div>
   </div>
-  <div class="team-info">
-    <img src="/assets/images/{{teamsArr[score.homeTeam].abbrev}}.png" class="logo">
-    <span class="score"> {{score.homeScore}} </span>
-    <span class="team-city">{{teamsArr[score.homeTeam].city}}</span><br>
-    <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
+  <div fxFlex="12px" *ngIf="showQuarter()">
+    <span class="quarter">{{ score.quarter }}</span>
   </div>
 </div>
 
