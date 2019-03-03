@@ -15,7 +15,16 @@
     margin: 5px 20px;
   }
 
+  .menu-link {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
   a {
+    @include normalText($smFontSize);
     color: white;
     cursor: pointer;
     padding: 14px 16px;

@@ -3,12 +3,12 @@
   <div class="menu-logo"><img src="/assets/images/NFL.gif" height="50px"></div>
 
   <div fxLayoutAlign="center" fxShow="false" fxShow.gt-sm>
-    <span><a [routerLink]="['/teams']" id="show">Show Teams</a></span>
-    <span><a [routerLink]="['/schedule']" id="schedule">Schedule</a></span>
-    <span><a [routerLink]="['/standings']" id="standings">Standings</a></span>
-    <span><a [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a></span>
-    <span><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
-    <span><a id="help">Help</a></span>
+    <span class="menu-link"><a [routerLink]="['/teams']" id="show">Show Teams</a></span>
+    <span class="menu-link"><a [routerLink]="['/schedule']" id="schedule">Schedule</a></span>
+    <span class="menu-link"><a [routerLink]="['/standings']" id="standings">Standings</a></span>
+    <span class="menu-link"><a [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a></span>
+    <span class="menu-link"><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
+    <span class="menu-link"><a id="help">Help</a></span>
   </div>
 
   <span fxFlex="1 1 auto"></span>
