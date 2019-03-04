@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TeamService } from '../../service/team.service';
 import { ITeam, ISchedule } from '../../model/nfl.model';
 import { ScheduleService } from '../../service/schedule.service';
+import { PlayoffService } from '../../service/playoff.service';
 
 @Component({
   selector: 'app-matchup-dialog',
@@ -18,14 +19,17 @@ export class MatchupDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<MatchupDialogComponent>,
     private teamService: TeamService,
     private scheduleService: ScheduleService,
+    private playoffService: PlayoffService,
     @Inject(MAT_DIALOG_DATA) public data
   ) { }
 
   ngOnInit() {
     // console.log('[matchup] data: ' + this.data);
-    this.modalGame = this.scheduleService.getGameById(this.data.id);
-
-    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+    if (this.data.playoffs) {
+      this.modalGame = this.playoffService.getGameById(this.data.id);
+    } else {
+      this.modalGame = this.scheduleService.getGameById(this.data.id);
+    }
 
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;

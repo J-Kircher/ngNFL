@@ -89,7 +89,7 @@ export class TeamScheduleComponent implements OnInit {
 
   openMatchupDialog(id: number): void {
     const dialogRef = this.dialog.open(MatchupDialogComponent, {
-      data: { id: id }
+      data: { id: id, playoffs: false }
     });
 
     dialogRef.afterClosed().subscribe(result => {
