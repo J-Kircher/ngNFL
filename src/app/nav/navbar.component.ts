@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
+import { TeamService } from '../service/team.service';
 import { StorageService } from '../service/storage.service';
 import { ScheduleService } from '../service/schedule.service';
-import { TeamService } from '../service/team.service';
+import { PlayoffService } from '../service/playoff.service';
 import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.component';
 import { SimseasonDialogComponent } from '../dialog/simseason/simseason-dialog.component';
 
@@ -14,21 +15,21 @@ import { SimseasonDialogComponent } from '../dialog/simseason/simseason-dialog.c
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavBarComponent implements OnInit, AfterContentChecked {
-  private postseason: boolean = false;
-
+export class NavBarComponent implements OnInit {
   dialogReturn: any;
   askSimSeason: boolean = false;
   simSeason: boolean = false;
   simFast: boolean = false;
   currentGame: number = 0;
   currentGameDay: string;
+  postseason: boolean = false;
 
   constructor(
     private router: Router,
+    private teamService: TeamService,
     private storageService: StorageService,
     private scheduleService: ScheduleService,
-    private teamService: TeamService,
+    private playoffService: PlayoffService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
@@ -41,10 +42,7 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
       }
     });
     this.scheduleService.currentGameDay$.subscribe(data => this.currentGameDay = data);
-  }
-
-  ngAfterContentChecked() {
-    this.postseason = this.currentGameDay === 'Playoffs';
+    this.scheduleService.endOfSeason$.subscribe(data => this.postseason = data);
   }
 
   getTopTeams() {
@@ -59,8 +57,16 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
         this.openSimSeasonDialog();
       }
     } else {
-      if (this.scheduleService.playNextGame(this.simSeason, this.simFast)) {
-        // Keep playing
+      if (!this.postseason) {
+        if (this.scheduleService.playNextGame(this.simSeason, this.simFast)) {
+          // Keep playing
+        } else {
+          console.log('[navbar] simulate() Initialize playoffs');
+          this.playoffService.initPlayoffs();
+        }
+      } else {
+        console.log('[navbar] simulate() Play a playoff game!');
+        this.playoffService.playPlayoffGame();
       }
     }
   }
@@ -92,6 +98,7 @@ export class NavBarComponent implements OnInit, AfterContentChecked {
       }, () => {
         console.log('[navbar] resetSeason() clearTeamsFromStorage() complete');
         this.teamService.initTeams();
+        this.playoffService.resetPlayoffs();
         this.askSimSeason = false;
         this.simSeason = false;
         this.simFast = false;

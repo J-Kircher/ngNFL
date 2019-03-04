@@ -1,18 +1,37 @@
+@import 'src/scss/common';
+
 mat-card {
   margin: 12px;
   padding: 8px;
 }
+
 .playoffs {
-  font-style: italic;
-  font-size: 14pt;
-  font-weight: bold;
-  vertical-align: middle;
-  margin: 5px 0px 0px 0px;
-  padding: 0px;
-  border-radius: 10px;
-}
-img {
-  border: 0px;
+  .playoffs-text {
+    @include boldItalText($lgFontSize);
+    margin-top: 5px;
+  }
+
+  img {
+    border: 0px;
+  }
+
+  .gameday-text {
+    @include boldItalText($medFontSize);
+    margin: 6px;
+  }
+
+  .gameday {
+    background-color: #DDD;
+    cursor: pointer;
+    margin: 6px;
+    transition: background-color 280ms cubic-bezier(.4,0,.2,1);
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.8);
+      background-color: rgb(238, 238, 238);
+    }
+  }
+
 }
 
 // .play-img {

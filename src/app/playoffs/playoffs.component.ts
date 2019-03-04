@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { TeamService } from '../service/team.service';
-import { ITeam } from '../model/nfl.model';
+import { ITeam, ISchedule, IGameResults } from '../model/nfl.model';
+import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
+import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
 import { PlayoffService } from '../service/playoff.service';
 
 @Component({
@@ -12,18 +15,26 @@ import { PlayoffService } from '../service/playoff.service';
 export class PlayoffsComponent implements OnInit {
   divisions: string[] = [];
   teamsArr: ITeam[] = [];
-  AFCPlayoffTeams: number[] = [];
-  NFCPlayoffTeams: number[] = [];
+  playoffTeams: number[] = [];
   SuperBowlChamp: number;
   loading: boolean = true;
 
+  dialogReturn: any;
+
+  currentPlayoffGame: number = 0;
+  currentPlayoffGameDay: string;
+  playoffGames: ISchedule[];
+
   constructor(
     private teamService: TeamService,
-    private playoffService: PlayoffService
+    private playoffService: PlayoffService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     // console.log('[playoffs] ngOnInit()');
+
+    // Reset season needs to also reset playoffs!
 
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
@@ -31,24 +42,76 @@ export class PlayoffsComponent implements OnInit {
       this.teamsArr = data;
       // console.log('[playoffs] ngOnInit() getTeams() SUCCESS');
 
-      this.playoffService.getAFCPlayoffTeams().subscribe((aData: number[]) => {
-        this.AFCPlayoffTeams = aData; // .map(teams => teams);
+      this.playoffService.getPlayoffTeams().subscribe((tData: number[]) => {
+        this.playoffTeams = tData;
       }, (err) => {
-        console.error('[playoffs] ngOnInit() getAFCPlayoffTeams() error: ' + err);
+        console.error('[playoffs] ngOnInit() getPlayoffTeams() error: ' + err);
+      }, () => {
+        console.log('[playoffs] ngOnInit() getPlayoffTeams() COMPLETE');
+
+        this.playoffService.initPlayoffs();
+
+        this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
+
+        this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;
+
+        this.loading = false;
+        // window.scrollTo(0, 0);
+
+        console.log('[playoffs] playoffTeams:');
+        console.log(this.playoffTeams);
       });
 
-      this.playoffService.getNFCPlayoffTeams().subscribe(nData => {
-        this.NFCPlayoffTeams = nData.map(teams => teams);
-      }, (err) => {
-        console.error('[playoffs] ngOnInit() getNFCPlayoffTeams() error: ' + err);
-      });
-
-      this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
-
-      this.loading = false;
-      window.scrollTo(0, 0);
     }, (err) => {
       console.error('[playoffs] ngOnInit() getTeams() error: ' + err);
+    });
+
+    this.playoffService.currentPlayoffGame$.subscribe(data => this.currentPlayoffGame = data);
+    this.playoffService.currentPlayoffGameDay$.subscribe(data => this.currentPlayoffGameDay = data);
+  }
+
+  showTeam(teamId: number) {
+    const team = this.teamService.getTeamByIndex(teamId);
+    return team.city + ' ' + team.name;
+  }
+
+  openResultsDialog(id: number): void {
+    const dialogRef = this.dialog.open(ResultsDialogComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    }, (err) => {
+      console.error('[playoffs] openResultsDialog() afterClosed() error: ' + err);
+    });
+  }
+
+  openMatchupDialog(id: number): void {
+    const dialogRef = this.dialog.open(MatchupDialogComponent, {
+      data: { id: id, playoffs: true }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    }, (err) => {
+      console.error('[playoffs] openMatchupDialog() afterClosed() error: ' + err);
+    });
+  }
+
+  getMatchup(id: number) {
+    // Open results if game has been played - results dialog not created yet
+    // Open matchup if game has not been played
+    // console.log('[playoffs] getMatchup: ' + id);
+
+    this.playoffService.getGameResults(id).subscribe((results: IGameResults[]) => {
+      if (results.length) {
+        this.openResultsDialog(id);
+      } else {
+        this.openMatchupDialog(id);
+      }
     });
   }
 }

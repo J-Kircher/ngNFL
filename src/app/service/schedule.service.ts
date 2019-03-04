@@ -57,13 +57,7 @@ const SCHEDULE: IScheduleBase[] = [
   { 'gameday': 'Saturday, December 23', 'games': [9, 4, 23, 22] },
   { 'gameday': 'Sunday, December 24', 'games': [27, 25, 6, 20, 21, 5, 1, 13, 0, 2, 24, 26, 14, 3, 29, 11, 12, 19, 10, 30, 17, 28, 31, 16] },
   { 'gameday': 'Monday, December 25', 'games': [7, 8, 15, 18] },
-  { 'gameday': 'Sunday, December 31', 'games': [25, 24, 5, 4, 22, 21, 8, 9, 0, 1, 20, 23, 3, 2, 19, 17, 16, 18, 6, 7, 26, 27, 10, 11, 13, 12, 15, 14, 30, 29, 28, 31] },
-  // {'gameday': 'Wildcard Weekend', 'games': [4, 3, 10, 9]},
-  // {'gameday': 'Wildcard Weekend', 'games': [5, 2, 11, 8]},
-  // {'gameday': 'Division Playoffs', 'games': [3, 0, 9, 6]},
-  // {'gameday': 'Division Playoffs', 'games': [2, 1, 8, 7]},
-  // {'gameday': 'Conference Championship', 'games': [1, 0, 7, 6]},
-  // {'gameday': 'Super Bowl', 'games': [6, 0]}
+  { 'gameday': 'Sunday, December 31', 'games': [25, 24, 5, 4, 22, 21, 8, 9, 0, 1, 20, 23, 3, 2, 19, 17, 16, 18, 6, 7, 26, 27, 10, 11, 13, 12, 15, 14, 30, 29, 28, 31] }
 ];
 
 @Injectable()
@@ -77,10 +71,12 @@ export class ScheduleService {
   // Observable sources
   private currentGameSource = new BehaviorSubject<number>(0);
   private currentGameDaySource = new BehaviorSubject<string>('');
+  private endOfSeasonSource = new BehaviorSubject<boolean>(false);
 
   // Observable streams
   currentGame$ = this.currentGameSource.asObservable();
   currentGameDay$ = this.currentGameDaySource.asObservable();
+  endOfSeason$ = this.endOfSeasonSource.asObservable();
 
   constructor(
     private teamService: TeamService,
@@ -97,6 +93,10 @@ export class ScheduleService {
   setCurrentGameDay(data: string) {
     // console.log('[schedule.service] setCurrentGameDay() data: ' + data);
     this.currentGameDaySource.next(data);
+  }
+  setEndOfSeason(data: boolean) {
+    // console.log('[schedule.service] setEndOfSeason() data: ' + data);
+    this.endOfSeasonSource.next(data);
   }
 
   loadScheduleFromStorage() {
@@ -135,17 +135,17 @@ export class ScheduleService {
           i++;
         }
       });
-      this.finalGame = counter;
 
       // console.log('[schedule.service] FULL_SCHEDULE built!');
       // console.table(this.FULL_SCHEDULE);
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
-    } else {
-      this.finalGame = this.FULL_SCHEDULE.length;
     }
 
+    this.finalGame = this.FULL_SCHEDULE.length;
     this.currentGameDay = this.currentGame < this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
     this.setCurrentGameDay(this.currentGameDay);
+    this.endOfSeason = this.currentGame >= this.finalGame;
+    this.setEndOfSeason(this.endOfSeason);
 
     console.log('[schedule.service] buildFullSchedule() Complete!');
   }
@@ -439,11 +439,9 @@ export class ScheduleService {
       console.log('[schedule.service] playNextGame() Season Over');
       this.currentGameDay = 'Playoffs';
       this.setCurrentGameDay(this.currentGameDay);
-        return false;
+      this.endOfSeason = true;
+      this.setEndOfSeason(this.endOfSeason);
+      return false;
     }
-  }
-
-  checkEndOfSeason() {
-    return this.endOfSeason = (this.currentGame >= this.FULL_SCHEDULE.length) ? true : false;
   }
 }

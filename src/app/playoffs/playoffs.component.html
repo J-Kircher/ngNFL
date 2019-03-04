@@ -1,8 +1,25 @@
 <mat-card *ngIf="!loading">
   <div class="playoffs">
-    Playoffs
-  </div>
-  <div fxLayout="row wrap" fxLayout.xs="column wrap">
+    <div class="playoffs-text">
+      Playoffs
+    </div>
+
+    <!-- <div style="margin: 12px;">
+      <div *ngFor="let team of playoffTeams">
+        {{ showTeam(team) }}
+      </div>
+    </div> -->
+
+    <div style="margin: 12px;">
+      <div fxFlex="25%" *ngFor="let score of playoffGames" (click)="getMatchup(score.id)">
+        <span class="gameday-text">{{ score.gameday }}</span>
+        <mat-card class="gameday" matRipple appMaterialElevation>
+          <show-score [score]=score></show-score>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- <div fxLayout="row wrap" fxLayout.xs="column wrap">
     <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" class="flex-container">
       <div fxLayout="column">
         <div><img src="/assets/images/{{teamsArr[AFCPlayoffTeams[4]]?.abbrev}}.png"></div>
@@ -60,6 +77,8 @@
         <div></div>
       </div>
     </div>
+  </div> -->
+
   </div>
 </mat-card>
 
