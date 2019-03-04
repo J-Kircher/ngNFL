@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule, IGameResults } from '../model/nfl.model';
+import { PlayoffService } from '../service/playoff.service';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
 import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
-import { PlayoffService } from '../service/playoff.service';
+import { listAnimation } from '../shared/animations';
 
 @Component({
   selector: 'playoffs',
   templateUrl: './playoffs.component.html',
-  styleUrls: ['./playoffs.component.scss']
+  styleUrls: ['./playoffs.component.scss'],
+  animations: [listAnimation]
 })
 
 export class PlayoffsComponent implements OnInit {
@@ -24,6 +26,7 @@ export class PlayoffsComponent implements OnInit {
   currentPlayoffGame: number = 0;
   currentPlayoffGameDay: string;
   playoffGames: ISchedule[];
+  aGameDay: string[] = [];
 
   constructor(
     private teamService: TeamService,
@@ -54,6 +57,7 @@ export class PlayoffsComponent implements OnInit {
         this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
 
         this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;
+        this.aGameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
 
         this.loading = false;
         // window.scrollTo(0, 0);
@@ -73,6 +77,10 @@ export class PlayoffsComponent implements OnInit {
   showTeam(teamId: number) {
     const team = this.teamService.getTeamByIndex(teamId);
     return team.city + ' ' + team.name;
+  }
+
+  getGamesForDay(day: string) {
+    return this.playoffService.getGamesForDay(day);
   }
 
   openResultsDialog(id: number): void {

@@ -15,23 +15,24 @@ mat-card {
     border: 0px;
   }
 
-  .gameday-text {
-    @include boldItalText($medFontSize);
-    margin: 6px;
-  }
+  .schedule {
+    .gameday-text {
+      @include boldItalText($medFontSize);
+      margin: 6px;
+    }
 
-  .gameday {
-    background-color: #DDD;
-    cursor: pointer;
-    margin: 6px;
-    transition: background-color 280ms cubic-bezier(.4,0,.2,1);
+    .gameday {
+      background-color: #DDD;
+      cursor: pointer;
+      margin: 6px;
+      transition: background-color 280ms cubic-bezier(.4,0,.2,1);
 
-    &:hover {
-      border-color: rgba(0, 0, 0, 0.8);
-      background-color: rgb(238, 238, 238);
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.8);
+        background-color: rgb(238, 238, 238);
+      }
     }
   }
-
 }
 
 // .play-img {

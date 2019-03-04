@@ -10,14 +10,36 @@
       </div>
     </div> -->
 
-    <div style="margin: 12px;">
-      <div fxFlex="25%" *ngFor="let score of playoffGames" (click)="getMatchup(score.id)">
-        <span class="gameday-text">{{ score.gameday }}</span>
-        <mat-card class="gameday" matRipple appMaterialElevation>
-          <show-score [score]=score></show-score>
-        </mat-card>
+    <mat-card>
+      <div class="schedule" *ngFor="let day of aGameDay">
+        <div class="gameday-text">
+          {{day}}
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column wrap"
+          [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '100ms' } }">
+          <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
+            (click)="getMatchup(score.id)">
+            <mat-card class="gameday" matRipple appMaterialElevation>
+              <show-score [score]=score></show-score>
+            </mat-card>
+          </div>
+        </div>
       </div>
-    </div>
+    </mat-card>
+
+
+    <!-- <div style="margin: 12px;">
+      <div *ngFor="let day of aGameDay">
+        <span class="gameday-text">{{ day }}</span>
+        <div>
+          <div fxFlex="25%" *ngFor="let score of getGamesForDay(day)" (click)="getMatchup(score.id)">
+            <mat-card class="gameday" matRipple appMaterialElevation>
+              <show-score [score]=score></show-score>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div> -->
 
     <!-- <div fxLayout="row wrap" fxLayout.xs="column wrap">
     <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" class="flex-container">
