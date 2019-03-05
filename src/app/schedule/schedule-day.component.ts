@@ -74,8 +74,6 @@ export class ScheduleDayComponent implements OnInit {
   }
 
   getMatchup(id: number) {
-    // Open results if game has been played - results dialog not created yet
-    // Open matchup if game has not been played
     // console.log('[schedule-day] getMatchup: ' + id);
 
     this.scheduleService.getGameResults(id).subscribe((results: IGameResults[]) => {
