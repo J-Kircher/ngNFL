@@ -42,7 +42,7 @@ export class StorageService {
     setTimeout(() => {
       subject.next(true);
       subject.complete();
-    }, 500);
+    }, 50);
     return subject;
   }
 
@@ -81,7 +81,43 @@ export class StorageService {
     setTimeout(() => {
       subject.next(true);
       subject.complete();
-    }, 500);
+    }, 50);
+    return subject;
+  }
+
+  public loadPlayoffScheduleFromLocalStorage(): ISchedule[] {
+    console.log('[storage.service] loadPlayoffScheduleFromLocalStorage()');
+    let config;
+
+    try {
+      const configText = localStorage.getItem('playoffSchedule');
+
+      if (configText) {
+        config = JSON.parse(configText);
+      }
+    } catch (e) {
+      console.warn('[storage.service] loadPlayoffScheduleFromLocalStorage() Error reading from local storage');
+    }
+    return config;
+  }
+
+  public storePlayoffScheduleToLocalStorage(newPlayoffSchedule: ISchedule[]): void {
+    console.log('[storage.service] storePlayoffScheduleToLocalStorage()');
+    try {
+      const configText = JSON.stringify(newPlayoffSchedule);
+      localStorage.setItem('playoffSchedule', configText);
+    } catch (e) {
+      console.warn('[storage.service] storePlayoffScheduleToLocalStorage() Error reading from local storage');
+    }
+  }
+
+  public clearPlayoffScheduleFromStorage(): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    localStorage.removeItem('playoffSchedule');
+    setTimeout(() => {
+      subject.next(true);
+      subject.complete();
+    }, 50);
     return subject;
   }
 }
