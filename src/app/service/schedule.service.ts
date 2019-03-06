@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { ISchedule, IScheduleBase, ITeam, IGameResults } from '../model/nfl.model';
 import { TeamService } from '../service/team.service';
 import { StorageService } from '../service/storage.service';
+import { PlayFakeGame } from '../shared/playFakeGame';
 
 const SCHEDULE: IScheduleBase[] = [
   { 'gameday': 'Thursday, September 7', 'games': [13, 2] },
@@ -121,7 +122,7 @@ export class ScheduleService {
       let counter: number = 0;
       SCHEDULE.forEach(day => {
         for (let i = 0; i < day.games.length; i++) {
-          const currentGame: ISchedule = {
+          const nextGame: ISchedule = {
             id: counter++,
             gameday: day.gameday,
             visitTeam: day.games[i],
@@ -131,7 +132,7 @@ export class ScheduleService {
             quarter: null,
             gameResults: []
           };
-          this.FULL_SCHEDULE.push(currentGame);
+          this.FULL_SCHEDULE.push(nextGame);
           i++;
         }
       });
@@ -218,74 +219,12 @@ export class ScheduleService {
     return this.zeroPad((team.wins / (team.wins + team.losses)), 3);
   }
 
-  generateFakeScore(): number {
-    // console.log('[schedule.service] generateFakeScore()');
-    const scoreArr = [7, 0, 7, 0, 7, 0, 7, 0, 3, 3, 0, 0, 3, 3, 0, 7, 0, 7, 0, 7, 0, 7];
-    const rndIndex = Math.floor(Math.random() * scoreArr.length);
-    return scoreArr[rndIndex];
-  }
-
-  playFakeGame(game: ISchedule, simFast: boolean): Observable<ISchedule> {
-    console.log('[schedule.service] playFakeGame() started');
-
-    const timeout = simFast ? 50 : 500;
-    const subject = new Subject<ISchedule>();
-    const gameCounter = 16;
-    const self = this;
-
-    game.visitScore = 0;
-    game.homeScore = 0;
-
-    (function theLoop (i) {
-      setTimeout(() => {
-        const score: number = self.generateFakeScore();
-
-        let quarter = 'X';
-        switch (i) {
-          case 0: case 1: case 2: case 3: quarter = '1'; break;
-          case 4: case 5: case 6: case 7: quarter = '2'; break;
-          case 8: case 9: case 10: case 11: quarter = '3'; break;
-          case 12: case 13: case 14: case 15: quarter = '4'; break;
-          default: return 'U';
-        }
-
-        game.quarter = quarter;
-
-        if (score > 0) {
-          if ((i % 2) > 0) {
-            // visit
-            game.visitScore += score;
-            game.gameResults.push({ teamScored: game.visitTeam, quarter: quarter, points: score });
-          } else {
-            // home
-            game.homeScore += score;
-            game.gameResults.push({ teamScored: game.homeTeam, quarter: quarter, points: score });
-          }
-        }
-
-        if (++i < gameCounter) {
-          theLoop(i);
-        } else {
-          if (game.visitScore === game.homeScore) {
-            game.homeScore += 3;
-            game.gameResults.push({ teamScored: game.homeTeam, quarter: 'OT', points: 3 });
-          }
-          console.log('[schedule.service] playFakeGame() game over');
-          subject.complete();
-        }
-      }, timeout);
-    })(0);
-
-    setTimeout(() => { subject.next(game); }, 0);
-    return subject;
-  }
-
   playSlowGame(game: ISchedule, simFast: boolean) {
     console.log('[schedule.service] playSlowGame() currentGame: ' + this.currentGame);
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
 
-    this.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
+    PlayFakeGame.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
       console.log('[schedule.service] playSlowGame() playing Game');
       game = gameData;
     }, (err) => {
