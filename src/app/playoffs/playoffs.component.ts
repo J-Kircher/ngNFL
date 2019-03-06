@@ -57,13 +57,11 @@ export class PlayoffsComponent implements OnInit {
         this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
 
         this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;
-        this.aGameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
+        // this.aGameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
+        this.playoffService.arrayGameDay$.subscribe(data => this.aGameDay = data);
 
         this.loading = false;
         // window.scrollTo(0, 0);
-
-        console.log('[playoffs] playoffTeams:');
-        console.log(this.playoffTeams);
       });
 
     }, (err) => {
