@@ -219,9 +219,19 @@ export class PlayoffService {
     return games.length > 0 ? true : false;
   }
 
-  getGamesForTeam(team: number): ISchedule[] {
-    // console.log('[playoff.service] getGamesForTeam() team: ' + team);
-    return this.PLAYOFF_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)));
+  getGamesForTeam(team: number): Observable<ISchedule[]> {
+    console.log('[playoff.service] getGamesForTeam() team: ' + team);
+
+    const subject = new Subject<ISchedule[]>();
+
+    if (this.PLAYOFF_SCHEDULE.length < 1) {
+      this.initPlayoffs();
+    }
+
+    setTimeout(() => {
+      subject.next(this.PLAYOFF_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)))); subject.complete();
+    }, 0);
+    return subject;
   }
 
   getGameById(id: number): ISchedule {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { ScheduleService } from '../service/schedule.service';
 import { TeamService } from '../service/team.service';
+import { ScheduleService } from '../service/schedule.service';
+import { PlayoffService } from '../service/playoff.service';
 import { ITeam, ISchedule, IGameResults } from '../model/nfl.model';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
 import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
@@ -20,6 +21,7 @@ export class TeamScheduleComponent implements OnInit {
   teamsArr: ITeam[] = [];
   teamIndex: number;
   teamSchedule: ISchedule[];
+  playoffSchedule: ISchedule[];
   loading: boolean = true;
 
   dialogReturn: any;
@@ -27,8 +29,9 @@ export class TeamScheduleComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private scheduleService: ScheduleService,
     private teamService: TeamService,
+    private scheduleService: ScheduleService,
+    private playoffService: PlayoffService,
     public dialog: MatDialog
   ) { }
 
@@ -46,10 +49,19 @@ export class TeamScheduleComponent implements OnInit {
         this.scheduleService.getGamesForTeam(this.teamIndex).subscribe((schedData: ISchedule[]) => {
           this.teamSchedule = schedData;
           // console.table(this.teamSchedule);
-          window.scrollTo(0, 0);
-          this.loading = false;
         }, (err) => {
           console.error('[team-schedule] ngOnInit() getGamesForTeam() error: ' + err);
+        }, () => {
+          console.log('[team-schedule] ngOnInit() getGamesForTeam() COMPLETE');
+          this.playoffService.getGamesForTeam(this.teamIndex).subscribe((playSchedData: ISchedule[]) => {
+            this.playoffSchedule = playSchedData;
+            // console.table(this.playoffSchedule);
+            this.loading = false;
+          }, (err) => {
+            console.error('[team-schedule] ngOnInit() playoff getGamesForTeam() error: ' + err);
+          }, () => {
+            console.log('[team-schedule] ngOnInit() playoff getGamesForTeam() COMPLETE');
+          });
         });
       }, (err) => {
         console.error('[team-schedule] ngOnInit() getTeams() error: ' + err);
@@ -74,9 +86,9 @@ export class TeamScheduleComponent implements OnInit {
     this.router.navigate(['/teams/' + abbrev]);
   }
 
-  openResultsDialog(id: number): void {
+  openResultsDialog(id: number, playoffs: boolean = false): void {
     const dialogRef = this.dialog.open(ResultsDialogComponent, {
-      data: { id: id }
+      data: { id: id, playoffs: playoffs }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -87,9 +99,9 @@ export class TeamScheduleComponent implements OnInit {
     });
   }
 
-  openMatchupDialog(id: number): void {
+  openMatchupDialog(id: number, playoffs: boolean = false): void {
     const dialogRef = this.dialog.open(MatchupDialogComponent, {
-      data: { id: id, playoffs: false }
+      data: { id: id, playoffs: playoffs }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -100,14 +112,14 @@ export class TeamScheduleComponent implements OnInit {
     });
   }
 
-  getMatchup(id: number) {
+  getMatchup(id: number, playoffs: boolean = false) {
     // console.log('[team-schedule] getMatchup: ' + id);
 
     this.scheduleService.getGameResults(id).subscribe((results: IGameResults[]) => {
       if (results.length) {
-        this.openResultsDialog(id);
+        this.openResultsDialog(id, playoffs);
       } else {
-        this.openMatchupDialog(id);
+        this.openMatchupDialog(id, playoffs);
       }
     });
   }

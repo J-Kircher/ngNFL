@@ -14,6 +14,15 @@
           <show-score [score]=score></show-score>
         </mat-card>
       </div>
+      <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of playoffSchedule"
+        (click)="getMatchup(score.id, true)">
+        <mat-card class="gameday" matRipple appMaterialElevation>
+          <div class="gameday-text">
+            {{score.gameday}}
+          </div>
+          <show-score [score]=score></show-score>
+        </mat-card>
+      </div>
     </div>
   </div>
 </mat-card>
