@@ -115,7 +115,9 @@ export class TeamScheduleComponent implements OnInit {
   getMatchup(id: number, playoffs: boolean = false) {
     // console.log('[team-schedule] getMatchup: ' + id);
 
-    this.scheduleService.getGameResults(id).subscribe((results: IGameResults[]) => {
+    const service = playoffs ? this.playoffService : this.scheduleService;
+
+    service.getGameResults(id).subscribe((results: IGameResults[]) => {
       if (results.length) {
         this.openResultsDialog(id, playoffs);
       } else {
