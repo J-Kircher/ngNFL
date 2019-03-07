@@ -58,7 +58,7 @@ export class NavBarComponent implements OnInit {
       }
     } else {
       if (!this.postseason) {
-        if (this.scheduleService.playNextGame(this.simSeason, this.simFast)) {
+        if (this.scheduleService.playNextGame(this.simFast)) {
           // Keep playing
         } else {
           console.log('[navbar] simulate() Initialize playoffs');
@@ -72,7 +72,7 @@ export class NavBarComponent implements OnInit {
   }
 
   playAllGames() {
-    if (this.scheduleService.playNextGame(this.simSeason, this.simFast)) {
+    if (this.scheduleService.playNextGame(this.simFast)) {
       // Keep playing
       const timeout = this.simFast ? 0 : 500;
       setTimeout(() => { this.playAllGames(); }, timeout);
@@ -141,10 +141,10 @@ export class NavBarComponent implements OnInit {
         if (this.simSeason) {
           this.playAllGames();
         } else {
-          this.scheduleService.playNextGame(this.simSeason, this.simFast);
+          this.scheduleService.playNextGame(this.simFast);
         }
       } else {
-        this.scheduleService.playNextGame(this.simSeason, this.simFast);
+        this.scheduleService.playNextGame(this.simFast);
       }
     }, (err) => {
       console.error('[navbar] openSimSeasonDialog() afterClosed() error: ' + err);
