@@ -13,6 +13,7 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   NFLCalendarArr: NFLCalendar[] = [];
   gameDay: string;
   gamesArr: ISchedule[] = [];
+  scheduleYear: number = 2018;
 
   constructor(
     private scheduleService: ScheduleService,
@@ -20,8 +21,13 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   ) { }
 
   ngOnInit() {
-    // console.log('[schedule-calendar] ngOnInit()');
-    this.NFLCalendarArr = [{ month: 9, year: 2017}, { month: 10, year: 2017}, { month: 11, year: 2017}, { month: 12, year: 2017}];
+    // console.log('[schedule-calendar] ngOnInit() scheduleYear: ' + this.scheduleYear);
+    this.NFLCalendarArr = [
+      { month: 9, year: this.scheduleYear },
+      { month: 10, year: this.scheduleYear },
+      { month: 11, year: this.scheduleYear },
+      { month: 12, year: this.scheduleYear }
+    ];
     this.scheduleService.currentGameDay$.subscribe(data => this.gameDay = data);
   }
 
