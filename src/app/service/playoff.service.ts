@@ -113,7 +113,6 @@ export class PlayoffService {
 
   checkNextPlayoffRound() {
     console.log('[playoff.service] checkNextPlayoffRound() check for more rounds or season over');
-    console.log(this.arrayGameDay);
     this.currentPlayoffGameDay = this.PLAYOFF_SCHEDULE[this.currentPlayoffGame - 1].gameday;
     let index = this.arrayGameDay.findIndex(day => day === this.currentPlayoffGameDay);
 
@@ -123,7 +122,7 @@ export class PlayoffService {
       this.setCurrentPlayoffGameDay(this.currentPlayoffGameDay);
       console.log('[playoff.service] checkNextPlayoffRound() currentPlayoffGameDay: ' + this.currentPlayoffGameDay);
 
-      if (index === 1) {
+      if (index === 1 && this.PLAYOFF_SCHEDULE[3].quarter === 'F') {
         console.log('[playoff.service] checkNextPlayoffRound() Division Round, check Wildcard Weekend results');
         if (this.PLAYOFF_SCHEDULE[0].visitScore > this.PLAYOFF_SCHEDULE[0].homeScore) {
           this.PLAYOFF_SCHEDULE[4].visitTeam = this.PLAYOFF_SCHEDULE[0].visitTeam;
@@ -148,7 +147,7 @@ export class PlayoffService {
           }
         }
       }
-      if (index === 2) {
+      if (index === 2 && this.PLAYOFF_SCHEDULE[7].quarter === 'F') {
         console.log('[playoff.service] checkNextPlayoffRound() Conference Round, check Division Round results');
         if ( (this.PLAYOFF_SCHEDULE[4].visitScore > this.PLAYOFF_SCHEDULE[4].homeScore)
           && (this.PLAYOFF_SCHEDULE[6].visitScore > this.PLAYOFF_SCHEDULE[6].homeScore) ) {
@@ -185,7 +184,7 @@ export class PlayoffService {
           }
         }
       }
-      if (index === 3) {
+      if (index === 3 && this.PLAYOFF_SCHEDULE[9].quarter === 'F') {
         console.log('[playoff.service] checkNextPlayoffRound() Super Bowl, check Conference Round results');
         if (this.PLAYOFF_SCHEDULE[8].visitScore > this.PLAYOFF_SCHEDULE[8].homeScore) {
           console.log('AFC UPSET conf game');
@@ -262,9 +261,9 @@ export class PlayoffService {
 
       this.storageService.storePlayoffScheduleToLocalStorage(this.PLAYOFF_SCHEDULE);
 
-      if (this.currentPlayoffGame === this.PLAYOFF_SCHEDULE.length) {
-        console.log('[playoff.service] playPlayoffGame() currentPlayoffGame: ' + this.currentPlayoffGame);
-        console.log('[playoff.service] playPlayoffGame() Time to build the next round');
+      if (game.id === (this.PLAYOFF_SCHEDULE.length - 1)) {
+        console.log('[playoff.service] playGame() currentPlayoffGame: ' + this.currentPlayoffGame);
+        console.log('[playoff.service] playGame() Last game, time to build the next round');
         this.checkNextPlayoffRound();
       }
     });
