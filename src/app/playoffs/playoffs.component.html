@@ -10,25 +10,95 @@
       </div>
     </div> -->
 
-    <mat-card>
-      <div class="schedule" *ngFor="let day of aGameDay">
-        <ng-container *ngIf="getGamesForDay(day).length">
-          <div class="gameday-text">
-            {{day}}
-          </div>
-          <div fxLayout="row wrap" fxLayout.xs="column wrap"
-            [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '100ms' } }">
-            <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
-              (click)="getMatchup(score.id)">
-              <mat-card class="gameday" matRipple appMaterialElevation>
-                <show-score [score]=score></show-score>
-              </mat-card>
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="Bracket">
+        <div class="bracket">
+          <div class="wrapper">
+            <div class="item">
+              <div class="item-parent">
+                <p><img src="/assets/images/{{ getAbbrev(10, 'v') }}.png"></p>
+              </div>
+              <div class="item-childrens">
+                <div class="item-child">
+                  <div class="item">
+                    <div class="item-parent">
+                      <p><img src="/assets/images/{{ getAbbrev(8, 'v') }}.png"></p>
+                    </div>
+                    <div class="item-childrens">
+                      <div class="item-child">
+                        <div class="item">
+                          <div class="item-parent">
+                            <p><img src="/assets/images/{{ getAbbrev(4, 'v') }}.png"></p>
+                          </div>
+                          <div class="item-childrens">
+                            <div class="item-child">
+                              <p><img src="/assets/images/{{ getAbbrev(0, 'v') }}.png"></p>
+                            </div>
+                            <div class="item-child">
+                              <p><img src="/assets/images/{{ getAbbrev(0, 'h') }}.png"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="item-child">
+                        <p><img src="/assets/images/{{ getAbbrev(4, 'h') }}.png"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-child">
+                  <div class="item">
+                    <div class="item-parent">
+                      <p><img src="/assets/images/{{ getAbbrev(8, 'h') }}.png"></p>
+                    </div>
+                    <div class="item-childrens">
+                      <div class="item-child">
+                        <div class="item">
+                          <div class="item-parent">
+                            <p><img src="/assets/images/{{ getAbbrev(6, 'v') }}.png"></p>
+                          </div>
+                          <div class="item-childrens">
+                            <div class="item-child">
+                              <p><img src="/assets/images/{{ getAbbrev(2, 'v') }}.png"></p>
+                            </div>
+                            <div class="item-child">
+                              <p><img src="/assets/images/{{ getAbbrev(2, 'h') }}.png"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="item-child">
+                        <p><img src="/assets/images/{{ getAbbrev(6, 'h') }}.png"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </ng-container>
-      </div>
-    </mat-card>
-
+        </div>
+      </mat-tab>
+      <mat-tab label="Schedule">
+        <mat-card>
+          <div class="schedule" *ngFor="let day of aGameDay">
+            <ng-container *ngIf="getGamesForDay(day).length">
+              <div class="gameday-text">
+                {{day}}
+              </div>
+              <div fxLayout="row wrap" fxLayout.xs="column wrap"
+                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '100ms' } }">
+                <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
+                  (click)="getMatchup(score.id)">
+                  <mat-card class="gameday" matRipple appMaterialElevation>
+                    <show-score [score]=score></show-score>
+                  </mat-card>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
 
     <!-- <div style="margin: 12px;">
       <div *ngFor="let day of aGameDay">

@@ -205,8 +205,8 @@ export class PlayoffService {
       }
     }
 
-    console.log('[playoff.service] checkNextPlayoffRound() PLAYOFF_SCHEDULE:');
-    console.log(this.PLAYOFF_SCHEDULE);
+    // console.log('[playoff.service] checkNextPlayoffRound() PLAYOFF_SCHEDULE:');
+    // console.log(this.PLAYOFF_SCHEDULE);
     this.storageService.storePlayoffScheduleToLocalStorage(this.PLAYOFF_SCHEDULE);
   }
 

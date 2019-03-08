@@ -58,7 +58,7 @@ export class PlayoffsComponent implements OnInit {
 
         this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;
         // this.aGameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
-        this.playoffService.arrayGameDay$.subscribe(data => this.aGameDay = data);
+        this.playoffService.arrayGameDay$.subscribe(pData => this.aGameDay = pData);
 
         this.loading = false;
         // window.scrollTo(0, 0);
@@ -70,6 +70,20 @@ export class PlayoffsComponent implements OnInit {
 
     this.playoffService.currentPlayoffGame$.subscribe(data => this.currentPlayoffGame = data);
     this.playoffService.currentPlayoffGameDay$.subscribe(data => this.currentPlayoffGameDay = data);
+  }
+
+  getAbbrev(id: number, hv: string) {
+    let abbrev = 'blank';
+
+    if (this.playoffGames[id]) {
+      if (hv === 'v') {
+        abbrev = this.teamsArr[this.playoffGames[id].visitTeam].abbrev;
+      } else {
+        abbrev = this.teamsArr[this.playoffGames[id].homeTeam].abbrev;
+      }
+    }
+
+    return abbrev;
   }
 
   showTeam(teamId: number) {

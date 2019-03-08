@@ -33,35 +33,84 @@ mat-card {
       }
     }
   }
+
+  .bracket {
+    $side-margin: 50px;
+    $vertical-margin: 10px;
+
+    .wrapper{
+      display: flex;
+      height: 600px;
+      justify-content: center;
+    }
+
+    .item{
+      display: flex;
+      flex-direction: row-reverse;
+      p{
+        padding: 0px;
+        margin: 0;
+        height: 55px;
+        width: 82px;
+        // background-color: Beige;
+      }
+
+      &-parent{
+        position: relative;
+        margin-left: $side-margin;
+        display: flex;
+        align-items: center;
+        &:after{
+            position: absolute;
+            content: '';
+            width: $side-margin/2;
+            height: 2px;
+            left: 0;
+            top: 50%;
+            background-color: rgba(0, 128, 0, 0.5);
+            transform: translateX(-100%);
+        }
+      }
+      &-childrens{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      &-child{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        margin-top: $vertical-margin;
+        margin-bottom: $vertical-margin;
+        position: relative;
+        &:before{
+          content: '';
+          position: absolute;
+          background-color: rgba(0, 128, 0, 0.5);
+          right: 0;
+          top: 50%;
+          transform: translateX(100%);
+          width: 25px;
+          height: 2px;
+        }
+        &:after{
+          content: '';
+          position: absolute;
+          background-color: rgba(0, 128, 0, 0.5);
+          right: -$side-margin / 2;
+          height: calc(50% + 22px) ;
+          width: 2px;
+          top: 50%;
+        }
+        &:last-child{
+          &:after{
+            transform: translateY(-100%);
+          }
+        }
+        &:only-child:after{
+          display: none;
+        }
+      }
+    }
+  }
 }
-
-// .play-img {
-//   position: relative;
-//   left: -32.5px;
-// }
-// .sb-img {
-//   position: relative;
-//   left: -9px;
-// }
-
-// .flex-container {
-//   display: flex;
-//   justify-content: space-around;
-// }
-// .flex-container-col {
-//   align-self: center;
-//   flex-direction: column;
-//   color: white;
-//   margin: 10px 0px;
-//   text-align: center;
-//   font-size: 30px;
-// }
-// .flex-container-col>div {
-//   background-color: #c1f1c1;
-//   width: 82px;
-//   height: 55px;
-//   border: 0px;
-//   margin: 10px;
-//   text-align: center;
-//   font-size: 30px;
-// }
