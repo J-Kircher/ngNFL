@@ -15,100 +15,106 @@ mat-card {
     border: 0px;
   }
 
-  .schedule {
-    .gameday-text {
-      @include boldItalText($medFontSize);
-      margin: 6px;
-    }
+  mat-tab-group {
+    background-color: #EEE;
+    border-radius: 5px;
+    padding: 5px;
 
-    .gameday {
-      background-color: #DDD;
-      cursor: pointer;
-      margin: 6px;
-      transition: background-color 280ms cubic-bezier(.4,0,.2,1);
-
-      &:hover {
-        border-color: rgba(0, 0, 0, 0.8);
-        background-color: rgb(238, 238, 238);
-      }
-    }
-  }
-
-  .bracket {
-    $side-margin: 50px;
-    $vertical-margin: 10px;
-
-    .wrapper{
-      display: flex;
-      height: 600px;
-      justify-content: center;
-    }
-
-    .item{
-      display: flex;
-      flex-direction: row-reverse;
-      p{
-        padding: 0px;
-        margin: 0;
-        height: 55px;
-        width: 82px;
-        // background-color: Beige;
+    .schedule {
+      .gameday-text {
+        @include boldItalText($medFontSize);
+        margin: 6px;
       }
 
-      &-parent{
-        position: relative;
-        margin-left: $side-margin;
-        display: flex;
-        align-items: center;
-        &:after{
-            position: absolute;
-            content: '';
-            width: $side-margin/2;
-            height: 2px;
-            left: 0;
-            top: 50%;
-            background-color: rgba(0, 128, 0, 0.5);
-            transform: translateX(-100%);
+      .gameday {
+        background-color: #DDD;
+        cursor: pointer;
+        margin: 6px;
+        transition: background-color 280ms cubic-bezier(.4,0,.2,1);
+
+        &:hover {
+          border-color: rgba(0, 0, 0, 0.8);
+          background-color: rgb(238, 238, 238);
         }
       }
-      &-childrens{
+    }
+
+    .bracket {
+      $side-margin: 50px;
+      $vertical-margin: 10px;
+
+      .wrapper{
         display: flex;
-        flex-direction: column;
+        height: 600px;
         justify-content: center;
       }
-      &-child{
+
+      .item{
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        margin-top: $vertical-margin;
-        margin-bottom: $vertical-margin;
-        position: relative;
-        &:before{
-          content: '';
-          position: absolute;
-          background-color: rgba(0, 128, 0, 0.5);
-          right: 0;
-          top: 50%;
-          transform: translateX(100%);
-          width: 25px;
-          height: 2px;
+        flex-direction: row-reverse;
+        p{
+          padding: 0px;
+          margin: 0;
+          height: 55px;
+          width: 82px;
+          // background-color: Beige;
         }
-        &:after{
-          content: '';
-          position: absolute;
-          background-color: rgba(0, 128, 0, 0.5);
-          right: -$side-margin / 2;
-          height: calc(50% + 22px) ;
-          width: 2px;
-          top: 50%;
-        }
-        &:last-child{
+
+        &-parent{
+          position: relative;
+          margin-left: $side-margin;
+          display: flex;
+          align-items: center;
           &:after{
-            transform: translateY(-100%);
+              position: absolute;
+              content: '';
+              width: $side-margin/2;
+              height: 2px;
+              left: 0;
+              top: 50%;
+              background-color: rgba(0, 128, 0, 0.5);
+              transform: translateX(-100%);
           }
         }
-        &:only-child:after{
-          display: none;
+        &-childrens{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        &-child{
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-end;
+          margin-top: $vertical-margin;
+          margin-bottom: $vertical-margin;
+          position: relative;
+          &:before{
+            content: '';
+            position: absolute;
+            background-color: rgba(0, 128, 0, 0.5);
+            right: 0;
+            top: 50%;
+            transform: translateX(100%);
+            width: 25px;
+            height: 2px;
+          }
+          &:after{
+            content: '';
+            position: absolute;
+            background-color: rgba(0, 128, 0, 0.5);
+            right: -$side-margin / 2;
+            height: calc(50% + 22px) ;
+            width: 2px;
+            top: 50%;
+          }
+          &:last-child{
+            &:after{
+              transform: translateY(-100%);
+            }
+          }
+          &:only-child:after{
+            display: none;
+          }
         }
       }
     }
