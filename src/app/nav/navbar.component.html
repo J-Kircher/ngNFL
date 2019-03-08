@@ -13,7 +13,7 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <button mat-raised-button type="button" id="simulate" [disabled]="simBtnDisabled()" (click)="simulate()">{{ postseason ? 'Sim Playoffs' : 'Simulate' }}</button>
+  <button mat-raised-button id="simulate" [disabled]="simBtnDisabled()" [ngClass]="{ disabled: simBtnDisabled() }" (click)="simulate()">{{ postseason ? 'Sim Playoffs' : 'Simulate' }}</button>
 
   <div class="spin">
     <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
