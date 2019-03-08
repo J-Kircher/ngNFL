@@ -3,8 +3,9 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
-import { ISchedule, IScheduleBase, ITeam, IGameResults } from '../model/nfl.model';
+import { ISchedule, ITeam, IGameResults } from '../model/nfl.model';
 import { TeamService } from '../service/team.service';
+import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
 import { PlayFakeGame } from '../shared/playFakeGame';
 
@@ -30,6 +31,7 @@ export class ScheduleService {
 
   constructor(
     private teamService: TeamService,
+    private gameService: GameService,
     private storageService: StorageService
   ) { }
 
@@ -176,11 +178,13 @@ export class ScheduleService {
 
     PlayFakeGame.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
       console.log('[schedule.service] playGame() playing Game');
+      this.gameService.setGameActive(true);
       game = gameData;
     }, (err) => {
       console.error('[schedule.service] playGame() playFakeGame error: ' + err);
     }, () => {
       console.log('[schedule.service] playGame() playFakeGame over');
+      this.gameService.setGameActive(false);
       game.quarter = 'F';
       if (game.visitScore > game.homeScore) {
         console.log('[schedule.service] playGame() Visitors Win');

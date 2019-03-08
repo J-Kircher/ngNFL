@@ -13,14 +13,15 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <button mat-raised-button type="button" id="simulate" [disabled]="simSeason" (click)="simulate()">{{ postseason ? 'Sim Playoffs' : 'Simulate' }}</button>
+  <button mat-raised-button type="button" id="simulate" [disabled]="simBtnDisabled()" (click)="simulate()">{{ postseason ? 'Sim Playoffs' : 'Simulate' }}</button>
 
   <div class="spin">
     <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
       <mat-icon>settings</mat-icon>
     </button>
     <mat-menu #settingsMenu>
-      <a mat-menu-item id="reset" (click)="resetSeason()">Reset Season</a>
+        <a mat-menu-item id="toggle" (click)="toggleGamePlay()">One Game at a Time: {{ oneGameAtATime }}</a>
+        <a mat-menu-item id="reset" (click)="resetSeason()">Reset Season</a>
     </mat-menu>
   </div>
 

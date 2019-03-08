@@ -33,6 +33,7 @@ import { SimseasonDialogComponent } from './dialog/simseason/simseason-dialog.co
 import { ResultsDialogComponent } from './dialog/results/results-dialog.component';
 import { StorageService } from './service/storage.service';
 import { MaterialElevationDirective } from './shared/material-elevation.directive';
+import { GameService } from './service/game.service';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -83,6 +84,7 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     TeamService,
     ScheduleService,
     PlayoffService,
+    GameService,
     StorageService,
     ConfigService,
     {

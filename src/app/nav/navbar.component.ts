@@ -6,6 +6,7 @@ import { TeamService } from '../service/team.service';
 import { StorageService } from '../service/storage.service';
 import { ScheduleService } from '../service/schedule.service';
 import { PlayoffService } from '../service/playoff.service';
+import { GameService } from '../service/game.service';
 import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.component';
 import { SimseasonDialogComponent } from '../dialog/simseason/simseason-dialog.component';
 
@@ -23,6 +24,8 @@ export class NavBarComponent implements OnInit {
   currentGame: number = 0;
   currentGameDay: string;
   postseason: boolean = false;
+  oneGameAtATime: boolean = true;
+  gameActive: boolean = false;
 
   constructor(
     private router: Router,
@@ -30,6 +33,7 @@ export class NavBarComponent implements OnInit {
     private storageService: StorageService,
     private scheduleService: ScheduleService,
     private playoffService: PlayoffService,
+    private gameService: GameService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
@@ -43,6 +47,7 @@ export class NavBarComponent implements OnInit {
     });
     this.scheduleService.currentGameDay$.subscribe(data => this.currentGameDay = data);
     this.scheduleService.endOfSeason$.subscribe(data => this.postseason = data);
+    this.gameService.gameActive$.subscribe(data => this.gameActive = data);
   }
 
   getTopTeams() {
@@ -71,6 +76,10 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  simBtnDisabled() {
+    return this.simSeason || (this.gameActive && this.oneGameAtATime);
+  }
+
   playAllGames() {
     if (this.scheduleService.playNextGame(this.simFast)) {
       // Keep playing
@@ -80,6 +89,10 @@ export class NavBarComponent implements OnInit {
       this.simSeason = false;
       console.log('[navbar] playAllGames() End of Season');
     }
+  }
+
+  toggleGamePlay() {
+    this.oneGameAtATime = !this.oneGameAtATime;
   }
 
   resetSeason() {
