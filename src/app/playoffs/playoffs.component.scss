@@ -44,9 +44,14 @@ mat-card {
       $vertical-margin: 10px;
       $line-color: rgba(0, 128, 0, 0.5);
 
+      .playoff-text {
+        @include boldItalText($medFontSize);
+        margin: 6px;
+      }
+
       .wrapper {
         display: flex;
-        height: 600px;
+        height: 522px;
         justify-content: center;
 
         &.left {
