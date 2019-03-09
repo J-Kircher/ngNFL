@@ -40,80 +40,153 @@ mat-card {
     }
 
     .bracket {
-      $side-margin: 50px;
+      $side-margin: 40px;
       $vertical-margin: 10px;
+      $line-color: rgba(0, 128, 0, 0.5);
 
-      .wrapper{
+      .wrapper {
         display: flex;
         height: 600px;
         justify-content: center;
-      }
 
-      .item{
-        display: flex;
-        flex-direction: row-reverse;
-        p{
-          padding: 0px;
-          margin: 0;
-          height: 55px;
-          width: 82px;
-          // background-color: Beige;
-        }
+        &.left {
+          .item {
+            display: flex;
+            flex-direction: row-reverse;
+            p {
+              padding: 0px;
+              margin: 0;
+              height: 55px;
+              width: 82px;
+              // background-color: $line-color;
+            }
 
-        &-parent{
-          position: relative;
-          margin-left: $side-margin;
-          display: flex;
-          align-items: center;
-          &:after{
-              position: absolute;
-              content: '';
-              width: $side-margin/2;
-              height: 2px;
-              left: 0;
-              top: 50%;
-              background-color: rgba(0, 128, 0, 0.5);
-              transform: translateX(-100%);
-          }
-        }
-        &-childrens{
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        &-child{
-          display: flex;
-          align-items: flex-start;
-          justify-content: flex-end;
-          margin-top: $vertical-margin;
-          margin-bottom: $vertical-margin;
-          position: relative;
-          &:before{
-            content: '';
-            position: absolute;
-            background-color: rgba(0, 128, 0, 0.5);
-            right: 0;
-            top: 50%;
-            transform: translateX(100%);
-            width: 25px;
-            height: 2px;
-          }
-          &:after{
-            content: '';
-            position: absolute;
-            background-color: rgba(0, 128, 0, 0.5);
-            right: -$side-margin / 2;
-            height: calc(50% + 22px) ;
-            width: 2px;
-            top: 50%;
-          }
-          &:last-child{
-            &:after{
-              transform: translateY(-100%);
+            &-parent {
+              position: relative;
+              margin-left: $side-margin;
+              display: flex;
+              align-items: center;
+              &:after {
+                  position: absolute;
+                  content: '';
+                  width: $side-margin/2;
+                  height: 2px;
+                  left: 0;
+                  top: 50%;
+                  background-color: $line-color;
+                  transform: translateX(-100%);
+              }
+            }
+            &-childrens {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            &-child {
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-end;
+              margin-top: $vertical-margin;
+              margin-bottom: $vertical-margin;
+              position: relative;
+              &:before {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                right: 0;
+                top: 50%;
+                transform: translateX(100%);
+                width: $side-margin / 2;
+                height: 2px;
+              }
+              &:after {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                right: -$side-margin / 2;
+                height: calc(50% + 22px) ;
+                width: 2px;
+                top: 50%;
+              }
+              &:last-child {
+                &:after {
+                  transform: translateY(-100%);
+                }
+              }
+              &:only-child:after {
+                display: none;
+              }
             }
           }
-          &:only-child:after{
-            display: none;
+        }
+        &.right {
+          .item {
+            display: flex;
+            flex-direction: row;
+            p {
+              padding: 0px;
+              margin: 0;
+              height: 55px;
+              width: 82px;
+              // background-color: $line-color;
+            }
+
+            &-parent {
+              position: relative;
+              margin-right: $side-margin;
+              display: flex;
+              align-items: center;
+              &:after {
+                  position: absolute;
+                  content: '';
+                  width: $side-margin/2;
+                  height: 2px;
+                  right: 0;
+                  top: 50%;
+                  background-color: $line-color;
+                  transform: translateX(100%);
+              }
+            }
+            &-childrens {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            &-child {
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              margin-top: $vertical-margin;
+              margin-bottom: $vertical-margin;
+              position: relative;
+              &:before {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                left: 0;
+                top: 50%;
+                transform: translateX(-100%);
+                width: $side-margin / 2;
+                height: 2px;
+              }
+              &:after {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                left: -$side-margin / 2;
+                height: calc(50% + 22px) ;
+                width: 2px;
+                top: 50%;
+              }
+              &:last-child {
+                &:after {
+                  transform: translateY(-100%);
+                }
+              }
+              &:only-child:after {
+                display: none;
+              }
+            }
           }
         }
       }

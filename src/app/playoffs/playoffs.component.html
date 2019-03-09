@@ -13,8 +13,8 @@
     <mat-tab-group mat-stretch-tabs>
       <mat-tab label="Bracket">
         <mat-card>
-          <div class="bracket">
-            <div class="wrapper">
+          <div class="bracket" fxLayout.gt-md="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
+            <div class="wrapper left">
               <div class="item">
                 <div class="item-parent">
                   <p><img src="/assets/images/{{ getAbbrev(10, 'v') }}.png"></p>
@@ -77,7 +77,7 @@
                 </div>
               </div>
             </div>
-            <div class="wrapper">
+            <div class="wrapper right">
               <div class="item">
                 <div class="item-parent">
                   <p><img src="/assets/images/{{ getAbbrev(10, 'h') }}.png"></p>
