@@ -108,7 +108,11 @@ export class PlayoffService {
     if (this.currentPlayoffGame < this.PLAYOFF_SCHEDULE.length) {
       this.currentPlayoffGameDay = this.PLAYOFF_SCHEDULE[this.currentPlayoffGame].gameday;
       this.setCurrentPlayoffGameDay(this.currentPlayoffGameDay);
+      // console.log('[playoff.service] buildPlayoffSchedule() 1 currentPlayoffGameDay: ' + this.currentPlayoffGameDay);
     } else {
+      this.currentPlayoffGameDay = this.PLAYOFF_SCHEDULE[this.currentPlayoffGame - 1].gameday;
+      this.setCurrentPlayoffGameDay(this.currentPlayoffGameDay);
+      // console.log('[playoff.service] buildPlayoffSchedule() 2 currentPlayoffGameDay: ' + this.currentPlayoffGameDay);
       this.checkNextPlayoffRound();
     }
   }
@@ -321,16 +325,18 @@ export class PlayoffService {
 
     if (this.PlayoffTeams.length) {
       // console.log('[playoff.service] getPlayoffTeams() PlayoffTeams already BUILT');
+      subject.complete();
     } else {
       // console.log('[playoff.service] getPlayoffTeams() Need to build Playoff Teams');
       this.getAFCPlayoffTeams();
       this.getNFCPlayoffTeams();
       setTimeout(() => {
         this.PlayoffTeams = this.AFCPlayoffTeams.concat(this.NFCPlayoffTeams);
+        subject.complete();
       }, 0);
     }
 
-    setTimeout(() => { subject.next(this.PlayoffTeams); subject.complete(); }, 0);
+    setTimeout(() => { subject.next(this.PlayoffTeams); }, 0);
     return subject;
   }
 

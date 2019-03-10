@@ -1,6 +1,6 @@
 <mat-card>
   <div class="gameday-text">
-    {{gameDay}}
+    {{ !postseason ? gameDay : playoffGameDay }}
   </div>
   <div class="div-scroll">
     <div *ngFor="let score of gamesArr" (click)="getResults(score.id)">

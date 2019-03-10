@@ -24,6 +24,8 @@ export class NavBarComponent implements OnInit {
   currentGame: number = 0;
   currentGameDay: string;
   postseason: boolean = false;
+  playoffTeams: number[] = [];
+  calledInitPlayoffs: boolean = false;
   oneGameAtATime: boolean = true;
   gameActive: boolean = false;
 
@@ -50,6 +52,26 @@ export class NavBarComponent implements OnInit {
     this.gameService.gameActive$.subscribe(data => this.gameActive = data);
   }
 
+  initPlayoffs() {
+    if (this.postseason && !this.calledInitPlayoffs) {
+      if (this.playoffTeams.length === 0) {
+        this.playoffService.getPlayoffTeams().subscribe((tData: number[]) => {
+          this.playoffTeams = tData;
+        }, (err) => {
+          console.error('[navbar] initPlayoffs() getPlayoffTeams() error: ' + err);
+        }, () => {
+          // console.log('[navbar] initPlayoffs() getPlayoffTeams() COMPLETE');
+          // console.log('[navbar] initPlayoffs() calling initPlayoffs()');
+          this.playoffService.initPlayoffs();
+          this.calledInitPlayoffs = true;
+        });
+      }
+    }
+    if (!this.calledInitPlayoffs) {
+      setTimeout(() => { this.initPlayoffs(); }, 1000);
+    }
+  }
+
   getTopTeams() {
     this.openTopTeamsDialog();
   }
@@ -66,8 +88,8 @@ export class NavBarComponent implements OnInit {
         if (this.scheduleService.playNextGame(this.simFast)) {
           // Keep playing
         } else {
-          console.log('[navbar] simulate() Initialize playoffs');
-          this.playoffService.initPlayoffs();
+          console.log('[navbar] simulate() season over, calling initPlayoffs()');
+          this.initPlayoffs();
         }
       } else {
         console.log('[navbar] simulate() Play a playoff game!');
@@ -87,7 +109,8 @@ export class NavBarComponent implements OnInit {
       setTimeout(() => { this.playAllGames(); }, timeout);
     } else {
       this.simSeason = false;
-      console.log('[navbar] playAllGames() End of Season');
+      console.log('[navbar] playAllGames() sim season complete, calling initPlayoffs()');
+      this.initPlayoffs();
     }
   }
 
@@ -116,6 +139,7 @@ export class NavBarComponent implements OnInit {
         this.simSeason = false;
         this.simFast = false;
         this.postseason = false;
+        this.calledInitPlayoffs = false;
         this.openSnackBar('Season reset!', '');
 
         if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {

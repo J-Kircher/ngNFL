@@ -93,10 +93,10 @@ export class ScheduleService {
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
     }
 
-    this.finalGame = this.FULL_SCHEDULE.length;
-    this.currentGameDay = this.currentGame < this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
+    this.finalGame = (this.FULL_SCHEDULE.length - 1);
+    this.currentGameDay = this.currentGame <= this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
     this.setCurrentGameDay(this.currentGameDay);
-    this.endOfSeason = this.currentGame >= this.finalGame;
+    this.endOfSeason = this.currentGame > this.finalGame;
     this.setEndOfSeason(this.endOfSeason);
 
     console.log('[schedule.service] buildFullSchedule() Complete!');
@@ -231,6 +231,12 @@ export class ScheduleService {
 
       this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
 
+      if (game.id === this.finalGame) {
+        console.log('[schedule.service] playGame() Regular Season Over');
+        this.endOfSeason = true;
+        this.setEndOfSeason(this.endOfSeason);
+      }
+
       // this.storageService.storeTeamsToLocalStorage(this.teamService.getAllCurrentTeams());
       this.teamService.getAllCurrentTeams().subscribe((teamData: ITeam[]) => {
         this.storageService.storeTeamsToLocalStorage(teamData);
@@ -256,8 +262,6 @@ export class ScheduleService {
       console.log('[schedule.service] playNextGame() Season Over');
       this.currentGameDay = 'Playoffs';
       this.setCurrentGameDay(this.currentGameDay);
-      this.endOfSeason = true;
-      this.setEndOfSeason(this.endOfSeason);
       return false;
     }
   }
