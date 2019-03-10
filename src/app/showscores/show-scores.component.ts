@@ -4,11 +4,13 @@ import { ScheduleService } from '../service/schedule.service';
 import { PlayoffService } from '../service/playoff.service';
 import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
 import { ISchedule } from '../model/nfl.model';
+import { listAnimation } from '../shared/animations';
 
 @Component({
   selector: 'show-scores',
   templateUrl: './show-scores.component.html',
-  styleUrls: ['./show-scores.component.scss']
+  styleUrls: ['./show-scores.component.scss'],
+  animations: [listAnimation]
 })
 
 export class ShowScoresComponent implements OnInit, DoCheck {

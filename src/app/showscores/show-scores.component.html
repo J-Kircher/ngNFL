@@ -2,7 +2,7 @@
   <div class="gameday-text">
     {{ !postseason ? gameDay : playoffGameDay }}
   </div>
-  <div class="div-scroll">
+  <div class="div-scroll" [@listAnimations]="{ value: gamesArr.length, params: { stagger: '100ms' } }">
     <div *ngFor="let score of gamesArr.slice().reverse()" (click)="getResults(score.id)">
       <mat-card class="scoreboard" matRipple appMaterialElevation>
         <show-score [score]=score></show-score>
