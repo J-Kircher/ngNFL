@@ -39,6 +39,17 @@
   button {
     margin: 10px;
 
+    &#Simulate {
+      width: 80px;
+      height: 32px;
+      line-height: 24px;
+
+      &.disabled {
+        background-color: rgba(0, 0, 0, 0.4);
+        color: rgba(200, 200, 200, 0.6);
+      }
+    }
+
     &.settings-mini-fab {
       padding: 0;
       width: 30px;
@@ -49,11 +60,6 @@
         line-height: .7em;
         font-size: $xxFontSize;
       }
-    }
-
-    &.disabled {
-      background-color: rgba(0, 0, 0, 0.4);
-      color: rgba(200, 200, 200, 0.6);
     }
   }
 
