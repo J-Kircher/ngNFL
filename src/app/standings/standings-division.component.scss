@@ -47,11 +47,11 @@ mat-card {
           }
           .team-city {
             @include normalText($medFontSize);
-            -webkit-padding-start: 5px;
+            padding-left: 5px;
           }
           .team-name {
             @include boldText($lgFontSize);
-            -webkit-padding-start: 5px;
+            padding-left: 5px;
           }
         }
       }
