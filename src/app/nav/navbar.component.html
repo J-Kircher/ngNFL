@@ -14,7 +14,7 @@
   <span fxFlex="1 1 auto"></span>
 
   <button mat-raised-button id="Simulate" (click)="simulate()" [disabled]="simBtnDisabled()"
-    [appSpinnerButton]="gameActive" [ngClass]="{ disabled: simBtnDisabled() }">Simulate</button>
+    [appSpinnerButton]="gameActive || simSeason" [ngClass]="{ disabled: simBtnDisabled() }">Simulate</button>
 
   <div class="spin">
     <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">

@@ -53,6 +53,7 @@ export class NavBarComponent implements OnInit {
   }
 
   initPlayoffs() {
+    console.log('[navbar] initPlayoffs()');
     if (this.postseason && !this.calledInitPlayoffs) {
       if (this.playoffTeams.length === 0) {
         this.playoffService.getPlayoffTeams().subscribe((tData: number[]) => {
@@ -68,7 +69,7 @@ export class NavBarComponent implements OnInit {
       }
     }
     if (!this.calledInitPlayoffs) {
-      setTimeout(() => { this.initPlayoffs(); }, 1000);
+      setTimeout(() => { this.initPlayoffs(); }, 1005);
     }
   }
 
