@@ -33,6 +33,7 @@
     <a mat-menu-item [routerLink]="['/teams']" id="show">Show Teams</a>
     <a mat-menu-item [routerLink]="['/schedule']" id="schedule">Schedule</a>
     <a mat-menu-item [routerLink]="['/standings']" id="standings">Standings</a>
+    <a mat-menu-item [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a>
     <a mat-menu-item id="topTeams" (click)="getTopTeams()">Top Teams</a>
     <a mat-menu-item id="help">Help</a>
   </mat-menu>
