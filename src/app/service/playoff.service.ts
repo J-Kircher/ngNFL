@@ -19,23 +19,26 @@ const SCHEDULE: IScheduleBase[] = [
 @Injectable()
 export class PlayoffService {
   PLAYOFF_SCHEDULE: ISchedule[] = [];
-  arrayGameDay: string[] = [];
+  GameDay: string[] = [];
   currentPlayoffGame: number = 0;
   currentPlayoffGameDay: string;
   AFCPlayoffTeams: number[] = [];
   NFCPlayoffTeams: number[] = [];
   PlayoffTeams: number[] = [];
+  PlayoffBracket: number[] = new Array(22);
   SuperBowlChamp: number;
 
   // Observable sources
   private currentPlayoffGameSource = new BehaviorSubject<number>(0);
   private currentPlayoffGameDaySource = new BehaviorSubject<string>('');
-  private arrayGameDaySource = new BehaviorSubject<string[]>([]);
+  private GameDaySource = new BehaviorSubject<string[]>([]);
+  private PlayoffBracketSource = new BehaviorSubject<number[]>(new Array(22));
 
   // Observable streams
   currentPlayoffGame$ = this.currentPlayoffGameSource.asObservable();
   currentPlayoffGameDay$ = this.currentPlayoffGameDaySource.asObservable();
-  arrayGameDay$ = this.arrayGameDaySource.asObservable();
+  GameDay$ = this.GameDaySource.asObservable();
+  PlayoffBracket$ = this.PlayoffBracketSource.asObservable();
 
   constructor(
     private teamService: TeamService,
@@ -52,9 +55,13 @@ export class PlayoffService {
     // console.log('[playoff.service] setPlayoffcurrentPlayoffGameDay() data: ' + data);
     this.currentPlayoffGameDaySource.next(data);
   }
-  setArrayGameDay(data: string[]) {
-    // console.log('[playoff.service] setArrayGameDay() data: ' + data);
-    this.arrayGameDaySource.next(data);
+  setGameDay(data: string[]) {
+    // console.log('[playoff.service] setGameDay() data: ' + data);
+    this.GameDaySource.next(data);
+  }
+  setPlayoffBracket(data: number[]) {
+    // console.log('[playoff.service] setGameDay() data: ' + data);
+    this.PlayoffBracketSource.next(data);
   }
 
   loadPlayoffScheduleFromStorage() {
@@ -115,14 +122,15 @@ export class PlayoffService {
       // console.log('[playoff.service] buildPlayoffSchedule() 2 currentPlayoffGameDay: ' + this.currentPlayoffGameDay);
       this.checkNextPlayoffRound();
     }
+    this.updatePlayoffBracket();
   }
 
   checkNextPlayoffRound() {
     console.log('[playoff.service] checkNextPlayoffRound() check for more rounds or season over');
     this.currentPlayoffGameDay = this.PLAYOFF_SCHEDULE[this.currentPlayoffGame - 1].gameday;
-    let index = this.arrayGameDay.findIndex(day => day === this.currentPlayoffGameDay);
+    let index = this.GameDay.findIndex(day => day === this.currentPlayoffGameDay);
 
-    this.addToSchedule(this.arrayGameDay[++index]);
+    this.addToSchedule(this.GameDay[++index]);
     if (this.currentPlayoffGame < this.PLAYOFF_SCHEDULE.length) {
       this.currentPlayoffGameDay = this.PLAYOFF_SCHEDULE[this.currentPlayoffGame].gameday;
       this.setCurrentPlayoffGameDay(this.currentPlayoffGameDay);
@@ -217,11 +225,11 @@ export class PlayoffService {
     return this.PLAYOFF_SCHEDULE.filter(day => day.gameday === searchTerm);
   }
 
-  hasGamesForDay(searchTerm: string): boolean {
-    let games: ISchedule[] = [];
-    games = this.PLAYOFF_SCHEDULE.filter(day => day.gameday === searchTerm);
-    return games.length > 0 ? true : false;
-  }
+  // hasGamesForDay(searchTerm: string): boolean {
+  //   let games: ISchedule[] = [];
+  //   games = this.PLAYOFF_SCHEDULE.filter(day => day.gameday === searchTerm);
+  //   return games.length > 0 ? true : false;
+  // }
 
   getGamesForTeam(team: number): Observable<ISchedule[]> {
     console.log('[playoff.service] getGamesForTeam() team: ' + team);
@@ -242,8 +250,115 @@ export class PlayoffService {
     return this.PLAYOFF_SCHEDULE.find(game => game.id === id);
   }
 
+  updatePlayoffBracket() {
+    const swapBracket = (t1, t2) => {
+      const temp = this.PlayoffBracket[t1];
+      this.PlayoffBracket[t1] = this.PlayoffBracket[t2];
+      this.PlayoffBracket[t2] = temp;
+    };
 
+    this.PLAYOFF_SCHEDULE.forEach(game => {
+      if (game.id === 0 && this.PlayoffTeams.length > 0) {
+        // console.log('[playoff.service] updatePlayoffBracket() Initializing Bracket');
+        this.PlayoffBracket = [];
+        this.PlayoffBracket[0] = this.PLAYOFF_SCHEDULE[0].visitTeam;
+        this.PlayoffBracket[1] = this.PLAYOFF_SCHEDULE[0].homeTeam;
+        this.PlayoffBracket[2] = this.PLAYOFF_SCHEDULE[1].visitTeam;
+        this.PlayoffBracket[3] = this.PLAYOFF_SCHEDULE[1].homeTeam;
+        this.PlayoffBracket[4] = this.PLAYOFF_SCHEDULE[2].visitTeam;
+        this.PlayoffBracket[5] = this.PLAYOFF_SCHEDULE[2].homeTeam;
+        this.PlayoffBracket[6] = this.PLAYOFF_SCHEDULE[3].visitTeam;
+        this.PlayoffBracket[7] = this.PLAYOFF_SCHEDULE[3].homeTeam;
 
+        this.PlayoffBracket[9] = this.PlayoffTeams[0];
+        this.PlayoffBracket[11] = this.PlayoffTeams[6];
+        this.PlayoffBracket[13] = this.PlayoffTeams[1];
+        this.PlayoffBracket[15] = this.PlayoffTeams[7];
+      }
+      if (game.quarter === 'F') {
+        if (game.id === 0) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[8] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[8] = game.visitTeam;
+          }
+        }
+        if (game.id === 1) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[10] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[10] = game.visitTeam;
+          }
+        }
+        if (game.id === 2) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[12] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[12] = game.visitTeam;
+            // swapBracket(9, 13);
+            swapBracket(0, 4);
+            swapBracket(1, 5);
+            swapBracket(8, 12);
+          }
+        }
+        if (game.id === 3) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[14] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[14] = game.visitTeam;
+            // swapBracket(11, 15);
+            swapBracket(2, 6);
+            swapBracket(3, 7);
+            swapBracket(10, 14);
+          }
+        }
+        if (game.id === 4) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[16] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[16] = game.visitTeam;
+          }
+        }
+        if (game.id === 5) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[17] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[17] = game.visitTeam;
+          }
+        }
+        if (game.id === 6) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[18] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[18] = game.visitTeam;
+          }
+        }
+        if (game.id === 7) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[19] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[19] = game.visitTeam;
+          }
+        }
+        if (game.id === 8) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[20] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[20] = game.visitTeam;
+          }
+        }
+        if (game.id === 9) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[21] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[21] = game.visitTeam;
+          }
+        }
+      }
+    });
+
+    this.setPlayoffBracket(this.PlayoffBracket);
+  }
 
   getGameResults(id: number): Observable<IGameResults[]> {
     const subject = new Subject<IGameResults[]>();
@@ -275,6 +390,7 @@ export class PlayoffService {
         // Update playoffs teams array
       }
 
+      this.updatePlayoffBracket();
       this.storageService.storePlayoffScheduleToLocalStorage(this.PLAYOFF_SCHEDULE);
 
       if (game.id === (this.PLAYOFF_SCHEDULE.length - 1)) {
@@ -309,9 +425,9 @@ export class PlayoffService {
       console.log('[playoff.service] initPlayoffs() Playoff schedule built');
     } else {
       console.log('[playoff.service] initPlayoffs() Building playoff schedule');
-      this.arrayGameDay = SCHEDULE.map(s => s.gameday);
-      this.setArrayGameDay(this.arrayGameDay);
-      this.buildPlayoffSchedule(this.arrayGameDay[0]);
+      this.GameDay = SCHEDULE.map(s => s.gameday);
+      this.setGameDay(this.GameDay);
+      this.buildPlayoffSchedule(this.GameDay[0]);
     }
   }
 
@@ -322,14 +438,15 @@ export class PlayoffService {
     const subject = new Subject<number[]>();
 
     if (this.PlayoffTeams.length) {
-      // console.log('[playoff.service] getPlayoffTeams() PlayoffTeams already BUILT');
+      subject.next(this.PlayoffTeams);
       subject.complete();
     } else {
-      // console.log('[playoff.service] getPlayoffTeams() Need to build Playoff Teams');
+      console.log('[playoff.service] getPlayoffTeams() Need to build Playoff Teams');
       this.getAFCPlayoffTeams();
       this.getNFCPlayoffTeams();
       setTimeout(() => {
         this.PlayoffTeams = this.AFCPlayoffTeams.concat(this.NFCPlayoffTeams);
+        subject.next(this.PlayoffTeams);
         subject.complete();
       }, 0);
     }

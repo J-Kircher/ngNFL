@@ -26,7 +26,8 @@ export class PlayoffsComponent implements OnInit {
   currentPlayoffGame: number = 0;
   currentPlayoffGameDay: string;
   playoffGames: ISchedule[];
-  aGameDay: string[] = [];
+  GameDay: string[] = [];
+  PlayoffBracket: number[] = new Array(22);
 
   constructor(
     private teamService: TeamService,
@@ -36,9 +37,7 @@ export class PlayoffsComponent implements OnInit {
 
   ngOnInit() {
     // console.log('[playoffs] ngOnInit()');
-
     // Reset season needs to also reset playoffs!
-
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
@@ -53,13 +52,8 @@ export class PlayoffsComponent implements OnInit {
         console.log('[playoffs] ngOnInit() getPlayoffTeams() COMPLETE');
 
         this.playoffService.initPlayoffs();
-
         this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
-
         this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;
-        // this.aGameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
-        this.playoffService.arrayGameDay$.subscribe(pData => this.aGameDay = pData);
-
         this.loading = false;
         // window.scrollTo(0, 0);
       });
@@ -70,21 +64,33 @@ export class PlayoffsComponent implements OnInit {
 
     this.playoffService.currentPlayoffGame$.subscribe(data => this.currentPlayoffGame = data);
     this.playoffService.currentPlayoffGameDay$.subscribe(data => this.currentPlayoffGameDay = data);
+    // this.GameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
+    this.playoffService.GameDay$.subscribe(data => this.GameDay = data);
+    this.playoffService.PlayoffBracket$.subscribe(data => this.PlayoffBracket = data);
   }
 
-  getAbbrev(id: number, hv: string) {
+  getAbbrev(idx: number) {
     let abbrev = 'blank';
-
-    if (this.playoffGames[id]) {
-      if (hv === 'v') {
-        abbrev = this.teamsArr[this.playoffGames[id].visitTeam].abbrev;
-      } else {
-        abbrev = this.teamsArr[this.playoffGames[id].homeTeam].abbrev;
-      }
+    // console.log('[playoffs] getAbbrev() idx: ' + idx + ', playoffbracket: ' + this.PlayoffBracket[idx]);
+    if (this.PlayoffBracket[idx] > -1) {
+      abbrev = this.teamsArr[this.PlayoffBracket[idx]].abbrev;
     }
-
     return abbrev;
   }
+
+  // getAbbrev(id: number, hv: string) {
+  //   let abbrev = 'blank';
+
+  //   if (this.playoffGames[id]) {
+  //     if (hv === 'v') {
+  //       abbrev = this.teamsArr[this.playoffGames[id].visitTeam].abbrev;
+  //     } else {
+  //       abbrev = this.teamsArr[this.playoffGames[id].homeTeam].abbrev;
+  //     }
+  //   }
+
+  //   return abbrev;
+  // }
 
   showTeam(teamId: number) {
     const team = this.teamService.getTeamByIndex(teamId);
