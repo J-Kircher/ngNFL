@@ -140,6 +140,7 @@ export class NavBarComponent implements OnInit {
         this.simSeason = false;
         this.simFast = false;
         this.postseason = false;
+        this.playoffTeams = [];
         this.calledInitPlayoffs = false;
         this.openSnackBar('Season reset!', '');
 

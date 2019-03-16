@@ -237,12 +237,12 @@ export class PlayoffService {
   //   return games.length > 0 ? true : false;
   // }
 
-  getGamesForTeam(team: number): Observable<ISchedule[]> {
+  getGamesForTeam(team: number, postseason: boolean): Observable<ISchedule[]> {
     console.log('[playoff.service] getGamesForTeam() team: ' + team);
 
     const subject = new Subject<ISchedule[]>();
 
-    if (this.PLAYOFF_SCHEDULE.length < 1) {
+    if ((this.PLAYOFF_SCHEDULE.length < 1) && (postseason)) {
       this.initPlayoffs();
     }
 
