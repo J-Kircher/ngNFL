@@ -24,6 +24,16 @@ mat-card {
       margin: 8px;
     }
 
+    .super-bowl-trophy {
+      width: 100px;
+      height: 116px;
+      background-image: url('/assets/images/Trophy.png');
+      .super-bowl-champ {
+        margin-top: 35px;
+        width: 45%;
+      }
+    }
+
     td {
       @include boldText($smFontSize);
       text-align: center;

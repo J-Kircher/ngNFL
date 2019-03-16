@@ -52,7 +52,6 @@ export class PlayoffsComponent implements OnInit {
         console.log('[playoffs] ngOnInit() getPlayoffTeams() COMPLETE');
 
         this.playoffService.initPlayoffs();
-        this.SuperBowlChamp = this.playoffService.SuperBowlChamp;
         this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;
         this.loading = false;
         // window.scrollTo(0, 0);
@@ -67,6 +66,7 @@ export class PlayoffsComponent implements OnInit {
     // this.GameDay = [...Array.from(new Set(this.playoffGames.map(s => s.gameday)))];
     this.playoffService.GameDay$.subscribe(data => this.GameDay = data);
     this.playoffService.PlayoffBracket$.subscribe(data => this.PlayoffBracket = data);
+    this.playoffService.SuperBowlChamp$.subscribe(data => this.SuperBowlChamp = data);
   }
 
   getAbbrev(idx: number) {

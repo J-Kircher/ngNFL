@@ -44,6 +44,23 @@ mat-card {
       $vertical-margin: 10px;
       $line-color: rgba(0, 128, 0, 0.5);
 
+      .overlay {
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .super-bowl-trophy {
+          width: 172px;
+          height: 200px;
+          background-image: url('/assets/images/SuperBowl.png');
+          .super-bowl-champ {
+            margin-top: 50px;
+          }
+        }
+      }
+
       .playoff-text {
         @include boldItalText($medFontSize);
         margin: 6px;

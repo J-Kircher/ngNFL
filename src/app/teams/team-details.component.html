@@ -9,7 +9,10 @@
   <mat-card class="team-card">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div class="image-container"><img src="/assets/images/{{team?.abbrev}}-L.png" [alt]="team?.name"></div>
-      <div class="image-container"><img src="/assets/images/{{team?.abbrev}}.png" [alt]="team?.name"></div>
+      <div class="image-container" [ngClass]="{ 'super-bowl-trophy': (teamIdx === SuperBowlChamp) }"
+        fxLayout="row" fxLayoutAlign="space-around center">
+        <img src="/assets/images/{{team?.abbrev}}.png" [ngClass]="{ 'super-bowl-champ': (teamIdx === SuperBowlChamp) }" [alt]="team?.name">
+      </div>
       <div class="image-container"><img src="/assets/images/{{team?.abbrev}}-R.png" [alt]="team?.name"></div>
     </div>
   </mat-card>

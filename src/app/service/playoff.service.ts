@@ -33,12 +33,14 @@ export class PlayoffService {
   private currentPlayoffGameDaySource = new BehaviorSubject<string>('');
   private GameDaySource = new BehaviorSubject<string[]>([]);
   private PlayoffBracketSource = new BehaviorSubject<number[]>(new Array(22));
+  private SuperBowlChampSource = new BehaviorSubject<number>(null);
 
   // Observable streams
   currentPlayoffGame$ = this.currentPlayoffGameSource.asObservable();
   currentPlayoffGameDay$ = this.currentPlayoffGameDaySource.asObservable();
   GameDay$ = this.GameDaySource.asObservable();
   PlayoffBracket$ = this.PlayoffBracketSource.asObservable();
+  SuperBowlChamp$ = this.SuperBowlChampSource.asObservable();
 
   constructor(
     private teamService: TeamService,
@@ -62,6 +64,10 @@ export class PlayoffService {
   setPlayoffBracket(data: number[]) {
     // console.log('[playoff.service] setGameDay() data: ' + data);
     this.PlayoffBracketSource.next(data);
+  }
+  setSuperBowlChamp(data: number) {
+    // console.log('[playoff.service] setSuperBowlChamp() data: ' + data);
+    this.SuperBowlChampSource.next(data);
   }
 
   loadPlayoffScheduleFromStorage() {
@@ -354,6 +360,14 @@ export class PlayoffService {
             this.PlayoffBracket[21] = game.visitTeam;
           }
         }
+        if (game.id === 10) {
+          if (game.homeScore > game.visitScore) {
+            this.SuperBowlChamp = game.homeTeam;
+          } else {
+            this.SuperBowlChamp = game.visitTeam;
+          }
+          this.setSuperBowlChamp(this.SuperBowlChamp);
+        }
       }
     });
 
@@ -565,7 +579,10 @@ export class PlayoffService {
       this.AFCPlayoffTeams = [];
       this.NFCPlayoffTeams = [];
       this.PlayoffTeams = [];
-      this.SuperBowlChamp = 0;
+      this.SuperBowlChamp = null;
+      this.setCurrentPlayoffGame(this.currentPlayoffGame);
+      this.setCurrentPlayoffGameDay(this.currentPlayoffGameDay);
+      this.setSuperBowlChamp(this.SuperBowlChamp);
     });
   }
 }
