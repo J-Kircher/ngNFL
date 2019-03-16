@@ -12,14 +12,14 @@
 <body>
   <app-nfl>
     <style>
-      .loader { font-size: 16px; float: left; width: 1.5em; height: 1.5em; margin: 0.75em auto;
-        border: 0.5em solid #4CAF50; border-left: 0.5em solid #FFC107; border-radius: 50%;
-        transform: translateZ(0); animation: loader 1.3s infinite linear; position: relative; }
+      .loader { font-size: 16px; float: left; width: 1.5em; height: 1.5em; margin: 0.75em 0.25em;
+        border: 0.25em solid #4CAF50; border-left: 0.25em solid #FFC107; border-radius: 50%;
+        transform: translateZ(0); animation: loader 0.7s infinite linear; position: relative; }
       @-webkit-keyframes loader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       @keyframes loader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       .loading-well { border-radius: 5px; background-color: #272727; position: absolute; margin: 8px; padding: 8px;
         width: auto; height: auto; z-index: 15; top: 40%; left: 50%; transform: translateX(-50%); }
-      .loading-font { float: right; font-size: 1.125em; color: #afafaf; padding: 14px 0; }
+      .loading-font { float: right; font-size: 1.125em; color: #afafaf; padding: 12px 0; }
       .one { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.0s; }
       .two { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.2s; }
       .three { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.4s; }
