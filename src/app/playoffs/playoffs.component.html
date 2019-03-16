@@ -14,9 +14,9 @@
       <mat-tab label="Bracket">
         <mat-card>
           <div class="bracket" fxLayout.gt-md="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
-            <div class="overlay" fxLayout="row" fxLayoutAlign="space-around center" fxHide.lt-lg>
-              <div [ngClass]="{ 'super-bowl-trophy': (SuperBowlChamp > -1) }" fxLayout="row" fxLayoutAlign="space-around center">
-                <img src="/assets/images/{{teamsArr[SuperBowlChamp]?.abbrev}}.png" [ngClass]="{ 'super-bowl-champ': (SuperBowlChamp > -1) }">
+            <div *ngIf="SuperBowlChamp" class="overlay" fxLayout="row" fxLayoutAlign="space-around center" fxHide.lt-lg>
+              <div class="super-bowl-trophy" fxLayout="row" fxLayoutAlign="space-around center">
+                <img src="/assets/images/{{teamsArr[SuperBowlChamp]?.abbrev}}.png" class="super-bowl-champ">
               </div>
             </div>
             <div fxLayout="column">
