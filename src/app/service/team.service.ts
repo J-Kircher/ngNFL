@@ -74,9 +74,9 @@ export class TeamService {
         console.log('[team.service] initTeams() Using Service!');
         // this.TEAMS = this.http.get(this.authServerUrl).map((res: Response) => res.json());
       } else {
-        console.log('[team.service] initTeams() NOT Using Service!');
+        // console.log('[team.service] initTeams() Not using Service!');
         this.TEAMS = _TEAMS;
-        console.log('[team.service] initTeams() TEAMS: ' + this.TEAMS.length);
+        // console.log('[team.service] initTeams() TEAMS: ' + this.TEAMS.length);
       }
 
       this.TEAMS.forEach(team => {

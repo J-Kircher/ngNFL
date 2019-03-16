@@ -14,7 +14,7 @@ export class PlayFakeGame {
 
   // Called by services (schedule.service and playoff.service)
   static playFakeGame(game: ISchedule, simFast: boolean): Observable<ISchedule> {
-    console.log('[PlayFakeGame] playFakeGame() started');
+    // console.log('[PlayFakeGame] playFakeGame() started');
 
     const timeout = simFast ? 10 : 500;
     const subject = new Subject<ISchedule>();
@@ -58,7 +58,7 @@ export class PlayFakeGame {
             game.homeScore += 3;
             game.gameResults.push({ teamScored: game.homeTeam, quarter: 'OT', points: 3 });
           }
-          console.log('[PlayFakeGame] playFakeGame() game over');
+          // console.log('[PlayFakeGame] playFakeGame() game over');
           subject.complete();
         }
       }, timeout);

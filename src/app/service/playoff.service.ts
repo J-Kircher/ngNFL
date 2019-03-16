@@ -108,14 +108,12 @@ export class PlayoffService {
     this.loadPlayoffScheduleFromStorage();
 
     if (this.PLAYOFF_SCHEDULE.length < 1) {
-      console.log('[playoff.service] building');
+      // console.log('[playoff.service] building');
       this.addToSchedule(playoffDay);
 
-      console.log('[playoff.service] PLAYOFF_SCHEDULE built!');
-      console.table(this.PLAYOFF_SCHEDULE);
+      console.log('[playoff.service] Playoff schedule built!');
+      // console.table(this.PLAYOFF_SCHEDULE);
       this.storageService.storePlayoffScheduleToLocalStorage(this.PLAYOFF_SCHEDULE);
-
-      console.log('[playoff.service] buildPlayoffSchedule() Complete!');
     }
 
     if (this.currentPlayoffGame < this.PLAYOFF_SCHEDULE.length) {
@@ -132,7 +130,7 @@ export class PlayoffService {
   }
 
   checkNextPlayoffRound() {
-    console.log('[playoff.service] checkNextPlayoffRound() check for more rounds or season over');
+    // console.log('[playoff.service] checkNextPlayoffRound() check for more rounds or season over');
     this.currentPlayoffGameDay = this.PLAYOFF_SCHEDULE[this.currentPlayoffGame - 1].gameday;
     let index = this.GameDay.findIndex(day => day === this.currentPlayoffGameDay);
 
@@ -143,7 +141,7 @@ export class PlayoffService {
       console.log('[playoff.service] checkNextPlayoffRound() currentPlayoffGameDay: ' + this.currentPlayoffGameDay);
 
       if (index === 1 && this.PLAYOFF_SCHEDULE[3].quarter === 'F') {
-        console.log('[playoff.service] checkNextPlayoffRound() Division Round, check Wildcard Weekend results');
+        // console.log('[playoff.service] checkNextPlayoffRound() Division Round, check Wildcard Weekend results');
         if (this.PLAYOFF_SCHEDULE[0].visitScore > this.PLAYOFF_SCHEDULE[0].homeScore) {
           this.PLAYOFF_SCHEDULE[4].visitTeam = this.PLAYOFF_SCHEDULE[0].visitTeam;
         }
@@ -168,52 +166,52 @@ export class PlayoffService {
         }
       }
       if (index === 2 && this.PLAYOFF_SCHEDULE[7].quarter === 'F') {
-        console.log('[playoff.service] checkNextPlayoffRound() Conference Round, check Division Round results');
+        // console.log('[playoff.service] checkNextPlayoffRound() Conference Round, check Division Round results');
         if ( (this.PLAYOFF_SCHEDULE[4].visitScore > this.PLAYOFF_SCHEDULE[4].homeScore)
           && (this.PLAYOFF_SCHEDULE[6].visitScore > this.PLAYOFF_SCHEDULE[6].homeScore) ) {
-          console.log('AFC both div UPSET');
+          // console.log('AFC both div UPSET');
           this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[4].visitTeam;
           this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[6].visitTeam;
         } else {
           if (this.PLAYOFF_SCHEDULE[4].visitScore > this.PLAYOFF_SCHEDULE[4].homeScore) {
-            console.log('AFC div UPSET 1');
+            // console.log('AFC div UPSET 1');
             this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[4].visitTeam;
             this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[6].homeTeam;
           }
           if (this.PLAYOFF_SCHEDULE[6].visitScore > this.PLAYOFF_SCHEDULE[6].homeScore) {
-            console.log('AFC div UPSET 2');
+            // console.log('AFC div UPSET 2');
             this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[6].visitTeam;
             this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[4].homeTeam;
           }
         }
         if ( (this.PLAYOFF_SCHEDULE[5].visitScore > this.PLAYOFF_SCHEDULE[5].homeScore)
           && (this.PLAYOFF_SCHEDULE[7].visitScore > this.PLAYOFF_SCHEDULE[7].homeScore) ) {
-          console.log('NFC both div UPSET');
+          // console.log('NFC both div UPSET');
           this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[5].visitTeam;
           this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[7].visitTeam;
         } else {
           if (this.PLAYOFF_SCHEDULE[5].visitScore > this.PLAYOFF_SCHEDULE[5].homeScore) {
-            console.log('NFC div UPSET 1');
+            // console.log('NFC div UPSET 1');
             this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[5].visitTeam;
             this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[7].homeTeam;
           }
           if (this.PLAYOFF_SCHEDULE[7].visitScore > this.PLAYOFF_SCHEDULE[7].homeScore) {
-            console.log('NFC div UPSET 2');
+            // console.log('NFC div UPSET 2');
             this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[7].visitTeam;
             this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[5].homeTeam;
           }
         }
       }
       if (index === 3 && this.PLAYOFF_SCHEDULE[9].quarter === 'F') {
-        console.log('[playoff.service] checkNextPlayoffRound() Super Bowl, check Conference Round results');
+        // console.log('[playoff.service] checkNextPlayoffRound() Super Bowl, check Conference Round results');
         if (this.PLAYOFF_SCHEDULE[8].visitScore > this.PLAYOFF_SCHEDULE[8].homeScore) {
-          console.log('AFC UPSET conf game');
+          // console.log('AFC UPSET conf game');
           this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[8].visitTeam;
         } else {
           this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[8].homeTeam;
         }
         if (this.PLAYOFF_SCHEDULE[9].visitScore > this.PLAYOFF_SCHEDULE[9].homeScore) {
-          console.log('NFC UPSET conf game');
+          // console.log('NFC UPSET conf game');
           this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[9].visitTeam;
         } else {
           this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[9].homeTeam;
@@ -238,7 +236,7 @@ export class PlayoffService {
   // }
 
   getGamesForTeam(team: number, postseason: boolean): Observable<ISchedule[]> {
-    console.log('[playoff.service] getGamesForTeam() team: ' + team);
+    // console.log('[playoff.service] getGamesForTeam() team: ' + team);
 
     const subject = new Subject<ISchedule[]>();
 
@@ -382,41 +380,40 @@ export class PlayoffService {
   }
 
   playGame(game: ISchedule, simFast: boolean) {
-    console.log('[playoff.service] playGame() currentPlayoffGame: ' + this.currentPlayoffGame);
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
+    console.log('[playoff.service] playGame() currentPlayoffGame: ' + this.currentPlayoffGame
+      + ', ' + visitTeam.city + ' at ' + homeTeam.city);
 
     PlayFakeGame.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
-      console.log('[playoff.service] playGame() playing Game');
+      // console.log('[playoff.service] playGame() playing Game');
       this.gameService.setGameActive(true);
       game = gameData;
     }, (err) => {
       console.error('[playoff.service] playGame() playFakeGame error: ' + err);
     }, () => {
-      console.log('[playoff.service] playGame() playFakeGame over');
+      // console.log('[playoff.service] playGame() playFakeGame over');
       this.gameService.setGameActive(false);
       game.quarter = 'F';
-      if (game.visitScore > game.homeScore) {
-        console.log('[playoff.service] playGame() Visitors Win');
-        // Update playoffs teams array
-      } else {
-        console.log('[playoff.service] playGame() Home Wins');
-        // Update playoffs teams array
-      }
+      // if (game.visitScore > game.homeScore) {
+      //   console.log('[playoff.service] playGame() Visitors Win');
+      // } else {
+      //   console.log('[playoff.service] playGame() Home Wins');
+      // }
 
       this.updatePlayoffBracket();
       this.storageService.storePlayoffScheduleToLocalStorage(this.PLAYOFF_SCHEDULE);
 
       if (game.id === (this.PLAYOFF_SCHEDULE.length - 1)) {
-        console.log('[playoff.service] playGame() currentPlayoffGame: ' + this.currentPlayoffGame);
-        console.log('[playoff.service] playGame() Last game, time to build the next round');
+        // console.log('[playoff.service] playGame() currentPlayoffGame: ' + this.currentPlayoffGame);
+        // console.log('[playoff.service] playGame() Last game, time to build the next round');
         this.checkNextPlayoffRound();
       }
     });
   }
 
   playPlayoffGame() {
-    console.log('[playoff.service] playPlayoffGame() curr:' + this.currentPlayoffGame + ' len:' + this.PLAYOFF_SCHEDULE.length);
+    // console.log('[playoff.service] playPlayoffGame() curr:' + this.currentPlayoffGame + ' len:' + this.PLAYOFF_SCHEDULE.length);
     const simFast = false;
     if (this.currentPlayoffGame < this.PLAYOFF_SCHEDULE.length) {
       this.setCurrentPlayoffGame(this.currentPlayoffGame);
@@ -436,9 +433,9 @@ export class PlayoffService {
 
   initPlayoffs() {
     if (this.PLAYOFF_SCHEDULE.length > 0) {
-      console.log('[playoff.service] initPlayoffs() Playoff schedule built');
+      // console.log('[playoff.service] initPlayoffs() Playoff schedule built');
     } else {
-      console.log('[playoff.service] initPlayoffs() Building playoff schedule');
+      // console.log('[playoff.service] initPlayoffs() Building playoff schedule');
       this.GameDay = SCHEDULE.map(s => s.gameday);
       this.setGameDay(this.GameDay);
       this.buildPlayoffSchedule(this.GameDay[0]);
@@ -455,7 +452,7 @@ export class PlayoffService {
       subject.next(this.PlayoffTeams);
       subject.complete();
     } else {
-      console.log('[playoff.service] getPlayoffTeams() Need to build Playoff Teams');
+      // console.log('[playoff.service] getPlayoffTeams() Need to build Playoff Teams');
       this.getAFCPlayoffTeams();
       this.getNFCPlayoffTeams();
       setTimeout(() => {

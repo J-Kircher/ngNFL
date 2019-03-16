@@ -172,22 +172,24 @@ export class ScheduleService {
 
   playGame(game: ISchedule, simFast: boolean) {
     // console.log('[schedule.service] playGame() simFast: ' + simFast);
-    console.log('[schedule.service] playGame() currentGame: ' + this.currentGame);
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
     const homeTeam = this.teamService.getTeamByIndex(game.homeTeam);
 
-    PlayFakeGame.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
-      console.log('[schedule.service] playGame() playing Game');
+    console.log('[schedule.service] playGame() currentGame: ' + this.currentGame
+      + ', ' + visitTeam.city + ' at ' + homeTeam.city);
+
+      PlayFakeGame.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
+      // console.log('[schedule.service] playGame() playing Game');
       this.gameService.setGameActive(true);
       game = gameData;
     }, (err) => {
       console.error('[schedule.service] playGame() playFakeGame error: ' + err);
     }, () => {
-      console.log('[schedule.service] playGame() playFakeGame over');
+      // console.log('[schedule.service] playGame() playFakeGame over');
       this.gameService.setGameActive(false);
       game.quarter = 'F';
       if (game.visitScore > game.homeScore) {
-        console.log('[schedule.service] playGame() Visitors Win');
+        // console.log('[schedule.service] playGame() Visitors Win');
         visitTeam.wins++;
         visitTeam.visitwins++;
         homeTeam.losses++;
@@ -204,7 +206,7 @@ export class ScheduleService {
           homeTeam.othlosses++;
         }
       } else {
-        console.log('[schedule.service] playGame() Home Wins');
+        // console.log('[schedule.service] playGame() Home Wins');
         visitTeam.losses++;
         visitTeam.visitlosses++;
         homeTeam.wins++;

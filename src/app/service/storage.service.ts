@@ -86,7 +86,7 @@ export class StorageService {
   }
 
   public loadPlayoffScheduleFromLocalStorage(): ISchedule[] {
-    console.log('[storage.service] loadPlayoffScheduleFromLocalStorage()');
+    // console.log('[storage.service] loadPlayoffScheduleFromLocalStorage()');
     let config;
 
     try {
@@ -102,7 +102,7 @@ export class StorageService {
   }
 
   public storePlayoffScheduleToLocalStorage(newPlayoffSchedule: ISchedule[]): void {
-    console.log('[storage.service] storePlayoffScheduleToLocalStorage()');
+    // console.log('[storage.service] storePlayoffScheduleToLocalStorage()');
     try {
       const configText = JSON.stringify(newPlayoffSchedule);
       localStorage.setItem('playoffSchedule', configText);

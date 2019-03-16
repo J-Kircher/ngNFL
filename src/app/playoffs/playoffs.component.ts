@@ -49,7 +49,7 @@ export class PlayoffsComponent implements OnInit {
       }, (err) => {
         console.error('[playoffs] ngOnInit() getPlayoffTeams() error: ' + err);
       }, () => {
-        console.log('[playoffs] ngOnInit() getPlayoffTeams() COMPLETE');
+        // console.log('[playoffs] ngOnInit() getPlayoffTeams() COMPLETE');
 
         this.playoffService.initPlayoffs();
         this.playoffGames = this.playoffService.PLAYOFF_SCHEDULE;

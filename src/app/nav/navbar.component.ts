@@ -53,7 +53,7 @@ export class NavBarComponent implements OnInit {
   }
 
   initPlayoffs() {
-    console.log('[navbar] initPlayoffs()');
+    // console.log('[navbar] initPlayoffs()');
     if (this.postseason && !this.calledInitPlayoffs) {
       if (this.playoffTeams.length === 0) {
         this.playoffService.getPlayoffTeams().subscribe((tData: number[]) => {
@@ -93,7 +93,7 @@ export class NavBarComponent implements OnInit {
           this.initPlayoffs();
         }
       } else {
-        console.log('[navbar] simulate() Play a playoff game!');
+        // console.log('[navbar] simulate() Play a playoff game!');
         this.playoffService.playPlayoffGame();
       }
     }

@@ -54,7 +54,7 @@ export class TeamScheduleComponent implements OnInit {
         }, (err) => {
           console.error('[team-schedule] ngOnInit() getGamesForTeam() error: ' + err);
         }, () => {
-          console.log('[team-schedule] ngOnInit() getGamesForTeam() COMPLETE');
+          // console.log('[team-schedule] ngOnInit() getGamesForTeam() COMPLETE');
           this.playoffService.getGamesForTeam(this.teamIndex, this.postseason).subscribe((playSchedData: ISchedule[]) => {
             this.playoffSchedule = playSchedData;
             // console.table(this.playoffSchedule);
@@ -62,7 +62,7 @@ export class TeamScheduleComponent implements OnInit {
           }, (err) => {
             console.error('[team-schedule] ngOnInit() playoff getGamesForTeam() error: ' + err);
           }, () => {
-            console.log('[team-schedule] ngOnInit() playoff getGamesForTeam() COMPLETE');
+            // console.log('[team-schedule] ngOnInit() playoff getGamesForTeam() COMPLETE');
           });
         });
       }, (err) => {
