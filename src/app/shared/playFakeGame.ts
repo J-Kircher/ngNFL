@@ -19,6 +19,7 @@ export class PlayFakeGame {
     const timeout = simFast ? 10 : 500;
     const subject = new Subject<ISchedule>();
     const gameCounter = 16;
+    const gameMax = 18;
     const self = this;
 
     game.visitScore = 0;
@@ -34,6 +35,7 @@ export class PlayFakeGame {
           case 4: case 5: case 6: case 7: quarter = '2'; break;
           case 8: case 9: case 10: case 11: quarter = '3'; break;
           case 12: case 13: case 14: case 15: quarter = '4'; break;
+          case 16: case 17: quarter = 'OT'; break;
           default: return 'U';
         }
 
@@ -51,10 +53,15 @@ export class PlayFakeGame {
           }
         }
 
-        if (++i < gameCounter) {
+        i++;
+        if ((i < gameCounter) || ((i < gameMax) && (game.visitScore === game.homeScore))) {
+          // if (i >= gameCounter) {
+          //   console.log('Game: ' + game.id + ' - OVERTIME! (' + gameCounter + ')');
+          // }
           theLoop(i);
         } else {
           if (game.visitScore === game.homeScore) {
+            // console.log('Game: ' + game.id + ' - FORECD OVERTIME!');
             game.homeScore += 3;
             game.gameResults.push({ teamScored: game.homeTeam, quarter: 'OT', points: 3 });
           }
