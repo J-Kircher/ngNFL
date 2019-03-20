@@ -7,7 +7,7 @@ import { TeamService } from '../service/team.service';
 import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
 import { sortDivision, sortConference } from '../common/sort';
-import { PlayFakeGame } from '../shared/playFakeGame';
+import { PlayNFLGame } from '../shared/playNFLGame';
 
 const SCHEDULE: IScheduleBase[] = [
   {'gameday': 'Wildcard Weekend', 'games': [4, 3, 10, 9, 5, 2, 11, 8]},
@@ -385,14 +385,14 @@ export class PlayoffService {
     console.log('[playoff.service] playGame() currentPlayoffGame: ' + this.currentPlayoffGame
       + ', ' + visitTeam.city + ' at ' + homeTeam.city);
 
-    PlayFakeGame.playFakeGame(game, simFast).subscribe((gameData: ISchedule) => {
+    PlayNFLGame.playNFLGame(game, visitTeam, homeTeam, simFast).subscribe((gameData: ISchedule) => {
       // console.log('[playoff.service] playGame() playing Game');
       this.gameService.setGameActive(true);
       game = gameData;
     }, (err) => {
-      console.error('[playoff.service] playGame() playFakeGame error: ' + err);
+      console.error('[playoff.service] playGame() playNFLGame error: ' + err);
     }, () => {
-      // console.log('[playoff.service] playGame() playFakeGame over');
+      // console.log('[playoff.service] playGame() playNFLGame over');
       this.gameService.setGameActive(false);
       game.quarter = 'F';
       // if (game.visitScore > game.homeScore) {

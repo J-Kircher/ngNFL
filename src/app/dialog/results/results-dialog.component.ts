@@ -55,7 +55,9 @@ export class ResultsDialogComponent implements OnInit {
   getScoreType(score: number) {
     switch (score) {
       case 3: return 'Field Goal';
+      case 6: return 'Touchdown (0pt)';
       case 7: return 'Touchdown';
+      case 8: return 'Touchdown (2pt)';
       default: return '?';
     }
   }
