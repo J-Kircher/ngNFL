@@ -255,6 +255,7 @@ export class PlayoffService {
   }
 
   updatePlayoffBracket() {
+    // console.log('[playoff.service] updatePlayoffBracket()');
     const swapBracket = (t1, t2) => {
       const temp = this.PlayoffBracket[t1];
       this.PlayoffBracket[t1] = this.PlayoffBracket[t2];
@@ -279,6 +280,11 @@ export class PlayoffService {
         this.PlayoffBracket[13] = this.PlayoffTeams[1];
         this.PlayoffBracket[15] = this.PlayoffTeams[7];
       }
+
+      // console.log('[playoff.service] updatePlayoffBracket() game.id: ' + game.id);
+      // console.log('[playoff.service] updatePlayoffBracket() PlayoffTeams:');
+      // console.log(this.PlayoffTeams);
+
       if (game.quarter === 'F') {
         if (game.id === 0) {
           if (game.homeScore > game.visitScore) {
@@ -449,6 +455,7 @@ export class PlayoffService {
     const subject = new Subject<number[]>();
 
     if (this.PlayoffTeams.length) {
+      // console.log('[playoff.service] getPlayoffTeams() Have Playoff Teams');
       subject.next(this.PlayoffTeams);
       subject.complete();
     } else {
@@ -458,6 +465,8 @@ export class PlayoffService {
       setTimeout(() => {
         this.PlayoffTeams = this.AFCPlayoffTeams.concat(this.NFCPlayoffTeams);
         subject.next(this.PlayoffTeams);
+        // console.log('[playoff.service] getPlayoffTeams() Built Playoff Teams!');
+        this.updatePlayoffBracket();
         subject.complete();
       }, 0);
     }
