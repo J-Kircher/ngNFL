@@ -14,15 +14,16 @@
   <span fxFlex="1 1 auto"></span>
 
   <button mat-raised-button id="Simulate" (click)="simulate()" [disabled]="simBtnDisabled()"
-    [appSpinnerButton]="gameActive || simSeason" [ngClass]="{ disabled: simBtnDisabled() }">Simulate</button>
+    [appSpinnerButton]="simBtnDisabled()" [ngClass]="{ disabled: simBtnDisabled() }">Simulate</button>
 
   <div class="spin">
     <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
       <mat-icon>settings</mat-icon>
     </button>
     <mat-menu #settingsMenu>
-        <a mat-menu-item id="toggle" (click)="toggleGamePlay()">One Game at a Time: {{ oneGameAtATime }}</a>
-        <a mat-menu-item id="reset" (click)="resetSeason()">Reset Season</a>
+      <a mat-menu-item id="toggle"><mat-slide-toggle [(ngModel)]="oneGameAtATime">One Game at a Time</mat-slide-toggle></a>
+      <a mat-menu-item id="speed"><mat-slide-toggle [(ngModel)]="simFast">Sim Fast</mat-slide-toggle></a>
+      <a mat-menu-item id="reset" (click)="resetSeason()">Reset Season</a>
     </mat-menu>
   </div>
 

@@ -100,7 +100,7 @@ export class NavBarComponent implements OnInit {
   }
 
   simBtnDisabled() {
-    return this.simSeason || (this.gameActive && this.oneGameAtATime);
+    return this.simSeason || (this.gameActive && !this.simSeason && this.oneGameAtATime);
   }
 
   playAllGames() {
@@ -113,10 +113,6 @@ export class NavBarComponent implements OnInit {
       console.log('[navbar] playAllGames() sim season complete, calling initPlayoffs()');
       this.initPlayoffs();
     }
-  }
-
-  toggleGamePlay() {
-    this.oneGameAtATime = !this.oneGameAtATime;
   }
 
   resetSeason() {
