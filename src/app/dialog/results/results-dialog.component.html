@@ -22,11 +22,11 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-around end">
           <div fxFlex="40" class="visit">
-            <span class="team-record">{{modalGame?.visitRecord}}</span>
+            <span class="team-record">({{modalGame?.visitRecord}})</span>
           </div>
           <div fxFlex="20" class="center"><span class="spread">{{ getOdds() }}</span></div>
           <div fxFlex="40" class="home">
-            <span class="team-record">{{modalGame?.homeRecord}}</span>
+            <span class="team-record">({{modalGame?.homeRecord}})</span>
           </div>
         </div>
         <mat-grid-list cols="4" rowHeight="40px">
