@@ -23,7 +23,7 @@
     <mat-menu #settingsMenu>
       <a mat-menu-item id="toggle"><mat-slide-toggle [(ngModel)]="oneGameAtATime">One Game at a Time</mat-slide-toggle></a>
       <a mat-menu-item id="speed"><mat-slide-toggle [(ngModel)]="simFast">Sim Fast</mat-slide-toggle></a>
-      <a mat-menu-item id="reset" (click)="resetSeason()">Reset Season</a>
+      <a mat-menu-item id="reset" (click)="resetSeason()"><mat-icon>replay</mat-icon>Reset Season</a>
     </mat-menu>
   </div>
 
