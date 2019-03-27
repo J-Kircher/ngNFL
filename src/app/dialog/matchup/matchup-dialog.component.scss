@@ -40,11 +40,9 @@ mat-dialog-content {
       }
       .team-city, .team-record {
         @include normalText($medFontSize);
-        padding-left: 5px;
       }
       .team-name {
         @include boldText($lgFontSize);
-        padding-left: 5px;
       }
       .spread {
         @include normalText($medFontSize);
