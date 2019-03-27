@@ -418,9 +418,8 @@ export class PlayoffService {
     });
   }
 
-  playPlayoffGame() {
+  playPlayoffGame(simFast: boolean) {
     // console.log('[playoff.service] playPlayoffGame() curr:' + this.currentPlayoffGame + ' len:' + this.PLAYOFF_SCHEDULE.length);
-    const simFast = false;
     if (this.currentPlayoffGame < this.PLAYOFF_SCHEDULE.length) {
       this.setCurrentPlayoffGame(this.currentPlayoffGame);
 

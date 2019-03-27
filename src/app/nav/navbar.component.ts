@@ -65,6 +65,7 @@ export class NavBarComponent implements OnInit {
           // console.log('[navbar] initPlayoffs() calling initPlayoffs()');
           this.playoffService.initPlayoffs();
           this.calledInitPlayoffs = true;
+          this.simFast = false;
         });
       }
     }
@@ -94,7 +95,7 @@ export class NavBarComponent implements OnInit {
         }
       } else {
         // console.log('[navbar] simulate() Play a playoff game!');
-        this.playoffService.playPlayoffGame();
+        this.playoffService.playPlayoffGame(this.simFast);
       }
     }
   }
