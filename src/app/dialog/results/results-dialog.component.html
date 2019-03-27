@@ -20,6 +20,15 @@
             <span class="team-name">{{teamsArr[modalGame?.homeTeam]?.name}}</span>
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="space-around end">
+          <div fxFlex="40" class="visit">
+            <span class="team-record">{{modalGame?.visitRecord}}</span>
+          </div>
+          <div fxFlex="20" class="center"><span class="spread">{{ getOdds() }}</span></div>
+          <div fxFlex="40" class="home">
+            <span class="team-record">{{modalGame?.homeRecord}}</span>
+          </div>
+        </div>
         <mat-grid-list cols="4" rowHeight="40px">
           <ng-container *ngFor="let result of results; let i = index;">
             <mat-grid-tile colspan="4" *ngIf="i === 0 || results[i].quarter !== results[i-1].quarter">

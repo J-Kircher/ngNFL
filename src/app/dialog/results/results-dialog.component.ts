@@ -4,6 +4,7 @@ import { TeamService } from '../../service/team.service';
 import { ITeam, ISchedule, IGameResults } from '../../model/nfl.model';
 import { ScheduleService } from '../../service/schedule.service';
 import { PlayoffService } from '../../service/playoff.service';
+import { getOddsText } from '../../common/odds';
 
 @Component({
   selector: 'app-results-dialog',
@@ -32,13 +33,20 @@ export class ResultsDialogComponent implements OnInit {
       this.modalGame = this.scheduleService.getGameById(this.data.id);
     }
 
-    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
       this.results = this.modalGame.gameResults;
       this.loading = false;
     }, (err) => {
-      console.error('[results] ngOnInit() getTeams() error: ' + err);
+      console.error('[results] ngOnInit() getAllCurrentTeams() error: ' + err);
     });
+  }
+
+  getOdds() {
+    // show saved game odds or calculate if there is none
+    const visit = this.teamsArr[this.modalGame.visitTeam] ? this.teamsArr[this.modalGame.visitTeam].abbrev : '';
+    const home = this.teamsArr[this.modalGame.homeTeam] ? this.teamsArr[this.modalGame.homeTeam].abbrev : '';
+    return getOddsText(this.modalGame.spread, visit, home);
   }
 
   getQuarter(quarter: string) {

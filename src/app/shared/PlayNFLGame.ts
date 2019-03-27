@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { ISchedule, ITeam } from '../model/nfl.model';
+import { calculateOdds } from '../common/odds';
 
 export class PlayNFLGame {
 
@@ -16,6 +17,11 @@ export class PlayNFLGame {
 
     game.visitScore = 0;
     game.homeScore = 0;
+
+    game.visitRecord = vTeam.wins + '-' + vTeam.losses;
+    game.homeRecord = hTeam.wins + '-' + hTeam.losses;
+
+    game.spread = calculateOdds(vTeam, hTeam);
 
     (function theLoop (i) {
       setTimeout(() => {

@@ -47,9 +47,12 @@ export interface ISchedule {
   gameday: string;
   visitTeam: number;
   visitScore: number;
+  visitRecord?: string;
   homeTeam: number;
   homeScore: number;
+  homeRecord?: string;
   quarter: string;
+  spread?: number;
   gameResults: IGameResults[];
 }
 

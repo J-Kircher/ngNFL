@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule } from '../model/nfl.model';
+import { calculateOdds } from '../common/odds';
 
 @Component({
   selector: 'show-score',
@@ -12,6 +13,7 @@ export class ShowScoreComponent implements OnInit {
   @Input() score: ISchedule;
   teamsArr: ITeam[] = [];
   loading: boolean = true;
+  odds: number = 0;
 
   constructor(
     private teamService: TeamService
@@ -21,12 +23,13 @@ export class ShowScoreComponent implements OnInit {
     // console.log('[show-score] ngOnInit()');
     // console.table(this.score);
 
-    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
-      // console.log('[show-score] ngOnInit() getTeams() SUCCESS');
+      // console.log('[show-score] ngOnInit() getAllCurrentTeams() SUCCESS');
       this.loading = false;
+      // this.odds = calculateOdds(this.teamsArr[this.score.visitTeam], this.teamsArr[this.score.homeTeam]);
     }, (err) => {
-      console.error('[show-score] ngOnInit() getTeams() error: ' + err);
+      console.error('[show-score] ngOnInit() getAllCurrentTeams() error: ' + err);
     });
   }
 

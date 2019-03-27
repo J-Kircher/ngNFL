@@ -4,6 +4,7 @@ import { TeamService } from '../../service/team.service';
 import { ITeam, ISchedule } from '../../model/nfl.model';
 import { ScheduleService } from '../../service/schedule.service';
 import { PlayoffService } from '../../service/playoff.service';
+import { calculateOdds, getOddsText } from '../../common/odds';
 
 @Component({
   selector: 'app-matchup-dialog',
@@ -14,6 +15,7 @@ export class MatchupDialogComponent implements OnInit {
   teamsArr: ITeam[] = [];
   modalGame: ISchedule;
   loading: boolean = true;
+  odds: number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<MatchupDialogComponent>,
@@ -31,13 +33,20 @@ export class MatchupDialogComponent implements OnInit {
       this.modalGame = this.scheduleService.getGameById(this.data.id);
     }
 
-    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
-      // console.log('[matchup] ngOnInit() getTeams() SUCCESS');
+      // console.log('[matchup] ngOnInit() getAllCurrentTeams() SUCCESS');
       this.loading = false;
+      this.odds = calculateOdds(this.teamsArr[this.modalGame.visitTeam], this.teamsArr[this.modalGame.homeTeam]);
     }, (err) => {
-      console.error('[matchup] ngOnInit() getTeams() error: ' + err);
+      console.error('[matchup] ngOnInit() getAllCurrentTeams() error: ' + err);
     });
+  }
+
+  getOdds() {
+    const visit = this.teamsArr[this.modalGame.visitTeam] ? this.teamsArr[this.modalGame.visitTeam].abbrev : '';
+    const home = this.teamsArr[this.modalGame.homeTeam] ? this.teamsArr[this.modalGame.homeTeam].abbrev : '';
+    return getOddsText(this.odds, visit, home);
   }
 
   onClose(): void {

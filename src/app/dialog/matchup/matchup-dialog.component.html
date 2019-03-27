@@ -24,7 +24,7 @@
           <div fxFlex="40" class="visit-level">
             <img src="/assets/images/{{teamsArr[modalGame?.visitTeam]?.abbrev}}-L.png" [alt]="teamsArr[modalGame?.visitTeam]?.name">
           </div>
-          <div fxFlex="20"></div>
+          <div fxFlex="20" class="center"><span class="normal">{{ getOdds() }}</span></div>
           <div fxFlex="40" class="home-level">
             <img src="/assets/images/{{teamsArr[modalGame?.homeTeam]?.abbrev}}-R.png" [alt]="teamsArr[modalGame?.homeTeam]?.name">
           </div>
