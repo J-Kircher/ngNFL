@@ -5,7 +5,7 @@
   <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Standard">
       <div id="standard" fxLayout="row wrap">
-        <div class="div-body" fxFlex="49" *ngFor="let division of divisions">
+        <div class="div-body" fxFlex.lt-lg="calc(100% - 4px)" fxFlex.gt-md="calc(50% - 4px)" *ngFor="let division of divisions">
           <standings-division [division]="division"></standings-division>
         </div>
       </div>
