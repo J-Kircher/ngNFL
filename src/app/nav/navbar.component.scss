@@ -36,6 +36,10 @@
     }
   }
 
+  .settings {
+    padding-right: 2px;
+  }
+
   button {
     margin: 10px;
 
@@ -51,7 +55,7 @@
     }
 
     &.settings-mini-fab {
-      padding: 0;
+      padding: 0px;
       width: 30px;
       height: 30px;
       color: white;
