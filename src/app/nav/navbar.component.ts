@@ -23,6 +23,8 @@ export class NavBarComponent implements OnInit {
   simFast: boolean = false;
   currentGame: number = 0;
   currentGameDay: string;
+  finalGame: number;
+  progress: number = 0;
   postseason: boolean = false;
   playoffTeams: number[] = [];
   calledInitPlayoffs: boolean = false;
@@ -50,6 +52,7 @@ export class NavBarComponent implements OnInit {
     this.scheduleService.currentGameDay$.subscribe(data => this.currentGameDay = data);
     this.scheduleService.endOfSeason$.subscribe(data => this.postseason = data);
     this.gameService.gameActive$.subscribe(data => this.gameActive = data);
+    this.scheduleService.finalGame$.subscribe(data => this.finalGame = data);
   }
 
   initPlayoffs() {
@@ -88,6 +91,7 @@ export class NavBarComponent implements OnInit {
     } else {
       if (!this.postseason) {
         if (this.scheduleService.playNextGame(this.simFast)) {
+          this.progress = Math.round((this.currentGame / this.finalGame) * 1000) / 10;
           // Keep playing
         } else {
           console.log('[navbar] simulate() season over, calling initPlayoffs()');
@@ -106,6 +110,7 @@ export class NavBarComponent implements OnInit {
 
   playAllGames() {
     if (this.scheduleService.playNextGame(this.simFast)) {
+      this.progress = Math.round((this.currentGame / this.finalGame) * 1000) / 10;
       // Keep playing
       const timeout = this.simFast ? 0 : 500;
       setTimeout(() => { this.playAllGames(); }, timeout);
@@ -136,6 +141,7 @@ export class NavBarComponent implements OnInit {
         this.askSimSeason = false;
         this.simSeason = false;
         this.simFast = false;
+        this.progress = 0;
         this.postseason = false;
         this.playoffTeams = [];
         this.calledInitPlayoffs = false;

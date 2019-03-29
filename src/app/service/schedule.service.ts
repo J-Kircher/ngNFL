@@ -14,7 +14,7 @@ import { _SCHEDULE } from '../shared/NFLSchedule2018';
 @Injectable()
 export class ScheduleService {
   FULL_SCHEDULE: ISchedule[];
-  currentGame: number;
+  currentGame: number = 0;
   currentGameDay: string;
   endOfSeason: boolean = false;
   finalGame: number;
@@ -24,11 +24,13 @@ export class ScheduleService {
   private currentGameSource = new BehaviorSubject<number>(0);
   private currentGameDaySource = new BehaviorSubject<string>('');
   private endOfSeasonSource = new BehaviorSubject<boolean>(false);
+  private finalGameSource = new BehaviorSubject<number>(0);
 
   // Observable streams
   currentGame$ = this.currentGameSource.asObservable();
   currentGameDay$ = this.currentGameDaySource.asObservable();
   endOfSeason$ = this.endOfSeasonSource.asObservable();
+  finalGame$ = this.finalGameSource.asObservable();
 
   constructor(
     private teamService: TeamService,
@@ -50,6 +52,10 @@ export class ScheduleService {
   setEndOfSeason(data: boolean) {
     // console.log('[schedule.service] setEndOfSeason() data: ' + data);
     this.endOfSeasonSource.next(data);
+  }
+  setFinalGame(data: number) {
+    // console.log('[schedule.service] setFinalGame() data: ' + data);
+    this.finalGameSource.next(data);
   }
 
   loadScheduleFromStorage() {
@@ -99,6 +105,7 @@ export class ScheduleService {
     }
 
     this.finalGame = (this.FULL_SCHEDULE.length - 1);
+    this.setFinalGame(this.finalGame);
     this.currentGameDay = this.currentGame <= this.finalGame ? this.FULL_SCHEDULE[this.currentGame].gameday : 'Playoffs';
     this.setCurrentGameDay(this.currentGameDay);
     this.endOfSeason = this.currentGame > this.finalGame;
