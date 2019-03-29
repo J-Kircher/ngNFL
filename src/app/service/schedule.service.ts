@@ -3,13 +3,13 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
-import { ISchedule, ITeam, IGameResults } from '../model/nfl.model';
+import { ISchedule, IScheduleBase, ITeam, IGameResults } from '../model/nfl.model';
 import { TeamService } from '../service/team.service';
 import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
 import { PlayNFLGame } from '../shared/playNFLGame';
 
-import { SCHEDULE } from '../shared/NFLSchedule2018';
+import { _SCHEDULE } from '../shared/NFLSchedule2018';
 
 @Injectable()
 export class ScheduleService {
@@ -18,6 +18,7 @@ export class ScheduleService {
   currentGameDay: string;
   endOfSeason: boolean = false;
   finalGame: number;
+  private SCHEDULE: IScheduleBase[] = [];
 
   // Observable sources
   private currentGameSource = new BehaviorSubject<number>(0);
@@ -67,11 +68,15 @@ export class ScheduleService {
     // console.log('[schedule.service] buildFullSchedule()');
     this.loadScheduleFromStorage();
 
+    if (this.SCHEDULE.length < 1) {
+      this.SCHEDULE = _SCHEDULE;
+    }
+
     if (this.FULL_SCHEDULE.length < 1) {
       // console.log('[schedule.service] building');
       this.FULL_SCHEDULE = [];
       let counter: number = 0;
-      SCHEDULE.forEach(day => {
+      this.SCHEDULE.forEach(day => {
         for (let i = 0; i < day.games.length; i++) {
           const nextGame: ISchedule = {
             id: counter++,
@@ -240,11 +245,11 @@ export class ScheduleService {
         this.setEndOfSeason(this.endOfSeason);
       }
 
-      // this.storageService.storeTeamsToLocalStorage(this.teamService.getAllCurrentTeams());
-      this.teamService.getAllCurrentTeams().subscribe((teamData: ITeam[]) => {
+      // this.storageService.storeTeamsToLocalStorage(this.teamService.getTeams());
+      this.teamService.getTeams().subscribe((teamData: ITeam[]) => {
         this.storageService.storeTeamsToLocalStorage(teamData);
       }, (err) => {
-        console.error('[schedule.service] playGame() getAllCurrentTeams() error: ' + err);
+        console.error('[schedule.service] playGame() getTeams() error: ' + err);
       });
     });
   }

@@ -23,13 +23,13 @@ export class ShowScoreComponent implements OnInit {
     // console.log('[show-score] ngOnInit()');
     // console.table(this.score);
 
-    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
-      // console.log('[show-score] ngOnInit() getAllCurrentTeams() SUCCESS');
+      // console.log('[show-score] ngOnInit() getTeams() SUCCESS');
       this.loading = false;
       // this.odds = calculateOdds(this.teamsArr[this.score.visitTeam], this.teamsArr[this.score.homeTeam]);
     }, (err) => {
-      console.error('[show-score] ngOnInit() getAllCurrentTeams() error: ' + err);
+      console.error('[show-score] ngOnInit() getTeams() error: ' + err);
     });
   }
 

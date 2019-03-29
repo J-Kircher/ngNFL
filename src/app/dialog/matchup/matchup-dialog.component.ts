@@ -33,13 +33,13 @@ export class MatchupDialogComponent implements OnInit {
       this.modalGame = this.scheduleService.getGameById(this.data.id);
     }
 
-    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
-      // console.log('[matchup] ngOnInit() getAllCurrentTeams() SUCCESS');
+      // console.log('[matchup] ngOnInit() getTeams() SUCCESS');
       this.loading = false;
       this.odds = calculateOdds(this.teamsArr[this.modalGame.visitTeam], this.teamsArr[this.modalGame.homeTeam]);
     }, (err) => {
-      console.error('[matchup] ngOnInit() getAllCurrentTeams() error: ' + err);
+      console.error('[matchup] ngOnInit() getTeams() error: ' + err);
     });
   }
 

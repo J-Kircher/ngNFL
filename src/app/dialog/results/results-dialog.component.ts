@@ -33,12 +33,12 @@ export class ResultsDialogComponent implements OnInit {
       this.modalGame = this.scheduleService.getGameById(this.data.id);
     }
 
-    this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
       this.results = this.modalGame.gameResults;
       this.loading = false;
     }, (err) => {
-      console.error('[results] ngOnInit() getAllCurrentTeams() error: ' + err);
+      console.error('[results] ngOnInit() getTeams() error: ' + err);
     });
   }
 

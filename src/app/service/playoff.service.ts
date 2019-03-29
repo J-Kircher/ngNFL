@@ -486,9 +486,9 @@ export class PlayoffService {
 
       this.AFCPlayoffTeams = [];
 
-      this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+      this.teamService.getTeams().subscribe((data: ITeam[]) => {
         teamsArr = data;
-        // console.log('[playoffs.service-afc] ngOnInit() getAllCurrentTeams() SUCCESS');
+        // console.log('[playoffs.service-afc] ngOnInit() getTeams() SUCCESS');
 
         teamsArr.forEach(team => {
           if (divisions.indexOf(team.division) < 0) {
@@ -534,9 +534,9 @@ export class PlayoffService {
 
       this.NFCPlayoffTeams = [];
 
-      this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+      this.teamService.getTeams().subscribe((data: ITeam[]) => {
         teamsArr = data;
-        // console.log('[playoffs.service-nfc] ngOnInit() getAllCurrentTeams() SUCCESS');
+        // console.log('[playoffs.service-nfc] ngOnInit() getTeams() SUCCESS');
 
         teamsArr.forEach(team => {
           if (divisions.indexOf(team.division) < 0) {

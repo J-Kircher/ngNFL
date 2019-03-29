@@ -32,11 +32,11 @@ export class TopTeamsDialogComponent implements OnInit, DoCheck {
     ngOnInit() {
       // this.teamsArr = this.teamService.getCurrentTeams().map(teams => teams);
 
-      this.teamService.getAllCurrentTeams().subscribe((data: ITeam[]) => {
+      this.teamService.getTeams().subscribe((data: ITeam[]) => {
         this.teamsArr = data;
         // console.log('[navbar] ngOnInit() getCurrentTeams() SUCCESS');
       }, (err) => {
-        console.error('[top-teams] ngOnInit() getAllCurrentTeams() error: ' + err);
+        console.error('[top-teams] ngOnInit() getTeams() error: ' + err);
       });
   }
 

@@ -134,11 +134,11 @@ export class PlayFakeGame {
 
   //   this.storageService.storeScheduleToLocalStorage(this.FULL_SCHEDULE);
 
-  //   // this.storageService.storeTeamsToLocalStorage(this.teamService.getAllCurrentTeams());
-  //   this.teamService.getAllCurrentTeams().subscribe((teamData: ITeam[]) => {
+  //   // this.storageService.storeTeamsToLocalStorage(this.teamService.getTeams());
+  //   this.teamService.getTeams().subscribe((teamData: ITeam[]) => {
   //     this.storageService.storeTeamsToLocalStorage(teamData);
   //   }, (err) => {
-  //     console.error('[schedule.service] playFastGame() getAllCurrentTeams() error: ' + err);
+  //     console.error('[schedule.service] playFastGame() getTeams() error: ' + err);
   //   });
   // }
 }
