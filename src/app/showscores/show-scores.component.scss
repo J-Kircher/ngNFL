@@ -10,7 +10,7 @@ mat-card {
 }
 
 .div-scroll {
-  max-height: 550px;
+  max-height: 562px; // Fits 5 score cards
   overflow-y: scroll;
 
   mat-card:last-child {
