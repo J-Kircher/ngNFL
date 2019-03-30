@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface Result {
@@ -11,7 +11,7 @@ export interface Result {
   templateUrl: './simseason-dialog.component.html',
   styleUrls: ['./simseason-dialog.component.scss']
 })
-export class SimseasonDialogComponent {
+export class SimseasonDialogComponent implements OnInit {
 
   result: Result = { simSeason: false, simFast: false};
 
@@ -19,6 +19,13 @@ export class SimseasonDialogComponent {
     public dialogRef: MatDialogRef<SimseasonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) { }
+
+  ngOnInit() {
+    // console.log('[simseason] data.simFast: ' + this.data.simFast);
+    if (this.data.simFast) {
+      this.result.simFast = this.data.simFast;
+    }
+  }
 
   submitForm() {
     // console.log('[simseason] submitForm() simSeason: ' + this.result.simSeason);

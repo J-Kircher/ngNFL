@@ -169,7 +169,7 @@ export class NavBarComponent implements OnInit {
 
   openSimSeasonDialog(): void {
     const dialogRef = this.dialog.open(SimseasonDialogComponent, {
-      data: {},
+      data: { simFast: this.simFast },
       minWidth: '30vw',
       disableClose: true
     });
