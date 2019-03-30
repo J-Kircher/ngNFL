@@ -201,6 +201,11 @@ export class ScheduleService {
       // console.log('[schedule.service] playGame() GAME OVER');
       this.gameService.setGameActive(false);
       game.quarter = 'F';
+
+      // Update in case sim season timing slightly updates the records
+      game.visitRecord = visitTeam.wins + '-' + visitTeam.losses;
+      game.homeRecord = homeTeam.wins + '-' + homeTeam.losses;
+
       if (game.visitScore > game.homeScore) {
         // console.log('[schedule.service] playGame() Visitors Win');
         visitTeam.wins++;

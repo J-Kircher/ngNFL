@@ -112,7 +112,7 @@ export class NavBarComponent implements OnInit {
     if (this.scheduleService.playNextGame(this.simFast)) {
       this.progress = Math.round((this.currentGame / this.finalGame) * 1000) / 10;
       // Keep playing
-      const timeout = this.simFast ? 0 : 500;
+      const timeout = this.simFast ? 50 : 500;
       setTimeout(() => { this.playAllGames(); }, timeout);
     } else {
       this.simSeason = false;
