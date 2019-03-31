@@ -7,7 +7,7 @@ import { ISchedule, IScheduleBase, ITeam, IGameResults } from '../model/nfl.mode
 import { TeamService } from '../service/team.service';
 import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
-import { PlayNFLGame } from '../shared/playNFLGame';
+import { PlayNFLGame } from '../shared/PlayNFLGame';
 
 import { _SCHEDULE } from '../shared/NFLSchedule2018';
 

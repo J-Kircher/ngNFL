@@ -7,7 +7,7 @@ import { TeamService } from '../service/team.service';
 import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
 import { sortDivision, sortConference } from '../common/sort';
-import { PlayNFLGame } from '../shared/playNFLGame';
+import { PlayNFLGame } from '../shared/PlayNFLGame';
 
 const SCHEDULE: IScheduleBase[] = [
   {'gameday': 'Wildcard Weekend', 'games': [4, 3, 10, 9, 5, 2, 11, 8]},
