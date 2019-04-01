@@ -13,8 +13,8 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <button mat-raised-button id="Simulate" (click)="simulate()" [disabled]="simBtnDisabled()"
-    [appSpinnerButton]="simBtnDisabled()" [ngClass]="{ disabled: simBtnDisabled() }">Simulate</button>
+  <button mat-raised-button id="Simulate" (click)="simulate()" [disabled]="simActive() || seasonOver"
+    [appSpinnerButton]="simActive()" [ngClass]="{ disabled: simActive() }">Simulate</button>
 
   <div class="settings">
     <div class="spin">

@@ -31,6 +31,7 @@ export class NavBarComponent implements OnInit {
   calledInitPlayoffs: boolean = false;
   oneGameAtATime: boolean = true;
   gameActive: boolean = false;
+  seasonOver: boolean = false;
 
   constructor(
     private router: Router,
@@ -54,11 +55,13 @@ export class NavBarComponent implements OnInit {
     this.scheduleService.endOfSeason$.subscribe(data => this.postseason = data);
     this.gameService.gameActive$.subscribe(data => this.gameActive = data);
     this.scheduleService.finalGame$.subscribe(data => this.finalGame = data);
+    this.progress = Math.round((this.currentGame / this.finalGame) * 1000) / 10;
   }
 
   initPlayoffs() {
     // console.log('[navbar] initPlayoffs()');
     if (this.postseason && !this.calledInitPlayoffs) {
+      this.calledInitPlayoffs = true;
       if (this.playoffTeams.length === 0) {
         this.playoffService.getPlayoffTeams().subscribe((tData: number[]) => {
           this.playoffTeams = tData;
@@ -68,8 +71,8 @@ export class NavBarComponent implements OnInit {
           // console.log('[navbar] initPlayoffs() getPlayoffTeams() COMPLETE');
           // console.log('[navbar] initPlayoffs() calling initPlayoffs()');
           this.playoffService.initPlayoffs();
-          this.calledInitPlayoffs = true;
           this.simFast = false;
+          this.seasonOver = false;
         });
       }
     }
@@ -94,18 +97,26 @@ export class NavBarComponent implements OnInit {
         if (this.scheduleService.playNextGame(this.simFast)) {
           this.progress = Math.round((this.currentGame / this.finalGame) * 1000) / 10;
           // Keep playing
+          if (this.progress === 100) {
+            console.log('[navbar] simulate() progress at 100, calling initPlayoffs()');
+            this.initPlayoffs();
+          }
         } else {
           console.log('[navbar] simulate() season over, calling initPlayoffs()');
           this.initPlayoffs();
         }
       } else {
         // console.log('[navbar] simulate() Play a playoff game!');
-        this.playoffService.playPlayoffGame(this.simFast);
+        if (this.playoffService.playPlayoffGame(this.simFast)) {
+          // Keep playing
+        } else {
+          this.seasonOver = true;
+        }
       }
     }
   }
 
-  simBtnDisabled() {
+  simActive() {
     return this.simSeason || (this.gameActive && !this.simSeason && this.oneGameAtATime);
   }
 
@@ -146,6 +157,7 @@ export class NavBarComponent implements OnInit {
         this.postseason = false;
         this.playoffTeams = [];
         this.calledInitPlayoffs = false;
+        this.seasonOver = false;
         this.openSnackBar('Season reset!', '');
 
         if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {
