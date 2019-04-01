@@ -6,7 +6,8 @@
         <td width="20%"></td>
         <td width="8%">W</td>
         <td width="8%">L</td>
-        <td width="8%">PCT</td>
+        <td width="8%" *ngIf="currentGame > 0">PCT</td>
+        <td width="8%" *ngIf="currentGame === 0">Total</td>
         <td width="8%">PF</td>
         <td width="8%">PA</td>
         <td width="8%">Home</td>
