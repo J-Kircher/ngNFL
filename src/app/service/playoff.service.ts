@@ -418,7 +418,7 @@ export class PlayoffService {
     });
   }
 
-  playPlayoffGame(simFast: boolean) {
+  playPlayoffGame(simFast: boolean): boolean {
     // console.log('[playoff.service] playPlayoffGame() curr:' + this.currentPlayoffGame + ' len:' + this.PLAYOFF_SCHEDULE.length);
     if (this.currentPlayoffGame < this.PLAYOFF_SCHEDULE.length) {
       this.setCurrentPlayoffGame(this.currentPlayoffGame);
@@ -429,10 +429,10 @@ export class PlayoffService {
 
       this.playGame(this.PLAYOFF_SCHEDULE[this.currentPlayoffGame], simFast);
       this.currentPlayoffGame++;
-      // return true;
+      return true;
     } else {
       console.log('[playoff.service] playPlayoffGame() Season Over');
-      // return false;
+      return false;
     }
   }
 
