@@ -21,6 +21,7 @@ export class NavBarComponent implements OnInit {
   askSimSeason: boolean = false;
   simSeason: boolean = false;
   simFast: boolean = false;
+  topTeamsTabIndex: number = 0;
   currentGame: number = 0;
   currentGameDay: string;
   finalGame: number;
@@ -156,12 +157,15 @@ export class NavBarComponent implements OnInit {
 
   openTopTeamsDialog(): void {
     const dialogRef = this.dialog.open(TopTeamsDialogComponent, {
-      data: {}
+      data: { 'tabIndex': this.topTeamsTabIndex }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       this.dialogReturn = result;
+      if (result) {
+        this.topTeamsTabIndex = result.tabIndex;
+      }
     }, (err) => {
       console.error('[navbar] openTopTeamsDialog() afterClosed() error: ' + err);
     });

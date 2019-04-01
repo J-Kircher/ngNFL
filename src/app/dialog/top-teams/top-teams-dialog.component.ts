@@ -1,5 +1,5 @@
-import { Component, OnInit, DoCheck, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, DoCheck, OnDestroy, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTabChangeEvent } from '@angular/material';
 
 import { TeamService } from '../../service/team.service';
 import { ITeam } from '../../model/nfl.model';
@@ -10,34 +10,41 @@ import { sortDivision, sortConference } from '../../common/sort';
   templateUrl: './top-teams-dialog.component.html',
   styleUrls: ['./top-teams-dialog.component.scss']
 })
-export class TopTeamsDialogComponent implements OnInit, DoCheck {
+export class TopTeamsDialogComponent implements OnInit, DoCheck, OnDestroy {
 
   constructor(
     private teamService: TeamService,
     public dialogRef: MatDialogRef<TopTeamsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data
-    ) {}
+  ) {}
 
-    divisions: string[] = [];
-    teamsArr: ITeam[] = [];
-    AFCDivLeaders: ITeam[] = [];
-    AFCOthers: ITeam[] = [];
-    AFCWildcard: ITeam[] = [];
-    AFCHunt: ITeam[] = [];
-    NFCDivLeaders: ITeam[] = [];
-    NFCOthers: ITeam[] = [];
-    NFCWildcard: ITeam[] = [];
-    NFCHunt: ITeam[] = [];
+  tabIndex: number;
+  divisions: string[] = [];
+  teamsArr: ITeam[] = [];
+  AFCDivLeaders: ITeam[] = [];
+  AFCOthers: ITeam[] = [];
+  AFCWildcard: ITeam[] = [];
+  AFCHunt: ITeam[] = [];
+  NFCDivLeaders: ITeam[] = [];
+  NFCOthers: ITeam[] = [];
+  NFCWildcard: ITeam[] = [];
+  NFCHunt: ITeam[] = [];
 
-    ngOnInit() {
-      // this.teamsArr = this.teamService.getCurrentTeams().map(teams => teams);
+  ngOnInit() {
+    // this.teamsArr = this.teamService.getCurrentTeams().map(teams => teams);
 
-      this.teamService.getTeams().subscribe((data: ITeam[]) => {
-        this.teamsArr = data;
-        // console.log('[navbar] ngOnInit() getCurrentTeams() SUCCESS');
-      }, (err) => {
-        console.error('[top-teams] ngOnInit() getTeams() error: ' + err);
-      });
+    if (this.data) {
+      this.tabIndex = this.data.tabIndex;
+    } else {
+      this.tabIndex = 0;
+    }
+
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+      // console.log('[navbar] ngOnInit() getCurrentTeams() SUCCESS');
+    }, (err) => {
+      console.error('[top-teams] ngOnInit() getTeams() error: ' + err);
+    });
   }
 
   ngDoCheck() {
@@ -104,7 +111,15 @@ export class TopTeamsDialogComponent implements OnInit, DoCheck {
     }
   }
 
+  ngOnDestroy() {
+    this.onClose();
+  }
+
+  tabClicked(event: MatTabChangeEvent) {
+    this.tabIndex = event.index;
+  }
+
   onClose(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ 'tabIndex': this.tabIndex });
   }
 }

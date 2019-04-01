@@ -3,7 +3,7 @@
   <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
 </div>
 <mat-dialog-content>
-  <mat-tab-group mat-stretch-tabs>
+  <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabIndex" (selectedTabChange)="tabClicked($event)">
     <mat-tab label="AFC Playoffs">
       <div id="afc">
         <h3 class="heading">Playoff <img src="/assets/images/AFC.png"> Picture</h3>
