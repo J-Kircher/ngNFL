@@ -3,29 +3,29 @@
 .month {
   @include boldItalText($medFontSize);
   text-align: center;
-  background: rgba(0, 128, 0, 0.5);
+  background: $NFLColor;
   height: 134px;
   border-radius: 5px;
   padding: 12px;
 
   .month-table {
     @include boldItalText($xsFontSize);
-    color: #666;
+    // color: #666;
     background: url(/assets/images/whiteback.gif);
     height: 116px;
     border-radius: 5px;
 
     a {
-      color: green;
+      color: $NFLLinkColor;
       cursor: pointer;
 
       &:hover {
-        border-color: rgba(0, 128, 0, 0.5);
-        background-color: rgba(0, 128, 0, 0.2);
+        border-color: $NFLColor;
+        background-color: $NFLTrans;
       }
     }
     .no-link {
-      color: black;
+      color: $NFLTrans;
     }
   }
 }

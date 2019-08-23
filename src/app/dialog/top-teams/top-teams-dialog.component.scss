@@ -9,14 +9,14 @@
   }
 
   button {
-    color: white;
-    background-color: rgba(0, 128, 0, 0.5) !important;
+    color: $NearWhite;
+    background-color: $NFLColor !important;
   }
 }
 
 mat-dialog-content {
   mat-tab-group {
-    background-color: #EEE;
+    background-color: $NearWhite;
     border-radius: 5px;
 
     .heading {
@@ -28,7 +28,7 @@ mat-dialog-content {
     .division {
       @include boldItalText($medFontSize);
       text-align: center;
-      background: rgba(0, 128, 0, 0.5);
+      background: $NFLColor;
       padding: 1px 1px 1px 1px;
       margin: 0px 0px 5px 5px;
       border-radius: 5px;
@@ -44,8 +44,8 @@ mat-dialog-content {
           min-width: 200px;
 
           &:hover {
-            border-color: rgba(0, 128, 0, 0.5);
-            background-color: rgba(0, 128, 0, 0.2);
+            border-color: $NFLColor;
+            background-color: $NFLTrans;
           }
           .logo {
             float: left;

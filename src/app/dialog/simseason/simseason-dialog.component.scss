@@ -7,14 +7,14 @@
     @include boldText($lgFontSize);
   }
   button {
-    color: white;
-    background-color: rgba(0, 128, 0, 0.5) !important;
+    color: $NearWhite;
+    background-color: $NFLColor !important;
   }
 }
 
 mat-dialog-content {
   mat-card {
-    background-color: #EEE;
+    background-color: $NearWhite;
     // .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
     //   background-color: green;
     // }
@@ -28,6 +28,6 @@ mat-dialog-actions {
   padding: 24px 0px;
   button {
     color: black;
-    background-color: rgba(0, 128, 0, 0.5) !important;
+    background-color: $NFLColor !important;
   }
 }

@@ -16,7 +16,7 @@ mat-card {
   }
 
   mat-tab-group {
-    background-color: #EEE;
+    background-color: $NearWhite;
     border-radius: 5px;
     padding: 5px;
 
@@ -27,14 +27,14 @@ mat-card {
       }
 
       .gameday {
-        background-color: #DDD;
+        background-color: $LightGrey;
         cursor: pointer;
         margin: 6px;
         transition: background-color 280ms cubic-bezier(.4,0,.2,1);
 
         &:hover {
-          border-color: rgba(0, 0, 0, 0.8);
-          background-color: rgb(238, 238, 238);
+          border-color: $NearBlack;
+          background-color: $NearWhite;
         }
       }
     }
@@ -42,7 +42,7 @@ mat-card {
     .bracket {
       $side-margin: 40px;
       $vertical-margin: 10px;
-      $line-color: rgba(0, 128, 0, 0.5);
+      $line-color: $NFLColor;
 
       .overlay {
         width: 100%;

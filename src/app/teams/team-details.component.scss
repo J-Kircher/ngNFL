@@ -6,6 +6,7 @@ mat-card {
 
   .team-card {
     margin: 4px;
+    background-color: $LightGrey;
 
     .banner-border {
       @include boldText($medFontSize);
@@ -17,7 +18,7 @@ mat-card {
     .banner-center {
       @include boldText($xxFontSize);
       text-align: center;
-      color: white;
+      color: $NearWhite;
     }
 
     .image-container {

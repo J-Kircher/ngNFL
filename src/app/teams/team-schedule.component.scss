@@ -11,14 +11,14 @@ mat-card {
     }
 
     .gameday {
-      background-color: #DDD;
+      background-color: $LightGrey;
       cursor: pointer;
       margin: 6px;
       transition: background-color 280ms cubic-bezier(.4,0,.2,1);
 
       &:hover {
-        border-color: rgba(0, 0, 0, 0.8);
-        background-color: rgb(238, 238, 238);
+        border-color: $NearBlack;
+        background-color: $NearWhite;
       }
 
       .gameday-text {

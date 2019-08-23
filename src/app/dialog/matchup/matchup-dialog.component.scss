@@ -11,8 +11,8 @@
     margin: 6px;
   }
   button {
-    color: white;
-    background-color: rgba(0, 128, 0, 0.5) !important;
+    color: $NearWhite;
+    background-color: $NFLColor !important;
   }
 }
 
@@ -20,7 +20,7 @@ mat-dialog-content {
   min-width: 600px;
 
   mat-card {
-    background-color: #EEE;
+    background-color: $NearWhite;
 
     .matchup {
       @include boldItalText($medFontSize);
