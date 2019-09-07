@@ -9,7 +9,7 @@ import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
 import { PlayNFLGame } from '../shared/PlayNFLGame';
 
-import { _SCHEDULE } from '../shared/NFLSchedule2018';
+import { _SCHEDULE } from '../shared/NFLSchedule2019';
 
 @Injectable()
 export class ScheduleService {

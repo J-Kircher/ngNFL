@@ -8,7 +8,7 @@ import { ITeam } from '../model/nfl.model';
 import { ConfigService } from '../service/config.service';
 import { StorageService } from '../service/storage.service';
 
-import { _TEAMS } from '../shared/NFLTeams2018';
+import { _TEAMS } from '../shared/NFLTeams2019';
 
 @Injectable()
 export class TeamService {
