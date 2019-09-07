@@ -10,7 +10,7 @@
       </div>
     </div> -->
 
-    <mat-tab-group mat-stretch-tabs>
+    <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabIndex" (selectedTabChange)="tabClicked($event)">
       <mat-tab label="Bracket">
         <mat-card>
           <div class="bracket" fxLayout.gt-md="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">

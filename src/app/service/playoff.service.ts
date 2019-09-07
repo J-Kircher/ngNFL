@@ -27,6 +27,7 @@ export class PlayoffService {
   PlayoffTeams: number[] = [];
   PlayoffBracket: number[] = new Array(22);
   SuperBowlChamp: number;
+  playoffTabIndex: number = 0;
 
   // Observable sources
   private currentPlayoffGameSource = new BehaviorSubject<number>(0);
@@ -68,6 +69,14 @@ export class PlayoffService {
   setSuperBowlChamp(data: number) {
     // console.log('[playoff.service] setSuperBowlChamp() data: ' + data);
     this.SuperBowlChampSource.next(data);
+  }
+
+  getPlayoffTabIndex() {
+    return this.playoffTabIndex;
+  }
+
+  setPlayoffTabIndex(idx: number) {
+    this.playoffTabIndex = idx;
   }
 
   loadPlayoffScheduleFromStorage() {

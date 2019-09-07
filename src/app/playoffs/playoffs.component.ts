@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule, IGameResults } from '../model/nfl.model';
 import { PlayoffService } from '../service/playoff.service';
@@ -15,6 +15,7 @@ import { listAnimation } from '../shared/animations';
 })
 
 export class PlayoffsComponent implements OnInit {
+  tabIndex: number;
   divisions: string[] = [];
   teamsArr: ITeam[] = [];
   playoffTeams: number[] = [];
@@ -39,6 +40,8 @@ export class PlayoffsComponent implements OnInit {
     // console.log('[playoffs] ngOnInit()');
     // Reset season needs to also reset playoffs!
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
+
+    this.tabIndex = this.playoffService.playoffTabIndex;
 
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
@@ -67,6 +70,11 @@ export class PlayoffsComponent implements OnInit {
     this.playoffService.GameDay$.subscribe(data => this.GameDay = data);
     this.playoffService.PlayoffBracket$.subscribe(data => this.PlayoffBracket = data);
     this.playoffService.SuperBowlChamp$.subscribe(data => this.SuperBowlChamp = data);
+  }
+
+  tabClicked(event: MatTabChangeEvent) {
+    this.tabIndex = event.index;
+    this.playoffService.setPlayoffTabIndex(this.tabIndex);
   }
 
   getAbbrev(idx: number) {
