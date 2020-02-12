@@ -53,6 +53,7 @@ export interface ISchedule {
   homeRecord?: string;
   quarter: string;
   spread?: number;
+  overtime?: boolean;
   gameResults: IGameResults[];
 }
 

@@ -62,12 +62,26 @@ export class ScheduleService {
     this.currentGame = 0;
     this.FULL_SCHEDULE = this.storageService.loadScheduleFromLocalStorage() || [];
     this.FULL_SCHEDULE.forEach(game => {
+      if (game.quarter !== 'F' && game.quarter !== null) {
+        this.resetIncompleteGame(game);
+      }
       if (game.visitScore !== null) {
         this.currentGame++;
       }
     });
     // this.currentGame = this.currentGame > 0 ? this.currentGame-- : 0;
     this.setCurrentGame(this.currentGame);
+  }
+
+  resetIncompleteGame(game: ISchedule) {
+    game.visitScore = null;
+    game.visitRecord = null;
+    game.homeScore = null,
+    game.homeRecord = null;
+    game.quarter = null;
+    game.spread = null;
+    game.overtime = null;
+    game.gameResults = [];
   }
 
   buildFullSchedule() {
@@ -139,7 +153,10 @@ export class ScheduleService {
 
     const subject = new Subject<ISchedule[]>();
 
-    setTimeout(() => {subject.next(this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team)))); subject.complete(); }, 0);
+    setTimeout(() => {
+      subject.next(this.FULL_SCHEDULE.filter(game => ((game.visitTeam === team) || (game.homeTeam === team))));
+      subject.complete();
+    }, 0);
     // .next adds data to the observable stream
     // using setTimeout to simulate aschrony
     return subject;
@@ -200,6 +217,8 @@ export class ScheduleService {
     }, () => {
       // console.log('[schedule.service] playGame() GAME OVER');
       this.gameService.setGameActive(false);
+      const overtime = game.quarter === 'OT';
+      game.overtime = overtime;
       game.quarter = 'F';
 
       // Update in case sim season timing slightly updates the records

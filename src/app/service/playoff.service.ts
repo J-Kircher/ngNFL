@@ -83,11 +83,25 @@ export class PlayoffService {
     this.currentPlayoffGame = 0;
     this.PLAYOFF_SCHEDULE = this.storageService.loadPlayoffScheduleFromLocalStorage() || [];
     this.PLAYOFF_SCHEDULE.forEach(game => {
+      if (game.quarter !== 'F' && game.quarter !== null) {
+        this.resetIncompleteGame(game);
+      }
       if (game.visitScore !== null) {
         this.currentPlayoffGame++;
       }
     });
     this.setCurrentPlayoffGame(this.currentPlayoffGame);
+  }
+
+  resetIncompleteGame(game: ISchedule) {
+    game.visitScore = null;
+    game.visitRecord = null;
+    game.homeScore = null,
+    game.homeRecord = null;
+    game.quarter = null;
+    game.spread = null;
+    game.overtime = null;
+    game.gameResults = [];
   }
 
   addToSchedule(playoffDay: string) {
@@ -409,6 +423,8 @@ export class PlayoffService {
     }, () => {
       // console.log('[playoff.service] playGame() playNFLGame over');
       this.gameService.setGameActive(false);
+      const overtime = game.quarter === 'OT';
+      game.overtime = overtime;
       game.quarter = 'F';
       // if (game.visitScore > game.homeScore) {
       //   console.log('[playoff.service] playGame() Visitors Win');
