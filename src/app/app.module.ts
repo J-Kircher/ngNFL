@@ -20,7 +20,6 @@ import { ScheduleMonthComponent } from './schedule/schedule-month.component';
 import { StandingsComponent } from './standings/standings.component';
 import { StandingsDivisionComponent } from './standings/standings-division.component';
 import { StandingsDivisionExpandedComponent } from './standings/standings-division-expanded.component';
-import { ShowGameComponent } from './showgame/show-game.component';
 import { ShowScoresComponent } from './showscores/show-scores.component';
 import { ShowScoreComponent } from './showscores/show-score.component';
 import { TeamScheduleComponent } from './teams/team-schedule.component';
@@ -72,7 +71,6 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     StandingsComponent,
     StandingsDivisionComponent,
     StandingsDivisionExpandedComponent,
-    ShowGameComponent,
     ShowScoresComponent,
     ShowScoreComponent,
     TeamScheduleComponent,
