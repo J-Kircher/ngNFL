@@ -34,7 +34,7 @@
             <mat-grid-tile colspan="4" *ngIf="i === 0 || results[i].quarter !== results[i-1].quarter">
               <span class="quarter">{{getQuarter(result.quarter)}}</span>
             </mat-grid-tile>
-            <mat-grid-tile colspan="1"><img src="/assets/images/{{teamsArr[result.teamScored]?.abbrev}}.png" class="logo"></mat-grid-tile>
+            <mat-grid-tile colspan="1"><img src="./assets/images/{{teamsArr[result.teamScored]?.abbrev}}.png" class="logo"></mat-grid-tile>
             <mat-grid-tile colspan="2"><span class="normal">{{teamsArr[result.teamScored]?.name}} {{getScoreType(result.points)}}</span></mat-grid-tile>
             <mat-grid-tile colspan="1">
               <span [ngClass]="whoScored(i, 'v')">{{getGameScore(i, 'v')}}</span>

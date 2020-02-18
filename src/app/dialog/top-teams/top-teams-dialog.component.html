@@ -6,13 +6,13 @@
   <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabIndex" (selectedTabChange)="tabClicked($event)">
     <mat-tab label="AFC Playoffs">
       <div id="afc">
-        <h3 class="heading">Playoff <img src="/assets/images/AFC.png" height="75px"> Picture</h3>
+        <h3 class="heading">Playoff <img src="./assets/images/AFC.png" height="75px"> Picture</h3>
         <div fxLayout="row">
           <div fxLayout="column" class="division">
             Division Leaders
             <div class="div-team" *ngFor="let team of AFCDivLeaders">
               <div class="team-info" fxFlex>
-                <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+                <img src="./assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
                 <span class="team-record">{{team.wins}} - {{team.losses}}</span>
                 <br>
@@ -24,7 +24,7 @@
             Wildcards
             <div class="div-team" *ngFor="let team of AFCWildcard">
               <div class="team-info" fxFlex>
-                <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+                <img src="./assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
                 <span class="team-record">{{team.wins}} - {{team.losses}}</span>
                 <br>
@@ -36,7 +36,7 @@
             On the Outside
             <div class="div-team" *ngFor="let team of AFCHunt">
               <div class="team-info" fxFlex>
-                <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+                <img src="./assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
                 <span class="team-record">{{team.wins}} - {{team.losses}}</span>
                 <br>
@@ -49,13 +49,13 @@
     </mat-tab>
     <mat-tab label="NFC Playoffs">
       <div id="nfc">
-        <h3 class="heading">Playoff <img src="/assets/images/NFC.png" height="75px"> Picture</h3>
+        <h3 class="heading">Playoff <img src="./assets/images/NFC.png" height="75px"> Picture</h3>
         <div fxLayout="row">
           <div fxLayout="column" class="division">
             Division Leaders
             <div class="div-team" *ngFor="let team of NFCDivLeaders">
               <div class="team-info" fxFlex>
-                <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+                <img src="./assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
                 <span class="team-record">{{team.wins}} - {{team.losses}}</span>
                 <br>
@@ -67,7 +67,7 @@
             Wildcards
             <div class="div-team" *ngFor="let team of NFCWildcard">
               <div class="team-info" fxFlex>
-                <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+                <img src="./assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
                 <span class="team-record">{{team.wins}} - {{team.losses}}</span>
                 <br>
@@ -79,7 +79,7 @@
             On the Outside
             <div class="div-team" *ngFor="let team of NFCHunt">
               <div class="team-info" fxFlex>
-                <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+                <img src="./assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
                 <span class="team-record">{{team.wins}} - {{team.losses}}</span>
                 <br>

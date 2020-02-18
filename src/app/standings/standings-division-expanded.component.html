@@ -20,7 +20,7 @@
     <tbody>
       <tr class="team-row" *ngFor="let team of divisionTeams" (click)="showTeam(team.abbrev)">
         <td class="team-info">
-          <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+          <img src="./assets/images/{{team.abbrev}}.png" class="logo">
           <span class="team-city">{{team.city}}</span>
           <br>
           <span class="team-name">{{team.name}}</span>
@@ -42,6 +42,6 @@
 </div>
 
 <mat-card class="loading-well" *ngIf="loading">
-  <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+  <div class="loading-image"><img src="./assets/images/loading.gif" height="40px"></div>
   <div class="loading-font">&nbsp; Loading Expanded Standings &hellip;</div>
 </mat-card>
