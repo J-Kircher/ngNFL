@@ -1,4 +1,4 @@
-import { ITeam } from '../model/nfl.model';
+import { ITeam } from '@app/model/nfl.model';
 
 export const _TEAMS: ITeam[] = [
   { 'city': 'Buffalo', 'name': 'Bills', 'abbrev': 'BUF', 'lightcolor': 'CF0020', 'darkcolor': '1F488F', 'division': 'AFC East', 'qb': 5, 'rb': 7, 'wr': 5, 'ol': 6, 'dl': 7, 'lb': 6, 'db': 8, 'st': 5, 'co': 7 },

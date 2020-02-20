@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ISchedule, IGameResults } from '../model/nfl.model';
-import { ScheduleService } from '../service/schedule.service';
-import { ScheduleDayService } from '../service/schedule.day.service';
-import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
-import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
-import { listAnimation } from '../shared/animations';
+import { ISchedule, IGameResults } from '@app/model/nfl.model';
+import { ScheduleService } from '@app/service/schedule.service';
+import { ScheduleDayService } from '@app/service/schedule.day.service';
+import { MatchupDialogComponent } from '@app/dialog/matchup/matchup-dialog.component';
+import { ResultsDialogComponent } from '@app/dialog/results/results-dialog.component';
+import { listAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'schedule-day',

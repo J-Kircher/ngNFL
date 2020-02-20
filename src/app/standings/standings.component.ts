@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamService } from '../service/team.service';
-import { ITeam } from '../model/nfl.model';
+import { TeamService } from '@app/service/team.service';
+import { ITeam } from '@app/model/nfl.model';
 
 @Component({
   selector: 'standings',

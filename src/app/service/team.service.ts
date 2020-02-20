@@ -4,11 +4,11 @@ import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
-import { ITeam } from '../model/nfl.model';
-import { ConfigService } from '../service/config.service';
-import { StorageService } from '../service/storage.service';
+import { ITeam } from '@app/model/nfl.model';
+import { ConfigService } from '@app/service/config.service';
+import { StorageService } from '@app/service/storage.service';
 
-import { _TEAMS } from '../shared/NFLTeams2019';
+import { _TEAMS } from '@app/shared/NFLTeams2019';
 
 @Injectable()
 export class TeamService {

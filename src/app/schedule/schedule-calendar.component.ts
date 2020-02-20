@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { NFLCalendar, ISchedule } from '../model/nfl.model';
-import { ScheduleService } from '../service/schedule.service';
-import { ScheduleDayService } from '../service/schedule.day.service';
+import { NFLCalendar, ISchedule } from '@app/model/nfl.model';
+import { ScheduleService } from '@app/service/schedule.service';
+import { ScheduleDayService } from '@app/service/schedule.day.service';
 
 @Component({
   selector: 'schedule-calendar',

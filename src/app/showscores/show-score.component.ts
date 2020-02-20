@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TeamService } from '../service/team.service';
-import { ITeam, ISchedule } from '../model/nfl.model';
-import { calculateOdds } from '../common/odds';
+import { TeamService } from '@app/service/team.service';
+import { ITeam, ISchedule } from '@app/model/nfl.model';
+import { calculateOdds } from '@app/common/odds';
 
 @Component({
   selector: 'show-score',

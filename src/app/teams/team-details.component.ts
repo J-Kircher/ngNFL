@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { TeamService } from '../service/team.service';
-import { PlayoffService } from '../service/playoff.service';
-import { ITeam } from '../model/nfl.model';
+import { TeamService } from '@app/service/team.service';
+import { PlayoffService } from '@app/service/playoff.service';
+import { ITeam } from '@app/model/nfl.model';
 
 @Component({
   selector: 'team-details', // This html tag is not necessary since we will be navigating to this

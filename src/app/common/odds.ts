@@ -1,4 +1,4 @@
-import { ITeam } from '../model/nfl.model';
+import { ITeam } from '@app/model/nfl.model';
 
 export function calculateOdds(t1: ITeam, t2: ITeam): number {
 

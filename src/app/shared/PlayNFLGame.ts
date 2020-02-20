@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { ISchedule, ITeam } from '../model/nfl.model';
-import { calculateOdds } from '../common/odds';
+import { ISchedule, ITeam } from '@app/model/nfl.model';
+import { calculateOdds } from '@app/common/odds';
 
 export class PlayNFLGame {
 

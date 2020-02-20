@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { TeamService } from '../../service/team.service';
-import { ITeam, ISchedule } from '../../model/nfl.model';
-import { ScheduleService } from '../../service/schedule.service';
-import { PlayoffService } from '../../service/playoff.service';
-import { calculateOdds, getOddsText } from '../../common/odds';
+import { TeamService } from '@app/service/team.service';
+import { ITeam, ISchedule } from '@app/model/nfl.model';
+import { ScheduleService } from '@app/service/schedule.service';
+import { PlayoffService } from '@app/service/playoff.service';
+import { calculateOdds, getOddsText } from '@app/common/odds';
 
 @Component({
   selector: 'app-matchup-dialog',

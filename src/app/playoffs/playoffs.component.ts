@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatTabChangeEvent } from '@angular/material';
-import { TeamService } from '../service/team.service';
-import { ITeam, ISchedule, IGameResults } from '../model/nfl.model';
-import { PlayoffService } from '../service/playoff.service';
-import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
-import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
-import { listAnimation } from '../shared/animations';
+import { TeamService } from '@app/service/team.service';
+import { ITeam, ISchedule, IGameResults } from '@app/model/nfl.model';
+import { PlayoffService } from '@app/service/playoff.service';
+import { MatchupDialogComponent } from '@app/dialog/matchup/matchup-dialog.component';
+import { ResultsDialogComponent } from '@app/dialog/results/results-dialog.component';
+import { listAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'playoffs',

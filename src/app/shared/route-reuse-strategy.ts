@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
-import { TeamDetailsComponent } from '../teams/team-details.component';
+import { TeamDetailsComponent } from '@app/teams/team-details.component';
 
 export class CustomReuseStrategy implements RouteReuseStrategy {
 

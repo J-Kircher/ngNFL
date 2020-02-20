@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { ScheduleService } from './service/schedule.service';
-import { TeamService } from './service/team.service';
-import { fadeAnimation } from './shared/animations';
+import { ScheduleService } from '@app/service/schedule.service';
+import { TeamService } from '@app/service/team.service';
+import { fadeAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'app-nfl',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ScheduleDayService } from '../service/schedule.day.service';
+import { ScheduleDayService } from '@app/service/schedule.day.service';
 
 @Component({
   selector: 'schedule', // Not necessarry, will be accessible via route

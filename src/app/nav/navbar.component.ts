@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { TeamService } from '../service/team.service';
-import { StorageService } from '../service/storage.service';
-import { ScheduleService } from '../service/schedule.service';
-import { PlayoffService } from '../service/playoff.service';
-import { GameService } from '../service/game.service';
-import { TopTeamsDialogComponent } from '../dialog/top-teams/top-teams-dialog.component';
-import { SimseasonDialogComponent } from '../dialog/simseason/simseason-dialog.component';
+import { TeamService } from '@app/service/team.service';
+import { StorageService } from '@app/service/storage.service';
+import { ScheduleService } from '@app/service/schedule.service';
+import { PlayoffService } from '@app/service/playoff.service';
+import { GameService } from '@app/service/game.service';
+import { TopTeamsDialogComponent } from '@app/dialog/top-teams/top-teams-dialog.component';
+import { SimseasonDialogComponent } from '@app/dialog/simseason/simseason-dialog.component';
 
 @Component({
   selector: 'nav-bar',

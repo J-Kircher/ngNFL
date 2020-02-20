@@ -1,10 +1,10 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ScheduleService } from '../service/schedule.service';
-import { PlayoffService } from '../service/playoff.service';
-import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
-import { ISchedule } from '../model/nfl.model';
-import { listAnimation } from '../shared/animations';
+import { ScheduleService } from '@app/service/schedule.service';
+import { PlayoffService } from '@app/service/playoff.service';
+import { ResultsDialogComponent } from '@app/dialog/results/results-dialog.component';
+import { ISchedule } from '@app/model/nfl.model';
+import { listAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'show-scores',

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
-import { TeamService } from '../service/team.service';
-import { ScheduleService } from '../service/schedule.service';
-import { ITeam } from '../model/nfl.model';
-import { sortDivision, sortDivisionByTotal } from '../common/sort';
+import { TeamService } from '@app/service/team.service';
+import { ScheduleService } from '@app/service/schedule.service';
+import { ITeam } from '@app/model/nfl.model';
+import { sortDivision, sortDivisionByTotal } from '@app/common/sort';
 
 @Component({
   selector: 'standings-division',
