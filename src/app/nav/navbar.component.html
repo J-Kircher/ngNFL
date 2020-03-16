@@ -1,7 +1,5 @@
 <mat-toolbar class="menu">
-
   <div class="menu-logo"><img src="./assets/images/NFL.png" height="50px"></div>
-
   <div fxLayoutAlign="center" fxShow="false" fxShow.gt-sm>
     <span class="menu-link"><a [routerLink]="['/teams']" id="show">Show Teams</a></span>
     <span class="menu-link"><a [routerLink]="['/schedule']" id="schedule">Schedule</a></span>
@@ -10,13 +8,14 @@
     <span class="menu-link"><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
     <span class="menu-link"><a id="help">Help</a></span>
   </div>
-
   <span fxFlex="1 1 auto"></span>
-
-  <button mat-raised-button id="Simulate" (click)="simulate()" [disabled]="simActive() || seasonOver"
-    [appSpinnerButton]="simActive()" [ngClass]="{ disabled: simActive() }">Simulate</button>
-
-  <div class="settings">
+  <button mat-raised-button id="Simulate" fxShow="false" fxShow.gt-sm color="accent"
+    (click)="simulate()" [disabled]="simActive() || seasonOver" [appSpinnerButton]="simActive()"
+    [ngClass]="{ disabled: simActive() }">Simulate</button>
+  <button mat-mini-fab fxShow="false" fxShow.gt-sm color="accent" fxHide="false" fxHide.gt-sm
+    (click)="simulate()" [disabled]="simActive() || seasonOver" [ngClass]="{ disabled: simActive() }">
+    <mat-icon>speed</mat-icon></button>
+  <div class="settings" fxShow="false" fxShow.gt-sm>
     <div class="spin">
       <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
         <mat-icon>settings</mat-icon>
@@ -28,7 +27,6 @@
       </mat-menu>
     </div>
   </div>
-
   <a mat-button [matMenuTriggerFor]="mainMenu" fxHide="false" fxHide.gt-sm>
     <mat-icon>more_vert</mat-icon>
   </a>
@@ -39,8 +37,7 @@
     <a mat-menu-item [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a>
     <a mat-menu-item id="topTeams" (click)="getTopTeams()">Top Teams</a>
     <a mat-menu-item id="help">Help</a>
+    <a mat-menu-item [matMenuTriggerFor]="settingsMenu">Settings</a>
   </mat-menu>
-
 </mat-toolbar>
-
 <mat-progress-bar color="accent" mode="determinate" [value]="progress"></mat-progress-bar>

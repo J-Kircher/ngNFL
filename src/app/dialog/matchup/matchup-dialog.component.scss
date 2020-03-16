@@ -16,6 +16,16 @@
   }
 }
 
+.normal-zoom {
+  min-width: 600px;
+  zoom: 1;
+}
+
+.zoom-out {
+  min-width: auto;
+  zoom: 0.4;
+}
+
 mat-dialog-content {
   min-width: 600px;
 

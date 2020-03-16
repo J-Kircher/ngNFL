@@ -10,8 +10,14 @@ mat-card {
     @include boldItalText($lgFontSize);
     margin-top: 5px;
   }
-
   .schedule-body {
-    margin: 2px;
+    max-height: 181px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    .month-container {
+      margin: 2px;
+      min-width: 248px;
+    }
   }
 }

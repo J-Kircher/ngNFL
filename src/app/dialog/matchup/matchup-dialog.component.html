@@ -5,7 +5,7 @@
   </div>
   <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
 </div>
-<mat-dialog-content *ngIf="!loading">
+<mat-dialog-content *ngIf="!loading" ngClass.lt-sm="zoom-out" ngClass.gt-xs="normal-zoom">
   <mat-card>
     <mat-card-content>
       <div class="matchup">

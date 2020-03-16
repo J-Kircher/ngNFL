@@ -3,22 +3,23 @@
   <table class="div-table" width="100%">
     <thead>
       <tr>
-        <td width="40%"></td>
-        <td width="12%">W</td>
-        <td width="12%">L</td>
-        <td width="12%" *ngIf="currentGame > 0">PCT</td>
-        <td width="12%" *ngIf="currentGame === 0">Total</td>
-        <td width="12%">PF</td>
-        <td width="12%">PA</td>
+        <td width="35%"></td>
+        <td width="13%">W</td>
+        <td width="13%">L</td>
+        <td width="13%" *ngIf="currentGame > 0">PCT</td>
+        <td width="13%" *ngIf="currentGame === 0">Total</td>
+        <td width="13%">PF</td>
+        <td width="13%">PA</td>
       </tr>
     </thead>
     <tbody>
       <tr class="team-row" *ngFor="let team of divisionTeams" (click)="showTeam(team.abbrev)">
         <td class="team-info">
           <img src="./assets/images/{{team.abbrev}}.png" class="logo">
-          <span class="team-city">{{team.city}}</span>
-          <br>
-          <span class="team-name">{{team.name}}</span>
+          <div fxHide.lt-sm>
+            <span class="team-city">{{team.city}}</span><br>
+            <span class="team-name">{{team.name}}</span>
+          </div>
         </td>
         <td>{{team.wins}}</td>
         <td>{{team.losses}}</td>

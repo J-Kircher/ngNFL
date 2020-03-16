@@ -3,9 +3,9 @@
     <div class="schedule-text">
       Schedule
     </div>
-    <div fxLayout="row wrap" fxLayout.xs="column wrap">
+    <div class="schedule-body" fxLayout="column wrap">
       <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let schedDate of NFLCalendarArr">
-        <div class="schedule-body">
+        <div class="month-container">
           <schedule-month [month]="schedDate.month" [year]="schedDate.year"></schedule-month>
         </div>
       </div>
