@@ -8,53 +8,135 @@ mat-card {
 .division {
   @include boldItalText($medFontSize);
   text-align: center;
-  background: $NFLColor;
+  background-color: $NFLColor;
   padding: 12px;
   margin: 0px;
   border-radius: 5px;
 
-  table {
-    border-collapse: collapse;
-    border-style: hidden;
+  mat-table {
+    @include normalText($smFontSize);
+    // background-image: url(/assets/images/whiteback.jpg);
+    background-color: $NearWhite;
+    border: solid $NearWhite 3px;
+    border-radius: 6px;
 
-    thead {
+    mat-header-row {
+      min-height: 16px;
+    }
+    mat-header-cell {
+      display: flex;
+      justify-content: flex-end;
       @include boldText($smFontSize);
     }
-
-    td {
-      text-align: center;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
-    &.div-table {
-      @include normalText($smFontSize);
-      background: url(/assets/images/whiteback.jpg);
-      border-radius: 5px;
-
-      .team-row {
-        &:hover {
-          border-color: $NFLColor;
-          background-color: $NFLTrans;
-        }
-
-        .team-info {
-          text-align: left;
-          white-space: nowrap;
-
-          .logo {
-            float: left;
-            height: 40px;
-          }
-          .team-city {
-            @include normalText($medFontSize);
-            padding-left: 5px;
-          }
-          .team-name {
-            @include boldText($lgFontSize);
-            padding-left: 5px;
-          }
-        }
+    mat-row {
+      min-height: 40px;
+      &:hover {
+        border-color: $NFLColor;
+        background-color: $NFLTrans;
       }
+    }
+    mat-cell {
+      display: flex;
+      justify-content: flex-end;
+      // border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .mat-column-team {
+    display: flex;
+    justify-content: flex-start !important;
+    padding-left: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .logo {
+      height: 40px;
+    }
+    .team-city {
+      @include normalText($medFontSize);
+      padding-left: 5px;
+    }
+    .team-name {
+      @include boldText($lgFontSize);
+      padding-left: 5px;
+    }
+  }
+
+  &.standard {
+    .mat-column-team {
+      flex: 1 1 35% !important;
+    }
+    .mat-column-wins {
+      flex: 1 1 13% !important;
+    }
+    .mat-column-losses {
+      flex: 1 1 13% !important;
+    }
+    .mat-column-pct {
+      flex: 1 1 13% !important;
+    }
+    .mat-column-total {
+      flex: 1 1 13% !important;
+    }
+    .mat-column-pf {
+      flex: 1 1 13% !important;
+    }
+    .mat-column-pa {
+      flex: 1 1 13% !important;
+    }
+    .mat-column-homewins {
+      flex: 0 0 0px !important;
+    }
+    .mat-column-visitwins {
+      flex: 0 0 0px !important;
+    }
+    .mat-column-divwins {
+      flex: 0 0 0px !important;
+    }
+    .mat-column-confwins {
+      flex: 0 0 0px !important;
+    }
+    .mat-column-othwins {
+      flex: 0 0 0px !important;
+    }
+  }
+
+  &.expanded {
+    .mat-column-team {
+      flex: 1 1 20% !important;
+    }
+    .mat-column-wins {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-losses {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-pct {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-total {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-pf {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-pa {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-homewins {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-visitwins {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-divwins {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-confwins {
+      flex: 1 1 8% !important;
+    }
+    .mat-column-othwins {
+      flex: 1 1 8% !important;
     }
   }
 }

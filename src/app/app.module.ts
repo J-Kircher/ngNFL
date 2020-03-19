@@ -19,7 +19,6 @@ import { ScheduleDayComponent } from '@app/schedule/schedule-day.component';
 import { ScheduleMonthComponent } from '@app/schedule/schedule-month.component';
 import { StandingsComponent } from '@app/standings/standings.component';
 import { StandingsDivisionComponent } from '@app/standings/standings-division.component';
-import { StandingsDivisionExpandedComponent } from '@app/standings/standings-division-expanded.component';
 import { ShowScoresComponent } from '@app/showscores/show-scores.component';
 import { ShowScoreComponent } from '@app/showscores/show-score.component';
 import { TeamScheduleComponent } from '@app/teams/team-schedule.component';
@@ -70,7 +69,6 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     ScheduleMonthComponent,
     StandingsComponent,
     StandingsDivisionComponent,
-    StandingsDivisionExpandedComponent,
     ShowScoresComponent,
     ShowScoreComponent,
     TeamScheduleComponent,

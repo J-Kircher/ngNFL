@@ -1,35 +1,87 @@
-<div *ngIf="!loading" class="division">
+<div *ngIf="!loading" class="division" [ngClass]="getClass()">
   {{division}}
-  <table class="div-table" width="100%">
-    <thead>
-      <tr>
-        <td width="35%"></td>
-        <td width="13%">W</td>
-        <td width="13%">L</td>
-        <td width="13%" *ngIf="currentGame > 0">PCT</td>
-        <td width="13%" *ngIf="currentGame === 0">Total</td>
-        <td width="13%">PF</td>
-        <td width="13%">PA</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="team-row" *ngFor="let team of divisionTeams" (click)="showTeam(team.abbrev)">
-        <td class="team-info">
-          <img src="./assets/images/{{team.abbrev}}.png" class="logo">
-          <div fxHide.lt-sm>
-            <span class="team-city">{{team.city}}</span><br>
-            <span class="team-name">{{team.name}}</span>
-          </div>
-        </td>
-        <td>{{team.wins}}</td>
-        <td>{{team.losses}}</td>
-        <td *ngIf="currentGame > 0">{{team.pct}}</td>
-        <td *ngIf="currentGame === 0">{{team.total}}</td>
-        <td>{{team.pf}}</td>
-        <td>{{team.pa}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- Team Column -->
+    <ng-container matColumnDef="team">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let team">
+        <img src="./assets/images/{{team.abbrev}}.png" class="logo">
+        <div fxHide.lt-sm fxLayout="column" fxLayoutAlign="center start">
+          <span class="team-city">{{team.city}}</span>
+          <span class="team-name">{{team.name}}</span>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Wins Column -->
+    <ng-container matColumnDef="wins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> W </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.wins}} </mat-cell>
+    </ng-container>
+
+    <!-- Losses Column -->
+    <ng-container matColumnDef="losses">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> L </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.losses}} </mat-cell>
+    </ng-container>
+
+    <!-- Percent Column -->
+    <ng-container matColumnDef="pct">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PCT </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.pct}} </mat-cell>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Total </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.total}} </mat-cell>
+    </ng-container>
+
+    <!-- Points For Column -->
+    <ng-container matColumnDef="pf">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PF </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.pf}} </mat-cell>
+    </ng-container>
+
+    <!-- Points Against Column -->
+    <ng-container matColumnDef="pa">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PA </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.pa}} </mat-cell>
+    </ng-container>
+
+    <!-- Home Record -->
+    <ng-container matColumnDef="homewins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Home </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.homewins}}-{{team.homelosses}} </mat-cell>
+    </ng-container>
+
+    <!-- Visit Record -->
+    <ng-container matColumnDef="visitwins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Away </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.visitwins}}-{{team.visitlosses}} </mat-cell>
+    </ng-container>
+
+    <!-- Div Record -->
+    <ng-container matColumnDef="divwins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Div </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.divwins}}-{{team.divlosses}} </mat-cell>
+    </ng-container>
+
+    <!-- Conf Record -->
+    <ng-container matColumnDef="confwins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> {{division.indexOf('NFC') >= 0 ? 'NFC' : 'AFC'}} </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.confwins}}-{{team.conflosses}} </mat-cell>
+    </ng-container>
+
+    <!-- Other Record -->
+    <ng-container matColumnDef="othwins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> {{division.indexOf('AFC') >= 0 ? 'NFC' : 'AFC'}} </mat-header-cell>
+      <mat-cell *matCellDef="let team"> {{team.othwins}}-{{team.othlosses}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showTeam(row.abbrev)"></mat-row>
+  </mat-table>
 </div>
 
 <mat-card class="loading-well" *ngIf="loading">

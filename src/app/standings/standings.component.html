@@ -6,14 +6,14 @@
     <mat-tab label="Standard">
       <div id="standard" fxLayout="row wrap">
         <div class="div-body" fxFlex.lt-lg="calc(100% - 4px)" fxFlex.gt-md="calc(50% - 4px)" *ngFor="let division of divisions">
-          <standings-division [division]="division"></standings-division>
+          <standings-division [division]="division" format="standard"></standings-division>
         </div>
       </div>
     </mat-tab>
     <mat-tab label="Expanded">
       <div id="expanded" fxLayout="column">
         <div class="div-body" *ngFor="let division of divisions">
-          <standings-division-expanded [division]="division"></standings-division-expanded>
+          <standings-division [division]="division" format="expanded"></standings-division>
         </div>
       </div>
     </mat-tab>
