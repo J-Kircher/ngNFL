@@ -60,7 +60,7 @@ export class PlayNFLGame {
           theLoop(i);
         } else {
           if (game.visitScore === game.homeScore) {
-            // console.log('[PlayNFLGame] playNFLGame() Game: ' + game.id + ' - FORECD OVERTIME!');
+            // console.log('[PlayNFLGame] playNFLGame() Game: ' + game.id + ' - FORCED OVERTIME!');
             game.homeScore += 3;
             game.gameResults.push({ teamScored: game.homeTeam, quarter: 'OT', points: 3 });
           }
