@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 import { TeamService } from '@app/service/team.service';
 import { PlayoffService } from '@app/service/playoff.service';
 import { ITeam } from '@app/model/nfl.model';
@@ -15,6 +16,9 @@ export class TeamDetailsComponent implements OnInit {
   teamIdx: number;
   total: number;
   SuperBowlChamp: number;
+  attColumns: string[] = [];
+  statsColumns: string[] = [];
+  dataSource = new MatTableDataSource();
 
   constructor(
     private teamService: TeamService,
@@ -30,5 +34,8 @@ export class TeamDetailsComponent implements OnInit {
         this.team.dl + this.team.lb + this.team.db + this.team.st + this.team.co;
     });
     this.playoffService.SuperBowlChamp$.subscribe(data => this.SuperBowlChamp = data);
+    this.attColumns = ['qb', 'rb', 'wr', 'ol', 'dl', 'lb', 'db', 'st', 'co', 'total'];
+    this.statsColumns = ['wins', 'losses', 'pf', 'pa'];
+    this.dataSource = new MatTableDataSource([this.team]);
   }
 }

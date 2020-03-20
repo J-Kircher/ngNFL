@@ -35,9 +35,51 @@ mat-card {
       }
     }
 
-    td {
-      @include boldText($smFontSize);
-      text-align: center;
+    mat-table {
+      @include normalText($smFontSize);
+      // border: solid $NearWhite 3px;
+
+      mat-header-row {
+        min-height: 18px;
+      }
+      mat-header-cell {
+        margin: 0 1px 1px 1px;
+        &:first-child {
+          margin-left: 0px;
+          padding-left: 0px;
+        }
+        &:last-child {
+          margin-right: 0px;
+          padding-right: 0px;
+        }
+        &.mat-column-total {
+          flex: 0 1 120px;
+        }
+        display: flex;
+        justify-content: center;
+        @include boldText($medFontSize);
+        flex: 1 1 0;
+      }
+      mat-row {
+        min-height: 18px;
+      }
+      mat-cell {
+        margin: 0 1px;
+        &:first-child {
+          margin-left: 0px;
+          padding-left: 0px;
+        }
+        &:last-child {
+          margin-right: 0px;
+          padding-right: 0px;
+        }
+        &.mat-column-total {
+          flex: 0 1 120px;
+        }
+        display: flex;
+        justify-content: center;
+        flex: 1 1 0;
+      }
     }
   }
 }
