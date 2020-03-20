@@ -32,6 +32,7 @@ import { ResultsDialogComponent } from '@app/dialog/results/results-dialog.compo
 import { StorageService } from '@app/service/storage.service';
 import { MaterialElevationDirective } from '@app/shared/material-elevation.directive';
 import { GameService } from '@app/service/game.service';
+import { CapitalizePipe } from './common/capitalize.pipe';
 import { SpinnerButtonDirective } from '@app/shared/spinner-button.directive';
 import { MatSpinner } from '@angular/material';
 
@@ -77,6 +78,7 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     MatchupDialogComponent,
     SimseasonDialogComponent,
     ResultsDialogComponent,
+    CapitalizePipe,
     MaterialElevationDirective,
     SpinnerButtonDirective
   ],
