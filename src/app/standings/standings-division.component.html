@@ -1,6 +1,6 @@
 <div *ngIf="!loading" class="division" [ngClass]="getClass()">
   {{division}}
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table [dataSource]="dataSource" matSort ngClass.lt-sm="small-view">
     <!-- Team Column -->
     <ng-container matColumnDef="team">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

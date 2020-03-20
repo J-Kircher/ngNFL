@@ -31,23 +31,19 @@ export class StandingsDivisionComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.scheduleService.currentGame$.subscribe(data => this.currentGame = data);
-    this.displayedColumns = ['team', 'wins', 'losses', 'pct', 'pf', 'pa', 'homewins', 'visitwins', 'divwins', 'confwins', 'othwins'];
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+    }, (err) => {
+      console.error('[standings-div] ngOnInit() getTeams() error: ' + err);
+    }, () => {
+      // console.log('[standings-div] ngOnInit() getTeams() SUCCESS');
+      this.loading = false;
+    });
+  this.displayedColumns = ['team', 'wins', 'losses', 'pct', 'pf', 'pa', 'homewins', 'visitwins', 'divwins', 'confwins', 'othwins'];
   }
 
   ngDoCheck() {
     // console.log('[standings-div] ngDoCheck() division: ' + this.division);
-    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
-    // this.divisionTeams = this.getTeamsForDivision(this.division);
-
-    if (this.loading) {
-      this.teamService.getTeams().subscribe((data: ITeam[]) => {
-        this.teamsArr = data;
-        // console.log('[standings-div] ngDoCheck() getTeams() SUCCESS');
-        this.loading = false;
-      }, (err) => {
-        console.error('[standings-div] ngDoCheck() getTeams() error: ' + err);
-      });
-    }
 
     if (this.currentGame > 0) {
       this.divisionTeams = this.teamService.getTeamsForDivision(this.division).sort(sortDivision);
@@ -58,7 +54,6 @@ export class StandingsDivisionComponent implements OnInit, DoCheck {
     }
     this.dataSource = new MatTableDataSource(this.divisionTeams);
     this.dataSource.sort = this.sort;
-    // this.customSort();
   }
 
   getClass() {
@@ -67,32 +62,6 @@ export class StandingsDivisionComponent implements OnInit, DoCheck {
       expanded: (this.format === 'expanded')
     };
   }
-
-  // customSort() {
-  //   this.dataSource.sortingDataAccessor = (item: ITeam, property) => {
-  //     switch (property) {
-  //       case 'homerec': {
-  //         const val: number = item.homewins - item.homelosses;
-  //         return val;
-  //       }
-  //       case 'visitrec': {
-  //         return item.visitwins - item.homelosses;
-  //       }
-  //       case 'divrec': {
-  //         return item.divwins - item.divlosses;
-  //       }
-  //       case 'confrec': {
-  //         return item.confwins - item.conflosses;
-  //       }
-  //       case 'othrec': {
-  //         return item.othwins - item.othlosses;
-  //       }
-  //       default: {
-  //         return item[property];
-  //       }
-  //     }
-  //   };
-  // }
 
   showTeam(abbrev: string) {
       this.router.navigate(['/teams/' + abbrev]);

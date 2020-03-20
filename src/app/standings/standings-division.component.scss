@@ -20,6 +20,10 @@ mat-card {
     border: solid $NearWhite 3px;
     border-radius: 6px;
 
+    &.small-view {
+      max-width: 75vw;
+    }
+
     mat-header-row {
       min-height: 16px;
     }
