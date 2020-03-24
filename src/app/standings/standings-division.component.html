@@ -15,37 +15,37 @@
 
     <!-- Wins Column -->
     <ng-container matColumnDef="wins">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> W </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> W </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.wins}} </mat-cell>
     </ng-container>
 
     <!-- Losses Column -->
     <ng-container matColumnDef="losses">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> L </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> L </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.losses}} </mat-cell>
     </ng-container>
 
     <!-- Percent Column -->
     <ng-container matColumnDef="pct">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PCT </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> PCT </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.pct}} </mat-cell>
     </ng-container>
 
     <!-- Total Column -->
     <ng-container matColumnDef="total">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Total </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> Total </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.total}} </mat-cell>
     </ng-container>
 
     <!-- Points For Column -->
     <ng-container matColumnDef="pf">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PF </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> PF </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.pf}} </mat-cell>
     </ng-container>
 
     <!-- Points Against Column -->
     <ng-container matColumnDef="pa">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PA </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> PA </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.pa}} </mat-cell>
     </ng-container>
 

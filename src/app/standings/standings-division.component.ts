@@ -63,6 +63,10 @@ export class StandingsDivisionComponent implements OnInit, DoCheck {
     };
   }
 
+  isMobileView() {
+    return (window.innerWidth <= 599);
+  }
+
   showTeam(abbrev: string) {
       this.router.navigate(['/teams/' + abbrev]);
   }
