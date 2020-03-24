@@ -1,0 +1,27 @@
+@import 'src/scss/common';
+
+.dialog-title {
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+  }
+  button {
+    color: $NearWhite;
+    background-color: $NFLColor !important;
+  }
+}
+
+mat-dialog-content {
+  mat-card {
+    background-color: $NearWhite;
+  }
+}
+
+mat-dialog-actions {
+  padding: 24px 0px;
+  button {
+    color: black;
+    background-color: $NFLColor !important;
+  }
+}

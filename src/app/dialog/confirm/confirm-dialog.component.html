@@ -1,0 +1,13 @@
+<div class="dialog-title" fxLayoutAlign="space-between">
+  <div class="dialog-title-text">{{ data.title }}</div>
+  <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+  <mat-card>
+    <mat-card-content [innerHtml]="sanitizedHtml"></mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="space-between">
+  <button id="cancel" mat-flat-button class="cancel" [mat-dialog-close]="false">Cancel</button>
+  <button id="submit" mat-flat-button class="submit" (click)="submitForm()">Confirm</button>
+</mat-dialog-actions>

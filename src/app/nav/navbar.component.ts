@@ -9,6 +9,7 @@ import { PlayoffService } from '@app/service/playoff.service';
 import { GameService } from '@app/service/game.service';
 import { TopTeamsDialogComponent } from '@app/dialog/top-teams/top-teams-dialog.component';
 import { SimseasonDialogComponent } from '@app/dialog/simseason/simseason-dialog.component';
+import { ConfirmDialogComponent } from '@app/dialog/confirm/confirm-dialog.component';
 
 @Component({
   selector: 'nav-bar',
@@ -135,35 +136,54 @@ export class NavBarComponent implements OnInit {
 
   resetSeason() {
     console.log('[navbar] resetSeason()');
-    this.storageService.clearScheduleFromStorage().subscribe(() => {
-      // Do nothing here; wait for complete
-    }, (err) => {
-      console.error('[navbar] resetSeason() clearScheduleFromStorage() error: ' + err);
-    }, () => {
-      console.log('[navbar] resetSeason() clearScheduleFromStorage() complete');
-      this.scheduleService.buildFullSchedule();
-      this.storageService.clearTeamsFromStorage().subscribe(() => {
-        // Do nothing here; wait for complete
-      }, (err) => {
-        console.error('[navbar] resetSeason() clearTeamsFromStorage() error: ' + err);
-      }, () => {
-        console.log('[navbar] resetSeason() clearTeamsFromStorage() complete');
-        this.teamService.initTeams();
-        this.playoffService.resetPlayoffs();
-        this.askSimSeason = false;
-        this.simSeason = false;
-        this.simFast = false;
-        this.progress = 0;
-        this.postseason = false;
-        this.playoffTeams = [];
-        this.calledInitPlayoffs = false;
-        this.seasonOver = false;
-        this.openSnackBar('Season reset!', '');
+    this.openConfirmDialog();
+  }
 
-        if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {
-          this.router.navigateByUrl('/teams');
-        }
-      });
+  openConfirmDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        messageBodyHtml: 'Are you sure?',
+        title: 'Reset Season'
+      },
+      minWidth: '30vw',
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.storageService.clearScheduleFromStorage().subscribe(() => {
+          // Do nothing here; wait for complete
+        }, (err) => {
+          console.error('[navbar] openConfirmDialog() clearScheduleFromStorage() error: ' + err);
+        }, () => {
+          console.log('[navbar] openConfirmDialog() clearScheduleFromStorage() complete');
+          this.scheduleService.buildFullSchedule();
+          this.storageService.clearTeamsFromStorage().subscribe(() => {
+            // Do nothing here; wait for complete
+          }, (err) => {
+            console.error('[navbar] openConfirmDialog() clearTeamsFromStorage() error: ' + err);
+          }, () => {
+            console.log('[navbar] openConfirmDialog() clearTeamsFromStorage() complete');
+            this.teamService.initTeams();
+            this.playoffService.resetPlayoffs();
+            this.askSimSeason = false;
+            this.simSeason = false;
+            this.simFast = false;
+            this.progress = 0;
+            this.postseason = false;
+            this.playoffTeams = [];
+            this.calledInitPlayoffs = false;
+            this.seasonOver = false;
+            this.openSnackBar('Season reset!', '');
+
+            if (this.router.url.includes('schedule') || this.router.url.includes('teams') || this.router.url.includes('playoffs')) {
+              this.router.navigateByUrl('/teams');
+            }
+          });
+        });
+      }
+    }, (err) => {
+      console.error('[navbar] openConfirmDialog() afterClosed() error: ' + err);
     });
   }
 
