@@ -37,5 +37,6 @@ export class TeamDetailsComponent implements OnInit {
     this.attColumns = ['qb', 'rb', 'wr', 'ol', 'dl', 'lb', 'db', 'st', 'co', 'total'];
     this.statsColumns = ['wins', 'losses', 'pf', 'pa'];
     this.dataSource = new MatTableDataSource([this.team]);
+    window.scrollTo(0, 0);
   }
 }
