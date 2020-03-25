@@ -145,7 +145,7 @@ export class NavBarComponent implements OnInit {
         messageBodyHtml: 'Are you sure?',
         title: 'Reset Season'
       },
-      minWidth: '30vw',
+      minWidth: '220px',
       autoFocus: false
     });
 
@@ -206,7 +206,7 @@ export class NavBarComponent implements OnInit {
   openSimSeasonDialog(): void {
     const dialogRef = this.dialog.open(SimseasonDialogComponent, {
       data: { simFast: this.simFast },
-      minWidth: '30vw',
+      minWidth: '220px',
       disableClose: true
     });
 
