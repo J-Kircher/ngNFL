@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-gh": "ng build --baseHref=/tryit/ngNFL/ --outputPath=../J-Kircher.github.io/tryit/ngNFL",
+    "build-gh": "ng build --prod --baseHref=/tryit/ngNFL/ --outputPath=../J-Kircher.github.io/tryit/ngNFL",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
