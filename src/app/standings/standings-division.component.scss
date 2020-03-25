@@ -20,10 +20,6 @@ mat-card {
     border: solid $NearWhite 3px;
     border-radius: 6px;
 
-    &.small-view {
-      max-width: 75vw;
-    }
-
     mat-header-row {
       min-height: 16px;
     }
@@ -107,13 +103,13 @@ mat-card {
 
   &.expanded {
     .mat-column-team {
-      flex: 1 1 20% !important;
+      flex: 1 1 28% !important;
     }
     .mat-column-wins {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-losses {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-pct {
       flex: 1 1 8% !important;
@@ -122,25 +118,25 @@ mat-card {
       flex: 1 1 8% !important;
     }
     .mat-column-pf {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-pa {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-homewins {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-visitwins {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-divwins {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
     .mat-column-confwins {
       flex: 1 1 8% !important;
     }
     .mat-column-othwins {
-      flex: 1 1 8% !important;
+      flex: 1 1 7% !important;
     }
   }
 }
