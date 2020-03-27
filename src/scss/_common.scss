@@ -149,3 +149,18 @@ $serifFont2: Didot, "Book Antiqua", "Times New Roman", serif;
     @include transWiggle($duration, $count);
   }
 }
+
+// Button Mixins
+@mixin matPrimaryButton($theme) {
+  $primary: map-get($theme, primary);
+
+  background-color: mat-color($primary) !important;
+  color: mat-color($primary, default-contrast) !important;
+}
+@mixin matSecondaryButton($theme) {
+  $background: map-get($theme, background);
+  $accent: map-get($theme, accent);
+
+  background-color: mat-color($accent) !important;
+  color: mat-color($background, default-contrast) !important;
+}
