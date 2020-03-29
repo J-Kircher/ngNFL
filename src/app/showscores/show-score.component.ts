@@ -13,6 +13,8 @@ export class ShowScoreComponent implements OnInit {
   @Input() score: ISchedule;
   teamsArr: ITeam[] = [];
   loading: boolean = true;
+  showQuarter: boolean = false;
+  timerSet: boolean = false;
   odds: number = 0;
 
   constructor(
@@ -33,7 +35,20 @@ export class ShowScoreComponent implements OnInit {
     });
   }
 
-  showQuarter() {
-    return !['F', 'OT'].includes(this.score.quarter);
+  checkQuarter() {
+    if (this.score.quarter === '4') {
+      // Game is almost over, start the timer
+      if (!this.timerSet) {
+        this.timerSet = true;
+        setTimeout(() => {
+          this.showQuarter = false;
+        }, 4005);
+      }
+    } else if (this.score.quarter === '1') {
+      // Game is starting, show the quarter
+      this.showQuarter = true;
+    }
+    // If the game was already over, then show nothing
+    return this.showQuarter || !['F', 'OT'].includes(this.score.quarter);
   }
 }
