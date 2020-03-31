@@ -6,7 +6,7 @@
     <span class="menu-link"><a [routerLink]="['/standings']" id="standings">Standings</a></span>
     <span class="menu-link"><a [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a></span>
     <span class="menu-link"><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
-    <span class="menu-link"><a id="help">Help</a></span>
+    <span class="menu-link"><a [routerLink]="['/help']" id="help">Help</a></span>
   </div>
   <span fxFlex="1 1 auto"></span>
   <button mat-raised-button id="Simulate" fxShow="false" fxShow.gt-sm color="accent"
@@ -36,7 +36,7 @@
     <a mat-menu-item [routerLink]="['/standings']" id="standings">Standings</a>
     <a mat-menu-item [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a>
     <a mat-menu-item id="topTeams" (click)="getTopTeams()">Top Teams</a>
-    <a mat-menu-item id="help">Help</a>
+    <a mat-menu-item [routerLink]="['/help']" id="help">Help</a>
     <a mat-menu-item [matMenuTriggerFor]="settingsMenu">Settings</a>
   </mat-menu>
 </mat-toolbar>

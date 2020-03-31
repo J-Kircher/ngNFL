@@ -150,6 +150,19 @@ $serifFont2: Didot, "Book Antiqua", "Times New Roman", serif;
   }
 }
 
+// Color
+@mixin getThemeBGColor($theme, $color, $opacity: 1.0) {
+  @if $color == 'primary' {
+    $primary: map-get($theme, primary);
+    background-color: mat-color($primary, $opacity) !important;
+    color: mat-color($primary, default-contrast) !important;
+  } @else {
+    $accent: map-get($theme, accent);
+    background-color: mat-color($accent, $opacity) !important;
+    color: mat-color($accent, default-contrast) !important;
+  }
+}
+
 // Button Mixins
 @mixin matPrimaryButton($theme) {
   $primary: map-get($theme, primary);

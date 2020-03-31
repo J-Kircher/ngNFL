@@ -36,6 +36,7 @@ import { CapitalizePipe } from './common/capitalize.pipe';
 import { SpinnerButtonDirective } from '@app/shared/spinner-button.directive';
 import { MatSpinner } from '@angular/material';
 import { ConfirmDialogComponent } from '@app/dialog/confirm/confirm-dialog.component';
+import { HelpComponent } from '@app/help/help.component';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -83,7 +84,8 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     CapitalizePipe,
     MaterialElevationDirective,
     SpinnerButtonDirective,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    HelpComponent
   ],
   providers: [
     TeamService,

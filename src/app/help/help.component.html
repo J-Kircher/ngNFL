@@ -1,0 +1,196 @@
+<mat-card>
+  <div class="help-text">
+    Help
+  </div>
+  <div fxLayout="row wrap" class="div-scroll">
+    <section fxLayout="column">
+      <article>
+        This is a simple simulation of an NFL season.
+        Statistics are tracked and playoff teams are determined from the outcome of
+        the simulated season. After the playoffs a Super Bowl champion is crowned.
+        Each team is ranked in nine categories:
+      </article>
+      <article>
+        <div class="accent-container">
+          <div>Quarterbacks</div>
+          <div>Running Backs</div>
+          <div>Wide Receivers</div>
+          <div>Offensive Line</div>
+          <div>Defensive Line</div>
+          <div>Linebackers</div>
+          <div>Defensive Backs</div>
+          <div>Special Teams</div>
+          <div>Coaches</div>
+        </div>
+      </article>
+      <article>
+        Using the schedule for the current season, the teams are compared against one
+        another and "win" or "lose" based on the rankings and randomly generated numbers.
+      </article>
+    </section>
+    <section fxLayout="column">
+      <article>
+        Here is a description of the navigation links:
+      </article>
+      <article>
+        <div class="heading">
+          Show Teams
+        </div>
+        <div class="accent-container">
+          This link will display all the NFL teams in the main section. Clicking on a
+          team in this window will display that team's individual ratings and current
+          statistics. The lower section will show the team's complete scheule.
+        </div>
+      </article>
+      <article>
+        <div class="heading">
+          Schedule
+        </div>
+        <div class="accent-container">
+          This link will bring up the league schedule. The active months are displayed in the
+          upper section. Clicking on a date will display that day's matchups in the main section.
+        </div>
+      </article>
+      <article>
+        <div class="heading">
+          Standings
+        </div>
+        <div class="accent-container">
+          This link will display the current standings. The divisions are updated
+          dynamically after each simulated game.
+          <div class="inner">
+            <div class="heading">
+              Standard/Expanded
+            </div>
+            <div>
+              Use these tabs to alternate the view of the standings.
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="heading">
+          Playoffs
+        </div>
+        <div class="accent-container">
+          This link is only displayed after the regular season. Clicking this link
+          simulates the playoffs and displays the playoff bracket in the main section.
+          <div class="inner">
+            <div class="heading">
+              Bracket/Schedule
+            </div>
+            <div>
+              Use these tabs to alternate the view between the playoff bracket and the
+              individual playoff games.
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="heading">
+          Top Teams
+        </div>
+        <div class="accent-container">
+          This link will display a popup showing the teams in the playoff hunt, along with
+          teams on the bubble. This is also updated dynamically after each simulated game.
+          <div class="inner">
+            <div class="heading">
+              AFC/NFC
+            </div>
+            <div>
+              Use these tabs to alternate the view of the conference leaders.
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="heading">
+          Simulate
+        </div>
+        <div class="accent-container">
+          This button will begin simulating the games for the current day. The teams
+          playing are shown in the top right section along with their scores and the quarter
+          the game is in. All of the current day's games are displayed in the right section.
+          <div class="inner">
+            <div class="heading">
+              Sim Season
+            </div>
+            <div>
+              The first time you click the "Simulate" button, you are presented with a choice on
+              how the simulation should proceed. There are two sliders, one to choose to simulate
+              the entire season or one game at a time. The second will determine the speed of each
+              simulated game. Clicking Cancel will run the simuation with the default options,
+              one game at a time, and slower.
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="heading">
+          Settings
+        </div>
+        <div class="accent-container">
+          This button will open the "settings" dialog.
+          <div class="inner">
+            <div class="heading">
+              One Game at a Time
+            </div>
+            <div>
+              When on, you will only be allowed to simulate one game at a time. When off, you can
+              simulate multiple games at once.
+            </div>
+          </div>
+          <div class="inner">
+            <div class="heading">
+              Sim Fast
+            </div>
+            <div>
+              When on, the games will simulate much faster.
+            </div>
+          </div>
+          <div class="inner">
+            <div class="heading">
+              Reset Season
+            </div>
+            <div>
+              This will allow you to return the simulation to its initial state, resetting the
+              schedule and all games played.
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section fxLayout="column">
+      <article>
+        Other helpful information:
+      </article>
+      <article>
+        <div class="heading">
+          Game Matchups
+        </div>
+        <div class="accent-container">
+          Clicking on any individual game will show either the "Matchup" or the "Results" dialog. If the game
+          has not yet been played, then you will see the "Matchup" dialog. If the game is in progress, or has
+          been completed, you will see the "Results" dialog.
+          <div class="inner">
+            <div class="heading">
+              Matchup
+            </div>
+            <div>
+              This dialog will show the head-to-head ratings for the two teams, as well as provide
+              a point spread on the game.
+            </div>
+          </div>
+          <div class="inner">
+            <div class="heading">
+              Results
+            </div>
+            <div>
+              This dialog will show the results of the game, score by score through all four quarters.
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</mat-card>

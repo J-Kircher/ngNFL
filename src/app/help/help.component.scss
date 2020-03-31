@@ -1,0 +1,45 @@
+@import 'src/scss/common';
+@import 'src/scss/nfl-theme';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+
+.help-text {
+  @include boldItalText($lgFontSize);
+  margin-top: 5px;
+}
+
+.div-scroll {
+  height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+section {
+  border-radius: 8px;
+  @include getThemeBGColor($nfl-theme, 'primary');
+  margin-bottom: 8px;
+  padding: 8px;
+  article {
+    padding: 8px;
+    div.heading {
+      @include boldItalText($smFontSize);
+    }
+    div.accent-container {
+      padding: 12px;
+      border-radius: 8px;
+      width: fit-content;
+      @include getThemeBGColor($nfl-theme, 'accent', 0.7);
+      .inner {
+        margin-top: 12px;
+        .heading {
+          @include boldItalText($smFontSize);
+        }
+        padding: 12px;
+        border-radius: 8px;
+        @include getThemeBGColor($nfl-theme, 'primary', 0.5);
+      }
+    }
+  }
+}
