@@ -12,19 +12,14 @@
 
     <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabIndex" (selectedTabChange)="tabClicked($event)">
       <mat-tab label="Bracket">
-        <mat-card ngClass.lt-sm="zoom-out" ngClass.gt-xs="normal-zoom">
-          <div class="bracket" fxLayout.gt-md="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
-            <div *ngIf="SuperBowlChamp" class="overlay" fxLayout="row" fxLayoutAlign="space-around center" fxHide.lt-lg>
-              <div class="super-bowl-trophy" fxLayout="row" fxLayoutAlign="space-around center">
-                <img src="./assets/images/{{teamsArr[SuperBowlChamp]?.abbrev}}.png" class="super-bowl-champ">
-              </div>
-            </div>
+        <mat-card fxShow fxHide.lt-sm ngClass.lt-lg="zoom-out" ngClass.gt-md="normal-zoom">
+          <div class="bracket" fxLayout="row" fxLayoutAlign="space-around center">
             <div fxLayout="column">
               <div class="playoff-text" fxLayoutAlign="flex-start">AFC Playoffs</div>
               <div class="wrapper left">
                 <div class="item">
                   <div class="item-parent">
-                    <p><img src="./assets/images/{{ getAbbrev(20) }}.png"></p>
+                    <p style="margin-right: 8px;"><img src="./assets/images/{{ getAbbrev(20) }}.png"></p>
                   </div>
                   <div class="item-childrens">
                     <div class="item-child">
@@ -85,7 +80,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="SuperBowlChamp" fxLayout="row" fxLayoutAlign="space-around center" fxHide fxShow.lt-lg>
+            <div *ngIf="SuperBowlChamp" class="overlay" fxLayout="row" fxLayoutAlign="space-around center">
               <div class="super-bowl-trophy" fxLayout="row" fxLayoutAlign="space-around center">
                 <img src="./assets/images/{{teamsArr[SuperBowlChamp]?.abbrev}}.png" class="super-bowl-champ">
               </div>
@@ -95,7 +90,7 @@
               <div class="wrapper right">
                 <div class="item">
                   <div class="item-parent">
-                    <p><img src="./assets/images/{{ getAbbrev(21) }}.png"></p>
+                    <p style="margin-left: 8px;"><img src="./assets/images/{{ getAbbrev(21) }}.png"></p>
                   </div>
                   <div class="item-childrens">
                     <div class="item-child">
@@ -158,6 +153,9 @@
             </div>
           </div>
         </mat-card>
+        <div fxLayout="row" fxLayoutAlign="center center" fxHide fxShow.lt-sm>
+          <mat-icon style="padding: 15px;">screen_rotation</mat-icon>Use Landscape mode for Playoff Bracket
+        </div>
       </mat-tab>
       <mat-tab label="Schedule">
         <mat-card>
