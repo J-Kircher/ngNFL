@@ -13,7 +13,7 @@ import { sortDivision, sortDivisionByTotal } from '@app/common/sort';
 })
 
 export class StandingsDivisionComponent implements OnInit, DoCheck {
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   @Input() division: string;
   @Input() format: string;
   teamsArr: ITeam[] = [];
