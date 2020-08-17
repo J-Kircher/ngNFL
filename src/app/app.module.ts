@@ -34,7 +34,7 @@ import { MaterialElevationDirective } from '@app/shared/material-elevation.direc
 import { GameService } from '@app/service/game.service';
 import { CapitalizePipe } from './common/capitalize.pipe';
 import { SpinnerButtonDirective } from '@app/shared/spinner-button.directive';
-import { MatSpinner } from '@angular/material';
+import { MatSpinner } from '@angular/material/progress-spinner';
 import { ConfirmDialogComponent } from '@app/dialog/confirm/confirm-dialog.component';
 import { HelpComponent } from '@app/help/help.component';
 

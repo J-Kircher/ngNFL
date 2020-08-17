@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { TeamService } from '@app/service/team.service';
 import { ScheduleService } from '@app/service/schedule.service';
 import { PlayoffService } from '@app/service/playoff.service';

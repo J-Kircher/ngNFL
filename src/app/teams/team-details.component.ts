@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { TeamService } from '@app/service/team.service';
 import { PlayoffService } from '@app/service/playoff.service';
 import { ITeam } from '@app/model/nfl.model';

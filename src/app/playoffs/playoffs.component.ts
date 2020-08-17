@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatTabChangeEvent } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { TeamService } from '@app/service/team.service';
 import { ITeam, ISchedule, IGameResults } from '@app/model/nfl.model';
 import { PlayoffService } from '@app/service/playoff.service';

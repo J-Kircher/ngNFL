@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ISchedule, IGameResults } from '@app/model/nfl.model';
 import { ScheduleService } from '@app/service/schedule.service';
 import { ScheduleDayService } from '@app/service/schedule.day.service';

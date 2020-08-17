@@ -1,6 +1,6 @@
 import { Directive, ComponentFactoryResolver, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewContainerRef } from '@angular/core';
 import { ElementRef } from '@angular/core';
-import { MatSpinner } from '@angular/material';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Directive({
   selector: 'button[appSpinnerButton]'

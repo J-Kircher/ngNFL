@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, DoCheck, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { TeamService } from '@app/service/team.service';
 import { ScheduleService } from '@app/service/schedule.service';
 import { ITeam } from '@app/model/nfl.model';

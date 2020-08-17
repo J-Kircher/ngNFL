@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck, OnDestroy, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTabChangeEvent } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 import { TeamService } from '@app/service/team.service';
 import { ITeam } from '@app/model/nfl.model';
