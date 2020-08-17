@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
   private appConfig;
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   loadAppConfig() {
     return this.http.get('assets/conf.json')

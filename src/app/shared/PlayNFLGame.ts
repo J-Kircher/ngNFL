@@ -1,5 +1,4 @@
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { ISchedule, ITeam } from '@app/model/nfl.model';
 import { calculateOdds } from '@app/common/odds';
 

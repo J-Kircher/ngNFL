@@ -1,5 +1,4 @@
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { ISchedule } from '@app/model/nfl.model';
 
 export class PlayFakeGame {
