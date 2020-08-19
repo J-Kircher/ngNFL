@@ -5,8 +5,13 @@
     "baseUrl": "./",
     "types": []
   },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
   "exclude": [
     "test.ts",
+    "route-reuse-strategy.ts",
     "**/*.spec.ts"
   ]
 }
