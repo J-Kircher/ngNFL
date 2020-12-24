@@ -14,6 +14,7 @@ import { listAnimation } from '@app/shared/animations';
 // background-color: {{team.darkcolor}};
 export class TeamListComponent implements OnInit {
   teamsArr: ITeam[] = [];
+  teamsArrList: ITeam[] = [];
   loading: boolean = true;
 
   constructor(
@@ -30,6 +31,13 @@ export class TeamListComponent implements OnInit {
       this.loading = false;
     }, (err) => {
       console.error('[team-list] ngOnInit() getTeams() error: ' + err);
+    }, () => {
+      // console.log('[team-list] ngOnInit() getTeams() COMPLETE');
+      this.teamsArrList = JSON.parse(JSON.stringify(this.teamsArr)).sort((n1: ITeam, n2: ITeam) => {
+        const t1 = n1.city.concat(' ').concat(n1.name);
+        const t2 = n2.city.concat(' ').concat(n2.name);
+        return ((t1 > t2) ? 1 : ((t1 < t2) ? -1 : 0));
+      });
     });
   }
 
