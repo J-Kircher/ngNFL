@@ -12,9 +12,9 @@
   <button mat-raised-button id="Simulate" fxShow="false" fxShow.gt-sm color="accent"
     (click)="simulate()" [disabled]="simActive() || seasonOver" [appSpinnerButton]="simActive()"
     [ngClass]="{ disabled: simActive() }">Simulate</button>
-  <button mat-mini-fab fxHide="false" fxHide.gt-sm color="accent"
+  <button mat-raised-button fxHide="false" fxHide.gt-sm color="accent"
     (click)="simulate()" [disabled]="simActive() || seasonOver" [ngClass]="{ disabled: simActive() }">
-    <mat-icon>speed</mat-icon></button>
+    <mat-icon>speed</mat-icon> Sim</button>
   <div class="settings" fxShow="false" fxShow.gt-sm>
     <div class="spin">
       <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
