@@ -10,10 +10,14 @@ import { ScheduleDayService } from '@app/service/schedule.day.service';
 })
 
 export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
-  NFLCalendarArr: NFLCalendar[] = [];
+  calendarArr: NFLCalendar[] = [];
   gameDay: string;
   gamesArr: ISchedule[] = [];
   scheduleYear: number = 2020;
+  fullSchedule: ISchedule[];
+
+  monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
 
   constructor(
     private scheduleService: ScheduleService,
@@ -21,13 +25,25 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   ) { }
 
   ngOnInit() {
-    // console.log('[schedule-calendar] ngOnInit() scheduleYear: ' + this.scheduleYear);
-    this.NFLCalendarArr = [
-      { month: 9, year: this.scheduleYear },
-      { month: 10, year: this.scheduleYear },
-      { month: 11, year: this.scheduleYear },
-      { month: 12, year: this.scheduleYear }
-    ];
+    console.log('[schedule-calendar] ngOnInit() scheduleYear: ' + this.scheduleYear);
+    this.fullSchedule = this.scheduleService.getFullSchedule();
+    this.calendarArr = [];
+    let currMonth = '';
+    let currYear = this.scheduleYear;
+    this.fullSchedule.forEach(schedDay => {
+      const vals = schedDay.gameday.split(' ');
+      const month = vals[1];
+      if (month !== currMonth) {
+        currMonth = month;
+        if (month === 'January') {
+          currYear++;
+        }
+        this.calendarArr.push(
+          { 'month': this.monthNames.indexOf(currMonth) + 1, 'year': currYear }
+        );
+      }
+    });
+    console.log(this.calendarArr);
     this.scheduleService.currentGameDay$.subscribe(data => this.gameDay = data);
   }
 
