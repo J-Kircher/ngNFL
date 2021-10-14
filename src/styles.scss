@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-  background: url('/assets/images/greenback.jpg');
+  background: url('./assets/images/greenback.jpg');
   text-align: left;
   font-family: Roboto, Arial, "Avenir Next", Calibri, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px;
@@ -57,7 +57,7 @@ img {
   /* transition: opacity 1s ease-out; */
   font-weight: bold;
   color: black;
-  background: url('/assets/images/greyback.jpg');
+  background: url('./assets/images/greyback.jpg');
   -webkit-transition: max-height 0.5s;
   -moz-transition: max-height 0.5s;
   -ms-transition: max-height 0.5s;

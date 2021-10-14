@@ -15,7 +15,7 @@ mat-card {
 
   mat-table {
     @include normalText($smFontSize);
-    // background-image: url(/assets/images/whiteback.jpg);
+    // background-image: url(../../assets/images/whiteback.jpg);
     background-color: $NearWhite;
     border: solid $NearWhite 3px;
     border-radius: 6px;
