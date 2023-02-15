@@ -38,12 +38,19 @@ mat-dialog-content {
         margin-top: 5px;
         text-align: right;
       }
+      .visit-value {
+        text-shadow: 0 0 5px #FFF;
+      }
       .position-label {
         text-align: center;
+        text-transform: uppercase;
       }
       .home-level {
         margin-top: 5px;
         text-align: left;
+      }
+      .home-value {
+        text-shadow: 0 0 5px black;
       }
       .center {
         text-align: center;

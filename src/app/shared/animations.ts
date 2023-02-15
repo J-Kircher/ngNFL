@@ -29,6 +29,46 @@ export const fadeAnimation =
     ])
   ]);
 
+  export const matchAnimationLeft =
+  trigger('matchAnimationsLeft', [
+    transition(':enter', [
+      style({ opacity: 0, transform: 'translateX(-30px)' }),
+      animate('600ms ease-in', style({ opacity: 1, transform: 'translateX(0)' }))
+    ])
+  ]);
+
+  export const matchAnimationRight =
+  trigger('matchAnimationsRight', [
+    transition(':enter', [
+      style({ opacity: 0, transform: 'translateX(30px)' }),
+      animate('600ms ease-in', style({ opacity: 1, transform: 'translateX(0)' }))
+    ])
+  ]);
+
+  export const ratingAnimation =
+  trigger('ratingAnimations', [
+    transition('* => *', [
+      query(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        stagger('100ms', [
+          animate('200ms ease-in', style({ opacity: 1, transform: 'translateY(0)' }))
+        ])
+      ])
+    ])
+  ]);
+
+  export const resultAnimation =
+  trigger('resultAnimations', [
+    transition('* => *', [
+      query(':enter', [
+        style({ opacity: 0, transform: 'scale(1.1)' }),
+        stagger('20ms', [
+          animate('400ms ease-in', style({ opacity: 1, transform: 'scale(1)' }))
+        ]),
+      ])
+    ]),
+  ]);
+
 export const listAnimation =
   trigger('listAnimations', [
     transition('* => *', [ // each time the binding value changes

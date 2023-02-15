@@ -5,17 +5,20 @@ import { ITeam, ISchedule } from '@app/model/nfl.model';
 import { ScheduleService } from '@app/service/schedule.service';
 import { PlayoffService } from '@app/service/playoff.service';
 import { calculateOdds, getOddsText } from '@app/common/odds';
+import { matchAnimationLeft, matchAnimationRight, ratingAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'app-matchup-dialog',
   templateUrl: './matchup-dialog.component.html',
-  styleUrls: ['./matchup-dialog.component.scss']
+  styleUrls: ['./matchup-dialog.component.scss'],
+  animations: [matchAnimationLeft, matchAnimationRight, ratingAnimation]
 })
 export class MatchupDialogComponent implements OnInit {
   teamsArr: ITeam[] = [];
   modalGame: ISchedule;
   loading: boolean = true;
   odds: number = 0;
+  attrTypes: string[] = ['qb', 'rb', 'wr', 'ol', 'dl', 'lb', 'db', 'st', 'co'];
 
   constructor(
     public dialogRef: MatDialogRef<MatchupDialogComponent>,
@@ -26,7 +29,8 @@ export class MatchupDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log('[matchup] data: ' + this.data);
+    // console.log('[matchup] data:');
+    // console.log(this.data);
     if (this.data.playoffs) {
       this.modalGame = this.playoffService.getGameById(this.data.id);
     } else {

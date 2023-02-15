@@ -5,11 +5,13 @@ import { ITeam, ISchedule, IGameResults } from '@app/model/nfl.model';
 import { ScheduleService } from '@app/service/schedule.service';
 import { PlayoffService } from '@app/service/playoff.service';
 import { getOddsText } from '@app/common/odds';
+import { resultAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'app-results-dialog',
   templateUrl: './results-dialog.component.html',
-  styleUrls: ['./results-dialog.component.scss']
+  styleUrls: ['./results-dialog.component.scss'],
+  animations: [resultAnimation]
 })
 export class ResultsDialogComponent implements OnInit {
   teamsArr: ITeam[] = [];
@@ -26,7 +28,8 @@ export class ResultsDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log('[results] data: ' + this.data);
+    // console.log('[results] data:');
+    // console.log(this.data);
     if (this.data.playoffs) {
       this.modalGame = this.playoffService.getGameById(this.data.id);
     } else {

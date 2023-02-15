@@ -30,21 +30,23 @@
           </div>
         </div>
         <mat-grid-list cols="4" rowHeight="40px">
-          <ng-container *ngFor="let result of results; let i = index;">
-            <mat-grid-tile colspan="4" *ngIf="i === 0 || results[i].quarter !== results[i-1].quarter">
-              <span class="quarter">{{getQuarter(result.quarter)}}</span>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1"><img src="./assets/images/{{teamsArr[result.teamScored]?.abbrev}}.png" class="logo"></mat-grid-tile>
-            <mat-grid-tile colspan="2"><span class="normal">
-              <span fxShow="false" fxShow.gt-sm>{{teamsArr[result.teamScored]?.name}}&nbsp;</span>
-              <span>{{getScoreType(result.points)}}</span>
-            </span></mat-grid-tile>
-            <mat-grid-tile colspan="1">
-              <span [ngClass]="whoScored(i, 'v')">{{getGameScore(i, 'v')}}</span>
-              <span class="normal">-</span>
-              <span [ngClass]="whoScored(i, 'h')">{{getGameScore(i, 'h')}}</span>
-            </mat-grid-tile>
-          </ng-container>
+          <div [@resultAnimations]="{ value: results.length }">
+            <ng-container *ngFor="let result of results; let i = index;">
+              <mat-grid-tile colspan="4" *ngIf="i === 0 || results[i].quarter !== results[i-1].quarter">
+                <span class="quarter">{{getQuarter(result.quarter)}}</span>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1"><img src="./assets/images/{{teamsArr[result.teamScored]?.abbrev}}.png" class="logo"></mat-grid-tile>
+              <mat-grid-tile colspan="2"><span class="normal">
+                <span fxShow="false" fxShow.gt-sm>{{teamsArr[result.teamScored]?.name}}&nbsp;</span>
+                <span>{{getScoreType(result.points)}}</span>
+              </span></mat-grid-tile>
+              <mat-grid-tile colspan="1">
+                <span [ngClass]="whoScored(i, 'v')">{{getGameScore(i, 'v')}}</span>
+                <span class="normal">-</span>
+                <span [ngClass]="whoScored(i, 'h')">{{getGameScore(i, 'h')}}</span>
+              </mat-grid-tile>
+            </ng-container>
+          </div>
           <mat-grid-tile colspan="4" *ngIf="modalGame.quarter === 'F'">
             <span class="quarter">{{getWinner()}} Win</span>
           </mat-grid-tile>
