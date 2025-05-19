@@ -33,7 +33,7 @@ export const _SCHEDULE: IScheduleBase[] = [
   { 'gameday': 'Sunday, November 9', 'games': [ 24, 9, 0, 1, 2, 27, 4, 23, 10, 8, 6, 3, 17, 20, 26, 25, 28, 31, 21, 19, 29, 30, 7, 15 ] },
   { 'gameday': 'Monday, November 10', 'games': [ 18, 22 ] },
   { 'gameday': 'Thursday, November 13', 'games': [ 3, 2 ] },
-  { 'gameday': 'Sunday, November 16', 'games': [ 19, 1, 22, 17, 25, 24, 27, 0, 8, 11, 15, 10, 20, 23, 30, 28, 31, 29, 4, 6, 13, 12, 21, 18 ] },
+  { 'gameday': 'Sunday, November 16', 'games': [ 19, 1, 22, 17, 25, 24, 27, 0, 8, 11, 15, 10, 20, 23, 5, 7, 30, 28, 31, 29, 4, 6, 13, 12, 21, 18 ] },
   { 'gameday': 'Monday, November 17', 'games': [ 16, 14 ] },
   { 'gameday': 'Thursday, November 20', 'games': [ 0, 8 ] },
   { 'gameday': 'Sunday, November 23', 'games': [ 17, 21, 2, 5, 3, 4, 23, 22, 31, 11, 9, 13, 7, 20, 6, 14, 10, 28, 24, 26, 18, 16, 27, 29 ] },
@@ -59,5 +59,5 @@ export const _SCHEDULE: IScheduleBase[] = [
   { 'gameday': 'Sunday, January 4', 'games': [ 1, 2, 3, 0, 4, 7, 6, 5, 11, 10, 9, 8, 15, 12, 13, 14, 16, 17, 19, 18, 21, 20, 22, 23, 25, 27, 24, 26, 28, 29, 31, 30 ] }
 ];
 
-// Created on Sat May 17, 2025
+// Created on Mon May 19, 2025
 // end of NFLSchedule2025
